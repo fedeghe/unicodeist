@@ -1,8 +1,7 @@
-import { createUseStyles } from 'react-jss'
+import { createUseStyles } from 'react-jss';
 
 export default createUseStyles({
     Container: {
-        // flex:1,
         marginBottom:'1em'
     },
     Box:{
@@ -16,4 +15,4 @@ export default createUseStyles({
         marginRight:'10px',
         fontWeight:'bold'
     },
-})
+});

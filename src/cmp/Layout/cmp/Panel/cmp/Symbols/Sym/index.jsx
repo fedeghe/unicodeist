@@ -22,7 +22,7 @@ const Sym = ({sym}) => {
     const {state: {focusedSymbolId}, dispatch} = useContext(ctx)
     const selected = focusedSymbolId === sym.id
     const classes = useStyles({selected})
-    const focus = () => dispatch({
+    const focus = () => !selected && dispatch({
         type: ACTIONS.FOCUS_ON_SYMBOL,
         payload: sym.id
     })

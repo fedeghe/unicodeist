@@ -1,7 +1,10 @@
-import { createUseStyles } from 'react-jss'
+import { createUseStyles } from 'react-jss';
 
-import { PANEL_WIDTH, PANEL_PADDING, BASE_FONTSIZE,
-    PANEL_BGCOLOR } from '../../../../constants'
+import {
+    PANEL_WIDTH,
+    PANEL_PADDING,
+    BASE_FONTSIZE,
+} from '../../../../constants';
 
 export default createUseStyles(theme => ({
     Container: {
@@ -14,4 +17,4 @@ export default createUseStyles(theme => ({
         display:'flex',
         flexDirection:'column'
     },
-}))
+}));

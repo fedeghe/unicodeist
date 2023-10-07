@@ -15,7 +15,7 @@ const ThemeSwitch = () => {
     return <Switch
         className={classes.Container}
         onChange={switchTheme}
-        checked={themeKey !== DEFAULT_THEME}
+        checked={themeKey === DEFAULT_THEME}
     />;
 };
 

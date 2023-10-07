@@ -1,6 +1,6 @@
-import { createUseStyles } from 'react-jss'
+import { createUseStyles } from 'react-jss';
 
-import bg from './../../../../../../../../../img/bg.png'
+import bg from './../../../../../../../../../img/bg.png';
 
 export default createUseStyles({
     Container: {
@@ -42,4 +42,4 @@ export default createUseStyles({
         transform: ({sym:{rotation}}) => `rotate(${rotation}deg)`,
     }
 
-})
+});

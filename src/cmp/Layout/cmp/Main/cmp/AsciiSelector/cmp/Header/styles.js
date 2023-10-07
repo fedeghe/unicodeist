@@ -1,5 +1,4 @@
-import { createUseStyles } from 'react-jss'
-import {ITEM_SIZE} from './../../../../../../../../constants'
+import { createUseStyles } from 'react-jss';
 export default createUseStyles(theme => ({
     Container: {
         display:'flex',
@@ -20,4 +19,4 @@ export default createUseStyles(theme => ({
     ClearIcon: {cursor: 'pointer', color:'white'},
     LeaveOpenCheck: {marginRight:'20px'},
     CloseIcon: {fontSize: '3em'}
-}))
+}));

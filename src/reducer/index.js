@@ -5,10 +5,11 @@ import {
     WIDTH, HEIGHT,
     SYMBOL_BASE_FONTSIZE,
     PANEL_WIDTH,
+    DEFAULT_THEME,
     SYMBOL_BASE_FONTFAMILY, SYMBOL_BASE_FONTWEIGHT} from './../constants';
 
 const createSymbol = ({ char, zIndex, left, top }) => {
-    const u = `${uniqueID}`
+    const u = `${uniqueID}`;
     return {
         id: u,
         char,
@@ -24,8 +25,9 @@ const createSymbol = ({ char, zIndex, left, top }) => {
         opacity: 1,
         locked: false,
         targetUp: false,
-    }
-}
+        faded: false
+    };
+};
 
 const actions = {
         [ACTIONS.INIT]: ({payload: cnf}) => ({
@@ -33,14 +35,16 @@ const actions = {
             height: HEIGHT,
             maxWidth: WIDTH,
             maxHeight: HEIGHT,
-            themeKey: 'bright',
+            themeKey: DEFAULT_THEME,
+            // themeKey: 'bright',
             symbols: [],
             addPanelVisibility: false,
             focusedSymbolId: null,
             backgroundColor: '#ffffff',
             asciiPanelFilter: '',
             letAsciiPanelOpenAfterSelection: false,
-            embedModalVisibility: false
+            embedModalVisibility: false,
+            superFocus: false // isolate focusedSymbolId
         }),
         [ACTIONS.SWITCH_THEME]: ({oldState: {themeKey}}) => ({
             themeKey: themeKey === 'bright' ? 'dark' : 'bright'
@@ -68,7 +72,7 @@ const actions = {
                     ...symbols,
                     newSymbol
                 ]
-            }
+            };
         },
         [ACTIONS.REMOVE_SYMBOL]: ({
             payload : id,
@@ -89,12 +93,19 @@ const actions = {
                     ...symbols,
                     clone
                 ]
-            }
+            };
         },
         [ACTIONS.FOCUS_ON_SYMBOL]: ({
             payload : id,
+            oldState: { symbols }
         }) => ({
-            focusedSymbolId: id
+            focusedSymbolId: id,
+            superFocus: false, //in case there is one
+            // and need to reset faded mode fo all symbols
+            symbols: symbols.map(sym => ({
+                ...sym,
+                faded: false
+            }))
         }),
         [ACTIONS.UPDATE_GLOBAL]: ({payload: {field, value}}) => ({[field]: value}),
         [ACTIONS.UPDATE_SYMBOL]: ({payload: {id, field, value}, oldState: {symbols}}) => ({
@@ -110,26 +121,26 @@ const actions = {
                     left: parseInt(sym.left, 10) + parseInt(update.left, 10),
                     top: parseInt(sym.top, 10) + parseInt(update.top, 10),
                 }) : sym)
-            }
+            };
         }
         ,
         [ACTIONS.MAX_ZI]: ({payload: id, oldState: {symbols}}) => {
-            const maxZindex = symbols.reduce((a, n) => n.zIndex > a ? n.zIndex : a, Number.NEGATIVE_INFINITY)
+            const maxZindex = symbols.reduce((a, n) => n.zIndex > a ? n.zIndex : a, Number.NEGATIVE_INFINITY);
             return {
                 symbols: symbols.map(sym => sym.id === id ? ({
                     ...sym,
                     zIndex: maxZindex+1
                 }) : sym)
-            }
+            };
         },
         [ACTIONS.MIN_ZI]: ({payload: id, oldState: {symbols}}) => {
-            const minZindex = symbols.reduce((a, n) => n.zIndex < a ? n.zIndex : a, Number.POSITIVE_INFINITY)
+            const minZindex = symbols.reduce((a, n) => n.zIndex < a ? n.zIndex : a, Number.POSITIVE_INFINITY);
             return {
                 symbols: symbols.map(sym => sym.id === id ? ({
                     ...sym,
                     zIndex: minZindex-1
                 }) : sym)
-            }
+            };
         },
         [ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION] : ({ payload }) => ({
             letAsciiPanelOpenAfterSelection: payload
@@ -143,14 +154,25 @@ const actions = {
         [ACTIONS.INIT_VIEWPORT]: ({payload : {maxWidth, maxHeight}, oldState: {
             width, height
         }}) => {
-            const newMaxWidth = ~~maxWidth - PANEL_WIDTH
-            const newMaxHeight = ~~maxHeight
+            const newMaxWidth = parseInt(maxWidth, 10) - PANEL_WIDTH;
+            const newMaxHeight = parseInt(maxHeight, 10);
             return {
-                maxWidth: newMaxWidth, maxHeight: maxHeight,
+                maxWidth: newMaxWidth,
+                maxHeight: maxHeight,
                 height: Math.min(height, newMaxHeight),
                 width: Math.min(width, newMaxWidth),
-            }
-        }
+            };
+        },
+        [ACTIONS.SYMBOL_FOCUS]: ({oldState: { focusedSymbolId, superFocus, symbols }}) => ({
+            ...(focusedSymbolId && {superFocus: !superFocus}),
+            //and it is was not then all symbols go in faded mode
+            ...(!superFocus && {
+                symbols: symbols.map(sym => ({
+                    ...sym,
+                    faded: sym.id !== focusedSymbolId
+                }))
+            })
+        })
         
     },
     reducer = (oldState, action) => {

@@ -10,8 +10,10 @@ import ACTIONS from './../../../../../../reducer/actions'
 const CanvasSymbol = ({symbol}) => {
     const {state: { focusedSymbolId}, dispatch} = useContext(ctx)
     const isTarget = focusedSymbolId===symbol.id
-    const classes = useStyles({ isTarget })
+    
     const {
+        id,
+        char,
         zIndex,
         left, top,
         color,
@@ -20,15 +22,21 @@ const CanvasSymbol = ({symbol}) => {
         fontWeight,
         rotation,
         opacity,
-    } = symbol
+        faded,
+    } = symbol;
+    const classes = useStyles({
+        isTarget,
+        faded,
+        ownOpacity: opacity
+    })
     const [startPoint, setStartPoint] = useState([left, top])
 
     const selectSymbol = useCallback(
         () => dispatch({
             type: ACTIONS.FOCUS_ON_SYMBOL,
-            payload: symbol.id
+            payload: id
         }),
-        [dispatch, symbol.id]
+        [dispatch, id]
     )
     const onDragStart = e => {
         setStartPoint([e.pageX, e.pageY])
@@ -42,44 +50,40 @@ const CanvasSymbol = ({symbol}) => {
         dispatch({
             type: ACTIONS.TUNE_SYMBOL_POSITION,
             payload: {
-                id: symbol.id,
+                id,
                 update: {
-                    left: ~~e.pageX - ~~startX,
-                    top: ~~e.pageY - ~~startY
+                    left: parseInt(e.pageX, 10) - parseInt(startX, 10),
+                    top: parseInt(e.pageY, 10) - parseInt(startY, 10)
                 }
             }
         })
     }
     
     return <div
-    style={{
-        backgroundColor: 'transparent',
-    }}
-    onDragStart={onDragStart}
-        onDragEnd={onDragEnd}
-        onDrag={onDrag}
-        draggable={isTarget}
-    >
+            onDragStart={onDragStart}
+            onDragEnd={onDragEnd}
+            onDrag={onDrag}
+            draggable={isTarget}
+        >
         <div
-        className={classes.CanvasSymbol}
-        onClick={selectSymbol}
-        
-        style={{
-            position:'absolute',
-            left: `${left}px`,
-            top: `${top}px`,
-            color,
-            fontSize: `${fontSize}px`,
-            height: `${fontSize}px`,
-            lineHeight: `${fontSize}px`,
-            fontWeight,
-            fontFamily,
-            transform: `rotate(${rotation}deg)`,
-            opacity,
-            zIndex,
-            backgroundColor: 'transparent'
-        }}
-    >{symbol.char}</div>
+            className={classes.CanvasSymbol}
+            onClick={selectSymbol}
+            
+            style={{
+                position:'absolute',
+                left: `${left}px`,
+                top: `${top}px`,
+                color,
+                fontSize: `${fontSize}px`,
+                height: `${fontSize}px`,
+                lineHeight: `${fontSize}px`,
+                fontWeight,
+                fontFamily,
+                zIndex,
+                ...(rotation && {transform: `rotate(${rotation}deg)`}),
+                ...(!faded && opacity < 1 && {opacity}),
+            }}
+        >{char}</div>
     </div>
 }
 export default CanvasSymbol

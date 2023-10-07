@@ -1,6 +1,6 @@
 import { colors } from './base';
 
-const {grayscale : cgs} = colors
+const {grayscale : cgs} = colors;
 
 const theme =  {
     mode: 'bright',
@@ -33,6 +33,6 @@ const theme =  {
         icon: '#FFFF00',
     },
     unselectedItemHoverBackgound: cgs.lightC
-}
+};
 
-export default theme
+export default theme;

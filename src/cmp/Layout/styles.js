@@ -1,4 +1,4 @@
-import { createUseStyles } from 'react-jss'
+import { createUseStyles } from 'react-jss';
 
 export default createUseStyles(theme => ({
     Root: {
@@ -7,4 +7,4 @@ export default createUseStyles(theme => ({
         fontFamily: 'verdana',
         color: theme.foreground
     },
-}))
+}));

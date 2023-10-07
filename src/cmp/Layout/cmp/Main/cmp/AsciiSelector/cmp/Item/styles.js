@@ -1,5 +1,5 @@
-import { createUseStyles } from 'react-jss'
-import {ITEM_SIZE} from './../../../../../../../../constants'
+import { createUseStyles } from 'react-jss';
+import {ITEM_SIZE} from './../../../../../../../../constants';
 export default createUseStyles(theme => ({
     Item: {
         lineHeight: `${ITEM_SIZE}px`,
@@ -20,4 +20,4 @@ export default createUseStyles(theme => ({
             outline: `4px solid ${theme.modal.hoverOutline}`,    
         }
     }
-}))
+}));

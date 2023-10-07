@@ -46,7 +46,7 @@ const Families = () => {
                 </div>
             )
         )}
-        {open && <CopyDone message={`${open} added`} onClose={hideConfirmation}/>}
+        {open && <CopyDone message={`${open} added`} onClose={hideConfirmation} open={open} setOpen={setOpen}/>}
     </div>
 }
 export default Families

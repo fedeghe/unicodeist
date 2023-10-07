@@ -1,6 +1,4 @@
-import { createUseStyles } from 'react-jss'
-
-import { SELECTOR_BGCOLOR, SELECTOR_FGCOLOR } from './../../../../../../constants'
+import { createUseStyles } from 'react-jss';
 
 export default createUseStyles((theme) => ({
 
@@ -40,4 +38,4 @@ export default createUseStyles((theme) => ({
         borderBottom:'1px dashed black'
     },
 
-}))
+}));

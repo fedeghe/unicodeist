@@ -1,10 +1,6 @@
-import { createUseStyles } from 'react-jss'
-
-import {EDITOR_BGCOLOR} from './../../../../constants'
+import { createUseStyles } from 'react-jss';
 
 export default createUseStyles((theme) =>({
-
-    
     Main: {
         flexGrow:1,
         display:'flex',
@@ -15,4 +11,4 @@ export default createUseStyles((theme) =>({
         
     },
 
-}))
+}));

@@ -1,20 +1,20 @@
 
-import { useReducer, useEffect, useCallback } from 'react'
-import { ThemeProvider} from 'react-jss'
+import { useReducer, useEffect, useCallback } from 'react';
+import { ThemeProvider} from 'react-jss';
 
 
-import Layout from './cmp/Layout'
-import Context from './Context'
-import reducerFactory from './reducer'
-import ACTIONS from './reducer/actions'
-import getTheme from './themes'
+import Layout from './cmp/Layout';
+import Context from './Context';
+import reducerFactory from './reducer';
+import ACTIONS from './reducer/actions';
+import getTheme from './themes';
 
 
 const {reducer, init} = reducerFactory();
 const App = () => {
     const [state, dispatch] = useReducer(reducer, {}, init);
-    const {themeKey} = state
-    const theme = getTheme(themeKey)
+    const {themeKey} = state;
+    const theme = getTheme(themeKey);
     const storeViewPortData = useCallback(() =>  
         dispatch({
             type: ACTIONS.INIT_VIEWPORT,
@@ -24,12 +24,12 @@ const App = () => {
             }
         }),
         []
-    )
+    );
     useEffect(storeViewPortData, [storeViewPortData]);
     useEffect(() => {
         window.addEventListener("resize", storeViewPortData);
         return () => window.removeEventListener("resize", storeViewPortData);
-    }, [storeViewPortData])
+    }, [storeViewPortData]);
     
     return (        
         <ThemeProvider theme={theme}>

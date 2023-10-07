@@ -1,43 +1,11 @@
-import {useContext, useState, useEffect, useCallback} from 'react'
-import {uniqueID} from './../../../../../../utils';
-
-
-import CopyDone from './../CopyDone'
-import ctx from '../../../../../../Context'
-import ACTIONS from '../../../../../../reducer/actions'
-import useStyles from './styles'
-import symbols from '../../../../../../Symbols'
-
-import Item from './cmp/Item'
-import Header from './cmp/Header'
-import Families from './cmp/Families'
+import useStyles from './styles';
+import Header from './cmp/Header';
+import Families from './cmp/Families';
 const AsciiSelector = () => {
-    const classes = useStyles({border: 10})
-    const [open, setOpen] = useState(false)
-    const {dispatch, state: {
-        letAsciiPanelOpenAfterSelection,
-        asciiPanelFilter
-    }} = useContext(ctx)
-    
-    const closePanel = () => {
-        dispatch({
-            type: ACTIONS.TOGGLE_ADD_PANEL,
-            payload: false
-        })
-    }
-    const showConfirmation = char => setOpen(char)
-    const hideConfirmation = () => setOpen(false)
-    const onSelect = (char) => {
-        dispatch({
-            type: ACTIONS.ADD_SYMBOL,
-            payload: char
-        })
-        letAsciiPanelOpenAfterSelection ? showConfirmation(char) : closePanel()
-    }
-    
+    const classes = useStyles({border: 10});
     return <div className={classes.Container}>
         <Header />
         <Families/>
-    </div>
-}
-export default AsciiSelector
+    </div>;
+};
+export default AsciiSelector;

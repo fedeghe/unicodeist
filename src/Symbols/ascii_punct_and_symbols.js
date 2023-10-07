@@ -8,4 +8,4 @@ export default [
 
 	'{','|','}','~'
 
-].map(c => ({ char: c }))
+].map(c => ({ char: c }));

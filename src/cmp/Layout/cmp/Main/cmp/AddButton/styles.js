@@ -1,4 +1,4 @@
-import { createUseStyles } from 'react-jss'
+import { createUseStyles } from 'react-jss';
 export default createUseStyles({    
     AddButton: {
         position:'absolute',
@@ -7,4 +7,4 @@ export default createUseStyles({
         color: 'green',
         cursor:'pointer'
     },
-})
+});

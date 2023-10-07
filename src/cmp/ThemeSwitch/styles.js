@@ -1,4 +1,4 @@
-import { createUseStyles } from 'react-jss'
+import { createUseStyles } from 'react-jss';
 
 export default createUseStyles(theme => ({
     Container: {
@@ -47,4 +47,4 @@ export default createUseStyles(theme => ({
             borderRadius: 20 / 2,
         },
     }
-}))
+}));

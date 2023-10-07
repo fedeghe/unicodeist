@@ -9,13 +9,13 @@ import CopyDone from './../CopyDone'
 
 import ctx from './../../../../../../Context'
 import ACTIONS from './../../../../../../reducer/actions'
+import { cleanCode } from './../../../../../../utils'
 
 import useStyles from './styles'
-import {cleanCode} from './utils'
 
 const Canvas = () => {
     const classes = useStyles()
-    const [open, setopen] = useState(false)
+    const [open, setOpen] = useState(false)
     const {
         state: {
             width, height,
@@ -60,14 +60,17 @@ const Canvas = () => {
     const onDragOver = e => {
         e.preventDefault()
     }
-    const onClose = useCallback(() => setEmbedModalVisibility(false), [setEmbedModalVisibility])
+    const onClose = useCallback(
+        () => setEmbedModalVisibility(false),
+        [setEmbedModalVisibility]
+    );
     const onCopy = useCallback(() => {
         copy(embedCode);
         onClose();
-        setopen(true);
+        setOpen(true);
     }, [embedCode, onClose])
     return (
-        <>
+        <div>
             <Dialog open={embedModalVisibility} onClose={onClose}>
                 <div className={classes.Dialog}>
                     <div className={classes.Code}>
@@ -81,8 +84,8 @@ const Canvas = () => {
             <div ref={ref} style={refStyles} droppable='droppable' onDragOver={onDragOver}>
                 {symbols.map(symbol => <CanvasSymbol key={symbol.id} symbol={symbol}/>)}
             </div>
-            {open && <CopyDone message="Code copied to clipboard"/>}
-        </>
+            {open && <CopyDone message="Code copied to clipboard"  onClose={onClose} open={open} setOpen={setOpen}/>}
+        </div>
     )
 }
 export default Canvas

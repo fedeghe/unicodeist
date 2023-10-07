@@ -1,6 +1,4 @@
-import { createUseStyles } from 'react-jss'
-
-// import { PANEL_WIDTH } from '../../../../../../constants'
+import { createUseStyles } from 'react-jss';
 
 export default createUseStyles({
     GlobalTools: {
@@ -10,14 +8,12 @@ export default createUseStyles({
         
         alignItems:'center',
         justifyContent:'center',
-        
     },
     Item: {
-        // width: '50%',
         flexBasis: '33%',
         cursor:'pointer',
         display: 'flex',
         justifyContent:'space-around',
         alignSelf: 'center'
     }
-})
+});

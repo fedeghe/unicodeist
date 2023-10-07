@@ -1,4 +1,4 @@
-import { createUseStyles } from 'react-jss'
+import { createUseStyles } from 'react-jss';
 
 export default createUseStyles((theme) => ({
 
@@ -25,4 +25,4 @@ export default createUseStyles((theme) => ({
         borderBottom:'1px dashed black'
     },
 
-}))
+}));
