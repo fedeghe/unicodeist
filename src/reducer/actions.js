@@ -1,0 +1,41 @@
+const INIT = Symbol('init'),
+    ADD_SYMBOL = Symbol('add a symbol'),
+    UPDATE_SYMBOL = Symbol('update a symbol'),
+    REMOVE_SYMBOL = Symbol('remove a symbol'),
+    CLONE_SYMBOL = Symbol('clone a symbol'),
+    RESIZE = Symbol('resize'),
+    FOCUS_ON_SYMBOL = Symbol('focus on one symbol'),
+    TOGGLE_ADD_PANEL = Symbol('toggle add panel'),
+    TUNE_SYMBOL_POSITION = Symbol('tune symbol position'),
+    UPDATE_GLOBAL = Symbol('update first level field panel'),
+    TOGGLE_PANEL = Symbol('toggle panel'),
+    MAX_ZI = Symbol('maximize z index'),
+    MIN_ZI = Symbol('minimize z-index'),
+    SWITCH_THEME = Symbol('switch theme'),
+    SET_ASCIIPANEL_FILTER = Symbol('set asciipanel filter'),
+    SET_EMBED_MODAL_VISIBILITY = Symbol('set embed modal visibility'),
+    INIT_VIEWPORT = Symbol('init sizes'),
+    LET_ASCIIPANEL_OPEN_AFTER_SELECTION = Symbol('let the panel open after selection');
+
+const exp = {
+    INIT,
+    ADD_SYMBOL,
+    UPDATE_SYMBOL,
+    REMOVE_SYMBOL,
+    CLONE_SYMBOL,
+    RESIZE,
+    TOGGLE_ADD_PANEL,
+    TOGGLE_PANEL,
+    TUNE_SYMBOL_POSITION,
+    FOCUS_ON_SYMBOL,
+    UPDATE_GLOBAL,
+    MAX_ZI,
+    MIN_ZI,
+    SWITCH_THEME,
+    SET_ASCIIPANEL_FILTER,
+    LET_ASCIIPANEL_OPEN_AFTER_SELECTION,
+    SET_EMBED_MODAL_VISIBILITY,
+    INIT_VIEWPORT
+};
+
+export default exp
