@@ -32,7 +32,7 @@ const createSymbol = ({ char, zIndex, left, top }) => {
 };
 
 const actions = {
-        [ACTIONS.INIT]: ({payload: cnf}) => ({
+        [ACTIONS.INIT]: () => ({
             width: WIDTH,
             height: HEIGHT,
             maxWidth: WIDTH,
