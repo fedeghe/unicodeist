@@ -33,9 +33,19 @@ export const debounce = (func, delay) => {
     return ret;
 };
 
+export const saveAsFile = (filename, data) => {
+    const blob = new Blob([JSON.stringify(data)]),
+        link = document.createElement("a");
+    link.download = filename;
+    link.href = window.URL.createObjectURL(blob);
+    link.click();
+
+};
+
 const def = {
     uniqueID,
     cleanCode,
-    debounce
+    debounce,
+    saveAsFile
 };
 export default def;

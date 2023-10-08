@@ -6,7 +6,9 @@ import {
     SYMBOL_BASE_FONTSIZE,
     PANEL_WIDTH,
     DEFAULT_THEME,
-    SYMBOL_BASE_FONTFAMILY, SYMBOL_BASE_FONTWEIGHT} from './../constants';
+    SYMBOL_BASE_FONTFAMILY,
+    SYMBOL_BASE_FONTWEIGHT
+} from './../constants';
 
 const createSymbol = ({ char, zIndex, left, top }) => {
     const u = `${uniqueID}`;
@@ -23,7 +25,7 @@ const createSymbol = ({ char, zIndex, left, top }) => {
         fontWeight: SYMBOL_BASE_FONTWEIGHT,
         rotation: 0,
         opacity: 1,
-        locked: false,
+        scale:1,
         targetUp: false,
         faded: false
     };
@@ -142,21 +144,15 @@ const actions = {
                 }) : sym)
             };
         },
-        [ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION] : ({ payload }) => ({
-            letAsciiPanelOpenAfterSelection: payload
-        }),
-        [ACTIONS.SET_ASCIIPANEL_FILTER]: ({payload = ''}) => ({
-            asciiPanelFilter: payload
-        }),
-        [ACTIONS.SET_EMBED_MODAL_VISIBILITY]: ({payload = ''}) => ({
-            embedModalVisibility: payload
-        }),
+        [ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION] : ({ payload }) => ({ letAsciiPanelOpenAfterSelection: payload }),
+        [ACTIONS.SET_ASCIIPANEL_FILTER]: ({payload = ''}) => ({ asciiPanelFilter: payload }),
+        [ACTIONS.SET_EMBED_MODAL_VISIBILITY]: ({payload = ''}) => ({ embedModalVisibility: payload }),
         [ACTIONS.INIT_VIEWPORT]: ({payload : {maxWidth, maxHeight}, oldState: {
             width, height
         }}) => {
-            console.log({maxWidth, maxHeight})
-            const newMaxWidth = parseInt(maxWidth, 10) - PANEL_WIDTH;
-            const newMaxHeight = parseInt(maxHeight, 10);
+            const newMaxWidth = parseInt(maxWidth, 10) - PANEL_WIDTH,
+                newMaxHeight = parseInt(maxHeight, 10);
+            // console.log({maxWidth, maxHeight});
             return {
                 maxWidth: newMaxWidth,
                 maxHeight: maxHeight,
@@ -165,15 +161,16 @@ const actions = {
             };
         },
         [ACTIONS.SYMBOL_FOCUS]: ({oldState: { focusedSymbolId, superFocus, symbols }}) => ({
-            ...(focusedSymbolId && {superFocus: !superFocus}),
-            //and it is was not then all symbols go in faded mode
-            ...(!superFocus && {
-                symbols: symbols.map(sym => ({
-                    ...sym,
-                    faded: sym.id !== focusedSymbolId
-                }))
-            })
-        })
+            // toggle superFocus
+            superFocus: !superFocus,
+            // if it was superFocused then remove all faded
+            // otherwise set all others faded
+            symbols: symbols.map(sym => ({
+                ...sym,
+                faded: superFocus ? false : sym.id !== focusedSymbolId
+            }))
+        }),
+        [ACTIONS.IMPORT]: () => {}
         
     },
     reducer = (oldState, action) => {

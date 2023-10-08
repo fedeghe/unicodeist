@@ -16,6 +16,7 @@ const INIT = Symbol('init'),
     SET_EMBED_MODAL_VISIBILITY = Symbol('set embed modal visibility'),
     INIT_VIEWPORT = Symbol('init sizes'),
     SYMBOL_FOCUS = Symbol('focus symbol toggle'),
+    IMPORT = Symbol('import'),
     LET_ASCIIPANEL_OPEN_AFTER_SELECTION = Symbol('let the panel open after selection');
 
 const exp = {
@@ -37,7 +38,8 @@ const exp = {
     LET_ASCIIPANEL_OPEN_AFTER_SELECTION,
     SET_EMBED_MODAL_VISIBILITY,
     SYMBOL_FOCUS,
-    INIT_VIEWPORT
+    INIT_VIEWPORT, 
+    IMPORT
 };
 
 export default exp;

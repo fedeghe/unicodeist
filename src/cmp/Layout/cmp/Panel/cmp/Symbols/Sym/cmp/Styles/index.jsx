@@ -1,15 +1,15 @@
 
-import { useContext} from 'react'
+import { useContext} from 'react';
 import Box from '@mui/material/Box';
-import ctx from './../../../../../../../../../Context'
-import ACTIONS from './../../../../../../../../../reducer/actions'
-import useStyles from './../../styles'
+import ctx from './../../../../../../../../../Context';
+import ACTIONS from './../../../../../../../../../reducer/actions';
+import useStyles from './../../styles';
 
 
 const Styles = ({sym}) => {
-    const classes = useStyles()
+    const classes = useStyles();
     // return 'rotation'
-    const {state: {width, height, focusedSymbolId}, dispatch} = useContext(ctx)
+    const {state: {width, height, focusedSymbolId}, dispatch} = useContext(ctx);
     return <div className={classes.SectionStyles}>
         <div style={{display:'flex',justifyContent:'space-between'}}  className={classes.SectionStylesContainer}>
             <div>
@@ -20,15 +20,21 @@ const Styles = ({sym}) => {
                         dispatch({
                             type: ACTIONS.UPDATE_SYMBOL,
                             payload: {id: sym.id, field:'fontFamily', value: v}
-                        })
+                        });
                     }}>
-                        {['Arial', 'Verdana', 'Tahoma',
-                    'Trebuchet MS',
-                    'Times New Roman',
-                    'Georgia',
-                    'Garamond',
-                    'Courier New',
-                    'Brush Script MT'].map(family => <option key={family} value={family}>{family}</option>)}}
+                        {
+                        [
+                            'Arial', 'Verdana', 'Tahoma',
+                            'Trebuchet MS',
+                            'Times New Roman',
+                            'Georgia',
+                            'Garamond',
+                            'Courier New',
+                            'Brush Script MT'
+                        ].map(family => 
+                            <option key={family} value={family}>{family}</option>
+                        )
+                        }
                     </select>
                     
                 </Box>
@@ -41,7 +47,7 @@ const Styles = ({sym}) => {
                         dispatch({
                             type: ACTIONS.UPDATE_SYMBOL,
                             payload: {id: sym.id, field:'color', value: v}
-                        })
+                        });
                     }} value={sym.color} />
                 </Box>
             </div>
@@ -55,9 +61,16 @@ const Styles = ({sym}) => {
                         dispatch({
                             type: ACTIONS.UPDATE_SYMBOL,
                             payload: {id: sym.id, field:'fontWeight', value: v}
-                        })
+                        });
                     }}>
-                        {Array.from({length: 9}, (_, i) => (i+1)*100).map(weight => <option key={weight} value={weight}>{weight}</option>)}}
+                        {
+                            Array.from(
+                                {length: 9},
+                                (_, i) => (i+1)*100
+                            ).map(
+                                weight => <option key={weight} value={weight}>{weight}</option>
+                            )
+                        }
                     </select>
                 </div>
             </Box>
@@ -72,7 +85,20 @@ const Styles = ({sym}) => {
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
                         payload: {id: sym.id, field:'fontSize', value: v}
-                    })
+                    });
+                }}/>
+            </Box>
+        </div>
+        <div className={classes.SectionStylesContainer}>
+            <Box className={classes.Box}>
+                <span  className={classes.Label} >Scale:</span>
+                <span>{sym.scale}</span>
+                <input type="range" min={0} max={10} step={0.1} value={sym.scale} onChange={e => {
+                    var v = e.target.value;
+                    dispatch({
+                        type: ACTIONS.UPDATE_SYMBOL,
+                        payload: {id: sym.id, field:'scale', value: v}
+                    });
                 }}/>
             </Box>
         </div>
@@ -85,7 +111,7 @@ const Styles = ({sym}) => {
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
                         payload: {id: sym.id, field:'rotation', value: v}
-                    })
+                    });
                 }}/>
             </Box>
         </div>
@@ -98,11 +124,11 @@ const Styles = ({sym}) => {
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
                         payload: {id: sym.id, field:'opacity', value: v}
-                    })
+                    });
                 }}/>
             </Box>
         </div>
-    </div>
-}
+    </div>;
+};
 
-export default Styles
+export default Styles;

@@ -52,7 +52,7 @@ export default createUseStyles(theme => ({
             : theme.sym.background,
         color: theme.sym.foreground,
         cursor: selected ? 'default' : 'pointer',
-        height: selected ? '480px' : '50px',
+        height: selected ? '520px' : '50px',
         transition: 'height 0.2s',
         ...(selected ? { animation: 'zoom-in-zoom-out 1s ease infinite' } : {})
 

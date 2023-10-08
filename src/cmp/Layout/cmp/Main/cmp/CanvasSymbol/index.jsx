@@ -1,15 +1,15 @@
 import {
     useCallback, useContext,
     useState
-} from 'react'
-import useStyles from './styles'
+} from 'react';
+import useStyles from './styles';
 
-import ctx from './../../../../../../Context'
-import ACTIONS from './../../../../../../reducer/actions'
+import ctx from './../../../../../../Context';
+import ACTIONS from './../../../../../../reducer/actions';
 
 const CanvasSymbol = ({symbol}) => {
-    const {state: { focusedSymbolId}, dispatch} = useContext(ctx)
-    const isTarget = focusedSymbolId===symbol.id
+    const {state: { focusedSymbolId}, dispatch} = useContext(ctx);
+    const isTarget = focusedSymbolId===symbol.id;
     
     const {
         id,
@@ -23,13 +23,14 @@ const CanvasSymbol = ({symbol}) => {
         rotation,
         opacity,
         faded,
+        scale
     } = symbol;
     const classes = useStyles({
         isTarget,
         faded,
         ownOpacity: opacity
-    })
-    const [startPoint, setStartPoint] = useState([left, top])
+    });
+    const [startPoint, setStartPoint] = useState([left, top]);
 
     const selectSymbol = useCallback(
         () => dispatch({
@@ -37,16 +38,16 @@ const CanvasSymbol = ({symbol}) => {
             payload: id
         }),
         [dispatch, id]
-    )
+    );
     const onDragStart = e => {
-        setStartPoint([e.pageX, e.pageY])
-    }
+        setStartPoint([e.pageX, e.pageY]);
+    };
     const onDrag = e => {
-        e.preventDefault()
-    }
+        e.preventDefault();
+    };
     const onDragEnd = e => {
         e.preventDefault();
-        const [startX, startY] = startPoint
+        const [startX, startY] = startPoint;
         dispatch({
             type: ACTIONS.TUNE_SYMBOL_POSITION,
             payload: {
@@ -56,8 +57,8 @@ const CanvasSymbol = ({symbol}) => {
                     top: parseInt(e.pageY, 10) - parseInt(startY, 10)
                 }
             }
-        })
-    }
+        });
+    };
     
     return <div
             onDragStart={onDragStart}
@@ -71,19 +72,23 @@ const CanvasSymbol = ({symbol}) => {
             
             style={{
                 position:'absolute',
-                left: `${left}px`,
-                top: `${top}px`,
+                
+                // left: `${left}px`,
+                // top: `${top}px`,
+                transformOrigin: 'center',
+                transform: `translate(${left}px,${top}px) ${rotation ? `rotate(${rotation}deg)` : '' }  scale(${scale})`,
                 color,
+
                 fontSize: `${fontSize}px`,
                 height: `${fontSize}px`,
                 lineHeight: `${fontSize}px`,
+
                 fontWeight,
                 fontFamily,
                 zIndex,
-                ...(rotation && {transform: `rotate(${rotation}deg)`}),
                 ...(!faded && opacity < 1 && {opacity}),
             }}
         >{char}</div>
-    </div>
-}
-export default CanvasSymbol
+    </div>;
+};
+export default CanvasSymbol;

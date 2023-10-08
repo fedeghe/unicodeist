@@ -16,14 +16,18 @@ const App = () => {
     const [state, dispatch] = useReducer(reducer, {}, init);
     const {themeKey} = state;
     const theme = getTheme(themeKey);
-    const debounced = debounce(() =>  
-    dispatch({
-        type: ACTIONS.INIT_VIEWPORT,
-        payload: {
-            maxHeight: window.innerHeight * 0.9,
-            maxWidth: window.innerWidth * 0.9,
-        }
-    }), 200)
+    const debounced = debounce(
+        () => {
+            // console.log({innerHeight: ~~window.innerHeight, innerWidth: ~~window.innerWidth});
+            dispatch({
+                type: ACTIONS.INIT_VIEWPORT,
+                payload: {
+                    maxHeight: ~~window.innerHeight * 0.9,
+                    maxWidth: ~~window.innerWidth * 0.9,
+                }
+            });
+        }, 500
+    );
     const storeViewPortData = useCallback(debounced, []);
     useEffect(storeViewPortData, [storeViewPortData]);
     useEffect(() => {

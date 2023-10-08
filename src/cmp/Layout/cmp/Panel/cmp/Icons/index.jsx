@@ -1,47 +1,54 @@
 import { useCallback, useContext } from 'react';
+
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
 import FolderOpenRoundedIcon from '@mui/icons-material/FolderOpenRounded';
 import Grid4x4RoundedIcon from '@mui/icons-material/Grid4x4Rounded';
-
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 
 
 import ThemeSwitch from '../../../../../ThemeSwitch';
-import ctx from './../../../../../../Context'
-import ACTIONS from './../../../../../../reducer/actions'
+import ctx from './../../../../../../Context';
+import ACTIONS from './../../../../../../reducer/actions';
+import {saveAsFile} from './../../../../../../utils';
 
-import useStyles from './styles'
+import useStyles from './styles';
 
-import Channel from '@fedeghe/channeljs'
+import Channel from '@fedeghe/channeljs';
 
 
 
 const Icons = () => {
-    const {state: { backgroundColor}, dispatch} = useContext(ctx)
-    const classes = useStyles()
+    const { state, dispatch} = useContext(ctx);
+    const {backgroundColor} = state;
+    const classes = useStyles();
     const embed = useCallback(() => {
-        Channel.get('event').pub('embed')
-    }, [])
+        Channel.get('event').pub('embed');
+    }, []);
     const mailto = useCallback(() => {
-        Channel.get('event').pub('mailto')
-    }, [])
+        Channel.get('event').pub('mailto');
+    }, []);
+    const exportState = useCallback(() => {
+        saveAsFile('asciist.json', state);
+    }, [state]);
     const updateBackgroundColor = e => {
-        const value = e.target.value
+        const value = e.target.value;
         dispatch({
             type: ACTIONS.UPDATE_GLOBAL,
             payload: {
                 field: 'backgroundColor',
                 value
             }
-        })
-    }
+        });
+    };
   
     return <div className={classes.GlobalTools}>
         {/* <div onClick={console.log} className={classes.Item}>
             <VisibilityRoundedIcon/>
         </div> */}
+        <div className={classes.Item}><FileUploadIcon onClick={exportState}/></div>
         <div className={classes.Item}><EmailRoundedIcon onClick={mailto}/></div>
         <div className={classes.Item}><CodeRoundedIcon onClick={embed}/></div>
         {/* <div className={classes.Item}><FolderOpenRoundedIcon/></div> */}
@@ -53,7 +60,7 @@ const Icons = () => {
             <ThemeSwitch/>
         </div>
         
-    </div>
-}
+    </div>;
+};
 
-export default Icons
+export default Icons;
