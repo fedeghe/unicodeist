@@ -1,15 +1,15 @@
 
-import { useContext} from 'react'
+import { useContext} from 'react';
 import Box from '@mui/material/Box';
-import ctx from './../../../../../../../../../Context'
-import ACTIONS from './../../../../../../../../../reducer/actions'
-import useStyles from './../../styles'
+import ctx from './../../../../../../../../../Context';
+import ACTIONS from './../../../../../../../../../reducer/actions';
+import useStyles from './../../styles';
 
 
 const Zindex = ({sym}) => {
-    const classes = useStyles()
-    // return 'rotation'
-    const {state: {width, height, focusedSymbolId}, dispatch} = useContext(ctx)
+    const classes = useStyles();
+
+    const { dispatch} = useContext(ctx);
     return <div className={classes.SectionZindex}>
 
         <div>
@@ -19,11 +19,11 @@ const Zindex = ({sym}) => {
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
                         payload: {id: sym.id, field:'zIndex', value: v}
-                    })
+                    });
                 }}/>
             </Box>
         </div>
-    </div>
-}
+    </div>;
+};
 
-export default Zindex
+export default Zindex;

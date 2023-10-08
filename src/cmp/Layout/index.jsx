@@ -1,9 +1,9 @@
-import useStyles from './styles'
-import Panel from './cmp/Panel'
-import Main from './cmp/Main'
+import useStyles from './styles';
+import Panel from './cmp/Panel';
+import Main from './cmp/Main';
 const Layout = () => {
     
-    const classes = useStyles()
+    const classes = useStyles();
     
     return (
         <div className={classes.Root}>
@@ -11,5 +11,5 @@ const Layout = () => {
             <Panel />
         </div>
     );
-}
-export default Layout
+};
+export default Layout;

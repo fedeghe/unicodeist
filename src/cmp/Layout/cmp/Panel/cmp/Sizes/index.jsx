@@ -1,19 +1,14 @@
-
-import { useContext} from 'react'
-
-import Slider from '@mui/material/Slider';
+import { useContext} from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
-
-import ctx from './../../../../../../Context'
-import ACTIONS from './../../../../../../reducer/actions'
-import useStyles from './styles'
+import ctx from './../../../../../../Context';
+import ACTIONS from './../../../../../../reducer/actions';
+import useStyles from './styles';
 
 
 const Sizes = () => {
-    const classes = useStyles()
-    const {state: {width, height, maxWidth, maxHeight, focusedSymbolId}, dispatch} = useContext(ctx)
+    const classes = useStyles();
+    const {state: {width, height, maxWidth, maxHeight}, dispatch} = useContext(ctx);
     return <div className={classes.Container}>
         <div>
             <Box className={classes.Box}>
@@ -23,7 +18,7 @@ const Sizes = () => {
                     dispatch({
                         type: ACTIONS.RESIZE,
                         payload: {what:'width', value: v}
-                    })
+                    });
                 }}/>
             </Box>
         </div>
@@ -35,11 +30,11 @@ const Sizes = () => {
                     dispatch({
                         type: ACTIONS.RESIZE,
                         payload: {what:'height', value: v}
-                    })
+                    });
                 }}/>
             </Box>
         </div>
-    </div>
-}
+    </div>;
+};
 
-export default Sizes
+export default Sizes;

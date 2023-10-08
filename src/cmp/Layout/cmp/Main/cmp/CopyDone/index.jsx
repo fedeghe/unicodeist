@@ -32,6 +32,6 @@ const  CopyDone = ({message, open, setOpen, onClose = () => {}}) =>  {
         action={action}
       />
   );
-}
+};
 
-export default CopyDone
+export default CopyDone;

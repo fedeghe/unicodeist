@@ -1,38 +1,38 @@
-import {useContext, useState, useEffect, useCallback} from 'react'
-import {uniqueID} from './../../../../../../../../utils';
+import { useContext, useState } from 'react';
+import { uniqueID } from './../../../../../../../../utils';
 
 
-import CopyDone from './../../../CopyDone'
-import ctx from '../../../../../../../../Context'
-import ACTIONS from '../../../../../../../../reducer/actions'
-import useStyles from './styles'
-import symbols from '../../../../../../../../Symbols'
+import CopyDone from './../../../CopyDone';
+import ctx from '../../../../../../../../Context';
+import ACTIONS from '../../../../../../../../reducer/actions';
+import useStyles from './styles';
+import symbols from '../../../../../../../../Symbols';
 
-import Item from './../Item'
+import Item from './../Item';
 
 const Families = () => {
-    const classes = useStyles({border: 10})
-    const [open, setOpen] = useState(false)
+    const classes = useStyles({border: 10});
+    const [open, setOpen] = useState(false);
     const {dispatch, state: {
         letAsciiPanelOpenAfterSelection,
         asciiPanelFilter
-    }} = useContext(ctx)
+    }} = useContext(ctx);
     
     const closePanel = () => {
         dispatch({
             type: ACTIONS.TOGGLE_ADD_PANEL,
             payload: false
-        })
-    }
-    const showConfirmation = char => setOpen(char)
-    const hideConfirmation = () => setOpen(false)
+        });
+    };
+    const showConfirmation = char => setOpen(char);
+    const hideConfirmation = () => setOpen(false);
     const onSelect = (char) => {
         dispatch({
             type: ACTIONS.ADD_SYMBOL,
             payload: char
-        })
-        letAsciiPanelOpenAfterSelection ? showConfirmation(char) : closePanel()
-    }
+        });
+        letAsciiPanelOpenAfterSelection ? showConfirmation(char) : closePanel();
+    };
     
     return <div className={classes.Container}>
         {symbols
@@ -47,6 +47,6 @@ const Families = () => {
             )
         )}
         {open && <CopyDone message={`${open} added`} onClose={hideConfirmation} open={open} setOpen={setOpen}/>}
-    </div>
-}
-export default Families
+    </div>;
+};
+export default Families;

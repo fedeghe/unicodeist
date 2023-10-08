@@ -1,11 +1,11 @@
-import Icons from './../Icons'
-import Sizes from './../Sizes'
-import Logo from './cmp/Logo'
-import useStyles from './styles'
+import Icons from './../Icons';
+import Sizes from './../Sizes';
+import Logo from './cmp/Logo';
+import useStyles from './styles';
 
 
 const Header = () => {
-    const classes = useStyles()
+    const classes = useStyles();
     
     return <>
         <div className={classes.PanelHeader}>
@@ -14,7 +14,7 @@ const Header = () => {
         </div>
         <hr className={classes.Hr} />
         <Sizes/>
-    </>
-}
+    </>;
+};
 
-export default Header
+export default Header;

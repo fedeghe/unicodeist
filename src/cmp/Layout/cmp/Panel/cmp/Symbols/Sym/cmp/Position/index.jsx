@@ -1,19 +1,19 @@
 
-import { useContext} from 'react'
+import { useContext} from 'react';
 
-import Slider from '@mui/material/Slider';
+
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 
-import ctx from './../../../../../../../../../Context'
-import ACTIONS from './../../../../../../../../../reducer/actions'
-import useStyles from './../../styles'
+
+import ctx from './../../../../../../../../../Context';
+import ACTIONS from './../../../../../../../../../reducer/actions';
+import useStyles from './../../styles';
 
 
 const Position = ({sym}) => {
-    const classes = useStyles()
-    const {state: {width, height}, dispatch} = useContext(ctx)
+    const classes = useStyles();
+    const {state: {width, height}, dispatch} = useContext(ctx);
     const w = parseInt(width, 10);
     const h = parseInt(height, 10);
     const wMore = w * .3;
@@ -28,7 +28,7 @@ const Position = ({sym}) => {
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
                         payload: {id: sym.id, field:'left', value: v}
-                    })
+                    });
                 }}/>
             </Box>
         </div>
@@ -40,11 +40,11 @@ const Position = ({sym}) => {
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
                         payload: {id: sym.id, field:'top', value: v}
-                    })
+                    });
                 }}/>
             </Box>
         </div>
-    </div>
-}
+    </div>;
+};
 
-export default Position
+export default Position;

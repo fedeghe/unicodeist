@@ -1,31 +1,29 @@
-/* eslint-disable no-unused-vars */
-import { useContext} from 'react'
-import Card from '@mui/material/Card'
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+
+import { useContext} from 'react';
+import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 
 
-import Label from './cmp/Label'
+import Label from './cmp/Label';
 
-import Zindex from './cmp/Zindex'
-import Element from './cmp/Element'
-import Styles from './cmp/Styles'
-import Position from './cmp/Position'
+import Zindex from './cmp/Zindex';
+import Element from './cmp/Element';
+import Styles from './cmp/Styles';
+import Position from './cmp/Position';
 
-import ctx from '../../../../../../../Context'
-import ACTIONS from '../../../../../../../reducer/actions'
+import ctx from '../../../../../../../Context';
+import ACTIONS from '../../../../../../../reducer/actions';
 
-import useStyles from './styles'
+import useStyles from './styles';
 const Sym = ({sym}) => {
 
-    const {state: {focusedSymbolId}, dispatch} = useContext(ctx)
-    const selected = focusedSymbolId === sym.id
-    const classes = useStyles({selected})
+    const {state: {focusedSymbolId}, dispatch} = useContext(ctx);
+    const selected = focusedSymbolId === sym.id;
+    const classes = useStyles({selected});
     const focus = () => !selected && dispatch({
         type: ACTIONS.FOCUS_ON_SYMBOL,
         payload: sym.id
-    })
+    });
     
     return <Card onClick={focus} className={classes.Sym}>
         {selected ? 
@@ -43,7 +41,7 @@ const Sym = ({sym}) => {
             <Typography variant="h5">{sym.char}</Typography>
         </div>}
         
-    </Card>
-}
+    </Card>;
+};
 
-export default Sym
+export default Sym;

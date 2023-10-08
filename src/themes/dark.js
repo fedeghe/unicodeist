@@ -29,7 +29,7 @@ const theme =  {
     },
     themeSwitch: {
         lineBg: cgs.dark0,
-        roundBg: cgs.dark4,
+        roundBg: '#5588dd',
         icon: '#ffdd00',
     },
     unselectedItemHoverBackgound: cgs.mid5

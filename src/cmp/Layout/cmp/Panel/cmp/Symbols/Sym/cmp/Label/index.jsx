@@ -1,19 +1,14 @@
-
-import { useContext} from 'react'
-
-import Slider from '@mui/material/Slider';
+import { useContext} from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
-
-import ctx from './../../../../../../../../../Context'
-import ACTIONS from './../../../../../../../../../reducer/actions'
-import useStyles from './../../styles'
+import ctx from './../../../../../../../../../Context';
+import ACTIONS from './../../../../../../../../../reducer/actions';
+import useStyles from './../../styles';
 
 
 const Label = ({sym}) => {
-    const classes = useStyles()
-    const {state: {width, height, focusedSymbolId}, dispatch} = useContext(ctx)
+    const classes = useStyles();
+    const {  dispatch} = useContext(ctx);
     const updateLabel = e => dispatch({
         type: ACTIONS.UPDATE_SYMBOL,
         payload: {
@@ -21,7 +16,7 @@ const Label = ({sym}) => {
             field: 'label',
             value: e.target.value
         }
-    })
+    });
     return <div className={classes.SectionLabel}>
         <div>
             <Box className={classes.Box}>
@@ -30,7 +25,7 @@ const Label = ({sym}) => {
             </Box>
         
         </div>
-    </div>
-}
+    </div>;
+};
 
-export default Label
+export default Label;

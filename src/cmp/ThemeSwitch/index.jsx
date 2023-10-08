@@ -8,7 +8,7 @@ import useStyles from './styles';
 
 const ThemeSwitch = () => {
     const {state: { themeKey}, dispatch} = useContext(ctx);
-    const classes = useStyles({themeKey})
+    const classes = useStyles({themeKey});
     const switchTheme = () => dispatch({
         type: ACTIONS.SWITCH_THEME
     });
