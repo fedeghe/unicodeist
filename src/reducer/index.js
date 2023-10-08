@@ -43,7 +43,8 @@ const actions = {
             addPanelVisibility: false,
             focusedSymbolId: null,
             backgroundColor: '#ffffff',
-            asciiPanelFilter: '',
+            asciiPanelFilterBySet: '',
+            asciiPanelFilterByIconName: '',
             letAsciiPanelOpenAfterSelection: false,
             embedModalVisibility: false,
             superFocus: false // isolate focusedSymbolId
@@ -145,7 +146,10 @@ const actions = {
             };
         },
         [ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION] : ({ payload }) => ({ letAsciiPanelOpenAfterSelection: payload }),
-        [ACTIONS.SET_ASCIIPANEL_FILTER]: ({payload = ''}) => ({ asciiPanelFilter: payload }),
+        [ACTIONS.SET_ASCIIPANEL_FILTER]: ({payload : {what, value}}) => {
+            const field = {set: 'asciiPanelFilterBySet', iconName: 'asciiPanelFilterByIconName'}[what];
+            return { [field]: value };
+        },
         [ACTIONS.SET_EMBED_MODAL_VISIBILITY]: ({payload = ''}) => ({ embedModalVisibility: payload }),
         [ACTIONS.INIT_VIEWPORT]: ({payload : {maxWidth, maxHeight}, oldState: {
             width, height

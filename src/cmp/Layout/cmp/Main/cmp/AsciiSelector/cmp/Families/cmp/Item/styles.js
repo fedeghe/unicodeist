@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss';
-import {ITEM_SIZE} from './../../../../../../../../constants';
+import {ITEM_SIZE} from '../../../../../../../../../../constants';
 export default createUseStyles(theme => ({
     Item: {
         lineHeight: `${ITEM_SIZE}px`,

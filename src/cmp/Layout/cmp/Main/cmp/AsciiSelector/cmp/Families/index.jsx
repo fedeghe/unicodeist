@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { uniqueID } from './../../../../../../../../utils';
+
 
 
 import CopyDone from './../../../CopyDone';
@@ -8,14 +8,15 @@ import ACTIONS from '../../../../../../../../reducer/actions';
 import useStyles from './styles';
 import symbols from '../../../../../../../../Symbols';
 
-import Item from './../Item';
+
+import Family from './cmp/Family';
 
 const Families = () => {
     const classes = useStyles({border: 10});
     const [open, setOpen] = useState(false);
     const {dispatch, state: {
         letAsciiPanelOpenAfterSelection,
-        asciiPanelFilter
+        asciiPanelFilterBySet
     }} = useContext(ctx);
     
     const closePanel = () => {
@@ -36,15 +37,18 @@ const Families = () => {
     
     return <div className={classes.Container}>
         {symbols
-            .filter(({label}) => label.toLowerCase().includes(asciiPanelFilter.toLowerCase()))
-            .map(({label, data}) => (
-                <div key={label} className={classes.SetContainer}>
-                    <h1>{label}</h1>
-                    <div className={classes.ItemsContainer}>
-                        {data.map(d => d.char === 'breakingLine' ? <div key={`${uniqueID}`} className={classes.Br}/> : <Item key={`${label}-${d.char}`} char={d.char} onSelect={onSelect} />)}
-                    </div>
-                </div>
-            )
+            .map(({label, data}) => {
+                const filteredData = data.filter(({char, description = ''})=>{
+                    return description.toLowerCase().split(',').some(s => s.includes(asciiPanelFilterBySet))
+                        || char === asciiPanelFilterBySet;
+                });
+                return filteredData.length &&  {
+                    label, 
+                    data:filteredData
+                };
+            })
+            .filter(Boolean)
+            .map(({label, data}) => <Family key={label} data={data} label={label} onSelect={onSelect}/>
         )}
         {open && <CopyDone message={`${open} added`} onClose={hideConfirmation} open={open} setOpen={setOpen}/>}
     </div>;
