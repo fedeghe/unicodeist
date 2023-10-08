@@ -5,7 +5,7 @@
 
 ascii selector modal:  
 - filter by char  
-- add all families  
+- add all families [here](https://www.freecodecamp.org/news/all-emojis-emoji-list-for-copy-and-paste/)  
 - 
 
 on main:  
