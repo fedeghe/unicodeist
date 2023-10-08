@@ -1,9 +1,14 @@
 # ASCIIst
 
 
-missing. 
+### missing  
+
 ascii selector modal:  
-- filter by char
+- filter by char  
+- add all families  
+- 
 
 on main:  
-- filter by lablel and char
+- filter by label & char  
+- export autoscript (hosted on jmvc.org)  
+- 
