@@ -1,5 +1,10 @@
 
 import { useReducer, useEffect, useCallback } from 'react';
+import { ThemeProvider} from 'react-jss';
+
+
+import Layout from './cmp/Layout';
+import Context from './Context';
 import reducerFactory from './reducer';
 import ACTIONS from './reducer/actions';
 import getTheme from './themes';
