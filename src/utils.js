@@ -39,13 +39,27 @@ export const saveAsFile = (filename, data) => {
     link.download = filename;
     link.href = window.URL.createObjectURL(blob);
     link.click();
-
+};
+export const importFromFile = ({onContentReady}) => {
+    const link = document.createElement("input");
+    link.type = 'file';
+    link.addEventListener('change', function (e) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            onContentReady(reader.result);
+        };
+        if (e.target.files.length) {
+            reader.readAsText(e.target.files[0]);
+        }
+    });
+    link.click();
 };
 
 const def = {
     uniqueID,
     cleanCode,
     debounce,
-    saveAsFile
+    saveAsFile,
+    importFromFile
 };
 export default def;

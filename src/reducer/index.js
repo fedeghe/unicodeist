@@ -170,8 +170,7 @@ const actions = {
                 faded: superFocus ? false : sym.id !== focusedSymbolId
             }))
         }),
-        [ACTIONS.IMPORT]: () => {}
-        
+        [ACTIONS.IMPORT]: ({payload}) => ({...payload})
     },
     reducer = (oldState, action) => {
         const { payload = {}, type } = action;

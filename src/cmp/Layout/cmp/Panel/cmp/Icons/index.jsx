@@ -6,13 +6,14 @@ import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
 import FolderOpenRoundedIcon from '@mui/icons-material/FolderOpenRounded';
 import Grid4x4RoundedIcon from '@mui/icons-material/Grid4x4Rounded';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
+import GetAppIcon from '@mui/icons-material/GetApp';
 
 
 
 import ThemeSwitch from '../../../../../ThemeSwitch';
 import ctx from './../../../../../../Context';
 import ACTIONS from './../../../../../../reducer/actions';
-import {saveAsFile} from './../../../../../../utils';
+import { saveAsFile, importFromFile } from './../../../../../../utils';
 
 import useStyles from './styles';
 
@@ -33,6 +34,15 @@ const Icons = () => {
     const exportState = useCallback(() => {
         saveAsFile('asciist.json', state);
     }, [state]);
+
+    const importState = () => {
+        importFromFile({
+            onContentReady : cnt => dispatch({
+                type: ACTIONS.IMPORT,
+                payload: JSON.parse(cnt)
+            })
+        });
+    };
     const updateBackgroundColor = e => {
         const value = e.target.value;
         dispatch({
@@ -49,6 +59,7 @@ const Icons = () => {
             <VisibilityRoundedIcon/>
         </div> */}
         <div className={classes.Item}><FileUploadIcon onClick={exportState}/></div>
+        <div className={classes.Item}><GetAppIcon onClick={importState}/></div>
         <div className={classes.Item}><EmailRoundedIcon onClick={mailto}/></div>
         <div className={classes.Item}><CodeRoundedIcon onClick={embed}/></div>
         {/* <div className={classes.Item}><FolderOpenRoundedIcon/></div> */}
