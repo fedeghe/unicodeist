@@ -7,9 +7,8 @@ import useStyles from './../../styles';
 
 
 const Styles = ({sym}) => {
-    const classes = useStyles();
-    // return 'rotation'
-    const {state: {width, height, focusedSymbolId}, dispatch} = useContext(ctx);
+    const classes = useStyles(),
+        { dispatch } = useContext(ctx);
     return <div className={classes.SectionStyles}>
         <div style={{display:'flex',justifyContent:'space-between'}}  className={classes.SectionStylesContainer}>
             <div>
