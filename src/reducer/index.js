@@ -154,13 +154,14 @@ const actions = {
         [ACTIONS.INIT_VIEWPORT]: ({payload : {maxWidth, maxHeight}, oldState: {
             width, height
         }}) => {
+            console.log({maxWidth, maxHeight})
             const newMaxWidth = parseInt(maxWidth, 10) - PANEL_WIDTH;
             const newMaxHeight = parseInt(maxHeight, 10);
             return {
                 maxWidth: newMaxWidth,
                 maxHeight: maxHeight,
-                height: Math.min(height, newMaxHeight),
                 width: Math.min(width, newMaxWidth),
+                height: Math.min(height, newMaxHeight),
             };
         },
         [ACTIONS.SYMBOL_FOCUS]: ({oldState: { focusedSymbolId, superFocus, symbols }}) => ({

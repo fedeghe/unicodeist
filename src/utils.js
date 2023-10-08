@@ -16,9 +16,26 @@ export const cleanCode = code => code
     .replace(/;\s/gm, ";")             // remove spaces after ;
     .replace(/,\s/gm, ",")              // remove spaces after ,
     .replace(/draggable=[true|false]/gm, "");              // remove draggable attrs
-    
+
+export const debounce = (func, delay) => {
+    var to,
+        ret = function () {
+            var args = [].slice.call(arguments),
+                self = this;
+            clearTimeout(to);
+            to = setTimeout(function () {
+                return func.apply(self, args);
+            }, delay);
+        };
+    ret.cancel = function () {
+        clearTimeout(to);
+    };
+    return ret;
+};
+
 const def = {
     uniqueID,
-    cleanCode
+    cleanCode,
+    debounce
 };
 export default def;
