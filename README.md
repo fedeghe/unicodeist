@@ -11,4 +11,4 @@ ascii selector modal:
 on main:  
 - filter by label & char  
 - export autoscript (hosted on jmvc.org)  
-- 
+- export png (through canvas)
