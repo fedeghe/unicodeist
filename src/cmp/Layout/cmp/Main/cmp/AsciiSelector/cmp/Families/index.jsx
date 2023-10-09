@@ -23,7 +23,7 @@ const Families = () => {
             payload: false
         });
     };
-    const showConfirmation = char => setOpen(char);
+    const showConfirmation = char => setOpen(Boolean(char));
     const hideConfirmation = () => setOpen(false);
     const onSelect = (char) => {
         dispatch({

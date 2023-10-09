@@ -1,7 +1,5 @@
-
 import { useReducer, useEffect, useCallback } from 'react';
 import { ThemeProvider} from 'react-jss';
-
 
 import Layout from './cmp/Layout';
 import Context from './Context';
@@ -10,23 +8,19 @@ import ACTIONS from './reducer/actions';
 import getTheme from './themes';
 import {debounce} from './utils';
 
-
 const {reducer, init} = reducerFactory();
 const App = () => {
     const [state, dispatch] = useReducer(reducer, {}, init);
     const {themeKey} = state;
     const theme = getTheme(themeKey);
     const debounced = debounce(
-        () => {
-            // console.log({innerHeight: ~~window.innerHeight, innerWidth: ~~window.innerWidth});
-            dispatch({
-                type: ACTIONS.INIT_VIEWPORT,
-                payload: {
-                    maxHeight: ~~window.innerHeight * 0.9,
-                    maxWidth: ~~window.innerWidth * 0.9,
-                }
-            });
-        }, 500
+        () => dispatch({
+            type: ACTIONS.INIT_VIEWPORT,
+            payload: {
+                maxHeight: ~~window.innerHeight * 0.9,
+                maxWidth: ~~window.innerWidth * 0.9,
+            }
+        }), 500
     );
     const storeViewPortData = useCallback(debounced, []);
     useEffect(storeViewPortData, [storeViewPortData]);

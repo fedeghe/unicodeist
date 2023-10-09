@@ -2,15 +2,17 @@ import {
     useCallback, useContext,
     useState
 } from 'react';
+
 import useStyles from './styles';
 
+import {FEATURE_FONTSIZE} from './../../../../../../constants';
 import ctx from './../../../../../../Context';
 import ACTIONS from './../../../../../../reducer/actions';
 
 const CanvasSymbol = ({symbol}) => {
     const {state: { focusedSymbolId}, dispatch} = useContext(ctx);
     const isTarget = focusedSymbolId===symbol.id;
-    
+
     const {
         id,
         char,
@@ -20,16 +22,21 @@ const CanvasSymbol = ({symbol}) => {
         fontSize,
         fontFamily,
         fontWeight,
-        rotation,
+        rotationX,
+        rotationY,
+        rotationZ,
         opacity,
         faded,
-        scale
+        scale,
+        scaleX,
+        scaleY,
     } = symbol;
     const classes = useStyles({
         isTarget,
         faded,
         ownOpacity: opacity
     });
+
     const [startPoint, setStartPoint] = useState([left, top]);
 
     const selectSymbol = useCallback(
@@ -58,8 +65,8 @@ const CanvasSymbol = ({symbol}) => {
                 }
             }
         });
-    };
-    
+    };    
+
     return <div
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}
@@ -72,17 +79,24 @@ const CanvasSymbol = ({symbol}) => {
             
             style={{
                 position:'absolute',
-                
                 // left: `${left}px`,
                 // top: `${top}px`,
                 transformOrigin: 'center',
-                transform: `translate(${left}px,${top}px) ${rotation ? `rotate(${rotation}deg)` : '' }  scale(${scale})`,
+                transform: `
+                    translate(${left}px,${top}px)
+                    ${rotationX ? `rotateX(${rotationX}deg)` : '' }  
+                    ${rotationY ? `rotateY(${rotationY}deg)` : '' }  
+                    ${rotationZ ? `rotateZ(${rotationZ}deg)` : '' }  
+                    scale(${scale}) 
+                    scaleX(${scaleX}) 
+                    scaleY(${scaleY}) 
+                `,
                 color,
-
-                fontSize: `${fontSize}px`,
-                height: `${fontSize}px`,
-                lineHeight: `${fontSize}px`,
-
+                ...(FEATURE_FONTSIZE && {
+                    fontSize: `${fontSize}px`,
+                    height: `${fontSize}px`,
+                    lineHeight: `${fontSize}px`,
+                }),
                 fontWeight,
                 fontFamily,
                 zIndex,

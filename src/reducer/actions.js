@@ -19,6 +19,8 @@ const INIT = Symbol('init'),
     IMPORT = Symbol('import'),
     MOVE_ALL_SYMBOLS = Symbol('global move'),
     PAN_ALL_SYMBOLS = Symbol('global pan'),
+    ALIGN_V = Symbol('align vertically'),
+    ALIGN_H = Symbol('align horizontally'),
     LET_ASCIIPANEL_OPEN_AFTER_SELECTION = Symbol('let the panel open after selection');
 
 const exp = {
@@ -43,7 +45,9 @@ const exp = {
     INIT_VIEWPORT, 
     IMPORT,
     MOVE_ALL_SYMBOLS,
-    PAN_ALL_SYMBOLS
+    PAN_ALL_SYMBOLS,
+    ALIGN_V,
+    ALIGN_H
 };
 
 export default exp;

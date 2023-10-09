@@ -2,6 +2,7 @@
 import { useContext} from 'react';
 import Box from '@mui/material/Box';
 import ctx from './../../../../../../../../../Context';
+import {MIN_ZINDEX, MAX_ZINDEX} from './../../../../../../../../../constants';
 import ACTIONS from './../../../../../../../../../reducer/actions';
 import useStyles from './../../styles';
 
@@ -14,13 +15,17 @@ const Zindex = ({sym}) => {
 
         <div>
             <Box className={classes.Box}>
-                <input className={classes.SectionZindexInput} type="range" min={0} max={1000} value={sym.zIndex} onChange={e => {
-                    var v = e.target.value;
-                    dispatch({
-                        type: ACTIONS.UPDATE_SYMBOL,
-                        payload: {id: sym.id, field:'zIndex', value: v}
-                    });
-                }}/>
+                <input className={classes.SectionZindexInput}
+                    type="range"
+                    min={MIN_ZINDEX} max={MAX_ZINDEX}
+                    value={sym.zIndex}
+                    onChange={e => 
+                        dispatch({
+                            type: ACTIONS.UPDATE_SYMBOL,
+                            payload: {id: sym.id, field:'zIndex', value: e.target.value}
+                        })
+                    }
+                />
             </Box>
         </div>
     </div>;

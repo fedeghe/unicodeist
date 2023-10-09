@@ -1,7 +1,7 @@
 export const uniqueID = new function () {
     var count = 0,
         self = this;
-    this.prefix = 'ASCIIST_';
+    this.prefix = 'UNICODEIST_';
     this.toString = function () {
         count += 1;
         return self.prefix + count;

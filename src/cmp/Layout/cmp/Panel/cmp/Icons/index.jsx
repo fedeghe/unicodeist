@@ -32,7 +32,7 @@ const Icons = () => {
         Channel.get('event').pub('mailto');
     }, []);
     const exportState = useCallback(() => {
-        saveAsFile('asciist.json', state);
+        saveAsFile('unicodeist.json', state);
     }, [state]);
 
     const importState = () => {

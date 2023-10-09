@@ -3,7 +3,7 @@ import { createUseStyles } from 'react-jss';
 export default createUseStyles((theme) => ({
 
     Container: {
-        zIndex:1000,
+        zIndex:10000,
         position:'absolute',
         top:'5px',
         left:'5px',

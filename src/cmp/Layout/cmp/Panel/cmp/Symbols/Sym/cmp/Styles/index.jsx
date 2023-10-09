@@ -2,6 +2,7 @@
 import { useContext} from 'react';
 import Box from '@mui/material/Box';
 import ctx from './../../../../../../../../../Context';
+import { MIN_SCALE, MAX_SCALE, STEP_SCALE, FEATURE_FONTSIZE } from './../../../../../../../../../constants';
 import ACTIONS from './../../../../../../../../../reducer/actions';
 import useStyles from './../../styles';
 
@@ -75,7 +76,7 @@ const Styles = ({sym}) => {
             </Box>
             
         </div>
-        <div className={classes.SectionStylesContainer}>
+        {FEATURE_FONTSIZE && <div className={classes.SectionStylesContainer}>
             <Box className={classes.Box}>
                 <span  className={classes.Label} >Font size:</span>
                 <span>{sym.fontSize}</span>
@@ -87,12 +88,12 @@ const Styles = ({sym}) => {
                     });
                 }}/>
             </Box>
-        </div>
+        </div>}
         <div className={classes.SectionStylesContainer}>
             <Box className={classes.Box}>
                 <span  className={classes.Label} >Scale:</span>
                 <span>{sym.scale}</span>
-                <input type="range" min={0} max={10} step={0.1} value={sym.scale} onChange={e => {
+                <input type="range" min={MIN_SCALE} max={MAX_SCALE} step={STEP_SCALE} value={sym.scale} onChange={e => {
                     var v = e.target.value;
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
@@ -100,16 +101,59 @@ const Styles = ({sym}) => {
                     });
                 }}/>
             </Box>
-        </div>
-        <div className={classes.SectionStylesContainer}>
             <Box className={classes.Box}>
-                <span  className={classes.Label} >Rotation:</span>
-                <span>{sym.rotation}</span>
-                <input type="range" min={-180} max={180} value={sym.rotation} onChange={e => {
+                <span  className={classes.Label} >ScaleX:</span>
+                <span>{sym.scaleX}</span>
+                <input type="range" min={MIN_SCALE} max={MAX_SCALE} step={STEP_SCALE} value={sym.scaleX} onChange={e => {
                     var v = e.target.value;
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
-                        payload: {id: sym.id, field:'rotation', value: v}
+                        payload: {id: sym.id, field:'scaleX', value: v}
+                    });
+                }}/>
+            </Box>
+            <Box className={classes.Box}>
+                <span  className={classes.Label} >ScaleY:</span>
+                <span>{sym.scaleY}</span>
+                <input type="range" min={MIN_SCALE} max={MAX_SCALE} step={STEP_SCALE} value={sym.scaleY} onChange={e => {
+                    var v = e.target.value;
+                    dispatch({
+                        type: ACTIONS.UPDATE_SYMBOL,
+                        payload: {id: sym.id, field:'scaleY', value: v}
+                    });
+                }}/>
+            </Box>
+        
+            <Box className={classes.Box}>
+                <span  className={classes.Label} >RotationX:</span>
+                <span>{sym.rotationX}</span>
+                <input type="range" min={-180} max={180} value={sym.rotationX} onChange={e => {
+                    var v = e.target.value;
+                    dispatch({
+                        type: ACTIONS.UPDATE_SYMBOL,
+                        payload: {id: sym.id, field:'rotationX', value: v}
+                    });
+                }}/>
+            </Box>
+            <Box className={classes.Box}>
+                <span  className={classes.Label} >RotationY:</span>
+                <span>{sym.rotationY}</span>
+                <input type="range" min={-180} max={180} value={sym.rotationY} onChange={e => {
+                    var v = e.target.value;
+                    dispatch({
+                        type: ACTIONS.UPDATE_SYMBOL,
+                        payload: {id: sym.id, field:'rotationY', value: v}
+                    });
+                }}/>
+            </Box>
+            <Box className={classes.Box}>
+                <span  className={classes.Label} >RotationZ:</span>
+                <span>{sym.rotationZ}</span>
+                <input type="range" min={-180} max={180} value={sym.rotationZ} onChange={e => {
+                    var v = e.target.value;
+                    dispatch({
+                        type: ACTIONS.UPDATE_SYMBOL,
+                        payload: {id: sym.id, field:'rotationZ', value: v}
                     });
                 }}/>
             </Box>

@@ -1,4 +1,7 @@
 const h = (new Date()).getHours();
+
+export const FEATURE_FONTSIZE = false;
+
 export const WIDTH = 500;
 export const HEIGHT = 500;
 export const PANEL_WIDTH = 300;
@@ -17,6 +20,14 @@ export const ITEM_FONTSIZE = '2em';
 export const DEFAULT_THEME = (h > 20 || h < 7) ? 'dark' : 'bright';
 export const FADED_OPACITY = 0.4;
 export const LET_UNICODE_PANEL_OPEN_AFTER_SELECTION = true;
+export const MIN_SCALE = 0.1;
+export const MAX_SCALE = 150;
+export const STEP_SCALE = 0.1;
+export const MIN_ZINDEX = 0;
+export const MAX_ZINDEX = 10000;
+export const EXPANDED_SYM_HEIGHT = FEATURE_FONTSIZE ? 630 : 560;
+export const COLLAPSED_SYM_HEIGHT = 50;
+
 
 const CONSTS = {
     WIDTH, HEIGHT,
@@ -34,6 +45,15 @@ const CONSTS = {
     ITEM_FONTSIZE,
     DEFAULT_THEME,
     FADED_OPACITY,
-    LET_UNICODE_PANEL_OPEN_AFTER_SELECTION
+    LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
+    MIN_SCALE,
+    MAX_SCALE,
+    STEP_SCALE,
+    MIN_ZINDEX,
+    MAX_ZINDEX,
+    EXPANDED_SYM_HEIGHT,
+    COLLAPSED_SYM_HEIGHT,
+
+    FEATURE_FONTSIZE
 };
 export default CONSTS;

@@ -39,7 +39,16 @@ export default createUseStyles({
     },
     Sym: {
         color: ({sym:{color}}) => color,
-        transform: ({sym:{rotation}}) => `rotate(${rotation}deg)`,
+        transform: ({sym:{
+            rotationX, rotationY, rotationZ,
+            scaleX, scaleY
+        }}) => `
+            rotateX(${rotationX}deg) 
+            rotateY(${rotationY}deg) 
+            rotateZ(${rotationZ}deg)
+            scaleX(${scaleX}deg) 
+            scaleY(${scaleY}deg) 
+        `,
     }
 
 });

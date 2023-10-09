@@ -8,7 +8,11 @@ import {
     DEFAULT_THEME,
     SYMBOL_BASE_FONTFAMILY,
     SYMBOL_BASE_FONTWEIGHT,
-    LET_UNICODE_PANEL_OPEN_AFTER_SELECTION
+    LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
+    MIN_SCALE,
+    MAX_SCALE,
+    MIN_ZINDEX,
+    MAX_ZINDEX
 
 } from './../constants';
 
@@ -25,9 +29,13 @@ const createSymbol = ({ char, zIndex, left, top }) => {
         fontSize: SYMBOL_BASE_FONTSIZE,
         fontFamily: SYMBOL_BASE_FONTFAMILY,
         fontWeight: SYMBOL_BASE_FONTWEIGHT,
-        rotation: 0,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
         opacity: 1,
         scale:1,
+        scaleX:1,
+        scaleY:1,
         targetUp: false,
         faded: false
     };
@@ -51,11 +59,15 @@ const actions = {
             embedModalVisibility: false,
             superFocus: false // isolate focusedSymbolId
         }),
+        
         [ACTIONS.SWITCH_THEME]: ({oldState: {themeKey}}) => ({
             themeKey: themeKey === 'bright' ? 'dark' : 'bright'
         }),
+        
         [ACTIONS.RESIZE]: ({payload: {what, value}}) => ({ [what]: value }),
+        
         [ACTIONS.TOGGLE_ADD_PANEL]: ({payload: visibility}) => ({addPanelVisibility : visibility }),
+        
         [ACTIONS.ADD_SYMBOL]: ({
             payload : char,
             oldState: { symbols, width, height}
@@ -79,6 +91,7 @@ const actions = {
                 ]
             };
         },
+
         [ACTIONS.REMOVE_SYMBOL]: ({
             payload : id,
             oldState: { symbols }
@@ -86,6 +99,7 @@ const actions = {
             symbols: symbols.filter(s => s.id !== id),
             focusedSymbolId : null
         }),
+
         [ACTIONS.CLONE_SYMBOL]: ({
             payload : id,
             oldState: { symbols }
@@ -100,6 +114,7 @@ const actions = {
                 ]
             };
         },
+
         [ACTIONS.FOCUS_ON_SYMBOL]: ({
             payload : id,
             oldState: { symbols }
@@ -112,13 +127,16 @@ const actions = {
                 faded: false
             }))
         }),
+        
         [ACTIONS.UPDATE_GLOBAL]: ({payload: {field, value}}) => ({[field]: value}),
+        
         [ACTIONS.UPDATE_SYMBOL]: ({payload: {id, field, value}, oldState: {symbols}}) => ({
             symbols: symbols.map(sym => sym.id === id ? {
                     ...sym,
                     [field]: value
                 } : sym)
         }),
+
         [ACTIONS.TUNE_SYMBOL_POSITION]: ({payload: {id, update}, oldState: {symbols}}) => {
             return {
                 symbols: symbols.map(sym => sym.id === id ? ({
@@ -127,10 +145,10 @@ const actions = {
                     top: parseInt(sym.top, 10) + parseInt(update.top, 10),
                 }) : sym)
             };
-        }
-        ,
+        },
+
         [ACTIONS.MAX_ZI]: ({payload: id, oldState: {symbols}}) => {
-            const maxZindex = symbols.reduce((a, n) => n.zIndex > a ? n.zIndex : a, Number.NEGATIVE_INFINITY);
+            const maxZindex = symbols.reduce((a, n) => n.zIndex > a ? n.zIndex : a, MIN_ZINDEX);
             return {
                 symbols: symbols.map(sym => sym.id === id ? ({
                     ...sym,
@@ -138,18 +156,23 @@ const actions = {
                 }) : sym)
             };
         },
+
         [ACTIONS.MIN_ZI]: ({payload: id, oldState: {symbols}}) => {
-            const minZindex = symbols.reduce((a, n) => n.zIndex < a ? n.zIndex : a, Number.POSITIVE_INFINITY);
+            const minZindex = symbols.reduce((a, n) => n.zIndex < a ? n.zIndex : a, MAX_ZINDEX);
             return {
                 symbols: symbols.map(sym => sym.id === id ? ({
                     ...sym,
-                    zIndex: minZindex-1
+                    zIndex: Math.max(0, minZindex-1)
                 }) : sym)
             };
         },
+        
         [ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION] : ({ payload }) => ({ letAsciiPanelOpenAfterSelection: payload }),
+        
         [ACTIONS.SET_ASCIIPANEL_FILTER]: ({ payload }) => ({ asciiSelectorFilter: payload }),
+        
         [ACTIONS.SET_EMBED_MODAL_VISIBILITY]: ({payload = ''}) => ({ embedModalVisibility: payload }),
+        
         [ACTIONS.INIT_VIEWPORT]: ({payload : {maxWidth, maxHeight}, oldState: {
             width, height
         }}) => {
@@ -162,6 +185,7 @@ const actions = {
                 height: Math.min(height, newMaxHeight),
             };
         },
+
         [ACTIONS.SYMBOL_FOCUS]: ({oldState: { focusedSymbolId, superFocus, symbols }}) => ({
             // toggle superFocus
             superFocus: !superFocus,
@@ -172,21 +196,49 @@ const actions = {
                 faded: superFocus ? false : sym.id !== focusedSymbolId
             }))
         }),
+        
         [ACTIONS.IMPORT]: ({payload}) => ({...payload}),
-        [ACTIONS.MOVE_ALL_SYMBOLS]: ({payload: {leftTune, topTune}, oldState: { symbols }}) => ({
-            symbols: symbols.map(sym => ({
+        
+        [ACTIONS.ALIGN_H]: ({payload: id, oldState: {symbols, width}}) => ({
+            symbols: symbols.map(sym => sym.id === id ? ({
+                ...sym,
+                left: ~~(width/2)
+            }) : sym)
+        }),
+
+        [ACTIONS.ALIGN_V]: ({payload: id , oldState: {symbols, height}}) => ({
+            symbols: symbols.map(sym => sym.id === id ? ({
+                ...sym,
+                top: ~~(height/2)
+            }) : sym)
+        }),
+        [ACTIONS.MOVE_ALL_SYMBOLS]: ({payload: {leftTune, topTune}, oldState: { symbols }}) => 
+        
+        ({
+            symbols: symbols.map(sym => console.log({left : sym.left, top: sym.top, leftTune, topTune}) || ({
                 ...sym,
                 left: sym.left + leftTune,
                 top: sym.top + topTune,
             }))
         }),
+
         [ACTIONS.PAN_ALL_SYMBOLS]: ({payload, oldState: { symbols }}) => ({
-            symbols: symbols.map(sym => ({
-                ...sym,
-                scale: parseInt(sym.scale, 10) - parseInt(payload, 10)
-            }))
-        })
-    },
+                symbols: symbols.map(sym => {
+                    const minCompliantScale = Math.max(
+                        MIN_SCALE,
+                        parseInt(sym.scale, 10) - parseInt(payload, 10)
+                    );
+                    const compliantScale = Math.min(
+                        MAX_SCALE,
+                        minCompliantScale
+                    );
+                    return {
+                        ...sym,
+                        scale: compliantScale
+                    };
+                })
+            })
+        },
     reducer = (oldState, action) => {
         const { payload = {}, type } = action;
         if (typeof type === 'undefined') throw new Error('Action type not given');

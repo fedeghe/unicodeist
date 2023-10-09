@@ -26,6 +26,8 @@ const Logo = () => {
         const [startX, startY] = startPoint,
             endX = e.pageX,
             endY = e.pageY;
+
+        console.log({endX, endY, startX, startY});
         shiftKey 
         ? dispatch({
             type: ACTIONS.PAN_ALL_SYMBOLS,

@@ -17,8 +17,10 @@ const Main = () => {
         }),
         [addPanelVisibility, dispatch]
     );
-    const seekEsc = useCallback(e => {        
-        if (e.key === "a" && e.metaKey) {
+    const seekEsc = useCallback(e => {  
+        // console.log(e);
+        // if (e.key === "a" && e.metaKey) {
+        if (e.key === "Escape") {
             togglePanel();
             e.preventDefault();
         }
