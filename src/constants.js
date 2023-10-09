@@ -12,7 +12,8 @@ export const PANEL_BGCOLOR = '#444444';
 export const EDITOR_BGCOLOR = '#222222';
 export const SELECTOR_BGCOLOR = '#AAAAAA';
 export const SELECTOR_FGCOLOR = '#000000';
-export const ITEM_SIZE = 60;
+export const ITEM_SIZE = 100;
+export const ITEM_FONTSIZE = '2em';
 export const DEFAULT_THEME = (h > 20 || h < 7) ? 'dark' : 'bright';
 export const FADED_OPACITY = 0.4;
 
@@ -29,6 +30,7 @@ const CONSTS = {
     SELECTOR_BGCOLOR,
     SELECTOR_FGCOLOR,
     ITEM_SIZE,
+    ITEM_FONTSIZE,
     DEFAULT_THEME,
     FADED_OPACITY
 };

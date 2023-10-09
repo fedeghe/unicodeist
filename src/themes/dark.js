@@ -15,7 +15,8 @@ const theme =  {
         itemBackgroundHover: cgs.dark4,
         outline: cgs.lightA,
         hoverOutline: cgs.lightE,
-        itemForeground: cgs.lightE,
+        itemForeground: cgs.lightA,
+        itemForegroundOver: cgs.lightF,
     },
     foreground: cgs.lightE,
     radius: {

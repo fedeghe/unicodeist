@@ -33,10 +33,16 @@ export const debounce = (func, delay) => {
     return ret;
 };
 
+/**
+ * TODO: here I should allow the use to see the location & name dialog
+ * but still do not know how
+ */
 export const saveAsFile = (filename, data) => {
     const blob = new Blob([JSON.stringify(data)]),
         link = document.createElement("a");
     link.download = filename;
+    // link.toggleAttribute('download');
+    
     link.href = window.URL.createObjectURL(blob);
     link.click();
 };

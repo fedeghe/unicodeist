@@ -8,9 +8,8 @@ const Family = ({ data, label, onSelect }) => {
         <div className={classes.ItemsContainer}>
             {data.map(d => 
                 d.char === 'breakingLine'
-                    // ? <div key={`${uniqueID}`} className={classes.Br} />
                     ? <hr key={`${uniqueID}`} className={classes.Br} />
-                    : <Item key={`${label}-${d.char}`} char={d.char} onSelect={onSelect} />
+                    : <Item key={`${uniqueID}`} char={d.char} onSelect={onSelect} />
             )}
         </div>
     </div>;

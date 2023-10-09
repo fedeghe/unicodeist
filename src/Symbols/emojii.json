@@ -115,9 +115,7 @@
         { "char": "😶‍🌫️", "description":	"Face in clouds"},
         { "char": "😮‍💨", "description":	"Face exhaling"},
         { "char": "😵‍💫", "description":	"Face with spiral eyes"},
-        { "char": "❤️‍🔥", "description":	"Heart on fire"},
-        { "char": "❤️‍🩹", "description":	"Mending heart"},
-        { "char": "👁️‍🗨️", "description":	"Eye in speech bubble"},
+    
         { "char": "🧔‍♂️", "description":	"Man with beard"},
         { "char": "🧔‍♀️", "description":	"Woman with beard"},
         { "char": "👨‍🦰", "description":	"Man with red hair"},
@@ -669,7 +667,6 @@
         {"char": "🧅", "description":	"Onion"},
         {"char": "🍄", "description":	"Mushroom"},
         {"char": "🥜", "description":	"Peanuts"},
-        {"char": "🫑", "description":	"Beans"},
         {"char": "🌰", "description":	"Chestnut"},
         {"char": "🍞", "description":	"Bread"},
         {"char": "🥐", "description":	"Croissant"},

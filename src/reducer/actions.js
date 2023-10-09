@@ -17,6 +17,7 @@ const INIT = Symbol('init'),
     INIT_VIEWPORT = Symbol('init sizes'),
     SYMBOL_FOCUS = Symbol('focus symbol toggle'),
     IMPORT = Symbol('import'),
+    MOVE_ALL_SYMBOLS = Symbol('global mmove'),
     LET_ASCIIPANEL_OPEN_AFTER_SELECTION = Symbol('let the panel open after selection');
 
 const exp = {
@@ -39,7 +40,8 @@ const exp = {
     SET_EMBED_MODAL_VISIBILITY,
     SYMBOL_FOCUS,
     INIT_VIEWPORT, 
-    IMPORT
+    IMPORT,
+    MOVE_ALL_SYMBOLS
 };
 
 export default exp;

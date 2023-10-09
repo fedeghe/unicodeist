@@ -43,7 +43,7 @@ const actions = {
             addPanelVisibility: false,
             focusedSymbolId: null,
             backgroundColor: '#ffffff',
-            asciiPanelFilterBySet: '',
+            asciiSelectorFilter: '',
             asciiPanelFilterByIconName: '',
             letAsciiPanelOpenAfterSelection: false,
             embedModalVisibility: false,
@@ -146,17 +146,13 @@ const actions = {
             };
         },
         [ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION] : ({ payload }) => ({ letAsciiPanelOpenAfterSelection: payload }),
-        [ACTIONS.SET_ASCIIPANEL_FILTER]: ({payload : {what, value}}) => {
-            const field = {set: 'asciiPanelFilterBySet', iconName: 'asciiPanelFilterByIconName'}[what];
-            return { [field]: value };
-        },
+        [ACTIONS.SET_ASCIIPANEL_FILTER]: ({ payload }) => ({ asciiSelectorFilter: payload }),
         [ACTIONS.SET_EMBED_MODAL_VISIBILITY]: ({payload = ''}) => ({ embedModalVisibility: payload }),
         [ACTIONS.INIT_VIEWPORT]: ({payload : {maxWidth, maxHeight}, oldState: {
             width, height
         }}) => {
             const newMaxWidth = parseInt(maxWidth, 10) - PANEL_WIDTH,
                 newMaxHeight = parseInt(maxHeight, 10);
-            // console.log({maxWidth, maxHeight});
             return {
                 maxWidth: newMaxWidth,
                 maxHeight: maxHeight,
@@ -174,7 +170,14 @@ const actions = {
                 faded: superFocus ? false : sym.id !== focusedSymbolId
             }))
         }),
-        [ACTIONS.IMPORT]: ({payload}) => ({...payload})
+        [ACTIONS.IMPORT]: ({payload}) => ({...payload}),
+        [ACTIONS.MOVE_ALL_SYMBOLS]: ({payload: {leftTune, topTune}, oldState: { symbols }}) => ({
+            symbols: symbols.map(sym => ({
+                ...sym,
+                left: sym.left + leftTune,
+                top: sym.top + topTune,
+            }))
+        })
     },
     reducer = (oldState, action) => {
         const { payload = {}, type } = action;

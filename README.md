@@ -1,12 +1,8 @@
-# ASCIIst
+# Unicodeist
 
 
 ### missing  
 
-ascii selector modal:  
-- filter by char  
-- add all families [here](https://www.freecodecamp.org/news/all-emojis-emoji-list-for-copy-and-paste/)  
-- 
 
 on main:  
 - filter by label & char  

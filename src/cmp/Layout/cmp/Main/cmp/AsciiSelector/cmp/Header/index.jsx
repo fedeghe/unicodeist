@@ -18,7 +18,7 @@ const Header = () => {
 
     const { dispatch, state: {
         letAsciiPanelOpenAfterSelection,
-        asciiPanelFilterBySet,
+        asciiSelectorFilter,
     } } = useContext(ctx);
 
     const toggleLetOpen = () => {
@@ -30,10 +30,7 @@ const Header = () => {
     const setFilterBySet = useCallback(e => {
         dispatch({
             type: ACTIONS.SET_ASCIIPANEL_FILTER,
-            payload: {
-                what: 'set',
-                value: e.target.value
-            }
+            payload: e.target.value
         });
     }, [dispatch]);
 
@@ -57,8 +54,8 @@ const Header = () => {
                 <RemoveCircleIcon className={classes.CloseIcon} onClick={closePanel} />
             </div>
             <div className={classes.Search}>
-                <input placeholder="search by set name" onInput={setFilterBySet} type="text" value={asciiPanelFilterBySet} />
-                <ClearIcon color={asciiPanelFilterBySet ? 'action' : 'disabled'} className={classes.ClearIcon} onClick={clearFilter} />
+                <input placeholder="search by set name" onInput={setFilterBySet} type="text" value={asciiSelectorFilter} />
+                <ClearIcon color={asciiSelectorFilter ? 'action' : 'disabled'} className={classes.ClearIcon} onClick={clearFilter} />
             </div>
         </div>
         <div className={classes.LeaveOpenCheck}>

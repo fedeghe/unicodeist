@@ -1,13 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState } from 'react';
-
-
-
 import CopyDone from './../../../CopyDone';
 import ctx from '../../../../../../../../Context';
 import ACTIONS from '../../../../../../../../reducer/actions';
 import useStyles from './styles';
-import symbols from '../../../../../../../../Symbols';
-
+import allSymbols from '../../../../../../../../Symbols';
+import useFilter from './useFilter';
 
 import Family from './cmp/Family';
 
@@ -16,7 +14,7 @@ const Families = () => {
     const [open, setOpen] = useState(false);
     const {dispatch, state: {
         letAsciiPanelOpenAfterSelection,
-        asciiPanelFilterBySet
+        asciiSelectorFilter
     }} = useContext(ctx);
     
     const closePanel = () => {
@@ -34,22 +32,12 @@ const Families = () => {
         });
         letAsciiPanelOpenAfterSelection ? showConfirmation(char) : closePanel();
     };
+
+    // const { symbols } = useFilter({ allSymbols, filter: asciiSelectorFilter });
+    const symbols = allSymbols;
     
     return <div className={classes.Container}>
-        {symbols
-            .map(({label, data}) => {
-                const filteredData = data.filter(({char, description = ''})=>{
-                    return description.toLowerCase().split(',').some(s => s.includes(asciiPanelFilterBySet))
-                        || char === asciiPanelFilterBySet;
-                });
-                return filteredData.length &&  {
-                    label, 
-                    data:filteredData
-                };
-            })
-            .filter(Boolean)
-            .map(({label, data}) => <Family key={label} data={data} label={label} onSelect={onSelect}/>
-        )}
+        {symbols.map(({label, data}) => <Family key={label} data={data} label={label} onSelect={onSelect}/>)}
         {open && <CopyDone message={`${open} added`} onClose={hideConfirmation} open={open} setOpen={setOpen}/>}
     </div>;
 };
