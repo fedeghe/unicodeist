@@ -6,20 +6,32 @@ const Logo = () => {
     const {dispatch} = useContext(ctx);
     const [startPoint, setStartPoint] = useState([0, 0]);
     const [dragging, setDragging] = useState(false);
-    const classes = useStyles({ dragging });
+    const [panning, setPanning] = useState(false);
+    const classes = useStyles({ dragging, panning });
     const onDragStart = e => {
-        setDragging(true);
+        const { shiftKey } = e;
+        (shiftKey ? setPanning : setDragging)(true);
         setStartPoint([e.pageX, e.pageY]);
     };
     const discard = e => {
-        setDragging(false);
+        const { shiftKey } = e;
+        (shiftKey ? setPanning : setDragging)(false);
         e.preventDefault();
     };
     const onDragEnd = e => {
-        setDragging(false);
+        const { shiftKey } = e;
+        (shiftKey ? setPanning : setDragging)(false);
+        
+        
         const [startX, startY] = startPoint,
             endX = e.pageX,
             endY = e.pageY;
+        shiftKey 
+        ? dispatch({
+            type: ACTIONS.PAN_ALL_SYMBOLS,
+            payload: (endY - startY) / 10
+
+        }):
         dispatch({
             type: ACTIONS.MOVE_ALL_SYMBOLS,
             payload: {
@@ -28,6 +40,7 @@ const Logo = () => {
             }
         });
     };
+    
     return <div
         onMouseDown={onDragStart}
         onMouseUp={onDragEnd}

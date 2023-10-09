@@ -16,6 +16,7 @@ export const ITEM_SIZE = 100;
 export const ITEM_FONTSIZE = '2em';
 export const DEFAULT_THEME = (h > 20 || h < 7) ? 'dark' : 'bright';
 export const FADED_OPACITY = 0.4;
+export const LET_UNICODE_PANEL_OPEN_AFTER_SELECTION = true;
 
 const CONSTS = {
     WIDTH, HEIGHT,
@@ -32,6 +33,7 @@ const CONSTS = {
     ITEM_SIZE,
     ITEM_FONTSIZE,
     DEFAULT_THEME,
-    FADED_OPACITY
+    FADED_OPACITY,
+    LET_UNICODE_PANEL_OPEN_AFTER_SELECTION
 };
 export default CONSTS;

@@ -7,7 +7,9 @@ import {
     PANEL_WIDTH,
     DEFAULT_THEME,
     SYMBOL_BASE_FONTFAMILY,
-    SYMBOL_BASE_FONTWEIGHT
+    SYMBOL_BASE_FONTWEIGHT,
+    LET_UNICODE_PANEL_OPEN_AFTER_SELECTION
+
 } from './../constants';
 
 const createSymbol = ({ char, zIndex, left, top }) => {
@@ -45,7 +47,7 @@ const actions = {
             backgroundColor: '#ffffff',
             asciiSelectorFilter: '',
             asciiPanelFilterByIconName: '',
-            letAsciiPanelOpenAfterSelection: false,
+            letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
             embedModalVisibility: false,
             superFocus: false // isolate focusedSymbolId
         }),
@@ -176,6 +178,12 @@ const actions = {
                 ...sym,
                 left: sym.left + leftTune,
                 top: sym.top + topTune,
+            }))
+        }),
+        [ACTIONS.PAN_ALL_SYMBOLS]: ({payload, oldState: { symbols }}) => ({
+            symbols: symbols.map(sym => ({
+                ...sym,
+                scale: parseInt(sym.scale, 10) - parseInt(payload, 10)
             }))
         })
     },

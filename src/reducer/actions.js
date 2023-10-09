@@ -17,7 +17,8 @@ const INIT = Symbol('init'),
     INIT_VIEWPORT = Symbol('init sizes'),
     SYMBOL_FOCUS = Symbol('focus symbol toggle'),
     IMPORT = Symbol('import'),
-    MOVE_ALL_SYMBOLS = Symbol('global mmove'),
+    MOVE_ALL_SYMBOLS = Symbol('global move'),
+    PAN_ALL_SYMBOLS = Symbol('global pan'),
     LET_ASCIIPANEL_OPEN_AFTER_SELECTION = Symbol('let the panel open after selection');
 
 const exp = {
@@ -41,7 +42,8 @@ const exp = {
     SYMBOL_FOCUS,
     INIT_VIEWPORT, 
     IMPORT,
-    MOVE_ALL_SYMBOLS
+    MOVE_ALL_SYMBOLS,
+    PAN_ALL_SYMBOLS
 };
 
 export default exp;

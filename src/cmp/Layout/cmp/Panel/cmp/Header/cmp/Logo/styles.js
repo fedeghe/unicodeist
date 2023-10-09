@@ -12,6 +12,11 @@ export default createUseStyles(theme => ({
         backgroundImage: `url(${bg})`,
         outline: `1px dotted ${theme.foreground}`,
         borderRadius: '4px',
-        cursor:({dragging}) => dragging ? 'move' : 'pointer'
+        cursor:({dragging, panning}) => {
+            if (dragging) return 'move';
+            if (panning) return 'ns-resize';
+            
+            return 'pointer';
+        }
     }
 }));
