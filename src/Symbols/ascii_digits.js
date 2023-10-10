@@ -1,1 +1,0 @@
-export default Array.from({length: 10}, (_, i) => i).map(c => ({ char: c }));

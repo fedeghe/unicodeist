@@ -6,6 +6,7 @@ import copy from 'copy-to-clipboard';
 import Button from '@mui/material/Button';
 import CanvasSymbol from './../CanvasSymbol';
 import CopyDone from './../CopyDone';
+// import ExportImage from './ExportImage';
 
 import ctx from './../../../../../../Context';
 import ACTIONS from './../../../../../../reducer/actions';
@@ -44,6 +45,10 @@ const Canvas = () => {
                 setEmbedCode(code);
                 setEmbedModalVisibility(!!(ref?.current?.outerHTML));
             });
+            Channel.get('event').sub('askHTML', () => {
+                const code = cleanCode(ref.current.outerHTML);
+                Channel.get('event').pub('exportImage', code);
+            });
             Channel.get('event').sub('mailto', () => {
                 const code = cleanCode(ref.current.outerHTML);
                 window.open(`mailto:someone@yoursite.com?subject=Big%20News&body=${code}`);
@@ -81,6 +86,7 @@ const Canvas = () => {
                     </div>
                 </div>
             </Dialog>
+            {/* <ExportImage/> */}
             <div ref={ref} style={refStyles} onDragOver={onDragOver}>
                 {symbols.map(symbol => <CanvasSymbol key={symbol.id} symbol={symbol}/>)}
             </div>

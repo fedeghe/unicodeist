@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createUseStyles } from 'react-jss';
 
 import bg from './../../../../../../../../../img/bg.png';
@@ -28,7 +29,7 @@ export default createUseStyles({
         border: '1px solid black',
         borderRadius: '5px',
         backgroundImage: `url(${bg})`,
-        
+        overflow:'hidden'
     },
     Item: {
         cursor: 'pointer'
@@ -42,13 +43,10 @@ export default createUseStyles({
         transform: ({sym:{
             rotationX, rotationY, rotationZ,
             scaleX, scaleY
-        }}) => `
-            rotateX(${rotationX}deg) 
-            rotateY(${rotationY}deg) 
-            rotateZ(${rotationZ}deg)
-            scaleX(${scaleX}deg) 
-            scaleY(${scaleY}deg) 
-        `,
+        // }}) => `rotateX(${rotationX}deg) rotateY(${rotationY}deg) rotateZ(${rotationZ}deg) scaleX(${scaleX}deg) scaleY(${scaleY}deg)`,
+        }}) => `rotateX(${rotationX}deg) rotateY(${rotationY}deg) rotateZ(${rotationZ}deg) scaleX(${scaleX}) scaleY(${scaleY})`,
+        
+        // }}) => `rotateX(${rotationX}deg)`,
     }
 
 });

@@ -23,5 +23,9 @@ export default createUseStyles((theme) => ({
         flexWrap: 'wrap',
         borderBottom:'1px dashed black'
     },
+    SubfamilyTitle: {
+        display:'block',
+        width:'100%'
+    }
 
 }));

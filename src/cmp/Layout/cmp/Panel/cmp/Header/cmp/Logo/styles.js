@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { createUseStyles } from 'react-jss';
-import bg from './../../../../../../../../img/asciist.png';
+import bg from './../../../../../../../../img/unicodeist.png';
 export default createUseStyles(theme => ({
     Logo: {
         flex:2,
@@ -10,8 +11,9 @@ export default createUseStyles(theme => ({
         justifyContent:'center',
         alignItems:'center',
         backgroundImage: `url(${bg})`,
-        outline: `1px dotted ${theme.foreground}`,
-        borderRadius: '4px',
+        backgroundSize: '200px 100px',
+        // outline: `1px dotted ${theme.foreground}`,
+        // borderRadius: '4px',
         cursor:({dragging, panning}) => {
             if (dragging) return 'move';
             if (panning) return 'ns-resize';

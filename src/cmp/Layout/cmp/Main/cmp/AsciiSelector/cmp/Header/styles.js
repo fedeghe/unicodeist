@@ -15,8 +15,18 @@ export default createUseStyles({
         display:'flex',
         backgroundColor: 'transparent'
     },
-    Search: {marginLeft:'20px', display:'flex', selfAlign:'center'},
-    ClearIcon: {cursor: 'pointer', color:'white'},
+    Search: {
+        marginLeft:'20px',
+        display:'flex',
+        alignSelf:'center',
+        '&>input' : {
+            fontSize:'2em',
+        }
+    },
+    ClearIcon: {
+        cursor: 'pointer',
+        height: '2em'
+    },
     LeaveOpenCheck: {marginRight:'20px'},
     CloseIcon: {fontSize: '3em'}
 });

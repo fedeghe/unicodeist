@@ -54,7 +54,7 @@ const Header = () => {
                 <RemoveCircleIcon className={classes.CloseIcon} onClick={closePanel} />
             </div>
             <div className={classes.Search}>
-                <input placeholder="search by set name" onInput={setFilterBySet} type="text" value={asciiSelectorFilter} />
+                <input placeholder="search by family or character name" onInput={setFilterBySet} type="text" value={asciiSelectorFilter} />
                 <ClearIcon color={asciiSelectorFilter ? 'action' : 'disabled'} className={classes.ClearIcon} onClick={clearFilter} />
             </div>
         </div>

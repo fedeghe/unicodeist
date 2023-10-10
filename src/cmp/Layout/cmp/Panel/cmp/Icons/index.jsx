@@ -1,14 +1,10 @@
 import { useCallback, useContext } from 'react';
 
-// import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
-// import FolderOpenRoundedIcon from '@mui/icons-material/FolderOpenRounded';
-// import Grid4x4RoundedIcon from '@mui/icons-material/Grid4x4Rounded';
+// import PhotoIcon from '@mui/icons-material/Photo';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import GetAppIcon from '@mui/icons-material/GetApp';
-
-
 
 import ThemeSwitch from '../../../../../ThemeSwitch';
 import ctx from './../../../../../../Context';
@@ -28,6 +24,9 @@ const Icons = () => {
     const embed = useCallback(() => {
         Channel.get('event').pub('embed');
     }, []);
+    // const exportImage = useCallback(() => {
+    //     Channel.get('event').pub('askHTML');
+    // }, []);
     const mailto = useCallback(() => {
         Channel.get('event').pub('mailto');
     }, []);
@@ -55,15 +54,12 @@ const Icons = () => {
     };
   
     return <div className={classes.GlobalTools}>
-        {/* <div onClick={console.log} className={classes.Item}>
-            <VisibilityRoundedIcon/>
-        </div> */}
         <div className={classes.Item}><FileUploadIcon onClick={exportState}/></div>
         <div className={classes.Item}><GetAppIcon onClick={importState}/></div>
         <div className={classes.Item}><EmailRoundedIcon onClick={mailto}/></div>
         <div className={classes.Item}><CodeRoundedIcon onClick={embed}/></div>
-        {/* <div className={classes.Item}><FolderOpenRoundedIcon/></div> */}
-        {/* <div className={classes.Item}><Grid4x4RoundedIcon/></div> */}
+        {/* <div className={classes.Item}><PhotoIcon onClick={exportImage}/></div> */}
+        
         <div className={classes.Item}>
             <input style={{width:'28px'}} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
         </div>

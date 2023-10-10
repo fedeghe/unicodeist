@@ -1,7 +1,6 @@
-[
-    {
-    "label": "Smiley Face Emojis",
-    "data": [
+export default [{
+    "title": "Smiley Face Emojis",
+    "charSet":[
         { "char": "🙂", "description": "Slightly smiling face" },
         { "char": "😀", "description": "Smiling face" },
         { "char": "😃", "description": "Smiling face with big eyes" },
@@ -21,8 +20,8 @@
         { "char": "🥳", "description": "Partying face" }
     ]
 },{
-    "label": "Emotional Faces Emojis",
-    "data": [
+    "title": "Emotional Faces Emojis",
+    "charSet": [
         { "char": "🥰", "description": "Smiling face with hearts"},
         { "char": "😍", "description": "Smiling face with heart eyes"},
         { "char": "🤩", "description": "Star-struck"},
@@ -33,9 +32,9 @@
         { "char": "😙", "description": "Kissng face with smiling eyes"},
         { "char": "🥲", "description": "Smiling face with tears"}
     ]
-}, {
-    "label": "Faces with Tongue Emojis",
-    "data": [
+},{
+    "title":"Faces with Tongue Emojis",
+    "charSet":[
         { "char": "😋", "description":	"Yummy face"},
         { "char": "😛", "description":	"Face with tongue"},
         { "char": "😜", "description":	"WInking face with tongue"},
@@ -43,17 +42,17 @@
         { "char": "😝", "description":	"Squinting face with tongue"},
         { "char": "🤑", "description":	"Money face with money tongue"}
     ]
-}, {
-    "label": "Faces with Hands Emojis",
-    "data": [
+},{
+    "title": "Faces with Hands Emojis",
+    "charSet":[
         { "char": "🤗", "description":	"Hugs"},
         { "char": "🤭", "description":	"Face with hand in mouth"},
         { "char": "🤫", "description":	"Shushing face"},
         { "char": "🤔", "description":	"Thinking face"}
     ]
 }, {
-    "label": "Neutral Faces Emojis",
-    "data": [
+    "title": "Neutral Faces Emojis",
+    "charSet":[
         { "char": "😐", "description":	"Neutral face"},
         { "char": "🤐", "description":	"Zipped mouth"},
         { "char": "🤨", "description":	"Face with raised eyebrow"},
@@ -66,8 +65,8 @@
         { "char": "🤥", "description":	"Lying face"}
     ]
 }, {
-    "label": "Sleepy Faces Emojis",
-    "data":[
+    "title": "Sleepy Faces Emojis",
+    "charSet": [
         { "char": "😪", "description":	"Sleepy face"},
         { "char": "😴", "description":	"Sleeping face"},
         { "char": "😌", "description":	"Relieved face"},
@@ -75,8 +74,8 @@
         { "char": "🤤", "description":	"Drooling face"}
     ]
 }, {
-    "label": "Sick Faces Emojis",
-    "data":[
+    "title": "Sick Faces Emojis",
+    "charSet": [
         { "char": "😷", "description":	"Face with mask"},
         { "char": "🤒", "description":	"Face with thermometer"},
         { "char": "🤕", "description":	"Face with bandage"},
@@ -90,8 +89,8 @@
         { "char": "🤯", "description":	"Face with exploding head"}
     ]
 }, {
-    "label": "Concerned Faces Emojis",
-    "data": [
+    "title": "Concerned Faces Emojis",
+    "charSet":[
         { "char": "😕", "description":	"Confused face"},
         { "char": "😟", "description":	"Worried face"},
         { "char": "🙁", "description":	"Slightly frowning face"},
@@ -118,8 +117,8 @@
         { "char": "🥱", "description":	"Yawning face"}
     ]
 }, {
-    "label": "Negative Faces Emojis",
-    "data": [
+    "title": "Negative Faces Emojis",
+    "charSet": [
         { "char": "😤", "description":	"Face with steam"},
         { "char": "😡", "description":	"Pouting face"},
         { "char": "😠", "description":	"Angry face"},
@@ -130,8 +129,8 @@
         { "char": "☠", "description":	"Skull and cross-bone"}
     ]
 }, {
-    "label": "Costume Faces Emojis",
-    "data": [
+    "title": "Costume Faces Emojis",
+    "charSet": [
         { "char": "💩", "description":	"Pile of poo"},
         { "char": "🤡", "description":	"Clown"},
         { "char": "👹", "description":	"Ogre"},
@@ -142,14 +141,11 @@
         { "char": "🤖", "description":	"Robot"}
     ]
 }, {
-    "label": "Faces that require more than one unicode character",
-    "data": [
+    "title": "Faces that require more than one unicode character",
+    "charSet": [
         { "char": "😶‍🌫️", "description":	"Face in clouds"},
         { "char": "😮‍💨", "description":	"Face exhaling"},
         { "char": "😵‍💫", "description":	"Face with spiral eyes"},
-        { "char": "❤️‍🔥", "description":	"Heart on fire"},
-        { "char": "❤️‍🩹", "description":	"Mending heart"},
-        { "char": "👁️‍🗨️", "description":	"Eye in speech bubble"},
         { "char": "🧔‍♂️", "description":	"Man with beard"},
         { "char": "🧔‍♀️", "description":	"Woman with beard"},
         { "char": "👨‍🦰", "description":	"Man with red hair"},
@@ -168,8 +164,8 @@
         { "char": "👱‍♂️", "description":	"Man with blond hair"}
     ]
 }, {
-    "label": "Cat Faces Emojis",
-    "data": [
+    "title": "Cat Faces Emojis",
+    "charSet":[
         { "char": "😺", "description":	"Grinnig cat"},
         { "char": "😸", "description":	"Grinning cat with smiling eyes"},
         { "char": "😹", "description":	"Grinning cat with tears"},
@@ -181,15 +177,15 @@
         { "char": "😾", "description":	"Pouting cat"}
     ]
 }, {
-    "label": "Monkey Faces Emojis",
-    "data": [
+    "title": "Monkey Faces Emojis",
+    "charSet": [
         { "char": "🙈", "description":	"See no evil monkey"},
         { "char": "🙉", "description":	"Hear no evil monkey"},
         { "char": "🙊", "description":	"Speak no evil monkey"}
     ]
 }, {
-    "label": "Emotion Emojis",
-    "data": [
+    "title": "Emotion Emojis",
+    "charSet": [
         {"char": "💋", "description":	"Kiss"},
         {"char": "💌", "description":	"Love letter"},
         {"char": "💘", "description":	"Heart with arrow"},
@@ -229,8 +225,8 @@
         {"char": "💤", "description":	"zzz"}
     ]
 }, {
-    "label": "Hands and other Body Parts Emojis",
-    "data": [
+    "title": "Hands and other Body Parts Emojis",
+    "charSet": [
         {"char": "👋", "description": 	"Waving hand"},
         {"char": "🤚", "description": 	"Raised back of hand"},
         {"char": "🖐", "description": 	"Hands with splayed finger"},
@@ -286,8 +282,8 @@
         {"char": "👄", "description": 	"Mouth"}
     ]
 }, {
-    "label": "Person Emojis",
-    "data": [
+    "title": "Person Emojis",
+    "charSet": [
         {"char": "🧑", "description":	"Person"},
         {"char": "👶", "description":	"Baby"},
         {"char": "🧒", "description":	"Child"},
@@ -498,8 +494,8 @@
         {"char": "🛌", "description":	"Person in bed"}
     ]
 }, {
-    "label": "Family Emojis",
-    "data": [
+    "title": "Family Emojis",
+    "charSet": [
         {"char": "👪", "description":	"Family"},
         {"char": "👨‍👩‍👦", "description":	"Family of man, woman and boy"},
         {"char": "👨‍👩‍👧", "description":	"Family of man, woman and girl"},
@@ -544,8 +540,8 @@
         {"char": "🫂", "description":	"People hugging"}
     ]
 }, {
-    "label": "Animals and Nature Emojis",
-    "data":[
+    "title": "Animals and Nature Emojis",
+    "charSet": [
         {"char": "🐵", "description":	"Monkey face"},
         {"char": "🐒", "description":	"Monkey"},
         {"char": "🦍", "description":	"Gorilla"},
@@ -690,8 +686,8 @@
         {"char": "🪺", "description":	"Nest with eggs"}
     ]
 }, {
-    "label": "Food and Drinks Emojis",
-    "data": [
+    "title": "Food and Drinks Emojis",
+    "charSet": [
         {"char": "🍇", "description":	"Grapes"},
         {"char": "🍈", "description":	"Melon"},
         {"char": "🍉", "description":	"Water melon"},
@@ -725,7 +721,6 @@
         {"char": "🧅", "description":	"Onion"},
         {"char": "🍄", "description":	"Mushroom"},
         {"char": "🥜", "description":	"Peanuts"},
-        {"char": "🫑", "description":	"Beans"},
         {"char": "🌰", "description":	"Chestnut"},
         {"char": "🍞", "description":	"Bread"},
         {"char": "🥐", "description":	"Croissant"},
@@ -825,8 +820,8 @@
         {"char": "🏺", "description":	"Amphora"}
     ]
 }, {
-    "label": "Travel and Places Emojis",
-    "data": [
+    "title": "Travel and Places Emojis",
+    "charSet": [
         {"char": "🌍", "description":	"Globe showing Africa and Europe"},
         {"char": "🌎", "description":	"Globe showing Americas"},
         {"char": "🌏", "description":	"Globe showing Asia and Australia"},
@@ -893,8 +888,8 @@
         {"char": "🎪", "description":	"Circus tent"}
     ]
 }, {
-    "label": "Transport Emojis",
-    "data": [
+    "title": "Transport Emojis",
+    "charSet": [
         {"char": "🚂", "description": 	"Locomotive"},
         {"char": "🚃", "description": 	"Railway car"},
         {"char": "🚄", "description": 	"High speed train"},
@@ -931,8 +926,8 @@
         {"char": "🦼", "description": 	"Motorized wheelchair"}
     ]
 }, {
-    "label": "Time Emojis",
-    "data": [
+    "title": "Time Emojis",
+    "charSet": [
         {"char": "⌛", "description":	"Hourglass done"},
         {"char": "⏳", "description":	"Hourglass starting"},
         {"char": "⌚", "description":	"Watch"},
@@ -966,8 +961,8 @@
         {"char": "🕦", "description":	"Eleven-thirty"}
     ]
 }, {
-    "label": "Sky and Weather Emojis",
-    "data": [
+    "title": "Sky and Weather Emojis",
+    "charSet":[
         {"char": "🌑", "description":	"New moon"},
         {"char": "🌒", "description":	"Waxing crescent moon"},
         {"char": "🌓", "description":	"First quarter moon"},
@@ -1017,8 +1012,8 @@
         {"char": "🌊", "description":	"Water wave"}
     ]
 }, {
-    "label": "Activity Emojis",
-    "data": [
+    "title": "Activity Emojis",
+    "charSet": [
         {"char": "🎃", "description":	"Jack-o-lantern"},
         {"char": "🎄", "description":	"Christmas tree"},
         {"char": "🎆", "description":	"Fireworks"},
@@ -1041,8 +1036,8 @@
         {"char": "🎫", "description":	"Ticket"}
     ]
 }, {
-    "label": "Award Medals Emojis",
-    "data": [
+    "title": "Award Medals Emojis",
+    "charSet": [
         {"char": "🎖", "description":	"Military medal"},
         {"char": "🏆", "description":	"Trophy"},
         {"char": "🏅", "description":	"Sports medal"},
@@ -1051,8 +1046,8 @@
         {"char": "🥉", "description":	"Bronze medal - third position"}
     ]
 }, {
-    "label": "Sport Emojis",
-    "data": [
+    "title": "Sport Emojis",
+    "charSet": [
         {"char": "⚽", "description":	"Soccer ball"},
         {"char": "⚾", "description":	"Baseball"},
         {"char": "🥎", "description":	"Softball"},
@@ -1082,8 +1077,8 @@
         {"char": "🥌", "description":	"Curling stone"}
     ]
 }, {
-    "label": "Games Emojis",
-    "data": [
+    "title": "Games Emojis",
+    "charSet":[
         {"char": "🎯", "description": 	"Bullseye"},
         {"char": "🪀", "description": 	"Yo-yo"},
         {"char": "🪁", "description": 	"Kite"},
@@ -1109,8 +1104,8 @@
         {"char": "🎴", "description": 	"Flower playing cards"}
     ]
 }, {
-    "label": "Arts and Crafts Emojis",
-    "data": [
+    "title": "Arts and Crafts Emojis",
+    "charSet": [
         {"char": "🎭", "description":	"Performing arts"},
         {"char": "🖼", "description":	"Framed picture"},
         {"char": "🎨", "description":	"Artist palette"},
@@ -1120,8 +1115,8 @@
         {"char": "🪢", "description":	"Knot"}
     ]
 }, {
-    "label": "Clothing Objects Emojis",
-    "data": [
+    "title": "Clothing Objects Emojis",
+    "charSet": [
         {"char": "👓", "description": 	"Glasses"},
         {"char": "🕶", "description": 	"Sunglasses"},
         {"char": "🥽", "description": 	"Goggles"},
@@ -1169,8 +1164,8 @@
         {"char": "💎", "description": 	"Gemstone"}
     ]
 }, {
-    "label": "Sound Emojis",
-    "data": [
+    "title": "Sound Emojis",
+    "charSet": [
         {"char": "🔇", "description":	"Muted speaker"},
         {"char": "🔈", "description":	"Low volume speaker"},
         {"char": "🔉", "description":	"Mid volume speaker"},
@@ -1191,8 +1186,8 @@
         {"char": "📻", "description":	"Radio"}
     ]
 }, {
-    "label": "Musical Instrument Emojis",
-    "data": [
+    "title": "Musical Instrument Emojis",
+    "charSet": [
         {"char": "🎷", "description":	"Saxophone"},
         {"char": "🪗", "description":	"Accordion"},
         {"char": "🎸", "description":	"Guitar"},
@@ -1204,8 +1199,8 @@
         {"char": "🪘", "description":	"Long drum"}
     ]
 }, {
-    "label": "Phone Emojis",
-    "data": [
+    "title": "Phone Emojis",
+    "charSet":[
         {"char": "📱", "description":	"Mobile phone"},
         {"char": "📲", "description":	"Mobile phone with arrow"},
         {"char": "☎", "description":	"Telephone"},
@@ -1214,8 +1209,8 @@
         {"char": "📠", "description":	"Fax machine"}
     ]
 }, {
-    "label": "Computer Emojis",
-    "data": [
+    "title": "Computer Emojis",
+    "charSet": [
         {"char": "🔋", "description":	"Full battery"},
         {"char": "🪫", "description":	"Low battery"},
         {"char": "🔌", "description":	"Electric plug"},
@@ -1232,8 +1227,8 @@
         {"char": "🧮", "description":	"Abacus"}
     ]
 }, {
-    "label": "Light and Video Emojis",
-    "data": [
+    "title": "Light and Video Emojis",
+    "charSet": [
         {"char": "🎥", "description":	"Movie camera"},
         {"char": "🎞", "description":	"Film frames"},
         {"char": "📽", "description":	"Film Projector"},
@@ -1252,8 +1247,8 @@
         {"char": "🪔", "description":	"Diya lamp"}
     ]
 }, {
-    "label": "Book and Paper Emojis",
-    "data": [
+    "title": "Book and Paper Emojis",
+    "charSet":[
         {"char": "📔", "description":	"Notebook with decorative cover"},
         {"char": "📕", "description":	"Closed notebook"},
         {"char": "📖", "description":	"Opened notebook"},
@@ -1283,8 +1278,8 @@
         {"char": "💹", "description":	"Chart increase woth Yen"}
     ]
 }, {
-    "label": "Mail Emojis",
-    "data": [
+    "title": "Mail Emojis",
+    "charSet":[
         {"char": "✉", "description":	"Envelope"},
         {"char": "📧", "description":	"e-mail"},
         {"char": "📩", "description":	"Envelope with arrow"},
@@ -1299,8 +1294,8 @@
         {"char": "🗳", "description":	"Ballot box with ballot"}
     ]
 }, {
-    "label": "Writing Emojis",
-    "data": [
+    "title": "Writing Emojis",
+    "charSet":[
         {"char": "✏", "description":	"Pencil"},
         {"char": "✒", "description":	"Black nib"},
         {"char": "🖋", "description":	"Fountain pen"},
@@ -1309,9 +1304,9 @@
         {"char": "🖍", "description":	"Crayon"},
         {"char": "📝", "description":	"Memo"}
     ]
-},{
-    "label": "Office Emojis",
-    "data": [
+}, {
+    "title": "Office Emojis",
+    "charSet":[
         {"char": "💼", "description":	"Briefcase"},
         {"char": "📁", "description":	"File folder"},
         {"char": "📂", "description":	"Open the folder"},
@@ -1335,8 +1330,8 @@
         {"char": "🗑", "description":	"Waste basket"}
     ]
 }, {
-    "label": "Lock Emojis",
-    "data": [
+    "title": "Lock Emojis",
+    "charSet":[
         {"char": "🔒", "description": 	"Locked"},
         {"char": "🔓", "description": 	"Unlocked"},
         {"char": "🔏", "description": 	"Locked with pen"},
@@ -1345,8 +1340,8 @@
         {"char": "🗝", "description": 	"Old key"}
     ]
 }, {
-    "label": "Tools Emojis",
-    "data": [
+    "title": "Tools Emojis",
+    "charSet":[
         {"char": "🔨", "description":	"Hammer"},
         {"char": "🪓", "description":	"Axe"},
         {"char": "⛏", "description":	"Pick"},
@@ -1374,8 +1369,8 @@
         {"char": "🪜", "description":	"Ladder"}
     ]
 }, {
-    "label": "Science Emojis",
-    "data": [
+    "title": "Science Emojis",
+    "charSet":[
         {"char": "⚗", "description":	"Alembic"},
         {"char": "🧪", "description":	"Test tube"},
         {"char": "🧫", "description":	"Petri dish"},
@@ -1385,8 +1380,8 @@
         {"char": "📡", "description":	"Satelite antenna"}
     ]
 }, {
-    "label": "Medical Emojis",
-    "data": [
+    "title": "Medical Emojis",
+    "charSet":[
         {"char": "💉", "description":	"Syringe"},
         {"char": "🩸", "description":	"A droplet of blood"},
         {"char": "💊", "description":	"Pill"},
@@ -1396,8 +1391,8 @@
         {"char": "🩻", "description":	"X-ray"}
     ]
 }, {
-    "label": "Household Emojis",
-    "data": [
+    "title": "Household Emojis",
+    "charSet":[
         {"char": "🚪", "description":	"Door"},
         {"char": "🛗", "description":	"Elevator"},
         {"char": "🪞", "description":	"Mirror"},
@@ -1425,8 +1420,8 @@
         {"char": "🛒", "description":	"Shopping cart"}
     ]
 }, {
-    "label": "Other Objects Emojis",
-    "data": [
+    "title": "Other Objects Emojis",
+    "charSet":[
         {"char": "🚬", "description":	"Cigarette"},
         {"char": "⚰", "description":	"Casket"},
         {"char": "🪦", "description":	"Headstone"},
@@ -1436,8 +1431,8 @@
         {"char": "🪪", "description":	"ID Card"}
     ]
 }, {
-    "label": "Symbols",
-    "data": [
+    "title": "Symbols",
+    "charSet":[
         {"char": "🏧", "description":	"ATM Sign"},
         {"char": "🚮", "description":	"Litter in bin"},
         {"char": "🚰", "description":	"Portable water"},
@@ -1453,8 +1448,8 @@
         {"char": "🛅", "description":	"Left laugage"}
     ]
 }, {
-    "label": "Warning Emojis",
-    "data": [
+    "title": "Warning Emojis",
+    "charSet":[
         {"char": "⚠", "description":	"Warning"},
         {"char": "🚸", "description":	"Children crossing"},
         {"char": "⛔", "description":	"No entry"},
@@ -1470,8 +1465,8 @@
         {"char": "☣", "description":	"Biohazard"}
     ]
 }, {
-    "label": "Arrow Emojis",
-    "data": [
+    "title": "Arrow Emojis",
+    "charSet":[
         {"char": "⬆", "description":	"Up Arrow"},
         {"char": "↗", "description":	"Up-right arrow"},
         {"char": "➡", "description":	"Right arrow"},
@@ -1495,8 +1490,8 @@
         {"char": "🔝", "description":	"Top arrow"}
     ]
 }, {
-    "label": "Religion",
-    "data": [
+    "title": "Religion",
+    "charSet":[
         {"char": "🛐", "description":	"Place of worship"},
         {"char": "⚛", "description":	"Atom symbol"},
         {"char": "🕉", "description":	"OM"},
@@ -1511,8 +1506,8 @@
         {"char": "🔯", "description":	"Six-pointed star"}
     ]
 }, {
-    "label": "Zodiac",
-    "data": [
+    "title": "Zodiac",
+    "charSet":[
         {"char": "♈", "description":	"Aries"},
         {"char": "♉", "description":	"Taurus"},
         {"char": "♊", "description":	"Gemini"},
@@ -1527,9 +1522,9 @@
         {"char": "♓", "description":	"Pisces"},
         {"char": "⛎", "description":	"Ophiucus"}
     ]
-},{
-    "label": "AV Symbols",
-    "data": [
+}, {
+    "title": "AV Symbols",
+    "charSet":[
         {"char": "🔀", "description":	"Shuffle tracks"},
         {"char": "🔁", "description":	"Repeat all"},
         {"char": "🔂", "description":	"Repeat one"},
@@ -1556,15 +1551,15 @@
         {"char": "📴", "description":	"Mobile phone off"}
     ]
 }, {
-    "label": "Gender",
-    "data":[
+    "title": "Gender",
+    "charSet":[
         {"char": "♀", "description":	"Female"},
         {"char": "♂", "description":	"Male"},
         {"char": "⚧", "description":	"Transgender"}
     ]
 }, {
-    "label": "Math Symbols",
-    "data": [
+    "title": "Math Symbols",
+    "charSet":[
         {"char": "✖", "description":	"Times"},
         {"char": "➕", "description":	"Plus"},
         {"char": "➖", "description":	"Minus"},
@@ -1573,8 +1568,8 @@
         {"char": "♾", "description":	"Infinity"}
     ]
 }, {
-    "label": "Punctuation Symbols",
-    "data":[
+    "title": "Punctuation Symbols",
+    "charSet":[
         {"char": "‼", "description":	"Double exclamation"},
         {"char": "⁉", "description":	"Exclamation and question mark"},
         {"char": "❓", "description":	"Red question mark"},
@@ -1584,14 +1579,14 @@
         {"char": "〰", "description":	"Wavy dash"}
     ]
 }, {
-    "label": "Currency",
-    "data":[
+    "title": "Currency",
+    "charSet":[
         {"char": "💱", "description":	"Currency exchange"},
         {"char": "💲", "description":	"Heavy green dollar sign"}
     ]
 }, {
-    "label": "Other Symbols",
-    "data": [
+    "title": "Other Symbols",
+    "charSet":[
         {"char": "⚕", "description":	"Medical symbol"},
         {"char": "♻", "description":	"Recycling symbol"},
         {"char": "⚜", "description":	"Fleur-de-lis"},
@@ -1614,9 +1609,9 @@
         {"char": "®", "description":	"Registered"},
         {"char": "™", "description":	"Trademark"}
     ]
-},{
-    "label": "Keycap",
-    "data": [
+}, {
+    "title": "Keycap",
+    "charSet":[
         {"char": "#️⃣", "description":	"# Keycap"},
         {"char": "*️⃣", "description":	"* Keycap"},
         {"char": "0️⃣", "description":	"0 Keycap"},
@@ -1631,9 +1626,9 @@
         {"char": "9️⃣", "description":	"9 Keycap"},
         {"char": "🔟", "description":	"10 Keycap"}
     ]
-},{
-    "label":"Alphanumeric Symbols",
-    "data": [
+}, {
+    "title": "Alphanumeric Symbols",
+    "charSet":[
         {"char": "🔠", "description":	"Input Latin uppercase"},
         {"char": "🔡", "description":	"Input Latin lowercase"},
         {"char": "🔢", "description":	"Input numbers"},
@@ -1657,9 +1652,9 @@
         {"char": "🆙", "description":	"UP! button"},
         {"char": "🆚", "description":	"VS Button"}
     ]
-},{
-    "label": "Japanese Buttons",
-    "data": [
+}, {
+    "title": "Japanese Buttons",
+    "charSet":[
         {"char": "🈁", "description":	"Japanese \"here\" button"},
         {"char": "🈂", "description":	"Japanese \"service charge\" button"},
         {"char": "🈷", "description":	"Japanese \"monthly amount\" button"},
@@ -1679,8 +1674,8 @@
         {"char": "🈵", "description":	"Japanese \"no vacancy\" button"}
     ]
 }, {
-    "label": "Geometric Emojis",
-    "data":[
+    "title": "Geometric Emojis",
+    "charSet":[
         {"char": "🔴", "description":	"Red circle"},
         {"char": "🟠", "description":	"Orange circle"},
         {"char": "🟡", "description":	"Yellow circle"},
@@ -1710,9 +1705,9 @@
         {"char": "🔳", "description":	"White square button"},
         {"char": "🔲", "description":	"Black square button"}
     ]
-},{
-    "label": "Flags",
-    "data": [
+}, {
+    "title": "Flags",
+    "charSet":[
         {"char": "🏁", "description":	"Chequered flag"},
         {"char": "🚩", "description":	"Triangular flag"},
         {"char": "🎌", "description":	"Crossed flag"},
@@ -1723,8 +1718,8 @@
         {"char": "🏴‍☠️", "description":	"Pirate flag"}
     ]
 }, {
-    "label": "Country Flags",
-    "data":[
+    "title": "Country Flags",
+    "charSet":[
         {"char": "🇦🇨", "description":	"Ascension Island flag"},
         {"char": "🇦🇩", "description":	"Andorra flag"},
         {"char": "🇦🇪", "description":	"UAE flag"},
@@ -1986,4 +1981,4 @@
         {"char": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "description":	"Scotland flag"},
         {"char": "🏴󠁧󠁢󠁷󠁬󠁳󠁿", "description":	"Wales flag"}
     ]
-}]
+}];

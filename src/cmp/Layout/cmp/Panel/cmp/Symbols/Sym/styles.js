@@ -103,6 +103,15 @@ export default createUseStyles(theme => ({
         '&:hover': {
             backgroundColor: theme.unselectedItemHoverBackgound,
         }
-    }
+    },
+    RotatedContainer: {
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    Rotated: ({ rx, ry, rz } = {}) => ({
+        transform: `rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)`,
+        display:'inline-block',
+    })
 
 }));

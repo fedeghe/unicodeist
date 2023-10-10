@@ -1,36 +1,39 @@
-import ascii_punct_and_symbols from './ascii_punct_and_symbols';
-import ascii_digits from './ascii_digits';
-import ascii_latin_alphabet from './ascii_latin_alphabet';
-import ascii_latin1_punct_and_symbols from './ascii_latin-1-punct_and_symbols';
-import ascii_letter_acc from './ascii_letter_acc';
-import base from './basic.json';
-import math from './math.json';
-// import sub from './sub.json';
-import emojii from './emojii.json';
+import latin1Supplement from './1-latin-1-supplement';
+import basicLatin from './0-basic-latin';
+import latinExtendedA from './2-latin-extended-A';
+import latinExtendedB from './3-latin-extended-B';
+import latinExtendedAdditional from './4-latin-extended-Additional';
+import additionalLatinExtended from './5-additional-latin-extended';
+import greekAndCoptic from './6-greek_and_coptic';
+import cyrillic from './7-cyrillic';
+import emojii from './8-emojii';
 
 const exp = [{
-    label: 'ASCII Punctuation & Symbols',
-    data: ascii_punct_and_symbols
+    label: 'Bacis Latin',
+    data: basicLatin
 },{
-    label: 'ASCII Digits',
-    data: ascii_digits
+    label: 'Latin-1 Supplement',
+    data: latin1Supplement
 },{
-    label: 'ASCII Latin Alphabet',
-    data: ascii_latin_alphabet
+    label: "Latin extended-A",
+    data: latinExtendedA
+}, {
+    label: "Latin extended-B",
+    data: latinExtendedB
+}, {
+    label: 'Latin extended additional',
+    data:latinExtendedAdditional
 },{
-    label: 'ASCII Latin-1 Punctuation & Symbols',
-    data: ascii_latin1_punct_and_symbols
+    label: "Additional latin extended",
+    data: additionalLatinExtended
 },{
-    label: 'ASCII letter variations',
-    data: ascii_letter_acc
+    label: "Greek and Coptic",
+    data: greekAndCoptic
 },{
-    label: 'Base',
-    data: base
+    label: "Cyrillic",
+    data: cyrillic
 },{
-    label: 'Math',
-    data: math
-},{
-    label: 'emojii',
+    label: 'Emojii',
     data: emojii
 }];
 

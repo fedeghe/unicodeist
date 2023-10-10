@@ -1,0 +1,131 @@
+export default [
+	{
+		"title": "ASCII Punctuation & Symbols",
+		"charSet": [
+			{"char":"!", "description":"Exclamation mark"},
+			{"char":'"', "description":"Quotation mark"},
+			{"char":"#", "description":"Number sign, Hash, Octothorpe, Sharp"},
+			{"char":"$", "description":"Dollar sign"},
+			{"char":"%", "description":"Percent sign"},
+			{"char":"&", "description":"Ampersand"},
+			{"char":"'", "description":"Apostrophe"},
+			{"char":"(", "description":"Left parenthesis"},
+			{"char":")", "description":"Right parenthesis"},
+			{"char":"*", "description":"Asterisk"},
+			{"char":"+", "description":"Plus sign"},
+			{"char":",", "description":"Comma"},
+			{"char":"-", "description":"Hyphen-minus"},
+			{"char":".", "description":"Full stop"},
+			{"char":"/", "description":"Slash (Solidus)"},
+		]
+	},
+	{
+		"title": "ASCII Digits",
+		"charSet": [
+			{"char": "0", "description":"Digit Zero"},
+			{"char": "1", "description":"Digit One"},
+			{"char": "2", "description":"Digit Two"},
+			{"char": "3", "description":"Digit Three"},
+			{"char": "4", "description":"Digit Four"},
+			{"char": "5", "description":"Digit Five"},
+			{"char": "6", "description":"Digit Six"},
+			{"char": "7", "description":"Digit Seven"},
+			{"char": "8", "description":"Digit Eight"},
+			{"char": "9", "description":"Digit Nine"},
+		]
+	},
+	{
+		"title": "ASCII Punctuation & Symbols",
+		"charSet": [
+			{"char":":", "description": "Colon"},
+			{"char":";", "description": "Semicolon"},
+			{"char":"<", "description": "Less-than sign"},
+			{"char":"=", "description": "Equal sign"},
+			{"char":">", "description": "Greater-than sign"},
+			{"char":"?", "description": "Question mark"},
+			{"char":"@", "description": "At sign"},
+		]
+	},
+	{
+		"title": "Latin Alphabet: Uppercase",
+		"charSet": [
+			{"char":"A", "description":"Latin Capital letter A"},
+			{"char":"B", "description":"Latin Capital letter B"},
+			{"char":"C", "description":"Latin Capital letter C"},
+			{"char":"D", "description":"Latin Capital letter D"},
+			{"char":"E", "description":"Latin Capital letter E"},
+			{"char":"F", "description":"Latin Capital letter F"},
+			{"char":"G", "description":"Latin Capital letter G"},
+			{"char":"H", "description":"Latin Capital letter H"},
+			{"char":"I", "description":"Latin Capital letter I"},
+			{"char":"J", "description":"Latin Capital letter J"},
+			{"char":"K", "description":"Latin Capital letter K"},
+			{"char":"L", "description":"Latin Capital letter L"},
+			{"char":"M", "description":"Latin Capital letter M"},
+			{"char":"N", "description":"Latin Capital letter N"},
+			{"char":"O", "description":"Latin Capital letter O"},
+			{"char":"P", "description":"Latin Capital letter P"},
+			{"char":"Q", "description":"Latin Capital letter Q"},
+			{"char":"R", "description":"Latin Capital letter R"},
+			{"char":"S", "description":"Latin Capital letter S"},
+			{"char":"T", "description":"Latin Capital letter T"},
+			{"char":"U", "description":"Latin Capital letter U"},
+			{"char":"V", "description":"Latin Capital letter V"},
+			{"char":"W", "description":"Latin Capital letter W"},
+			{"char":"X", "description":"Latin Capital letter X"},
+			{"char":"Y", "description":"Latin Capital letter Y"},
+			{"char":"Z", "description":"Latin Capital letter Z"},
+		]
+	},
+	{
+		"title": "ASCII Punctuation & Symbols",
+		"charSet": [
+			{"char":"[","description":"Left square bracket"},
+			{"char":"\\","description":"Backslash"},
+			{"char":"]","description":"Right square bracket"},
+			{"char":"^","description":"Circumflex accent"},
+			{"char":"_","description":"Low line"},
+			{"char":"`","description":"Grave accent"},
+		]
+	},
+	{
+		"title": "Latin Alphabet: Lowercase",
+		"charSet": [
+			{"char": "a", "description": "Latin Small Letter A"},
+			{"char": "b", "description": "Latin Small Letter B"},
+			{"char": "c", "description": "Latin Small Letter C"},
+			{"char": "d", "description": "Latin Small Letter D"},
+			{"char": "e", "description": "Latin Small Letter E"},
+			{"char": "f", "description": "Latin Small Letter F"},
+			{"char": "g", "description": "Latin Small Letter G"},
+			{"char": "h", "description": "Latin Small Letter H"},
+			{"char": "i", "description": "Latin Small Letter I"},
+			{"char": "j", "description": "Latin Small Letter J"},
+			{"char": "k", "description": "Latin Small Letter K"},
+			{"char": "l", "description": "Latin Small Letter L"},
+			{"char": "m", "description": "Latin Small Letter M"},
+			{"char": "n", "description": "Latin Small Letter N"},
+			{"char": "o", "description": "Latin Small Letter O"},
+			{"char": "p", "description": "Latin Small Letter P"},
+			{"char": "q", "description": "Latin Small Letter Q"},
+			{"char": "r", "description": "Latin Small Letter R"},
+			{"char": "s", "description": "Latin Small Letter S"},
+			{"char": "t", "description": "Latin Small Letter T"},
+			{"char": "u", "description": "Latin Small Letter U"},
+			{"char": "v", "description": "Latin Small Letter V"},
+			{"char": "w", "description": "Latin Small Letter W"},
+			{"char": "x", "description": "Latin Small Letter X"},
+			{"char": "y", "description": "Latin Small Letter Y"},
+			{"char": "z", "description": "Latin Small Letter Z"},
+		]
+	},
+	{
+		"title": "ASCII Punctuation & Symbols",
+		"charSet": [
+			{"char":"{", "description":"Left curly bracket"},
+			{"char":"|", "description":"Vertical bar"},
+			{"char":"}", "description":"Right curly bracket"},
+			{"char":"~", "description":"Tilde"}
+		]
+	}
+];
