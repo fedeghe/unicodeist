@@ -22,23 +22,21 @@ const Logo = () => {
         const { shiftKey } = e;
         (shiftKey ? setPanning : setDragging)(false);
         
-        
         const [startX, startY] = startPoint,
-            endX = e.pageX,
-            endY = e.pageY;
+        endX = e.pageX,
+        endY = e.pageY;
 
-        console.log({endX, endY, startX, startY});
         shiftKey 
         ? dispatch({
             type: ACTIONS.PAN_ALL_SYMBOLS,
-            payload: (endY - startY) / 10
+            payload: parseInt((endY - startY) / 10, 10)
 
         }):
         dispatch({
             type: ACTIONS.MOVE_ALL_SYMBOLS,
             payload: {
-                leftTune: endX - startX,
-                topTune: endY - startY
+                leftTune: parseInt(endX - startX, 10),
+                topTune: parseInt(endY - startY, 10)
             }
         });
     };

@@ -20,13 +20,25 @@ export const ITEM_FONTSIZE = '2em';
 export const DEFAULT_THEME = (h > 20 || h < 7) ? 'dark' : 'bright';
 export const FADED_OPACITY = 0.4;
 export const LET_UNICODE_PANEL_OPEN_AFTER_SELECTION = true;
-export const MIN_SCALE = 0.1;
+export const MIN_SCALE = 0.01;
 export const MAX_SCALE = 150;
-export const STEP_SCALE = 0.1;
+export const STEP_SCALE = 0.01;
+export const MIN_ROT = -180;
+export const MAX_ROT= 180;
+export const STEP_ROT = 1;
 export const MIN_ZINDEX = 0;
 export const MAX_ZINDEX = 10000;
 export const EXPANDED_SYM_HEIGHT = FEATURE_FONTSIZE ? 630 : 560;
 export const COLLAPSED_SYM_HEIGHT = 50;
+export const FONT_FAMILIES = [
+    'Arial', 'Verdana', 'Tahoma',
+    'Trebuchet MS',
+    'Times New Roman',
+    'Georgia',
+    'Garamond',
+    'Courier New',
+    'Brush Script MT'
+];
 
 
 const CONSTS = {
@@ -49,11 +61,15 @@ const CONSTS = {
     MIN_SCALE,
     MAX_SCALE,
     STEP_SCALE,
+    MIN_ROT,
+    MAX_ROT,
+    STEP_ROT,
     MIN_ZINDEX,
     MAX_ZINDEX,
     EXPANDED_SYM_HEIGHT,
     COLLAPSED_SYM_HEIGHT,
 
-    FEATURE_FONTSIZE
+    FEATURE_FONTSIZE,
+    FONT_FAMILIES
 };
 export default CONSTS;

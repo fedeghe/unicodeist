@@ -6,10 +6,16 @@ import useStyles from './styles';
 
 const Symbols = () => {
     const classes = useStyles(); 
-    const {state: {symbols}} = useContext(ctx);
+    const {state: {
+        symbols, symbolsFilter,
+        focusedSymbolId
+    }} = useContext(ctx);
 
     return <div className={classes.Container}>{
-        symbols.map(sym =>
+        symbols.filter(
+            sym => sym.label.includes(symbolsFilter)
+                || sym.id === focusedSymbolId
+        ).map(sym =>
             <Sym key={sym.id} sym={sym}/>
         )
     } </div>;

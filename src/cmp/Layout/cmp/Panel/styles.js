@@ -15,6 +15,8 @@ export default createUseStyles(theme => ({
         backgroundColor: theme.background.panel,
         padding: `${PANEL_PADDING}px`,
         display:'flex',
-        flexDirection:'column'
+        flexDirection:'column',
+        // boxShadow: `30px 0px 80px -7px ${theme.mode === 'bright' ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.75)'}`,
+        
     },
 }));

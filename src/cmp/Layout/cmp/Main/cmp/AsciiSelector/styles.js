@@ -14,6 +14,7 @@ export default createUseStyles((theme) => ({
         color: theme.foreground,
         display:'flex',
         flexDirection:'column',
+        
     },
     Asciis: {
         display:'flex',

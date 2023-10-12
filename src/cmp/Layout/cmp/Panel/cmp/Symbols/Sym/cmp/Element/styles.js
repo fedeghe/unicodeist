@@ -38,15 +38,13 @@ export default createUseStyles({
         cursor:'default',
         color:'#888888'
     },
-    Sym: {
+    Char: {
         color: ({sym:{color}}) => color,
         transform: ({sym:{
             rotationX, rotationY, rotationZ,
             scaleX, scaleY
-        // }}) => `rotateX(${rotationX}deg) rotateY(${rotationY}deg) rotateZ(${rotationZ}deg) scaleX(${scaleX}deg) scaleY(${scaleY}deg)`,
         }}) => `rotateX(${rotationX}deg) rotateY(${rotationY}deg) rotateZ(${rotationZ}deg) scaleX(${scaleX}) scaleY(${scaleY})`,
-        
-        // }}) => `rotateX(${rotationX}deg)`,
+        textShadow: '5px 1px 8px black'
     }
 
 });

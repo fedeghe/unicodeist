@@ -62,7 +62,7 @@ const Element = ({sym}) => {
             <div className={classes.Item}><AlignVerticalCenterIcon onClick={onAlignV}/></div>
         </div>
         <div className={classes.Mid}>
-            <div className={classes.Sym}>{sym.char}</div>
+            <div className={classes.Char}>{sym.char}</div>
         </div>
         
     </div>;

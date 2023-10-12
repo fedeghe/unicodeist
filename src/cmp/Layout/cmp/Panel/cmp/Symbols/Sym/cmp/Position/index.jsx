@@ -1,30 +1,27 @@
 
 import { useContext} from 'react';
-
-
 import Box from '@mui/material/Box';
-
-
 
 import ctx from './../../../../../../../../../Context';
 import ACTIONS from './../../../../../../../../../reducer/actions';
 import useStyles from './../../styles';
+import useElementStyles from './styles';
 
 
 const Position = ({sym}) => {
     const classes = useStyles();
+    const localClasses = useElementStyles();
     const {state: {width, height}, dispatch} = useContext(ctx);
     const w = parseInt(width, 10);
     const h = parseInt(height, 10);
-    const wMore = w * .3;
-    const hMore = h * .3;
+    
 
-    return <div className={classes.SectionPosition}>
+    return <div className={localClasses.SectionPosition}>
         <div>
             <Box className={classes.Box}>
                 <span  className={classes.Label}>Left: {sym.left}px</span>
-                <input type="range" min={-wMore} max={width+wMore} value={sym.left} onChange={e => {
-                    var v = e.target.value;
+                <input type="range" min={0} max={w} value={sym.left} onChange={e => {
+                    var v = parseInt(e.target.value, 10);
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
                         payload: {id: sym.id, field:'left', value: v}
@@ -35,8 +32,8 @@ const Position = ({sym}) => {
         <div>
             <Box className={classes.Box}>
                 <span  className={classes.Label}>Top: {sym.top}px</span>
-                <input type="range" min={-hMore} max={height+hMore} value={sym.top} onChange={e => {
-                    var v = e.target.value;
+                <input type="range" min={0} max={h} value={sym.top} onChange={e => {
+                    var v = parseInt(e.target.value, 10);
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
                         payload: {id: sym.id, field:'top', value: v}

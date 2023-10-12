@@ -24,7 +24,7 @@ const Sym = ({sym}) => {
         },
         dispatch
     } = useContext(ctx);
-    console.log({backgroundColor});
+
     const selected = focusedSymbolId === sym.id;
     const classes = useStyles({
         selected,
@@ -43,8 +43,6 @@ const Sym = ({sym}) => {
         {selected ? 
         <>
             <Label sym={sym} />
-            
-            
             <Zindex sym={sym}/>
             <Element sym={sym} backgroundColor={backgroundColor}/>
             <Styles sym={sym} />

@@ -23,10 +23,24 @@ const App = () => {
         }), 500
     );
     const storeViewPortData = useCallback(debounced, []);
+    // const catchReload = useCallback(e => {
+    //     e.preventDefault();
+    //     e.returnValue = '';
+    // }, []);
     useEffect(storeViewPortData, [storeViewPortData]);
     useEffect(() => {
+        // window.addEventListener("beforeunload", catchReload);
         window.addEventListener("resize", storeViewPortData);
-        return () => window.removeEventListener("resize", storeViewPortData);
+        
+        // history.pushState(null, null, location.href);
+        // window.onpopstate = function () {
+        //     history.go(1);
+        // };
+        
+        return () => {
+            window.removeEventListener("resize", storeViewPortData);
+            // window.removeEventListener("beforeunload", catchReload);
+        };
     }, [storeViewPortData]);
     
     return (        

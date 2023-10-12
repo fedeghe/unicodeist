@@ -8,7 +8,6 @@ export default createUseStyles((theme) =>({
         justifyContent: 'center',
         backgroundColor: theme.background.main,
         position:'relative',
-        
     },
 
 }));

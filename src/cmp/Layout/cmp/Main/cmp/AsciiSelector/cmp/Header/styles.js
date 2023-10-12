@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss';
-export default createUseStyles({
+export default createUseStyles(theme => ({
     Container: {
         display:'flex',
         justifyContent:'space-between',
@@ -25,8 +25,9 @@ export default createUseStyles({
     },
     ClearIcon: {
         cursor: 'pointer',
-        height: '2em'
+        height: '2em',
+        color: theme.foreground,
     },
     LeaveOpenCheck: {marginRight:'20px'},
     CloseIcon: {fontSize: '3em'}
-});
+}));

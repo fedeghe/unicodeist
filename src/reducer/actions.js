@@ -21,6 +21,7 @@ const INIT = Symbol('init'),
     PAN_ALL_SYMBOLS = Symbol('global pan'),
     ALIGN_V = Symbol('align vertically'),
     ALIGN_H = Symbol('align horizontally'),
+    SET_SYMBOLS_FILTER = Symbol('set symbols filter'),
     LET_ASCIIPANEL_OPEN_AFTER_SELECTION = Symbol('let the panel open after selection');
 
 const exp = {
@@ -47,7 +48,8 @@ const exp = {
     MOVE_ALL_SYMBOLS,
     PAN_ALL_SYMBOLS,
     ALIGN_V,
-    ALIGN_H
+    ALIGN_H,
+    SET_SYMBOLS_FILTER
 };
 
 export default exp;
