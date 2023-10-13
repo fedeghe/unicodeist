@@ -2,6 +2,7 @@
   "name": "unicodeist",
   "version": "0.0.1",
   "private": true,
+  "homepage": "https://fedeghe.github.io/",
   "author": {
     "name": "Federico Ghedina",
     "email": "federico.ghedina@gmail.com"
@@ -17,7 +18,6 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "copy-to-clipboard": "^3.3.3",
-    "gh-pages": "^6.0.0",
     "mui-color-input": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -31,7 +31,10 @@
     "eject": "react-scripts eject",
     "lint": "eslint src",
     "lintfix": "eslint src --fix",
-    "unicodeist": "malta src/unicodeist/build.json"
+    "unicodeist": "malta src/unicodeist/build.json",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
+
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +56,7 @@
   },
   "devDependencies": {
     "eslint-plugin-react": "^7.33.2",
+    "gh-pages": "^6.0.0",
     "malta": "^4.1.38",
     "malta-millijs": "^1.0.5"
   }
