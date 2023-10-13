@@ -1,5 +1,6 @@
 import Icons from './../Icons';
 import Sizes from './../Sizes';
+import Search from './../Search';
 import Logo from './cmp/Logo';
 import useStyles from './styles';
 
@@ -14,6 +15,7 @@ const Header = () => {
         </div>
         <hr className={classes.Hr} />
         <Sizes/>
+        <Search/>
     </>;
 };
 

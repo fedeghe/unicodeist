@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-export default createUseStyles(theme => ({
+export default createUseStyles({
     Container: {
         marginBottom:'1em'
     },
@@ -15,17 +15,4 @@ export default createUseStyles(theme => ({
         marginRight:'10px',
         fontWeight:'bold'
     },
-    ClearIcon: {
-        // flexBasis: '33%',
-        cursor:'pointer',
-        display: 'flex',
-        justifyContent:'space-around',
-        alignSelf: 'center',
-        color: theme.foreground,
-    },
-    SearchContainer: {
-        marginTop:'0.5em',
-        display:'flex',
-        justifyContent: 'right'
-    },
-}));
+});
