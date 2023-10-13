@@ -49,7 +49,7 @@ const Canvas = () => {
         },
         mailto = () => {
             const code = cleanCode(ref.current.outerHTML);
-            window.open(`mailto:someone@yoursite.com?subject=Big%20News&body=${code}`);
+            window.open(`mailto:your@friend.com?subject=Unicodeist&body=${code}`);
         };
         if (ref.current) {
             Channel.get('event').sub('embed', embed);
