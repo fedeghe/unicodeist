@@ -13,7 +13,7 @@ const Symbols = () => {
 
     return <div className={classes.Container}>{
         symbols.filter(
-            sym => sym.label.includes(symbolsFilter)
+            sym => sym.label.toLowerCase().includes(symbolsFilter.toLowerCase())
                 || sym.id === focusedSymbolId
         ).map(sym =>
             <Sym key={sym.id} sym={sym}/>

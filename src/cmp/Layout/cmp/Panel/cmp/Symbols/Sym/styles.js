@@ -66,7 +66,14 @@ export default createUseStyles(theme => ({
     HoverLight: {
         '&:hover': {
             backgroundColor: theme.unselectedItemHoverBackgound,
-        }
+        },
+        display:'flex',
+        justifyContent: 'space-between'
+    },
+    HoverLightActions: {
+        display:'flex',
+        alignItems:'end',
+        flexDirection:'column',
     },
 
     RotatedContainer: {
@@ -78,5 +85,5 @@ export default createUseStyles(theme => ({
     Rotated: ({ rx, ry, rz } = {}) => ({
         transform: `rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)`,
         display:'inline-block',
-    })
+    }),
 }));

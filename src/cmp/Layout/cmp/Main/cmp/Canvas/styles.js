@@ -10,10 +10,12 @@ export default createUseStyles({
         backgroundColor: '#eeeeee'
     },
     Code: {
-        marginBottom: '2em',
+        marginBottom: '0em',
+        marginTop: '2em',
         backgroundColor: '#ffffff',
         overflow: 'auto',
         padding: '1em',
-        borderRadius: '3px'
+        borderRadius: '3px',
+        maxHeight:'300px',
     }
 });

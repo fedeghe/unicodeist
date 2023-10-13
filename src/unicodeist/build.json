@@ -1,0 +1,3 @@
+{
+    "#src/unicodeist/src/index.js": "src/unicodeist -plugins=malta-millijs"
+}

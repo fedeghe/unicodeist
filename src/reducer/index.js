@@ -13,7 +13,6 @@ import {
     MAX_SCALE,
     MIN_ZINDEX,
     MAX_ZINDEX
-
 } from './../constants';
 
 
@@ -72,7 +71,7 @@ const actions = {
         [ACTIONS.RESIZE]: ({
             payload: {what, value}
         }) => ({
-            [what]: value
+            [what]: parseInt(value, 10)
         }),
         
         [ACTIONS.TOGGLE_ADD_PANEL]: ({
@@ -323,7 +322,22 @@ const actions = {
                 };
             })
         }),
-        [ACTIONS.SET_SYMBOLS_FILTER] : ({ payload }) => ({ symbolsFilter: payload})
+        [ACTIONS.SET_SYMBOLS_FILTER] : ({ payload }) => ({ symbolsFilter: payload}),
+        [ACTIONS.MOVE_SYMBOL] : ({
+            payload: { id, direction },
+            oldState: { symbols }
+        }) => {
+            const position = symbols.findIndex(s =>s.id === id),
+                newSymbols = symbols.filter(s =>s.id !== id),
+                newPosition = position + direction,
+                canProceed = newPosition >= 0 && newPosition <= symbols.length;
+            if (canProceed) {
+                newSymbols.splice(newPosition, 0, symbols[position]);
+            }
+            return {
+                symbols: canProceed ? newSymbols : symbols
+            };
+        }
     },
     reducer = (oldState, action) => {
         const { payload = {}, type } = action;

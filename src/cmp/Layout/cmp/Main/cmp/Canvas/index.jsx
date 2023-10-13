@@ -6,11 +6,11 @@ import copy from 'copy-to-clipboard';
 import Button from '@mui/material/Button';
 import CanvasSymbol from './../CanvasSymbol';
 import CopyDone from './../CopyDone';
-// import ExportImage from './ExportImage';
+
 
 import ctx from './../../../../../../Context';
 import ACTIONS from './../../../../../../reducer/actions';
-import { cleanCode } from './../../../../../../utils';
+import { cleanCode, getUnicodeistScriptTag } from './../../../../../../utils';
 
 import useStyles from './styles';
 
@@ -24,6 +24,7 @@ const Canvas = () => {
             backgroundColor,
             embedModalVisibility
         },
+        state,
         dispatch
     } = useContext(ctx);
     const ref = useRef();
@@ -37,23 +38,28 @@ const Canvas = () => {
     }, [dispatch, embedModalVisibility]);
 
     const [embedCode, setEmbedCode] = useState('');
+    const [scriptCode, setScriptCode] = useState('');
 
     useEffect(() => {
-        if (ref.current)
-            Channel.get('event').sub('embed', () => {
-                const code = cleanCode(ref.current.outerHTML);
-                setEmbedCode(code);
-                setEmbedModalVisibility(!!(ref?.current?.outerHTML));
-            });
-            Channel.get('event').sub('askHTML', () => {
-                const code = cleanCode(ref.current.outerHTML);
-                Channel.get('event').pub('exportImage', code);
-            });
-            Channel.get('event').sub('mailto', () => {
-                const code = cleanCode(ref.current.outerHTML);
-                window.open(`mailto:someone@yoursite.com?subject=Big%20News&body=${code}`);
-            });
-    }, [ref, setEmbedModalVisibility]);
+        const embed = () => {
+            const code = cleanCode(ref.current.outerHTML);
+            setEmbedCode(code);
+            setScriptCode(getUnicodeistScriptTag(state));
+            setEmbedModalVisibility(!!(ref?.current?.outerHTML));
+        },
+        mailto = () => {
+            const code = cleanCode(ref.current.outerHTML);
+            window.open(`mailto:someone@yoursite.com?subject=Big%20News&body=${code}`);
+        };
+        if (ref.current) {
+            Channel.get('event').sub('embed', embed);
+            Channel.get('event').sub('mailto', mailto);
+        } 
+        return () => {
+            Channel.get('event').unsub('embed', embed);
+            Channel.get('event').unsub('mailto', mailto);
+        };
+    }, [ref, setEmbedModalVisibility, state]);
 
     const refStyles = useMemo(() => ({
         width: `${width}px`,
@@ -69,11 +75,16 @@ const Canvas = () => {
         () => setEmbedModalVisibility(false),
         [setEmbedModalVisibility]
     );
-    const onCopy = useCallback(() => {
+    const onCopyTag = useCallback(() => {
         copy(embedCode);
         onClose();
         setOpen(true);
     }, [embedCode, onClose]);
+    const onCopyScript = useCallback(() => {
+        copy(scriptCode);
+        onClose();
+        setOpen(true);
+    }, [scriptCode, onClose]);
     return (
         <div>
             <Dialog open={embedModalVisibility} onClose={onClose}>
@@ -81,12 +92,13 @@ const Canvas = () => {
                     <div className={classes.Code}>
                         <code>{embedCode}</code>
                     </div>
-                    <div>
-                        <Button variant="contained" onClick={onCopy}>Copy</Button>
+                    <Button variant="contained" onClick={onCopyTag}>Copy</Button>                    
+                    <div className={classes.Code}>
+                        <code>{scriptCode}</code>
                     </div>
+                    <Button variant="contained" onClick={onCopyScript}>Copy</Button>
                 </div>
             </Dialog>
-            {/* <ExportImage/> */}
             <div ref={ref} style={refStyles} onDragOver={onDragOver}>
                 {symbols.map(symbol => <CanvasSymbol key={symbol.id} symbol={symbol}/>)}
             </div>

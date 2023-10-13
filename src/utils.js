@@ -61,11 +61,49 @@ export const importFromFile = ({onContentReady}) => {
     link.click();
 };
 
+const getUnicodeistData = j => JSON.stringify({
+    sty: {
+        w: j.width, //px
+        h: j.height, //px
+        bgc: j.backgroundColor,
+        // position:'relative'
+    },
+    sym: j.symbols.map(s =>({
+      cnt: s.char,
+      sty: {
+        // position:'absolute',
+        zi: s.zIndex,
+        c: s.color,
+        // fs: s.fontSize, //px
+        ff: s.fontFamily,
+        fw: s.fontWeight,
+        o: s.opacity,
+        // 'transform-origin': 'center center', 
+        t: {
+            trn:[s.left, s.top],
+            ...(s.scale && {s: s.scale}),
+            ...(s.scaleX && {sy: s.scaleX}),
+            ...(s.scaleY && {sy: s.scaleY}),
+            ...(s.rotationX && {rx: s.rotationX}), // deg
+            ...(s.rotationY && {ry: s.rotationY}), // deg
+            ...(s.rotationZ && {rz: s.rotationZ})  // deg
+        },
+      }
+    }))
+});
+
+export const getUnicodeistScriptTag = state => {
+    const dataUnicodeist = getUnicodeistData(state);
+    return `<script src="https://www.jmvc.org/Unicodeist/index.js" data-unicodeist='${dataUnicodeist}'></script>`;
+};
+
 const def = {
     uniqueID,
     cleanCode,
     debounce,
     saveAsFile,
-    importFromFile
+    importFromFile,
+    getUnicodeistData,
+    getUnicodeistScriptTag
 };
 export default def;

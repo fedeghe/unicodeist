@@ -1,5 +1,5 @@
 const h = (new Date()).getHours();
-
+// leave that false, scale does the job
 export const FEATURE_FONTSIZE = false;
 
 export const WIDTH = 500;

@@ -24,9 +24,6 @@ const Icons = () => {
     const embed = useCallback(() => {
         Channel.get('event').pub('embed');
     }, []);
-    // const exportImage = useCallback(() => {
-    //     Channel.get('event').pub('askHTML');
-    // }, []);
     const mailto = useCallback(() => {
         Channel.get('event').pub('mailto');
     }, []);
@@ -58,7 +55,6 @@ const Icons = () => {
         <div className={classes.Item}><GetAppIcon onClick={importState}/></div>
         <div className={classes.Item}><EmailRoundedIcon onClick={mailto}/></div>
         <div className={classes.Item}><CodeRoundedIcon onClick={embed}/></div>
-        {/* <div className={classes.Item}><PhotoIcon onClick={exportImage}/></div> */}
         
         <div className={classes.Item}>
             <input style={{width:'28px'}} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
