@@ -1,6 +1,6 @@
 {
   "name": "unicodeist",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "homepage": "https://fedeghe.github.io/Unicodeist/",
   "author": {
@@ -34,7 +34,6 @@
     "unicodeist": "malta src/unicodeist/build.json",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
-
   },
   "eslintConfig": {
     "extends": [
