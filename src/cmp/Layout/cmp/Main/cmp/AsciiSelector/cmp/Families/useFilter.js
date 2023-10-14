@@ -9,11 +9,11 @@ const useFilter = ({allSymbols, filter}) => {
             ? allSymbols.map(({label, data}) => {
                 const newData = data.map(({title, charSet}) => {
                     const filteredCharset = charSet.filter(
-                        ({char, description}) => false 
+                        ({char, description = ''}) => false 
                             || description.toLowerCase().split(',').some(s => s.includes(lcFilter))
                             || `${char}`.toLowerCase() === lcFilter
                             // || `${title}`.toLowerCase().includes(lcFilter)
-                            // || `${label}`.toLowerCase().includes(lcFilter)
+                            || `${label}`.toLowerCase().includes(lcFilter)
                     );
                     return filteredCharset.length && {
                         title,

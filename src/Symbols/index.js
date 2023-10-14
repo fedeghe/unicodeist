@@ -7,6 +7,7 @@ import additionalLatinExtended from './5-additional-latin-extended';
 import greekAndCoptic from './6-greek_and_coptic';
 import cyrillic from './7-cyrillic';
 import emojii from './8-emojii';
+import math from './9-math';
 
 const exp = [{
     label: 'Bacis Latin',
@@ -32,6 +33,9 @@ const exp = [{
 },{
     label: "Cyrillic",
     data: cyrillic
+},{
+    label: 'Math',
+    data: math
 },{
     label: 'Emojii',
     data: emojii

@@ -16,15 +16,15 @@
     - email the html of the _creative_ to someone
     - get the content as `<div>` usable in a html page or a `<script>` that will automatically render it exactly where you put the script.
 
-- Press the <span style="padding:0px;font-size:1.5em;position:relative;top:2px;border:1px solid gray;">➕</span> button on the top left (or press <span style="padding:0px;font-size:1.5em;position:relative;top:2px;border:1px solid gray">␛</span> button) to toggle the symbol selection panel  
-- Add one or more symbols and close the panel (through - button or pressing <span style="padding:0px;font-size:1.5em;position:relative;top:2px;border:1px solid gray">␛</span>)  
+- Press the ➕ button on the top left (or press `ESC` button) to toggle the symbol selection panel  
+- Add one or more symbols and close the panel (through ➖ button or pressing `ESC`)  
 - Last symbol added is the current target one, thus on the right panel you will see a tuning card expanded allowing you to: 
     - set a label for it (only useful to search it among added symbols)
     - set the `z-index`
-    - see a preview showing on hte left sdie some icons to:
-        - throw it away
+    - see a preview showing on its left some icons to:
+        - throw it away 
         - isolate that from others (useful to be sure to change the right symbol)
-        - clone it (when clicked, the clone will be automatically the target)
+        - clone it  (when clicked, the clone will be automatically the target)
         - bring it to the top (z-index)
         - move it to the bottom (z-index)
         - center horizontally *
