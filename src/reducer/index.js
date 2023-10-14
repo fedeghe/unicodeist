@@ -337,6 +337,21 @@ const actions = {
             return {
                 symbols: canProceed ? newSymbols : symbols
             };
+        },
+        [ACTIONS.MOVE_TARGET_ONE_PX]: ({payload : dir, oldState: {focusedSymbolId, symbols}}) => {
+            const what = {
+                left: {field: 'left', diff: -1},
+                right: {field: 'left', diff: 1},
+                up: {field: 'top', diff: -1},
+                down: {field: 'top', diff: 1},
+            }[dir];
+            return {symbols: symbols.map(s => (
+                s.id === focusedSymbolId ? 
+                {
+                    ...s,
+                    [what.field]: s[what.field] + what.diff
+                } : s
+            ))};
         }
     },
     reducer = (oldState, action) => {

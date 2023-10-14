@@ -31,9 +31,10 @@
                     var trans = [
                         'transform:translate('+sty.t.trn[0]+'px,'+sty.t.trn[1]+'px)'
                     ];
-                    trans.push(map.s(sty.t.s || 1));
-                    trans.push(map.sx(sty.t.sx || 1));
-                    trans.push(map.sy(sty.t.sy || 1));
+                    sty.t.s !== 1 && trans.push(map.s(sty.t.s));
+                    sty.t.sx !== 1 && trans.push(map.sx(sty.t.sx));
+                    sty.t.sy !== 1 && trans.push(map.sy(sty.t.sy));
+                    
                     'rx' in sty.t && trans.push(map.rx(sty.t.rx));
                     'ry' in sty.t && trans.push(map.ry(sty.t.ry));
                     'rz' in sty.t && trans.push(map.rz(sty.t.rz));
