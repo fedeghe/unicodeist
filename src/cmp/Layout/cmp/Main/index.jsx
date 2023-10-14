@@ -17,19 +17,20 @@ const Main = () => {
         }),
         [addPanelVisibility, dispatch]
     );
-    const move = useCallback(dir =>
+    // eslint-disable-next-line no-unused-vars
+    const move = useCallback(key =>
         dispatch({
             type: ACTIONS.MOVE_TARGET_ONE_PX,
-            payload: dir
+            payload: key
         }),
         [addPanelVisibility, dispatch]
     );
     const seekEsc = useCallback(e => {  
         if (e.key === "Escape") { togglePanel(); e.preventDefault();}
-        if (e.key === "ArrowUp") { move('up'); e.preventDefault();}
-        if (e.key === "ArrowDown") { move('down'); e.preventDefault();}
-        if (e.key === "ArrowLeft") { move('left'); e.preventDefault();}
-        if (e.key === "ArrowRight") { move('right'); e.preventDefault();}
+        if (e.shiftKey){
+            ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)
+            && move(e.key); e.preventDefault();
+        }
     }, [togglePanel]);
     useEffect(() => {
         document.addEventListener("keydown", seekEsc);

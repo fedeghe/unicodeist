@@ -338,13 +338,13 @@ const actions = {
                 symbols: canProceed ? newSymbols : symbols
             };
         },
-        [ACTIONS.MOVE_TARGET_ONE_PX]: ({payload : dir, oldState: {focusedSymbolId, symbols}}) => {
+        [ACTIONS.MOVE_TARGET_ONE_PX]: ({payload : key, oldState: {focusedSymbolId, symbols}}) => {
             const what = {
-                left: {field: 'left', diff: -1},
-                right: {field: 'left', diff: 1},
-                up: {field: 'top', diff: -1},
-                down: {field: 'top', diff: 1},
-            }[dir];
+                ArrowLeft: {field: 'left', diff: -1},
+                ArrowRight: {field: 'left', diff: 1},
+                ArrowUp: {field: 'top', diff: -1},
+                ArrowDown: {field: 'top', diff: 1},
+            }[key];
             return {symbols: symbols.map(s => (
                 s.id === focusedSymbolId ? 
                 {
