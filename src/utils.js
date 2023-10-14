@@ -94,7 +94,7 @@ const getUnicodeistData = j => JSON.stringify({
 
 export const getUnicodeistScriptTag = state => {
     const dataUnicodeist = getUnicodeistData(state);
-    return `<script src="https://www.jmvc.org/Unicodeist/index.js" data-unicodeist='${dataUnicodeist}'></script>`;
+    return `<script src="https://www.jmvc.org/unicodeist/index.js" data-unicodeist='${dataUnicodeist}'></script>`;
 };
 
 const def = {
