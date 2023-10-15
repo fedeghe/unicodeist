@@ -1,37 +1,33 @@
-(function (){
+(function () {
     var script = document.currentScript,
         createElement = function (sty, cnt) {
             var node = document.createElement('div'),
-                styles = [],
+                styles = [cnt
+                    ? 'position:absolute;transform-origin:center center'
+                    : 'position:relative;overflow:hidden'
+                ],
                 map = {
-                    w:function (v){return 'width:' + v + 'px';},
-                    h:function (v){return 'height:' + v + 'px';},
-                    bgc:function (v){return 'background-color:' + v;},
-                    zi:function (v){return 'z-index:' + v;},
-                    c:function (v){return 'color:' + v;},
-                    ff:function (v){return 'font-family:"' + v + '"';},
-                    fw:function (v){return 'font-weight:' + v;},
-                    o:function (v){return 'opacity:' + v;},
-                    s: function (v) {return v !== 1 ? 'scale('+v+')' : '';},
-                    sx: function (v) {return v !== 1 ? 'scaleX('+v+')' : '';},
-                    sy: function (v) {return v !== 1 ? 'scaleY('+v+')' : '';},
-                    rx: function (v) {return v ? 'rotateX('+v+'deg)' : '';},
-                    ry: function (v) {return v ? 'rotateY('+v+'deg)' : '';},
-                    rz: function (v) {return v ? 'rotateZ('+v+'deg)' : '';}
+                    w: function (v) { return 'width:' + v + 'px'; },
+                    h: function (v) { return 'height:' + v + 'px'; },
+                    bgc: function (v) { return 'background-color:' + v; },
+                    zi: function (v) { return 'z-index:' + v; },
+                    c: function (v) { return 'color:' + v; },
+                    ff: function (v) { return 'font-family:"' + v + '"'; },
+                    fw: function (v) { return 'font-weight:' + v; },
+                    o: function (v) { return 'opacity:' + v; },
+                    s: function (v) { return v !== 1 ? 'scale(' + v + ')' : ''; },
+                    sx: function (v) { return v !== 1 ? 'scaleX(' + v + ')' : ''; },
+                    sy: function (v) { return v !== 1 ? 'scaleY(' + v + ')' : ''; },
+                    rx: function (v) { return v ? 'rotateX(' + v + 'deg)' : ''; },
+                    ry: function (v) { return v ? 'rotateY(' + v + 'deg)' : ''; },
+                    rz: function (v) { return v ? 'rotateZ(' + v + 'deg)' : ''; }
                 },
-                mapped,
                 k;
-            //position && transfrom-origin
-            if (cnt) { //symbol case
-                styles.push('position:absolute;transform-origin:center center');
-            } else { //root case
-                styles.push('position:relative;overflow:hidden');
-            }
-            for(k in sty) {
-                mapped = map[k];
+
+            for (k in sty) {
                 if (k === 't') {
                     var trans = [
-                        'transform:translate('+sty.t.trn[0]+'px,'+sty.t.trn[1]+'px)'
+                        'transform:translate(' + sty.t.trn[0] + 'px,' + sty.t.trn[1] + 'px)'
                     ];
                     's' in sty.t && trans.push(map.s(sty.t.s));
                     'sx' in sty.t && trans.push(map.sx(sty.t.sx));
@@ -44,13 +40,11 @@
                         trans.join(' ') + ';'
                     );
                 } else {
-                    mapped && styles.push(
-                        mapped(sty[k])
+                    k in map && styles.push(
+                        map[k](sty[k])
                     );
                 }
             }
-            
-
             styles.length && node.setAttribute('style', styles.join(';'));
             cnt && (node.innerHTML = cnt);
             return node;
@@ -58,8 +52,8 @@
         rawData = script.dataset.unicodeist,
         data = JSON.parse(rawData),
         root = createElement(data.sty);
-        
-    data.sym.forEach(function (symbol){
+
+    data.sym.forEach(function (symbol) {
         root.appendChild(
             createElement(symbol.sty, symbol.cnt)
         );
