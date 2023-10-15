@@ -9,8 +9,11 @@ export default createUseStyles({
         padding: '2em',
         backgroundColor: '#eeeeee'
     },
+    TopMargined: {
+        marginTop: '4em'
+    },
     Code: {
-        marginBottom: '0em',
+        marginBottom: '0.5em',
         marginTop: '2em',
         backgroundColor: '#ffffff',
         overflow: 'auto',

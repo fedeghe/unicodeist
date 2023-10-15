@@ -33,6 +33,6 @@ const {grayscale : cgs} = colors,
             icon: '#FFFF00',
         },
         unselectedItemHoverBackgound: cgs.lightC
-    };
+    };  
 
 export default theme;

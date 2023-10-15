@@ -27,6 +27,7 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
     - change the `background-color` (default is white)
     - email the html of the _creative_ to someone
     - get the content as `<div>` usable in a html page or a `<script>` that will automatically render it exactly where you put the script.
+    - export a named file as png|jpeg|blob|pixeldata|svg
     ---
 
 - Press the ➕ button on the top left (or press `ESC` button) to toggle the symbol selection panel  

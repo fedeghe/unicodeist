@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react';
 
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
-// import PhotoIcon from '@mui/icons-material/Photo';
+import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import GetAppIcon from '@mui/icons-material/GetApp';
 
@@ -23,6 +23,7 @@ const Icons = () => {
         classes = useStyles(),
         embed = useCallback(() => Channel.get('event').pub('embed') , []),
         mailto = useCallback(() => Channel.get('event').pub('mailto'), []),
+        exportImage = useCallback(() => Channel.get('event').pub('exportImage'), []),
         exportState = useCallback(() => saveAsFile('unicodeist.json', state), [state]),
         importState = () => importFromFile({
             onContentReady: cnt => dispatch({
@@ -43,6 +44,7 @@ const Icons = () => {
         <div className={classes.Item}><GetAppIcon onClick={importState}/></div>
         <div className={classes.Item}><EmailRoundedIcon onClick={mailto}/></div>
         <div className={classes.Item}><CodeRoundedIcon onClick={embed}/></div>
+        <div className={classes.Item}><InsertPhotoIcon onClick={exportImage}/></div>
         <div className={classes.Item}>
             <input style={{width:'28px'}} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
         </div>

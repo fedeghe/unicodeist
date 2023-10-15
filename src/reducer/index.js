@@ -54,7 +54,6 @@ const actions = {
             symbolsFilter: '',
             asciiPanelFilterByIconName: '',
             letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
-            embedModalVisibility: false,
             superFocus: false
         }),
         
@@ -219,12 +218,6 @@ const actions = {
             payload
         }) => ({
             asciiSelectorFilter: payload
-        }),
-        
-        [ACTIONS.SET_EMBED_MODAL_VISIBILITY]: ({
-            payload = ''
-        }) => ({
-            embedModalVisibility: payload
         }),
         
         [ACTIONS.INIT_VIEWPORT]: ({
