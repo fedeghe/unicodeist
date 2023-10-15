@@ -71,7 +71,6 @@ const CanvasSymbol = ({symbol}) => {
         <div
             className={classes.CanvasSymbol}
             onClick={selectSymbol}
-            
             style={{
                 position:'absolute',
                 transformOrigin: 'center',
