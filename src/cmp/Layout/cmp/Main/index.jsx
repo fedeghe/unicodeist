@@ -26,6 +26,7 @@ const Main = () => {
         [addPanelVisibility, dispatch]
     );
     const seekEsc = useCallback(e => {  
+        if (e.target.tagName === 'INPUT') return e;
         if (e.key === "Escape") { togglePanel(); e.preventDefault();}
         if (e.shiftKey){
             ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)

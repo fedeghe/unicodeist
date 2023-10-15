@@ -10,7 +10,8 @@ import CopyDone from './../CopyDone';
 
 import ctx from './../../../../../../Context';
 import ACTIONS from './../../../../../../reducer/actions';
-import { cleanCode, getUnicodeistScriptTag } from './../../../../../../utils';
+// eslint-disable-next-line no-unused-vars
+import { cleanCode, cleanCodeFromState, getUnicodeistScriptTag } from './../../../../../../utils';
 
 import useStyles from './styles';
 
@@ -42,7 +43,8 @@ const Canvas = () => {
 
     useEffect(() => {
         const embed = () => {
-            const code = cleanCode(ref.current.outerHTML);
+            // const code = cleanCode(ref.current.outerHTML);
+            const code = cleanCodeFromState(state);
             setEmbedCode(code);
             setScriptCode(getUnicodeistScriptTag(state));
             setEmbedModalVisibility(!!(ref?.current?.outerHTML));

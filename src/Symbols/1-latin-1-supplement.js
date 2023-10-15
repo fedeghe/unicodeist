@@ -33,7 +33,8 @@ export default [
 			{ "char": "¾", "description": "Vulgar fraction three quarters" },
 			{ "char": "¿", "description": "Inverted Question Mark" },
 		]
-	}, {
+	},
+	{
 		"title": "Letters: Uppercase",
 		"charSet": [
 			{ "char": "À", "description": "Latin Capital Letter A with grave" },
@@ -68,13 +69,15 @@ export default [
 			{ "char": "Ý", "description": "Latin Capital Letter Y with acute" },
 			{ "char": "Þ", "description": "Latin Capital Letter Thorn" },
 		]
-	}, {
+	},
+	{
 		"title": "Math",
 		"charSet": [
 			{ "char": "×", "description": "Multiplication sign" },
 			{ "char": "÷", "description": "Division sign" },
 		]
-	}, {
+	},
+	{
 		"title": "Letters: Lowercase",
 		"charSet": [
 			{ "char": "ß", "description": "Latin Small Letter sharp S" },

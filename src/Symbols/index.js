@@ -18,10 +18,12 @@ const exp = [{
 },{
     label: "Latin extended-A",
     data: latinExtendedA
-}, {
+},
+{
     label: "Latin extended-B",
     data: latinExtendedB
-}, {
+},
+{
     label: 'Latin extended additional',
     data:latinExtendedAdditional
 },{

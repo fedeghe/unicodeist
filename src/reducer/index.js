@@ -3,7 +3,7 @@ import ACTIONS from './actions';
 import {uniqueID} from './../utils';
 import {
     WIDTH, HEIGHT,
-    SYMBOL_BASE_FONTSIZE,
+    // SYMBOL_BASE_FONTSIZE,
     PANEL_WIDTH,
     DEFAULT_THEME,
     SYMBOL_BASE_FONTFAMILY,
@@ -26,7 +26,7 @@ const createSymbol = ({ char, zIndex, left, top }) => {
         left,
         top,
         color: '#000000',
-        fontSize: SYMBOL_BASE_FONTSIZE,
+        // fontSize: SYMBOL_BASE_FONTSIZE,
         fontFamily: SYMBOL_BASE_FONTFAMILY,
         fontWeight: SYMBOL_BASE_FONTWEIGHT,
         rotationX: 0,

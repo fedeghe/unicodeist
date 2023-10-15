@@ -160,25 +160,28 @@ export default [
 			{ "char": "ẛ", "description": "Latin Small Letter Long S with dot above	0667	for Fraktur, Irish Gaelic, Old English" },
 
 		]
-	}, {
+	},
+	{
 		"title": "Medievalist",
 		"charSet": [
 			{ "char": "ẜ", "description": "Latin Small Letter Long S with diagonal stroke" },
 			{ "char": "ẝ", "description": "Latin Small Letter Long S with high stroke" },
 			{ "char": "ẟ", "description": "Latin Small Letter Delta" },
-			{ "char":"Ỻ", "description": "Latin Capital Letter Middle-Welsh LL"},
-			{ "char":"ỻ", "description": "Latin Small Letter Middle-Welsh LL"},
-			{ "char":"Ỽ", "description": "Latin Capital Letter Middle-Welsh V"},
-			{ "char":"ỽ", "description": "Latin Small Letter Middle-Welsh V"},
-			{ "char":"Ỿ", "description": "Latin Capital Letter Y with loop"},
-			{ "char":"ỿ", "description": "Latin Small Letter Y with loop"},
+			{ "char": "Ỻ", "description": "Latin Capital Letter Middle-Welsh LL" },
+			{ "char": "ỻ", "description": "Latin Small Letter Middle-Welsh LL" },
+			{ "char": "Ỽ", "description": "Latin Capital Letter Middle-Welsh V" },
+			{ "char": "ỽ", "description": "Latin Small Letter Middle-Welsh V" },
+			{ "char": "Ỿ", "description": "Latin Capital Letter Y with loop" },
+			{ "char": "ỿ", "description": "Latin Small Letter Y with loop" },
 		]
-	}, {
+	},
+	{
 		"title": "German typography",
 		"charSet": [
 			{ "char": "ẞ", "description": "Latin Capital Letter Sharp S" }
 		]
-	}, {
+	},
+	{
 		"title": "Vietnamese",
 		"charSet": [
 			{ "char": "Ạ", "description": "Latin Capital Letter A with dot below" },

@@ -31,10 +31,10 @@
                     var trans = [
                         'transform:translate('+sty.t.trn[0]+'px,'+sty.t.trn[1]+'px)'
                     ];
-                    sty.t.s !== 1 && trans.push(map.s(sty.t.s));
-                    sty.t.sx !== 1 && trans.push(map.sx(sty.t.sx));
-                    sty.t.sy !== 1 && trans.push(map.sy(sty.t.sy));
-                    
+                    's' in sty.t && trans.push(map.s(sty.t.s));
+                    'sx' in sty.t && trans.push(map.sx(sty.t.sx));
+                    'sy' in sty.t && trans.push(map.sy(sty.t.sy));
+                    'sy' in sty.t && trans.push(map.rx(sty.t.rx));
                     'rx' in sty.t && trans.push(map.rx(sty.t.rx));
                     'ry' in sty.t && trans.push(map.ry(sty.t.ry));
                     'rz' in sty.t && trans.push(map.rz(sty.t.rz));
@@ -56,7 +56,7 @@
         rawData = script.dataset.unicodeist,
         data = JSON.parse(rawData),
         root = createElement(data.sty);
-        console.log(data.sty);
+        
     data.sym.forEach(function (symbol){
         root.appendChild(
             createElement(symbol.sty, symbol.cnt)

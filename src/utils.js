@@ -16,6 +16,42 @@ export const cleanCode = code => code
     .replace(/;\s/gm, ";")             // remove spaces after ;
     .replace(/,\s/gm, ",")              // remove spaces after ,
     .replace(/draggable=[true|false]/gm, "");              // remove draggable attrs
+// eslint-disable-next-line no-unused-vars
+export const cleanCodeFromState = state => {
+    var root = document.createElement('div');
+    root.setAttribute('style',
+        [
+            `width:${state.width}px`,
+            `height:${state.height}px`,
+            `background-color:${state.backgroundColor}`,
+            `position:relative;overflow:hidden`,
+        ].join(';')
+    );
+    state.symbols.map(sym => {
+        var child = document.createElement('div');
+        child.innerHTML = sym.char;
+        child.setAttribute('style',
+            [
+                `z-index:${sym.zIndex}`,
+                `font-family:${sym.fontFamily}`,
+                `font-weight:${sym.fontWeight}`,
+                `color:${sym.color}`,
+                `position:absolute;transform-origin:center center`,
+                `transform:` + [
+                    `translate(${sym.left}px,${sym.top}px)`,
+                    sym.scale && `scale(${sym.scale})`,
+                    sym.scaleX && `scaleX(${sym.scaleX})`,
+                    sym.scaleY && `scaleY(${sym.scaleY})`,
+                    sym.rotationX && `rotateX(${sym.rotationX}deg)`,
+                    sym.rotationY && `rotateY(${sym.rotationY}deg)`,
+                    sym.rotationZ && `rotateZ(${sym.rotationZ}deg)`,
+                ].filter(Boolean).join(' ')
+            ].join(';')
+        );
+        return child;
+    }).forEach(c => root.appendChild(c));
+    return root.outerHTML;
+};
 
 export const debounce = (func, delay) => {
     var to,
@@ -100,6 +136,7 @@ export const getUnicodeistScriptTag = state => {
 const def = {
     uniqueID,
     cleanCode,
+    cleanCodeFromState,
     debounce,
     saveAsFile,
     importFromFile,
