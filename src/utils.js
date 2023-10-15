@@ -18,7 +18,7 @@ export const cleanCode = code => code
     .replace(/;\s/gm, ";")             // remove spaces after ;
     .replace(/,\s/gm, ",")              // remove spaces after ,
     .replace(/draggable=[true|false]/gm, "");              // remove draggable attrs
-// eslint-disable-next-line no-unused-vars
+
 export const cleanCodeFromState = state => {
     var root = document.createElement('div');
     root.setAttribute('style',
@@ -42,8 +42,8 @@ export const cleanCodeFromState = state => {
                 `transform:` + [
                     `translate(${sym.left}px,${sym.top}px)`,
                     sym.scale && `scale(${sym.scale})`,
-                    sym.scaleX && `scaleX(${sym.scaleX})`,
-                    sym.scaleY && `scaleY(${sym.scaleY})`,
+                    sym.scaleX !== 1 && `scaleX(${sym.scaleX})`,
+                    sym.scaleY !== 1 && `scaleY(${sym.scaleY})`,
                     sym.rotationX && `rotateX(${sym.rotationX}deg)`,
                     sym.rotationY && `rotateY(${sym.rotationY}deg)`,
                     sym.rotationZ && `rotateZ(${sym.rotationZ}deg)`,
@@ -119,9 +119,9 @@ const getUnicodeistData = j => JSON.stringify({
         // 'transform-origin': 'center center', 
         t: {
             trn:[s.left, s.top],
-            ...(s.scale && {s: s.scale}),
-            ...(s.scaleX && {sy: s.scaleX}),
-            ...(s.scaleY && {sy: s.scaleY}),
+            ...(s.scale !== 1 && {s: s.scale}),
+            ...(s.scaleX !== 1 && {sy: s.scaleX}),
+            ...(s.scaleY !== 1 && {sy: s.scaleY}),
             ...(s.rotationX && {rx: s.rotationX}), // deg
             ...(s.rotationY && {ry: s.rotationY}), // deg
             ...(s.rotationZ && {rz: s.rotationZ})  // deg
