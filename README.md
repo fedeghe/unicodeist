@@ -4,7 +4,17 @@
 
 
 
+A unicode characters based visual editor
 ---
+
+Sometimes creating temporary creative for a logo should be a matter of minutes, using _unicodeist_ is it!
+
+I created the following in more or less 3 minutes, using 3 different symbols...
+<img align="right" width="322"  src="src/img/ss0.png?raw=true">
+
+[here](./src//img/fg.json) you could download exactly that creative and import it in _unicodeist_ .... but 'm sure You can do way better that that 
+
+
 [Try it here](https://fedeghe.github.io/Unicodeist/)
 
 ---
