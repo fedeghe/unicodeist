@@ -13,8 +13,7 @@ I created the following in more or less 3 minutes, using 3 different symbols...
 
 <img width="322"  src="src/img/ss0.png?raw=true">
 
-
-[here](./src//img/fg.json?raw=true) you could download exactly that creative and import it in _unicodeist_ .... but 'm sure You can do way better that that 
+Clicking <a href="./src//img/fg.json?raw=true" download>here</a> you could download exactly that creative and import it in _unicodeist_ .... but 'm sure You can do way better that that 
 
 
 [Try it here](https://fedeghe.github.io/Unicodeist/)
