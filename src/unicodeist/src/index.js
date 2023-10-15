@@ -19,7 +19,8 @@
                     ry: function (v) {return v ? 'rotateY('+v+'deg)' : '';},
                     rz: function (v) {return v ? 'rotateZ('+v+'deg)' : '';}
                 },
-                mapped, k;
+                mapped,
+                k;
             //position && transfrom-origin
             if (cnt) { //symbol case
                 styles.push('position:absolute;transform-origin:center center');
