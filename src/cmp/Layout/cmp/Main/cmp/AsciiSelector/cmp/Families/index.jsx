@@ -41,7 +41,10 @@ const Families = () => {
     const symbols = useFilter({ allSymbols, filter: asciiSelectorFilter });
     
     return <div className={classes.Container}>
-        {symbols.map(({label, data}) => <Family key={label} data={data} label={label} onSelect={onSelect}/>)}
+        {symbols.length
+            ? symbols.map(({label, data}) => <Family key={label} data={data} label={label} onSelect={onSelect}/>)
+            : <h3>0 results</h3>
+        }
         {/* {symbols.map(r => <Family key={`${uniqueID}`} data={r} label={'lab'} onSelect={onSelect}/>)} */}
         {open && <CopyDone message={`${messageChar} added`} onClose={hideConfirmation} open={open} setOpen={setOpen}/>}
     </div>;
