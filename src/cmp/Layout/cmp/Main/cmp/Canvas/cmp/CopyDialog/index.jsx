@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
-import Dialog from '@mui/material/Dialog';
+import { Dialog, Button } from '@mui/material';
 import copy from 'copy-to-clipboard';
-import Button from '@mui/material/Button';
 
 import CopyDone from '../../../CopyDone';
 import useStyles from './styles';

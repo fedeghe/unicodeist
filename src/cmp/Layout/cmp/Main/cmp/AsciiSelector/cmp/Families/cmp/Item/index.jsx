@@ -1,6 +1,7 @@
 import useStyles from './styles';
 const Item = ({char, onSelect}) => {
     const classes = useStyles();
-    return <div className={classes.Item} onClick={() => onSelect(char)}>{char}</div>;
+    const onClick = () => onSelect(char);
+    return <div className={classes.Item} onClick={onClick}>{char}</div>;
 };
 export default Item;

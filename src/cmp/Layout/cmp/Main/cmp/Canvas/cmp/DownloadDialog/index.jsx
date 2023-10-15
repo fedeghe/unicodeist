@@ -7,19 +7,16 @@ import {
 import {
     toPng, toJpeg
 } from 'html-to-image';
+import { DEFAULT_DOWNLOAD_FORMAT, DOWNLOAD_FORMATS } from './../../../../../../../../constants';
 import { saveAsFileJSON } from './../../../../../../../../utils';
 import ctx from './../../../../../../../../Context';
-
 import useStyles from './styles';
-
-const defaultFormat = 'json';
-
 
 const DownloadDialog = ({visibility, setVisibility, domRef }) => {
     
     const classes = useStyles(),
         {state} = useContext(ctx),
-        [format, setFormat] = useState(defaultFormat),
+        [format, setFormat] = useState(DEFAULT_DOWNLOAD_FORMAT),
         [filename, setFilename] = useState(''),
         [downloadEnabled, setDownloadEnabled] = useState(false),
         onClose = useCallback(
@@ -35,9 +32,9 @@ const DownloadDialog = ({visibility, setVisibility, domRef }) => {
             [state]
         ),
         formatToReader = {
-            json: toJson,
-            jpeg: toJpeg,
-            png: toPng,
+            [DOWNLOAD_FORMATS.json]: toJson,
+            [DOWNLOAD_FORMATS.jpeg]: toJpeg,
+            [DOWNLOAD_FORMATS.png]: toPng,
         },
         changeFormat = e => setFormat(e.target.value),
         changeName = e => setFilename(e.target.value),
@@ -80,7 +77,7 @@ const DownloadDialog = ({visibility, setVisibility, domRef }) => {
                                 <MenuItem key={format} value={format}>{format}</MenuItem>    
                             )}
                         </Select>
-                        <FormHelperText className={classes.Warn}>{format === defaultFormat ? 'this is the only importable format' : " "}</FormHelperText>
+                        <FormHelperText className={classes.Warn}>{format === DEFAULT_DOWNLOAD_FORMAT ? 'this is the only importable format' : " "}</FormHelperText>
                     </FormGroup>
                     
                     <Button className={classes.DownloadButton}disabled={!downloadEnabled} variant="contained" onClick={doDownload}>Download</Button>

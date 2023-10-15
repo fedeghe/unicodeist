@@ -3,9 +3,7 @@ import Box from '@mui/material/Box';
 
 import ctx from './../../../../../../Context';
 import ACTIONS from './../../../../../../reducer/actions';
-
 import useStyles from './styles';
-
 
 const Sizes = () => {
     const classes = useStyles(),

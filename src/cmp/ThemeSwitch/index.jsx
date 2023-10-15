@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-
 import Switch from '@mui/material/Switch';
+
 import {DEFAULT_THEME} from './../../constants';
 import ctx from './../../Context';
 import ACTIONS from './../..//reducer/actions';

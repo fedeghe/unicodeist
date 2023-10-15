@@ -2,18 +2,14 @@ import {
     useRef, useContext, useMemo,
     useEffect, useState, useCallback
 } from 'react';
-// eslint-disable-next-line no-unused-vars
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+
 import Channel from '@fedeghe/channeljs';
 
 import CanvasSymbol from './../CanvasSymbol';
 import ctx from './../../../../../../Context';
-
-
 import { cleanCodeFromState, getUnicodeistScriptTag } from './../../../../../../utils';
 import CopyDialog from './cmp/CopyDialog';
 import DownloadDialog from './cmp/DownloadDialog';
-
 
 const Canvas = () => {
     const {
@@ -44,24 +40,18 @@ const Canvas = () => {
 
     useEffect(() => {
         const embed = () => {
-            const code = cleanCodeFromState(state);
-            setEmbedCode(code);
-            setScriptCode(getUnicodeistScriptTag(state));
-            if (ref?.current) setCopyDialogVisibility(true);
-        },
-            mailto = () => {
                 const code = cleanCodeFromState(state);
-                window.open(`mailto:your@friend.com?subject=Unicodeist&body=${code}`);
+                setEmbedCode(code);
+                setScriptCode(getUnicodeistScriptTag(state));
+                if (ref?.current) setCopyDialogVisibility(true);
             };
 
         if (ref.current) {
             Channel.get('event').sub('embed', embed);
-            Channel.get('event').sub('mailto', mailto);
             Channel.get('event').sub('exportImage', exportImage);
         }
         return () => {
             Channel.get('event').unsub('embed', embed);
-            Channel.get('event').unsub('mailto', mailto);
             Channel.get('event').unsub('exportImage', exportImage);
         };
     }, [ref, state]);

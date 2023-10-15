@@ -41,6 +41,12 @@ export const FONT_FAMILIES = [
     'Brush Script MT'
 ];
 export const UNICODEIST_SCRIPT_URI = 'https://www.jmvc.org/unicodeist/index.js';
+export const DOWNLOAD_FORMATS = {
+    json: 'json',
+    jpeg: 'jpeg',
+    png: 'png'
+};
+export const DEFAULT_DOWNLOAD_FORMAT = 'json';
 
 
 const CONSTS = {
@@ -71,9 +77,9 @@ const CONSTS = {
     EXPANDED_SYM_HEIGHT,
     COLLAPSED_SYM_HEIGHT,
     CLOSE_TOAST_TIMEOUT,
-
-
     FONT_FAMILIES,
-    UNICODEIST_SCRIPT_URI
+    UNICODEIST_SCRIPT_URI,
+    DOWNLOAD_FORMATS,
+    DEFAULT_DOWNLOAD_FORMAT
 };
 export default CONSTS;

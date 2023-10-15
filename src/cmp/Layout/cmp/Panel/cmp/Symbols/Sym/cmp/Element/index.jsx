@@ -21,6 +21,7 @@ const Element = ({sym}) => {
         onFocusToggle = () => dispatch({ type: ACTIONS.SYMBOL_FOCUS }),
         onAlignH = () => dispatch({ type: ACTIONS.ALIGN_H, payload: sym.id }),
         onAlignV = () => dispatch({ type: ACTIONS.ALIGN_V, payload: sym.id });
+        
     return <div className={classes.Container}>
         <div className={classes.Left}>
             <div className={classes.Item}><DeleteIcon onClick={onDelete}/></div>

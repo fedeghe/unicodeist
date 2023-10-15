@@ -1,7 +1,9 @@
 import { useState, useContext } from 'react';
+
 import useStyles from './styles';
 import ctx from '../../../../../../../../Context';
 import ACTIONS from '../../../../../../../../reducer/actions';
+
 const Logo = () => {
     const {dispatch} = useContext(ctx),
         [startPoint, setStartPoint] = useState([0, 0]),
@@ -19,26 +21,23 @@ const Logo = () => {
             e.preventDefault();
         },
         onDragEnd = ({pageX, pageY, shiftKey}) => {
-            
             (shiftKey ? setPanning : setDragging)(false);
-            
             const [startX, startY] = startPoint,
                 endX = pageX,
                 endY = pageY;
 
             shiftKey 
-            ? dispatch({
-                type: ACTIONS.PAN_ALL_SYMBOLS,
-                payload: parseInt((endY - startY) / 10, 10)
-
-            }):
-            dispatch({
-                type: ACTIONS.MOVE_ALL_SYMBOLS,
-                payload: {
-                    leftTune: parseInt(endX - startX, 10),
-                    topTune: parseInt(endY - startY, 10)
-                }
-            });
+                ? dispatch({
+                    type: ACTIONS.PAN_ALL_SYMBOLS,
+                    payload: parseInt((endY - startY) / 10, 10)
+                })
+                : dispatch({
+                    type: ACTIONS.MOVE_ALL_SYMBOLS,
+                    payload: {
+                        leftTune: parseInt(endX - startX, 10),
+                        topTune: parseInt(endY - startY, 10)
+                    }
+                });
         };
     
     return <div

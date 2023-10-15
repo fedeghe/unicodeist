@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { createUseStyles } from 'react-jss';
 
 import bg from './../../../../../../../../../img/bg.png';

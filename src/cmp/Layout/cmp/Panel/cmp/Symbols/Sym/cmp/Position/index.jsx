@@ -7,7 +7,6 @@ import ACTIONS from './../../../../../../../../../reducer/actions';
 import useStyles from './../../styles';
 import useElementStyles from './styles';
 
-
 const Position = ({sym}) => {
     const classes = useStyles(),
         localClasses = useElementStyles(),

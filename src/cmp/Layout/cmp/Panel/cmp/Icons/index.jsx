@@ -1,8 +1,7 @@
 import { useCallback, useContext } from 'react';
 
-// import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
+
 import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
-// import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import GetAppIcon from '@mui/icons-material/GetApp';
 
@@ -20,7 +19,6 @@ const Icons = () => {
         {backgroundColor} = state,
         classes = useStyles(),
         embed = useCallback(() => Channel.get('event').pub('embed') , []),
-        // mailto = useCallback(() => Channel.get('event').pub('mailto'), []),
         exportImage = useCallback(() => Channel.get('event').pub('exportImage'), []),
         importState = () => importFromFile({
             onContentReady: cnt => dispatch({

@@ -6,7 +6,6 @@ import ACTIONS from './../../../../../../../../../reducer/actions';
 import useStyles from './../../styles';
 import useElementStyles from './styles';
 
-
 const Label = ({sym}) => {
     const classes = useStyles(),
         localCasses = useElementStyles(),

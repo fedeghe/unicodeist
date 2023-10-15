@@ -1,7 +1,7 @@
 import { useContext} from 'react';
+
 import Sym from './Sym';
 import ctx from '../../../../../../Context';
-
 import useStyles from './styles';
 
 const Symbols = () => {

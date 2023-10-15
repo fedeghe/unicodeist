@@ -1,7 +1,6 @@
 
 import { useContext, useCallback } from 'react';
-import Card from '@mui/material/Card';
-import Typography from '@mui/material/Typography';
+import { Card, Typography} from '@mui/material';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 

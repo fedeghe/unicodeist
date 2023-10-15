@@ -12,21 +12,10 @@ const CanvasSymbol = ({symbol}) => {
     const {state: { focusedSymbolId}, dispatch} = useContext(ctx),
         isTarget = focusedSymbolId===symbol.id,
         {
-            id,
-            char,
-            zIndex,
-            left, top,
-            color,
-            fontFamily,
-            fontWeight,
-            rotationX,
-            rotationY,
-            rotationZ,
-            opacity,
-            faded,
-            scale,
-            scaleX,
-            scaleY,
+            id, char, zIndex, left, top, color,
+            faded,opacity, fontFamily, fontWeight,
+            rotationX, rotationY, rotationZ,
+            scale, scaleX, scaleY,
         } = symbol,
         classes = useStyles({
             isTarget,
@@ -41,12 +30,8 @@ const CanvasSymbol = ({symbol}) => {
             }),
             [dispatch, id]
         ),
-        onDragStart = e => {
-            setStartPoint([e.pageX, e.pageY]);
-        },
-        onDrag = e => {
-            e.preventDefault();
-        },
+        onDragStart = e => setStartPoint([e.pageX, e.pageY]),
+        onDrag = e => e.preventDefault(),
         onDragEnd = e => {
             e.preventDefault();
             const [startX, startY] = startPoint;

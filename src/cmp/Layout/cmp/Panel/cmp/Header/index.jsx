@@ -4,10 +4,8 @@ import Search from './../Search';
 import Logo from './cmp/Logo';
 import useStyles from './styles';
 
-
 const Header = () => {
     const classes = useStyles();
-    
     return <>
         <div className={classes.PanelHeader}>
             <Logo/>

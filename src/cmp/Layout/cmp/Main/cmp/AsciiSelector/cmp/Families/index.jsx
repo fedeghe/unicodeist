@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 import { useContext, useState } from 'react';
+
 import CopyDone from './../../../CopyDone';
 import ctx from '../../../../../../../../Context';
 import ACTIONS from '../../../../../../../../reducer/actions';
@@ -8,7 +8,7 @@ import allSymbols from '../../../../../../../../Symbols';
 import useFilter from './useFilter';
 
 import Family from './cmp/Family';
-import { uniqueID } from '../../../../../../../../utils';
+
 
 const Families = () => {
     const classes = useStyles({border: 10});

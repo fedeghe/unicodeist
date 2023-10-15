@@ -1,13 +1,13 @@
 
 import { useContext, useCallback } from 'react';
 import Box from '@mui/material/Box';
+
 import ctx from './../../../../../../../../../Context';
 import { FONT_FAMILIES } from './../../../../../../../../../constants';
 import scaleRotConfig from './scaleAndRotation.config';
 import ACTIONS from './../../../../../../../../../reducer/actions';
 import useStyles from './../../styles';
 import useElementStyles from './styles';
-
 
 const Styles = ({ sym }) => {
     const classes = useStyles(),
