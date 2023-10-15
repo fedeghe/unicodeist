@@ -1,13 +1,14 @@
 
-![Unicodeist](https://github.com/fedeghe/Unicodeist/blob/master/src/img/unicodeist.png?raw=true)
-                
+![Unicodeist](src/img/unicodeist.png?raw=true)
+
+
 
 
 ---
 [Try it here](https://fedeghe.github.io/Unicodeist/)
 
 ---
-- In the top right you can:
+- In the top right you can:<img align="right" width="322"  src="src/img/ss1.png?raw=true">
     - set the size of the current _creative_
     - switch 🌓 theme
     - export a `.json` file of the current _creative_
@@ -15,10 +16,13 @@
     - change the `background-color` (default is white)
     - email the html of the _creative_ to someone
     - get the content as `<div>` usable in a html page or a `<script>` that will automatically render it exactly where you put the script.
+    ---
 
 - Press the ➕ button on the top left (or press `ESC` button) to toggle the symbol selection panel  
+
 - Add one or more symbols and close the panel (through ➖ button or pressing `ESC`)  
-- Last symbol added is the current target one, thus on the right panel you will see a tuning card expanded allowing you to: 
+<img align="right" width="322"  src="src/img/ss2.png?raw=true">
+- Last symbol added is the current target one, thus on the right panel you will see a tuning card expanded allowing you to:  
     - set a label for it (only useful to search it among added symbols)
     - set the `z-index`
     - see a preview showing on its left some icons to:
@@ -39,8 +43,11 @@
         - drag the symbol
         - when focused press <span style="padding:0px 2px;font-size:1.5em;position:relative;top:2px;border:1px solid gray">⇧ + arrow</span> (1px move each)
 
-### Move all symbols
-To move all symbols together just go to the logo in the right upper part and drag it in one direction, you will move all simbols together in that direction for an amout proportional to the movement.
+
+
+### Move all symbols  
+
+To move all symbols together just go to the _Unicodeist_ logo in the right upper part and drag it in one direction, on drop end all symbols will move together in that direction for an amout proportional to the movement.
 
 
 ---
