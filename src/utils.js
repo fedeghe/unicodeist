@@ -1,3 +1,5 @@
+import { UNICODEIST_SCRIPT_URI } from './constants'
+
 export const uniqueID = new function () {
     var count = 0,
         self = this;
@@ -130,7 +132,7 @@ const getUnicodeistData = j => JSON.stringify({
 
 export const getUnicodeistScriptTag = state => {
     const dataUnicodeist = getUnicodeistData(state);
-    return `<script src="https://www.jmvc.org/unicodeist/index.js" data-unicodeist='${dataUnicodeist}'></script>`;
+    return `<script src="${UNICODEIST_SCRIPT_URI}" data-unicodeist='${dataUnicodeist}'></script>`;
 };
 
 const def = {

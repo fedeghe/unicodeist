@@ -39,6 +39,7 @@ export const FONT_FAMILIES = [
     'Courier New',
     'Brush Script MT'
 ];
+const UNICODEIST_SCRIPT_URI = 'https://www.jmvc.org/unicodeist/index.js';
 
 
 const CONSTS = {
@@ -70,6 +71,7 @@ const CONSTS = {
     COLLAPSED_SYM_HEIGHT,
 
     FEATURE_FONTSIZE,
-    FONT_FAMILIES
+    FONT_FAMILIES,
+    UNICODEIST_SCRIPT_URI
 };
 export default CONSTS;
