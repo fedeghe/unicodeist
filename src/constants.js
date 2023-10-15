@@ -30,6 +30,7 @@ export const MIN_ZINDEX = 0;
 export const MAX_ZINDEX = 10000;
 export const EXPANDED_SYM_HEIGHT = 560;
 export const COLLAPSED_SYM_HEIGHT = 50;
+export const CLOSE_TOAST_TIMEOUT = 1000;
 export const FONT_FAMILIES = [
     'Arial', 'Verdana', 'Tahoma',
     'Trebuchet MS',
@@ -69,6 +70,7 @@ const CONSTS = {
     MAX_ZINDEX,
     EXPANDED_SYM_HEIGHT,
     COLLAPSED_SYM_HEIGHT,
+    CLOSE_TOAST_TIMEOUT,
 
 
     FONT_FAMILIES,
