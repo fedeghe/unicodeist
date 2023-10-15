@@ -15,6 +15,7 @@ export default createUseStyles(theme => ({
         color: theme.modal.itemForeground,
         borderRadius: theme.radius.selectorModalItem,
         opacity:0.8,
+        display:'inline-block',
 
         '&:hover': {
             // fontWeight: 'bold',

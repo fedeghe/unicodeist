@@ -1,38 +1,25 @@
-/* eslint-disable no-unused-vars */
+import { useState, useCallback, useEffect, useContext } from 'react';
 import {
-    useContext, useState,
-    useCallback, useEffect
-} from 'react';
-import Dialog from '@mui/material/Dialog';
-import copy from 'copy-to-clipboard';
-import Button from '@mui/material/Button';
-import FormGroup from '@mui/material/FormGroup';
-
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import TextField from '@mui/material/TextField';
-
-import Select from '@mui/material/Select';
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
-
-import CopyDone from '../../../CopyDone';
+    Dialog, Button, FormGroup,
+    MenuItem, TextField, Select,
+    FormHelperText
+} from '@mui/material';
+import {
+    toPng, toJpeg
+} from 'html-to-image';
+import { saveAsFileJSON } from './../../../../../../../../utils';
 import ctx from './../../../../../../../../Context';
-import ACTIONS from './../../../../../../../../reducer/actions';
 
 import useStyles from './styles';
 
-const formatToReader = {
-    png: toPng,
-    jpeg: toJpeg,
-    blob: toBlob,
-    pixedata: toPixelData,
-    svg: toSvg
-};
+const defaultFormat = 'json';
+
 
 const DownloadDialog = ({visibility, setVisibility, domRef }) => {
     
     const classes = useStyles(),
-        [format, setFormat] = useState(""),
+        {state} = useContext(ctx),
+        [format, setFormat] = useState(defaultFormat),
         [filename, setFilename] = useState(''),
         [downloadEnabled, setDownloadEnabled] = useState(false),
         onClose = useCallback(
@@ -43,6 +30,15 @@ const DownloadDialog = ({visibility, setVisibility, domRef }) => {
             },
             [setVisibility]
         ),
+        toJson = useCallback(
+            () => saveAsFileJSON(state),
+            [state]
+        ),
+        formatToReader = {
+            json: toJson,
+            jpeg: toJpeg,
+            png: toPng,
+        },
         changeFormat = e => setFormat(e.target.value),
         changeName = e => setFilename(e.target.value),
         doDownload = useCallback(() => {
@@ -54,7 +50,7 @@ const DownloadDialog = ({visibility, setVisibility, domRef }) => {
                     a.setAttribute('download', `${filename}.${format}`);
                     a.click();
                 }
-            ).then(() => setVisibility(false));
+            ).then(onClose);
         }, [format, filename]);
 
     useEffect(() =>
@@ -69,29 +65,25 @@ const DownloadDialog = ({visibility, setVisibility, domRef }) => {
                     <h3>Download as</h3>
                     <FormGroup>
                         <TextField
-                            className={classes.SpaceDown}
-                            required label="file name with no extension" variant="outlined"
+                            className={classes.SpaceUp}
+                            required
+                            label="file name without extension" variant="outlined"
                             onChange={changeName}
                         />
-                        <br />
                         <Select
-                            className={classes.SpaceDown}
+                            className={classes.SpaceUp}
                             required
-                            displayEmpty
                             value={format}
-                            label="Age"
                             onChange={changeFormat}
                         >
-                            <MenuItem value="">
-                                <em>choose download format</em>
-                            </MenuItem>
                             {Object.keys(formatToReader).map(format => 
                                 <MenuItem key={format} value={format}>{format}</MenuItem>    
                             )}
                         </Select>
+                        <FormHelperText className={classes.Warn}>{format === defaultFormat ? 'this is the only importable format' : " "}</FormHelperText>
                     </FormGroup>
                     
-                    <Button disabled={!downloadEnabled} variant="contained" onClick={doDownload}>Download</Button>
+                    <Button className={classes.DownloadButton}disabled={!downloadEnabled} variant="contained" onClick={doDownload}>Download</Button>
                 </div>
             </Dialog>
         </div>

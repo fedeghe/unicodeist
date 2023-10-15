@@ -7,8 +7,8 @@ export default createUseStyles({
         padding: '2em',
         backgroundColor: '#eeeeee'
     },
-    SpaceDown: {
-        marginBottom: '1em'
+    SpaceUp: {
+        marginTop: '1em'
     },
     TopMargined: {
         marginTop: '4em'
@@ -21,5 +21,12 @@ export default createUseStyles({
         padding: '1em',
         borderRadius: '3px',
         maxHeight:'300px',
+    },
+    DownloadButton: {
+        marginTop:'1em'
+    },
+    Warn: {
+        color:'red',
+        fontWeight:900
     }
 });

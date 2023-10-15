@@ -24,11 +24,23 @@ const Main = () => {
             [addPanelVisibility, dispatch]
         ),
         seekWhat = useCallback(e => {  
-            if (e.target.tagName === 'INPUT') return e;
+            //for the symbol search
+            // if input text and not escape
+            // allow the default (e.g. +shilf+a)
+            if (e.target.tagName === 'INPUT'
+                && e.target.type === 'text'
+                && e.key !== "Escape"
+            ) return e;
+
+            // on escape toggle panel
             if (e.key === "Escape") { togglePanel(); e.preventDefault();}
-            if (e.shiftKey){
-                ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)
-                && move(e.key); e.preventDefault();
+
+            //on shift +arrow move current target symbol
+            if (
+                e.shiftKey
+                && ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)
+            ){
+                move(e.key); e.preventDefault();
             }
         }, [togglePanel]);
 

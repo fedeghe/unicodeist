@@ -76,14 +76,11 @@ export const debounce = (func, delay) => {
  * TODO: here I should allow the use to see the location & name dialog
  * but still do not know how
  */
-export const saveAsFile = (filename, data) => {
-    const blob = new Blob([JSON.stringify(data)]),
-        link = document.createElement("a");
-    link.download = filename;
-    // link.toggleAttribute('download');
-    
-    link.href = window.URL.createObjectURL(blob);
-    link.click();
+export const saveAsFileJSON = data => {
+    return new Promise(resolve => {
+        const blob = new Blob([JSON.stringify(data)]);
+        resolve(window.URL.createObjectURL(blob));
+    });
 };
 export const importFromFile = ({onContentReady}) => {
     const link = document.createElement("input");
@@ -141,9 +138,9 @@ const def = {
     cleanCode,
     cleanCodeFromState,
     debounce,
-    saveAsFile,
     importFromFile,
     getUnicodeistData,
-    getUnicodeistScriptTag
+    getUnicodeistScriptTag,
+    saveAsFileJSON
 };
 export default def;

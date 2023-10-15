@@ -7,21 +7,11 @@ export default createUseStyles((theme) => ({
         flexDirection:'column',
         color: theme.modal.setStringColor
     },
-    SubContainer: {
-        display:'flex',
-        flexDirection:'row',
-        color: theme.modal.setStringColor
-    },
-    Br: {
-        width:'100%',
-        border:'none',
-        borderTop: `1px dotted ${theme.foreground}`
-    },
     ItemsContainer: {
         display:'flex',
-        flexDirection:'row',
         flexWrap: 'wrap',
-        borderBottom:'1px dashed black'
+        borderBottom:'1px dashed black',
+        flexDirection: 'column'
     },
     SubfamilyTitle: {
         display:'block',
