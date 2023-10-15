@@ -32,7 +32,9 @@ Clicking <a href="./src/img/fg.json?raw=true" target="_blank" download>here</a> 
 - Press the ➕ button on the top left (or press `ESC` button) to toggle the symbol selection panel  
 
 - Add one or more symbols and close the panel (through ➖ button or pressing `ESC`)  
-<img align="right" width="322"  src="src/img/ss2.png?raw=true">
+
+<img align="right" width="322"  src="src/img/ss2.png?raw=true">  
+
 - Last symbol added is the current target one, thus on the right panel you will see a tuning card expanded allowing you to:  
     - set a label for it (only useful to search it among added symbols)
     - set the `z-index`
