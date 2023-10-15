@@ -39,7 +39,7 @@ export const FONT_FAMILIES = [
     'Courier New',
     'Brush Script MT'
 ];
-const UNICODEIST_SCRIPT_URI = 'https://www.jmvc.org/unicodeist/index.js';
+export const UNICODEIST_SCRIPT_URI = 'https://www.jmvc.org/unicodeist/index.js';
 
 
 const CONSTS = {
