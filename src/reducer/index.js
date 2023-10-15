@@ -3,7 +3,6 @@ import ACTIONS from './actions';
 import {uniqueID} from './../utils';
 import {
     WIDTH, HEIGHT,
-    // SYMBOL_BASE_FONTSIZE,
     PANEL_WIDTH,
     DEFAULT_THEME,
     SYMBOL_BASE_FONTFAMILY,
@@ -26,7 +25,6 @@ const createSymbol = ({ char, zIndex, left, top }) => {
         left,
         top,
         color: '#000000',
-        // fontSize: SYMBOL_BASE_FONTSIZE,
         fontFamily: SYMBOL_BASE_FONTFAMILY,
         fontWeight: SYMBOL_BASE_FONTWEIGHT,
         rotationX: 0,
@@ -48,7 +46,6 @@ const actions = {
             maxWidth: WIDTH,
             maxHeight: HEIGHT,
             themeKey: DEFAULT_THEME,
-            // themeKey: 'bright',
             symbols: [],
             addPanelVisibility: false,
             focusedSymbolId: null,
@@ -58,7 +55,7 @@ const actions = {
             asciiPanelFilterByIconName: '',
             letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
             embedModalVisibility: false,
-            superFocus: false // isolate focusedSymbolId
+            superFocus: false
         }),
         
         [ACTIONS.SWITCH_THEME]: ({
@@ -86,15 +83,15 @@ const actions = {
         }) => {
             // get highest zindex
             const zIndex = Object.values(symbols).reduce(
-                (acc, {zIndex}) => acc > zIndex ? acc : zIndex,
-                0
-            ) + 1,
-            newSymbol = createSymbol({
-                char,
-                left: width / 2,
-                top: height / 2,
-                zIndex
-            });
+                    (acc, {zIndex}) => acc > zIndex ? acc : zIndex,
+                    0
+                ) + 1,
+                newSymbol = createSymbol({
+                    char,
+                    left: width / 2,
+                    top: height / 2,
+                    zIndex
+                });
             return {
                 focusedSymbolId: newSymbol.id,
                 symbols: [
@@ -142,9 +139,7 @@ const actions = {
         
         [ACTIONS.UPDATE_GLOBAL]: ({
             payload: {field, value}
-        }) => ({
-            [field]: value
-        }),
+        }) => ({ [field]: value }),
         
         [ACTIONS.UPDATE_SYMBOL]: ({
             payload: {id, field, value},
@@ -162,18 +157,16 @@ const actions = {
         [ACTIONS.TUNE_SYMBOL_POSITION]: ({
             payload: {id, update},
             oldState: {symbols}
-        }) => {
-            return {
-                symbols: symbols.map(sym => sym.id === id
-                    ? ({
-                        ...sym,
-                        left: parseInt(sym.left, 10) + parseInt(update.left, 10),
-                        top: parseInt(sym.top, 10) + parseInt(update.top, 10),
-                    })
-                    : sym
-                )
-            };
-        },
+        }) => ({
+            symbols: symbols.map(sym => sym.id === id
+                ? ({
+                    ...sym,
+                    left: parseInt(sym.left, 10) + parseInt(update.left, 10),
+                    top: parseInt(sym.top, 10) + parseInt(update.top, 10),
+                })
+                : sym
+            )
+        }),
 
         [ACTIONS.MAX_ZI]: ({
             payload: id,

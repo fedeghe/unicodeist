@@ -12,45 +12,15 @@ import ACTIONS from '../../../../../../../../../reducer/actions';
 import useStyles from './styles';
 
 const Element = ({sym}) => {
-    const classes = useStyles({sym});
-    const { dispatch } = useContext(ctx);
-    const onDelete = () => {
-        dispatch({
-            type: ACTIONS.REMOVE_SYMBOL,
-            payload: sym.id
-        });
-    };
-    const onClone = () => {
-        dispatch({
-            type: ACTIONS.CLONE_SYMBOL,
-            payload: sym.id
-        });
-    };
-    const onTopZi = () => {
-        dispatch({
-            type: ACTIONS.MAX_ZI,
-            payload: sym.id
-        });
-    };
-    const onBottomZi = () => {
-        dispatch({
-            type: ACTIONS.MIN_ZI,
-            payload: sym.id
-        });
-    };
-    const onFocusToggle = () => {
-        dispatch({
-            type: ACTIONS.SYMBOL_FOCUS,
-        });
-    };
-    const onAlignH = () => dispatch({
-        type: ACTIONS.ALIGN_H,
-        payload: sym.id
-    });
-    const onAlignV = () => dispatch({
-        type: ACTIONS.ALIGN_V,
-        payload: sym.id
-    });
+    const classes = useStyles({sym}),
+        { dispatch } = useContext(ctx),
+        onDelete = () => dispatch({ type: ACTIONS.REMOVE_SYMBOL, payload: sym.id }),
+        onClone = () => dispatch({ type: ACTIONS.CLONE_SYMBOL, payload: sym.id }),
+        onTopZi = () => dispatch({ type: ACTIONS.MAX_ZI, payload: sym.id }),
+        onBottomZi = () => dispatch({ type: ACTIONS.MIN_ZI, payload: sym.id }),
+        onFocusToggle = () => dispatch({ type: ACTIONS.SYMBOL_FOCUS }),
+        onAlignH = () => dispatch({ type: ACTIONS.ALIGN_H, payload: sym.id }),
+        onAlignV = () => dispatch({ type: ACTIONS.ALIGN_V, payload: sym.id });
     return <div className={classes.Container}>
         <div className={classes.Left}>
             <div className={classes.Item}><DeleteIcon onClick={onDelete}/></div>
@@ -64,7 +34,6 @@ const Element = ({sym}) => {
         <div className={classes.Mid}>
             <div className={classes.Char}>{sym.char}</div>
         </div>
-        
     </div>;
 };
 

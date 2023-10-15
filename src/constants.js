@@ -1,6 +1,6 @@
 const h = (new Date()).getHours();
 // leave that false, scale does the job
-export const FEATURE_FONTSIZE = false;
+
 
 export const WIDTH = 500;
 export const HEIGHT = 500;
@@ -28,7 +28,7 @@ export const MAX_ROT= 180;
 export const STEP_ROT = 1;
 export const MIN_ZINDEX = 0;
 export const MAX_ZINDEX = 10000;
-export const EXPANDED_SYM_HEIGHT = FEATURE_FONTSIZE ? 630 : 560;
+export const EXPANDED_SYM_HEIGHT = 560;
 export const COLLAPSED_SYM_HEIGHT = 50;
 export const FONT_FAMILIES = [
     'Arial', 'Verdana', 'Tahoma',
@@ -70,7 +70,7 @@ const CONSTS = {
     EXPANDED_SYM_HEIGHT,
     COLLAPSED_SYM_HEIGHT,
 
-    FEATURE_FONTSIZE,
+
     FONT_FAMILIES,
     UNICODEIST_SCRIPT_URI
 };

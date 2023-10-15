@@ -16,43 +16,65 @@ import { cleanCode, cleanCodeFromState, getUnicodeistScriptTag } from './../../.
 import useStyles from './styles';
 
 const Canvas = () => {
-    const classes = useStyles();
-    const [open, setOpen] = useState(false);
-    const {
-        state: {
-            width, height,
-            symbols,
+    const classes = useStyles(),
+        [open, setOpen] = useState(false),
+        {
+            state: {
+                width, height,
+                symbols,
+                backgroundColor,
+                embedModalVisibility
+            },
+            state,
+            dispatch
+        } = useContext(ctx),
+        ref = useRef(),
+        setEmbedModalVisibility = useCallback(visibility => {
+            dispatch({
+                type: ACTIONS.SET_EMBED_MODAL_VISIBILITY,
+                payload : typeof visibility !== 'undefined'
+                    ? visibility :
+                    !embedModalVisibility
+            });
+        }, [dispatch, embedModalVisibility]),
+        [embedCode, setEmbedCode] = useState(''),
+        [scriptCode, setScriptCode] = useState(''),
+        refStyles = useMemo(() => ({
+            width: `${width}px`,
+            height: `${height}px`,
             backgroundColor,
-            embedModalVisibility
-        },
-        state,
-        dispatch
-    } = useContext(ctx);
-    const ref = useRef();
-    const setEmbedModalVisibility = useCallback(visibility => {
-        dispatch({
-            type: ACTIONS.SET_EMBED_MODAL_VISIBILITY,
-            payload : typeof visibility !== 'undefined'
-                ? visibility :
-                !embedModalVisibility
-        });
-    }, [dispatch, embedModalVisibility]);
-
-    const [embedCode, setEmbedCode] = useState('');
-    const [scriptCode, setScriptCode] = useState('');
+            position:'relative',
+            overflow: 'hidden'
+        }), [height, width, backgroundColor]),
+        
+        onDragOver = e => { e.preventDefault();},
+        onClose = useCallback(
+            () => setEmbedModalVisibility(false),
+            [setEmbedModalVisibility]
+        ),
+        onCopyTag = useCallback(() => {
+            copy(embedCode);
+            onClose();
+            setOpen(true);
+        }, [embedCode, onClose]),
+        onCopyScript = useCallback(() => {
+            copy(scriptCode);
+            onClose();
+            setOpen(true);
+        }, [scriptCode, onClose]);
 
     useEffect(() => {
         const embed = () => {
-            // const code = cleanCode(ref.current.outerHTML);
-            const code = cleanCodeFromState(state);
-            setEmbedCode(code);
-            setScriptCode(getUnicodeistScriptTag(state));
-            setEmbedModalVisibility(!!(ref?.current?.outerHTML));
-        },
-        mailto = () => {
-            const code = cleanCode(ref.current.outerHTML);
-            window.open(`mailto:your@friend.com?subject=Unicodeist&body=${code}`);
-        };
+                const code = cleanCodeFromState(state);
+                setEmbedCode(code);
+                setScriptCode(getUnicodeistScriptTag(state));
+                setEmbedModalVisibility(!!(ref?.current?.outerHTML));
+            },
+            mailto = () => {
+                const code = cleanCode(ref.current.outerHTML);
+                window.open(`mailto:your@friend.com?subject=Unicodeist&body=${code}`);
+            };
+
         if (ref.current) {
             Channel.get('event').sub('embed', embed);
             Channel.get('event').sub('mailto', mailto);
@@ -62,31 +84,6 @@ const Canvas = () => {
             Channel.get('event').unsub('mailto', mailto);
         };
     }, [ref, setEmbedModalVisibility, state]);
-
-    const refStyles = useMemo(() => ({
-        width: `${width}px`,
-        height: `${height}px`,
-        backgroundColor,
-        position:'relative',
-        overflow: 'hidden'
-    }), [height, width, backgroundColor]);
-    const onDragOver = e => {
-        e.preventDefault();
-    };
-    const onClose = useCallback(
-        () => setEmbedModalVisibility(false),
-        [setEmbedModalVisibility]
-    );
-    const onCopyTag = useCallback(() => {
-        copy(embedCode);
-        onClose();
-        setOpen(true);
-    }, [embedCode, onClose]);
-    const onCopyScript = useCallback(() => {
-        copy(scriptCode);
-        onClose();
-        setOpen(true);
-    }, [scriptCode, onClose]);
     return (
         <div>
             <Dialog open={embedModalVisibility} onClose={onClose}>

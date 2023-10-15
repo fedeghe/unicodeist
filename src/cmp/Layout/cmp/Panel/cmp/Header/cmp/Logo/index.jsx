@@ -3,43 +3,43 @@ import useStyles from './styles';
 import ctx from '../../../../../../../../Context';
 import ACTIONS from '../../../../../../../../reducer/actions';
 const Logo = () => {
-    const {dispatch} = useContext(ctx);
-    const [startPoint, setStartPoint] = useState([0, 0]);
-    const [dragging, setDragging] = useState(false);
-    const [panning, setPanning] = useState(false);
-    const classes = useStyles({ dragging, panning });
-    const onDragStart = e => {
-        const { shiftKey } = e;
-        (shiftKey ? setPanning : setDragging)(true);
-        setStartPoint([e.pageX, e.pageY]);
-    };
-    const discard = e => {
-        const { shiftKey } = e;
-        (shiftKey ? setPanning : setDragging)(false);
-        e.preventDefault();
-    };
-    const onDragEnd = e => {
-        const { shiftKey } = e;
-        (shiftKey ? setPanning : setDragging)(false);
-        
-        const [startX, startY] = startPoint,
-        endX = e.pageX,
-        endY = e.pageY;
+    const {dispatch} = useContext(ctx),
+        [startPoint, setStartPoint] = useState([0, 0]),
+        [dragging, setDragging] = useState(false),
+        [panning, setPanning] = useState(false),
+        classes = useStyles({ dragging, panning }),
+        onDragStart = e => {
+            const { shiftKey } = e;
+            (shiftKey ? setPanning : setDragging)(true);
+            setStartPoint([e.pageX, e.pageY]);
+        },
+        discard = e => {
+            const { shiftKey } = e;
+            (shiftKey ? setPanning : setDragging)(false);
+            e.preventDefault();
+        },
+        onDragEnd = ({pageX, pageY, shiftKey}) => {
+            
+            (shiftKey ? setPanning : setDragging)(false);
+            
+            const [startX, startY] = startPoint,
+                endX = pageX,
+                endY = pageY;
 
-        shiftKey 
-        ? dispatch({
-            type: ACTIONS.PAN_ALL_SYMBOLS,
-            payload: parseInt((endY - startY) / 10, 10)
+            shiftKey 
+            ? dispatch({
+                type: ACTIONS.PAN_ALL_SYMBOLS,
+                payload: parseInt((endY - startY) / 10, 10)
 
-        }):
-        dispatch({
-            type: ACTIONS.MOVE_ALL_SYMBOLS,
-            payload: {
-                leftTune: parseInt(endX - startX, 10),
-                topTune: parseInt(endY - startY, 10)
-            }
-        });
-    };
+            }):
+            dispatch({
+                type: ACTIONS.MOVE_ALL_SYMBOLS,
+                payload: {
+                    leftTune: parseInt(endX - startX, 10),
+                    topTune: parseInt(endY - startY, 10)
+                }
+            });
+        };
     
     return <div
         onMouseDown={onDragStart}

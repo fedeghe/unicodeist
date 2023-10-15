@@ -22,7 +22,7 @@ const Zindex = ({sym}) => {
                     onChange={e => 
                         dispatch({
                             type: ACTIONS.UPDATE_SYMBOL,
-                            payload: {id: sym.id, field:'zIndex', value: e.target.value}
+                            payload: {id: sym.id, field:'zIndex', value: parseInt(e.target.value, 10)}
                         })
                     }
                 />

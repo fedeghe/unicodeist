@@ -9,38 +9,38 @@ import useElementStyles from './styles';
 
 
 const Position = ({sym}) => {
-    const classes = useStyles();
-    const localClasses = useElementStyles();
-    const {state: {width, height}, dispatch} = useContext(ctx);
-    const w = parseInt(width, 10);
-    const h = parseInt(height, 10);
-    
+    const classes = useStyles(),
+        localClasses = useElementStyles(),
+        {state: {width, height}, dispatch} = useContext(ctx),
+        w = parseInt(width, 10),
+        h = parseInt(height, 10);
 
     return <div className={localClasses.SectionPosition}>
-        <div>
-            <Box className={classes.Box}>
-                <span  className={classes.Label}>Left: {sym.left}px</span>
-                <input type="range" min={0} max={w} value={sym.left} onChange={e => {
-                    var v = parseInt(e.target.value, 10);
-                    dispatch({
-                        type: ACTIONS.UPDATE_SYMBOL,
-                        payload: {id: sym.id, field:'left', value: v}
-                    });
-                }}/>
-            </Box>
-        </div>
-        <div>
-            <Box className={classes.Box}>
-                <span  className={classes.Label}>Top: {sym.top}px</span>
-                <input type="range" min={0} max={h} value={sym.top} onChange={e => {
-                    var v = parseInt(e.target.value, 10);
-                    dispatch({
-                        type: ACTIONS.UPDATE_SYMBOL,
-                        payload: {id: sym.id, field:'top', value: v}
-                    });
-                }}/>
-            </Box>
-        </div>
+        {[{
+            label: 'Left',
+            min: 0,
+            max: w,
+            value: sym.left,
+            key: 'left'
+        },{
+            label: 'Top',
+            min: 0,
+            max: h,
+            value: sym.top,
+            key: 'top'
+        }].map(el => 
+            <div key={el.key}>
+                <Box className={classes.Box}>
+                    <span  className={classes.Label}>{el.label}: {el.value}px</span>
+                    <input type="range" min={el.min} max={el.max} value={el.value} onChange={e => 
+                        dispatch({
+                            type: ACTIONS.UPDATE_SYMBOL,
+                            payload: {id: sym.id, field:el.key, value: parseInt(e.target.value, 10)}
+                        })
+                    }/>
+                </Box>
+            </div>
+        )}
     </div>;
 };
 

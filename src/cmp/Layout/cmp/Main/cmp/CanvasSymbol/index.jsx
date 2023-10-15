@@ -5,67 +5,62 @@ import {
 
 import useStyles from './styles';
 
-import {FEATURE_FONTSIZE} from './../../../../../../constants';
 import ctx from './../../../../../../Context';
 import ACTIONS from './../../../../../../reducer/actions';
 
 const CanvasSymbol = ({symbol}) => {
-    const {state: { focusedSymbolId}, dispatch} = useContext(ctx);
-    const isTarget = focusedSymbolId===symbol.id;
-
-    const {
-        id,
-        char,
-        zIndex,
-        left, top,
-        color,
-        fontSize,
-        fontFamily,
-        fontWeight,
-        rotationX,
-        rotationY,
-        rotationZ,
-        opacity,
-        faded,
-        scale,
-        scaleX,
-        scaleY,
-    } = symbol;
-    const classes = useStyles({
-        isTarget,
-        faded,
-        ownOpacity: opacity
-    });
-
-    const [startPoint, setStartPoint] = useState([left, top]);
-
-    const selectSymbol = useCallback(
-        () => dispatch({
-            type: ACTIONS.FOCUS_ON_SYMBOL,
-            payload: id
+    const {state: { focusedSymbolId}, dispatch} = useContext(ctx),
+        isTarget = focusedSymbolId===symbol.id,
+        {
+            id,
+            char,
+            zIndex,
+            left, top,
+            color,
+            fontFamily,
+            fontWeight,
+            rotationX,
+            rotationY,
+            rotationZ,
+            opacity,
+            faded,
+            scale,
+            scaleX,
+            scaleY,
+        } = symbol,
+        classes = useStyles({
+            isTarget,
+            faded,
+            ownOpacity: opacity
         }),
-        [dispatch, id]
-    );
-    const onDragStart = e => {
-        setStartPoint([e.pageX, e.pageY]);
-    };
-    const onDrag = e => {
-        e.preventDefault();
-    };
-    const onDragEnd = e => {
-        e.preventDefault();
-        const [startX, startY] = startPoint;
-        dispatch({
-            type: ACTIONS.TUNE_SYMBOL_POSITION,
-            payload: {
-                id,
-                update: {
-                    left: parseInt(e.pageX, 10) - parseInt(startX, 10),
-                    top: parseInt(e.pageY, 10) - parseInt(startY, 10)
+        [startPoint, setStartPoint] = useState([left, top]),
+        selectSymbol = useCallback(
+            () => dispatch({
+                type: ACTIONS.FOCUS_ON_SYMBOL,
+                payload: id
+            }),
+            [dispatch, id]
+        ),
+        onDragStart = e => {
+            setStartPoint([e.pageX, e.pageY]);
+        },
+        onDrag = e => {
+            e.preventDefault();
+        },
+        onDragEnd = e => {
+            e.preventDefault();
+            const [startX, startY] = startPoint;
+            dispatch({
+                type: ACTIONS.TUNE_SYMBOL_POSITION,
+                payload: {
+                    id,
+                    update: {
+                        left: parseInt(e.pageX, 10) - parseInt(startX, 10),
+                        top: parseInt(e.pageY, 10) - parseInt(startY, 10)
+                    }
                 }
-            }
-        });
-    };    
+            });
+        };    
 
     return <div
             onDragStart={onDragStart}
@@ -79,8 +74,6 @@ const CanvasSymbol = ({symbol}) => {
             
             style={{
                 position:'absolute',
-                // left: `${left}px`,
-                // top: `${top}px`,
                 transformOrigin: 'center',
                 transform: `
                     translate(${left}px,${top}px)
@@ -92,11 +85,6 @@ const CanvasSymbol = ({symbol}) => {
                     scaleY(${scaleY}) 
                 `,
                 color,
-                ...(FEATURE_FONTSIZE && {
-                    fontSize: `${fontSize}px`,
-                    height: `${fontSize}px`,
-                    lineHeight: `${fontSize}px`,
-                }),
                 fontWeight,
                 fontFamily,
                 zIndex,

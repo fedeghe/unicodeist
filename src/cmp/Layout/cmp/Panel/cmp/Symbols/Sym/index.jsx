@@ -1,53 +1,49 @@
 
-import { useContext} from 'react';
+import { useContext, useCallback } from 'react';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
-
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 import Label from './cmp/Label';
-
 import Zindex from './cmp/Zindex';
 import Element from './cmp/Element';
 import Styles from './cmp/Styles';
 import Position from './cmp/Position';
-
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
 import ctx from '../../../../../../../Context';
 import ACTIONS from '../../../../../../../reducer/actions';
-
 import useStyles from './styles';
+
 const Sym = ({sym}) => {
-
     const {
-        state: {
-            focusedSymbolId,
-            backgroundColor
+            state: {
+                focusedSymbolId,
+                backgroundColor
+            },
+            dispatch
+        } = useContext(ctx),
+        selected = focusedSymbolId === sym.id,
+        classes = useStyles({
+            selected,
+            backgroundColor,
+            color: sym.color,
+            rx: sym.rotationX,
+            ry: sym.rotationY,
+            rz: sym.rotationZ
+        }),
+        focus = () => !selected && dispatch({
+            type: ACTIONS.FOCUS_ON_SYMBOL,
+            payload: sym.id
+        }),
+        move = (e, direction) => {
+            e.stopPropagation();
+            dispatch({
+                type: ACTIONS.MOVE_SYMBOL,
+                payload: {id: sym.id, direction}
+            });
         },
-        dispatch
-    } = useContext(ctx);
-
-    const selected = focusedSymbolId === sym.id;
-    const classes = useStyles({
-        selected,
-        backgroundColor,
-        color: sym.color,
-        rx: sym.rotationX,
-        ry: sym.rotationY,
-        rz: sym.rotationZ
-    });
-    const focus = () => !selected && dispatch({
-        type: ACTIONS.FOCUS_ON_SYMBOL,
-        payload: sym.id
-    });
-    const move = (e, direction) => {
-        e.stopPropagation();
-        dispatch({
-            type: ACTIONS.MOVE_SYMBOL,
-            payload: {id: sym.id, direction}
-        });
-    };
+        moveUp = useCallback(e => move(e, -1)),
+        moveDown = useCallback(e => move(e, 1));
     
     return <Card onClick={focus} className={classes.Sym}>
         {selected ? 
@@ -68,12 +64,10 @@ const Sym = ({sym}) => {
                 </Typography>
             </div>
             <div className={classes.HoverLightActions}>
-                <ArrowDropUpIcon onClick={e => move(e, -1)}/>
-                <ArrowDropDownIcon onClick={e => move(e, 1)}/>
+                <ArrowDropUpIcon onClick={moveUp}/>
+                <ArrowDropDownIcon onClick={moveDown}/>
             </div>
-            
         </div>}
-        
     </Card>;
 };
 

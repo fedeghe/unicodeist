@@ -18,44 +18,31 @@ import Channel from '@fedeghe/channeljs';
 
 
 const Icons = () => {
-    const { state, dispatch} = useContext(ctx);
-    const {backgroundColor} = state;
-    const classes = useStyles();
-    const embed = useCallback(() => {
-        Channel.get('event').pub('embed');
-    }, []);
-    const mailto = useCallback(() => {
-        Channel.get('event').pub('mailto');
-    }, []);
-    const exportState = useCallback(() => {
-        saveAsFile('unicodeist.json', state);
-    }, [state]);
-
-    const importState = () => {
-        importFromFile({
-            onContentReady : cnt => dispatch({
+    const { state, dispatch} = useContext(ctx),
+        {backgroundColor} = state,
+        classes = useStyles(),
+        embed = useCallback(() => Channel.get('event').pub('embed') , []),
+        mailto = useCallback(() => Channel.get('event').pub('mailto'), []),
+        exportState = useCallback(() => saveAsFile('unicodeist.json', state), [state]),
+        importState = () => importFromFile({
+            onContentReady: cnt => dispatch({
                 type: ACTIONS.IMPORT,
                 payload: JSON.parse(cnt)
             })
-        });
-    };
-    const updateBackgroundColor = e => {
-        const value = e.target.value;
-        dispatch({
+        }),
+        updateBackgroundColor = e => dispatch({
             type: ACTIONS.UPDATE_GLOBAL,
             payload: {
                 field: 'backgroundColor',
-                value
+                value :e.target.value
             }
         });
-    };
   
     return <div className={classes.GlobalTools}>
         <div className={classes.Item}><FileUploadIcon onClick={exportState}/></div>
         <div className={classes.Item}><GetAppIcon onClick={importState}/></div>
         <div className={classes.Item}><EmailRoundedIcon onClick={mailto}/></div>
         <div className={classes.Item}><CodeRoundedIcon onClick={embed}/></div>
-        
         <div className={classes.Item}>
             <input style={{width:'28px'}} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
         </div>

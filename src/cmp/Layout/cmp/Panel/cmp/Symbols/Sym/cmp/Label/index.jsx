@@ -8,17 +8,17 @@ import useElementStyles from './styles';
 
 
 const Label = ({sym}) => {
-    const classes = useStyles();
-    const localCasses = useElementStyles();
-    const {  dispatch} = useContext(ctx);
-    const updateLabel = e => dispatch({
-        type: ACTIONS.UPDATE_SYMBOL,
-        payload: {
-            id: sym.id,
-            field: 'label',
-            value: e.target.value
-        }
-    });
+    const classes = useStyles(),
+        localCasses = useElementStyles(),
+        {  dispatch} = useContext(ctx),
+        updateLabel = e => dispatch({
+            type: ACTIONS.UPDATE_SYMBOL,
+            payload: {
+                id: sym.id,
+                field: 'label',
+                value: e.target.value
+            }
+        });
     return <div className={localCasses.SectionLabel}>
         <div>
             <Box className={classes.Box}>

@@ -2,7 +2,7 @@
 import { useContext, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import ctx from './../../../../../../../../../Context';
-import { FEATURE_FONTSIZE, FONT_FAMILIES } from './../../../../../../../../../constants';
+import { FONT_FAMILIES } from './../../../../../../../../../constants';
 import scaleRotConfig from './scaleAndRotation.config';
 import ACTIONS from './../../../../../../../../../reducer/actions';
 import useStyles from './../../styles';
@@ -53,19 +53,6 @@ const Styles = ({ sym }) => {
                 </div>
             </Box>
         </div>
-        {FEATURE_FONTSIZE && <div className={localClasses.SectionStylesContainer}>
-            <Box className={classes.Box}>
-                <span className={classes.Label} >Font size:</span>
-                <span>{sym.fontSize}</span>
-                <input type="range" min={1} max={1000} step={1} value={sym.fontSize} onChange={e => {
-                    var v = parseInt(e.target.value, 10);
-                    dispatch({
-                        type: ACTIONS.UPDATE_SYMBOL,
-                        payload: { id: sym.id, field: 'fontSize', value: v }
-                    });
-                }} />
-            </Box>
-        </div>}
         <div className={localClasses.SectionStylesContainer}>
             {scaleRotConfig.map(({ label, field, step, min, max, rounder }) => (
                 <Box className={classes.Box} key={label}>

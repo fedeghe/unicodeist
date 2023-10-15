@@ -14,39 +14,30 @@ import ACTIONS from '../../../../../../../../reducer/actions';
 import useStyles from './styles';
 
 const Header = () => {
-    const classes = useStyles({ border: 10 });
-
-    const { dispatch, state: {
-        letAsciiPanelOpenAfterSelection,
-        asciiSelectorFilter,
-    } } = useContext(ctx);
-
-    const toggleLetOpen = () => {
-        dispatch({
+    const classes = useStyles({ border: 10 }),
+        { dispatch, state: {
+            letAsciiPanelOpenAfterSelection,
+            asciiSelectorFilter,
+        } } = useContext(ctx),
+        setFilterBySet = useCallback(e =>
+            dispatch({
+                type: ACTIONS.SET_ASCIIPANEL_FILTER,
+                payload: e.target.value
+            }),
+            [dispatch]
+        ),
+        toggleLetOpen = () => dispatch({
             type: ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION,
             payload: !letAsciiPanelOpenAfterSelection
-        });
-    };
-    const setFilterBySet = useCallback(e => {
-        dispatch({
-            type: ACTIONS.SET_ASCIIPANEL_FILTER,
-            payload: e.target.value
-        });
-    }, [dispatch]);
-
-
-    const clearFilter = () =>
-        dispatch({
+        }),
+        clearFilter = () => dispatch({
             type: ACTIONS.SET_ASCIIPANEL_FILTER,
             payload: ''
-        });
-
-    const closePanel = () => {
-        dispatch({
+        }),
+        closePanel = () => dispatch({
             type: ACTIONS.TOGGLE_ADD_PANEL,
             payload: false
         });
-    };
 
     return <div className={classes.Container}>
         <div className={classes.RightSide}>

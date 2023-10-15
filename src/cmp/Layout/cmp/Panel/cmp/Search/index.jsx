@@ -7,30 +7,28 @@ import useStyles from './styles';
 
 
 const Search = () => {
-    const classes = useStyles();
-    const {state: {
-        symbols,
-        symbolsFilter,
-    }, dispatch} = useContext(ctx);
-
-    const clearFilter = useCallback(() => 
-        dispatch({
-            type: ACTIONS.SET_SYMBOLS_FILTER,
-            payload: ''
-        })
-    , []);
-    const updateFilter = useCallback(e => 
-        dispatch({
-            type: ACTIONS.SET_SYMBOLS_FILTER,
-            payload: e.target.value
-        })
-    , []);
-    if (symbols.length === 0) return null;
-    return <div className={classes.Container}>
-        
-        <input placeholder="filter by label" type="text" value={symbolsFilter} onInput={updateFilter}/>
-        <ClearIcon color={symbolsFilter ? 'action' : 'disabled'} className={classes.ClearIcon} onClick={clearFilter} />
-    </div>;
+    const classes = useStyles(),
+        {
+            state: {
+                symbols,
+                symbolsFilter,
+            },
+            dispatch
+        } = useContext(ctx),
+        clearFilter = useCallback(() => 
+            dispatch({ type: ACTIONS.SET_SYMBOLS_FILTER, payload: ''}),
+            []
+        ),
+        updateFilter = useCallback(e => 
+            dispatch({ type: ACTIONS.SET_SYMBOLS_FILTER, payload: e.target.value}),
+            []
+        );
+    return symbols.length === 0
+        ? null
+        : <div className={classes.Container}>
+            <input placeholder="filter by label" type="text" value={symbolsFilter} onInput={updateFilter}/>
+            <ClearIcon color={symbolsFilter ? 'action' : 'disabled'} className={classes.ClearIcon} onClick={clearFilter} />
+        </div>;
 };
 
 export default Search;
