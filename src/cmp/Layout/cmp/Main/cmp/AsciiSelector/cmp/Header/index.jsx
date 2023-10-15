@@ -65,7 +65,7 @@ const Header = () => {
                     onChange={toggleLetOpen}
                     checked={letAsciiPanelOpenAfterSelection}
                 />}
-                label="Do not close after selection"
+                label="Leave panel open after selection"
             />
             <ThemeSwitch />
         </div>
