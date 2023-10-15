@@ -18,15 +18,16 @@
                     rx: function (v) {return v ? 'rotateX('+v+'deg)' : '';},
                     ry: function (v) {return v ? 'rotateY('+v+'deg)' : '';},
                     rz: function (v) {return v ? 'rotateZ('+v+'deg)' : '';}
-                };
+                },
+                mapped, k;
             //position && transfrom-origin
             if (cnt) { //symbol case
                 styles.push('position:absolute;transform-origin:center center');
             } else { //root case
                 styles.push('position:relative;overflow:hidden');
             }
-            for(var k in sty) {
-                var mapped = map[k];
+            for(k in sty) {
+                mapped = map[k];
                 if (k === 't') {
                     var trans = [
                         'transform:translate('+sty.t.trn[0]+'px,'+sty.t.trn[1]+'px)'
