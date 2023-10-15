@@ -1,4 +1,4 @@
-import { UNICODEIST_SCRIPT_URI } from './constants'
+import { UNICODEIST_SCRIPT_URI } from './constants';
 
 export const uniqueID = new function () {
     var count = 0,
