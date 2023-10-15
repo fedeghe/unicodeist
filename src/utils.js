@@ -38,10 +38,11 @@ export const cleanCodeFromState = state => {
                 `font-family:${sym.fontFamily}`,
                 `font-weight:${sym.fontWeight}`,
                 `color:${sym.color}`,
+                `opacity:${sym.opacity}`,
                 `position:absolute;transform-origin:center center`,
                 `transform:` + [
                     `translate(${sym.left}px,${sym.top}px)`,
-                    sym.scale && `scale(${sym.scale})`,
+                    sym.scale !== 1 && `scale(${sym.scale})`,
                     sym.scaleX !== 1 && `scaleX(${sym.scaleX})`,
                     sym.scaleY !== 1 && `scaleY(${sym.scaleY})`,
                     sym.rotationX && `rotateX(${sym.rotationX}deg)`,

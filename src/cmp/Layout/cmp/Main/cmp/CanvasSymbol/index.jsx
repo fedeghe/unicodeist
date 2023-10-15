@@ -77,12 +77,12 @@ const CanvasSymbol = ({symbol}) => {
                 transformOrigin: 'center',
                 transform: `
                     translate(${left}px,${top}px)
-                    ${rotationX ? `rotateX(${rotationX}deg)` : '' }  
-                    ${rotationY ? `rotateY(${rotationY}deg)` : '' }  
-                    ${rotationZ ? `rotateZ(${rotationZ}deg)` : '' }  
                     scale(${scale}) 
                     scaleX(${scaleX}) 
                     scaleY(${scaleY}) 
+                    ${rotationX ? `rotateX(${rotationX}deg)` : '' }  
+                    ${rotationY ? `rotateY(${rotationY}deg)` : '' }  
+                    ${rotationZ ? `rotateZ(${rotationZ}deg)` : '' }  
                 `,
                 color,
                 fontWeight,
