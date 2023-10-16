@@ -16,7 +16,9 @@ export default createUseStyles(theme => ({
         padding: `${PANEL_PADDING}px`,
         display:'flex',
         flexDirection:'column',
-        // boxShadow: `30px 0px 80px -7px ${theme.mode === 'bright' ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.75)'}`,
+        borderRadius:'25px',
+        borderTopRightRadius: 0,
+        borderBottomRightRadius: 0
         
     },
 }));

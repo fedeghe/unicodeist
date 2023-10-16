@@ -93,6 +93,8 @@ export const importFromFile = ({onContentReady}) => {
         if (e.target.files.length) {
             reader.readAsText(e.target.files[0]);
         }
+        document.body.focus();
+        e.preventDefault();
     });
     link.click();
 };

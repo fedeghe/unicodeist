@@ -23,6 +23,7 @@ const INIT = Symbol('init'),
     SET_SYMBOLS_FILTER = Symbol('set symbols filter'),
     MOVE_SYMBOL = Symbol('move up down symbol'),
     MOVE_TARGET_ONE_PX = Symbol('move 1px symbol in direction'),
+    REMOVE_ERROR = Symbol('remove error'),
     LET_ASCIIPANEL_OPEN_AFTER_SELECTION = Symbol('let the panel open after selection');
 
 const exp = {
@@ -51,7 +52,8 @@ const exp = {
     ALIGN_H,
     SET_SYMBOLS_FILTER,
     MOVE_SYMBOL,
-    MOVE_TARGET_ONE_PX
+    MOVE_TARGET_ONE_PX,
+    REMOVE_ERROR
 };
 
 export default exp;

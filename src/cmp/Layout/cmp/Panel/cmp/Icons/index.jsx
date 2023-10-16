@@ -1,12 +1,17 @@
-import { useCallback, useContext } from 'react';
+/* eslint-disable no-unused-vars */
+import { useCallback, useContext, useState, useRef } from 'react';
 
+import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 
+import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import GetAppIcon from '@mui/icons-material/GetApp';
 
 import Channel from '@fedeghe/channeljs';
 
+import CopyDone from '../../../Main/cmp/CopyDone';
 import ThemeSwitch from '../../../../../ThemeSwitch';
 import ctx from './../../../../../../Context';
 import ACTIONS from './../../../../../../reducer/actions';
@@ -15,39 +20,67 @@ import useStyles from './styles';
 
 
 const Icons = () => {
-    const { state, dispatch} = useContext(ctx),
-        {backgroundColor} = state,
-        classes = useStyles(),
-        embed = useCallback(() => Channel.get('event').pub('embed') , []),
-        exportImage = useCallback(() => Channel.get('event').pub('exportImage'), []),
-        importState = () => importFromFile({
-            onContentReady: cnt => dispatch({
-                type: ACTIONS.IMPORT,
-                payload: JSON.parse(cnt)
-            })
-        }),
-        updateBackgroundColor = e => dispatch({
-            type: ACTIONS.UPDATE_GLOBAL,
-            payload: {
-                field: 'backgroundColor',
-                value :e.target.value
-            }
-        });
-  
-    return <div className={classes.GlobalTools}>
-        <div className={classes.Item}><GetAppIcon onClick={importState}/></div>
-        <div className={classes.Item}><FileUploadIcon onClick={exportImage}/></div>
-        {/* <div className={classes.Item}><EmailRoundedIcon onClick={mailto}/></div> */}
-        
-        <div className={classes.Item}><CodeRoundedIcon onClick={embed}/></div>
-        <div className={classes.Item}>
-            <input style={{width:'28px'}} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
-        </div>
-        <div className={classes.Item}>
-            <ThemeSwitch/>
-        </div>
-        
-    </div>;
+    const { state, dispatch } = useContext(ctx),
+        [open, setOpen] = useState(false),
+        handleOpen = () => setOpen(true),
+        handleClose = () => setOpen(false),
+        { themeKey, error } = state,
+        embed = () => {
+            handleClose();
+            Channel.get('event').pub('embed');
+        },
+        exportImage = () => {
+            handleClose();
+            Channel.get('event').pub('exportImage');
+        },
+        importState = () => {
+            handleClose();
+            importFromFile({
+                onContentReady: cnt => dispatch({
+                    type: ACTIONS.IMPORT,
+                    payload: cnt
+                })
+            });
+        },
+        removeError = e => dispatch({type: ACTIONS.REMOVE_ERROR}),
+        actions = [{
+            name: 'import',
+            icon: <GetAppIcon />,
+            onClick: importState
+        },{
+            name: 'export',
+            icon: <FileUploadIcon />,
+            onClick: exportImage
+        },{
+            name: 'embed',
+            icon: <CodeRoundedIcon />,
+            onClick: embed
+        },{
+            name: `switch to ${{bright:'dark', dark:'bright'}[themeKey]} theme`,
+            icon: <ThemeSwitch onChange={handleClose}/>,
+        }];
+
+    return <>
+        <SpeedDial
+            ariaLabel="actions"
+            direction='left'
+            sx={{ position: 'absolute', top: 30, right: 26 }}
+            icon={<SpeedDialIcon icon={<SettingsIcon/>}/>}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            open={open}
+        >
+            {actions.map((action) => (
+                <SpeedDialAction
+                    key={action.name}
+                    icon={action.icon}
+                    tooltipTitle={action.name}
+                    onClick={action.onClick || handleClose}
+                />
+            ))}
+        </SpeedDial>
+        {error && <CopyDone message={error} open={error} setOpen={removeError}/>}
+    </>;
 };
 
 export default Icons;

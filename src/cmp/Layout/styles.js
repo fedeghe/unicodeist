@@ -5,6 +5,7 @@ export default createUseStyles(theme => ({
         overflow: 'hidden',
         display:'flex',
         fontFamily: 'verdana',
-        color: theme.foreground
+        color: theme.foreground,
+        backgroundColor: theme.background.main
     },
 }));

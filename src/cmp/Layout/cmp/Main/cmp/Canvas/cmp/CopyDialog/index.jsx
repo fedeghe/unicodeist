@@ -25,7 +25,7 @@ const CopyDialog = ({visibility, setVisibility, embedCode, scriptCode}) => {
 
     return (
         <div>
-            <Dialog open={visibility} onClose={onClose}>
+            <Dialog open={visibility} onClose={onClose} disableRestoreFocus>
                 <div className={classes.Dialog}>
                     <h3>HTML</h3>
                     <div className={classes.Code}>

@@ -6,10 +6,13 @@ import ctx from './../../Context';
 import ACTIONS from './../..//reducer/actions';
 import useStyles from './styles';
 
-const ThemeSwitch = () => {
+const ThemeSwitch = ({onChange = () => {}}) => {
     const {state: { themeKey}, dispatch} = useContext(ctx),
         classes = useStyles({themeKey}),
-        switchTheme = () => dispatch({ type: ACTIONS.SWITCH_THEME });
+        switchTheme = () => {
+            dispatch({ type: ACTIONS.SWITCH_THEME });
+            onChange();
+        };
     return <Switch
         className={classes.Container}
         onChange={switchTheme}

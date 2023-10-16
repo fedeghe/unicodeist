@@ -2,7 +2,7 @@ import { createUseStyles } from 'react-jss';
 
 export default createUseStyles(theme =>({
     GlobalTools: {
-        flex:1,
+        // flex:1,
         display:'flex',
         flexWrap: 'wrap',
         alignItems:'center',
@@ -15,5 +15,6 @@ export default createUseStyles(theme =>({
         display: 'flex',
         justifyContent:'space-around',
         alignSelf: 'center'
-    }
+    },
+    
 }));
