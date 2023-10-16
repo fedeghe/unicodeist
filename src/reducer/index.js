@@ -20,7 +20,7 @@ const createSymbol = ({ char, zIndex, left, top }) => {
     return {
         id: u,
         char,
-        label : `Label for ${u}`,
+        label : `${u}`,
         zIndex,
         left,
         top,

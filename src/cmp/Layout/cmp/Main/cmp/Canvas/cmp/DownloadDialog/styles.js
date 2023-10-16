@@ -26,7 +26,7 @@ export default createUseStyles({
         marginTop:'1em'
     },
     Warn: {
-        color:'red',
+        color:'orange',
         fontWeight:900
     }
 });

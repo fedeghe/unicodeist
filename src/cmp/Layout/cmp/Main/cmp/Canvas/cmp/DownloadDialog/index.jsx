@@ -12,18 +12,21 @@ import { saveAsFileJSON } from './../../../../../../../../utils';
 import ctx from './../../../../../../../../Context';
 import useStyles from './styles';
 
-const DownloadDialog = ({visibility, setVisibility, domRef }) => {
-    
+const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
+
     const classes = useStyles(),
-        {state} = useContext(ctx),
+        { state } = useContext(ctx),
         [format, setFormat] = useState(DEFAULT_DOWNLOAD_FORMAT),
         [filename, setFilename] = useState(''),
         [downloadEnabled, setDownloadEnabled] = useState(false),
+        [validFilename, setValidFilename] = useState(true),
         onClose = useCallback(
             () => {
                 setVisibility(false);
                 setFilename('');
-                setFormat('');
+                setDownloadEnabled(false);
+                setValidFilename(true);
+                setFormat(DEFAULT_DOWNLOAD_FORMAT);
             },
             [setVisibility]
         ),
@@ -37,7 +40,10 @@ const DownloadDialog = ({visibility, setVisibility, domRef }) => {
             [DOWNLOAD_FORMATS.png]: toPng,
         },
         changeFormat = e => setFormat(e.target.value),
-        changeName = e => setFilename(e.target.value),
+        changeName = e => {
+            setValidFilename(e.target.value.match(/^[0-9a-zA-Z ... ]+$/));
+            setFilename(e.target.value);
+        },
         doDownload = useCallback(() => {
             const dom = domRef.current;
             format in formatToReader && formatToReader[format](dom).then(
@@ -50,21 +56,23 @@ const DownloadDialog = ({visibility, setVisibility, domRef }) => {
             ).then(onClose);
         }, [format, filename]);
 
-    useEffect(() =>
-        setDownloadEnabled(format && filename),
-        [format, filename]
-    );
+    useEffect(() => {
+            setDownloadEnabled(format && validFilename && filename.length);
+    }, [format, validFilename]);
 
     return (
         <div>
             <Dialog open={visibility} onClose={onClose}>
                 <div className={classes.Dialog}>
-                    <h3>Download as</h3>
+                    <h3>Download as <em>.{format}</em></h3>
                     <FormGroup>
                         <TextField
+                            error={!validFilename}
+                            helperText={'your file name is not fitting'}
                             className={classes.SpaceUp}
                             required
                             label="file name without extension" variant="outlined"
+                            value={filename}
                             onChange={changeName}
                         />
                         <Select
@@ -73,14 +81,15 @@ const DownloadDialog = ({visibility, setVisibility, domRef }) => {
                             value={format}
                             onChange={changeFormat}
                         >
-                            {Object.keys(formatToReader).map(format => 
-                                <MenuItem key={format} value={format}>{format}</MenuItem>    
+                            {Object.keys(formatToReader).map(format =>
+                                <MenuItem key={format} value={format}>{format}</MenuItem>
                             )}
                         </Select>
                         <FormHelperText className={classes.Warn}>{format === DEFAULT_DOWNLOAD_FORMAT ? 'this is the only importable format' : " "}</FormHelperText>
+                        
                     </FormGroup>
-                    
-                    <Button className={classes.DownloadButton}disabled={!downloadEnabled} variant="contained" onClick={doDownload}>Download</Button>
+
+                    <Button className={classes.DownloadButton} disabled={!downloadEnabled} variant="contained" onClick={doDownload}>Download</Button>
                 </div>
             </Dialog>
         </div>

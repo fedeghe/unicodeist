@@ -3,7 +3,7 @@ import { UNICODEIST_SCRIPT_URI } from './constants';
 export const uniqueID = new function () {
     var count = 0,
         self = this;
-    this.prefix = 'UNICODEIST_';
+    this.prefix = 'U-';
     this.toString = function () {
         count += 1;
         return self.prefix + count;
