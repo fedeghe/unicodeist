@@ -2,7 +2,8 @@ import { createUseStyles } from 'react-jss';
 
 export default createUseStyles(theme => ({
     Container: {
-        margin:'0.2em 0',
+        marginBottom:'0.5em',
+        
         display:'flex',
         justifyContent: 'right'
     },
