@@ -11,7 +11,8 @@ import {
     MIN_SCALE,
     MAX_SCALE,
     MIN_ZINDEX,
-    MAX_ZINDEX
+    MAX_ZINDEX,
+    UNSUPPORTEDFILE_MESSAGE
 } from './../constants';
 
 
@@ -251,7 +252,20 @@ const actions = {
             }))
         }),
         
-        [ACTIONS.IMPORT]: ({payload}) => ({...payload}),
+        [ACTIONS.IMPORT]: ({payload}) => {
+            let newState;
+            try {
+                newState = JSON.parse(payload);
+                if (!('symbolsFilter' in newState)) {
+                    throw UNSUPPORTEDFILE_MESSAGE;
+                }
+            } catch(e) {
+                return {
+                    error: UNSUPPORTEDFILE_MESSAGE
+                };
+            }
+            return newState;
+        },
         
         [ACTIONS.ALIGN_H]: ({payload: id, oldState: {symbols, width}}) => ({
             symbols: symbols.map(
@@ -309,6 +323,7 @@ const actions = {
             })
         }),
         [ACTIONS.SET_SYMBOLS_FILTER] : ({ payload }) => ({ symbolsFilter: payload}),
+        [ACTIONS.REMOVE_ERROR] : ( ) => ({ error: null}),
         [ACTIONS.MOVE_SYMBOL] : ({
             payload: { id, direction },
             oldState: { symbols }

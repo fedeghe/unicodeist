@@ -1,7 +1,7 @@
 
 import { createUseStyles } from 'react-jss';
 
-import { EXPANDED_SYM_HEIGHT, COLLAPSED_SYM_HEIGHT } from '../../../../../../../constants';
+import { EXPANDED_SYM_HEIGHT } from '../../../../../../../constants';
 
 
 
@@ -13,13 +13,13 @@ export default createUseStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         padding: '10px',
-        marginTop: '5px',
+        margin: '5px',
         backgroundColor: selected
             ? theme.sym.backgroundSelected
             : theme.sym.background,
         color: theme.sym.foreground,
         cursor: selected ? 'default' : 'pointer',
-        height: selected ? `${EXPANDED_SYM_HEIGHT}px` : `${COLLAPSED_SYM_HEIGHT}px`,
+        height: selected ? `${EXPANDED_SYM_HEIGHT}px` : `auto`,
         transition: 'height 0.2s',
     }),
     Hr: {
@@ -68,7 +68,10 @@ export default createUseStyles(theme => ({
             backgroundColor: theme.unselectedItemHoverBackgound,
         },
         display:'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding:'5px',
+        borderRadius:'5px'
     },
     HoverLightActions: {
         display:'flex',

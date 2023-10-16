@@ -2,7 +2,7 @@ import { createUseStyles } from 'react-jss';
 import bg from './../../../../../../../../img/unicodeist.png';
 export default createUseStyles({
     Logo: {
-        flex:2,
+        // flex:2,
         display:'flex',
         width:'200px',
         height:'100px',

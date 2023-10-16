@@ -62,7 +62,7 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
 
     return (
         <div>
-            <Dialog open={visibility} onClose={onClose}>
+            <Dialog open={visibility} onClose={onClose} disableRestoreFocus>
                 <div className={classes.Dialog}>
                     <h3>Download as <em>.{format}</em></h3>
                     <FormGroup>

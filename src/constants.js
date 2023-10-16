@@ -47,6 +47,7 @@ export const DOWNLOAD_FORMATS = {
     png: 'png'
 };
 export const DEFAULT_DOWNLOAD_FORMAT = 'json';
+export const UNSUPPORTEDFILE_MESSAGE = 'File not supported';
 
 
 const CONSTS = {
@@ -80,6 +81,7 @@ const CONSTS = {
     FONT_FAMILIES,
     UNICODEIST_SCRIPT_URI,
     DOWNLOAD_FORMATS,
-    DEFAULT_DOWNLOAD_FORMAT
+    DEFAULT_DOWNLOAD_FORMAT,
+    UNSUPPORTEDFILE_MESSAGE
 };
 export default CONSTS;
