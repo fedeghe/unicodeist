@@ -24,7 +24,7 @@ const Icons = () => {
         [open, setOpen] = useState(false),
         handleOpen = () => setOpen(true),
         handleClose = () => setOpen(false),
-        { themeKey, error } = state,
+        { backgroundColor, themeKey, error } = state,
         embed = () => {
             handleClose();
             Channel.get('event').pub('embed');
@@ -42,6 +42,13 @@ const Icons = () => {
                 })
             });
         },
+        updateBackgroundColor = e => dispatch({
+            type: ACTIONS.UPDATE_GLOBAL,
+            payload: {
+                field: 'backgroundColor',
+                value :e.target.value
+            }
+        }),
         removeError = e => dispatch({type: ACTIONS.REMOVE_ERROR}),
         actions = [{
             name: 'import',
@@ -58,6 +65,9 @@ const Icons = () => {
         },{
             name: `switch to ${{bright:'dark', dark:'bright'}[themeKey]} theme`,
             icon: <ThemeSwitch onChange={handleClose}/>,
+        }, {
+            name: 'change background',
+            icon: <input style={{width:'28px'}} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
         }];
 
     return <>
