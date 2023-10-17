@@ -2,6 +2,7 @@
 import { useContext, useCallback } from 'react';
 import Box from '@mui/material/Box';
 
+import Uslider from './../../../../../../../../Uslider';
 import ctx from './../../../../../../../../../Context';
 import { FONT_FAMILIES } from './../../../../../../../../../constants';
 import scaleRotConfig from './scaleAndRotation.config';
@@ -54,32 +55,37 @@ const Styles = ({ sym }) => {
             </Box>
         </div>
         <div className={localClasses.SectionStylesContainer}>
-            {scaleRotConfig.map(({ label, field, step, min, max, rounder }) => (
-                <Box className={classes.Box} key={label}>
-                    <span className={classes.Label} >{label}:</span>
-                    <span>{sym[field]}</span>
-                    <input type="range" min={min} max={max} step={step} value={sym[field]} onChange={e => {
-                        var v = rounder(e.target.value, 10);
-                        dispatch({
-                            type: ACTIONS.UPDATE_SYMBOL,
-                            payload: { id: sym.id, field, value: v }
-                        });
-                    }} />
-                </Box>
+            {scaleRotConfig.map(({ label, field, step, min, max, rounder, unit, quickTune }) => (
+                <Uslider key={label}
+                    label={label} value={sym[field]}
+                    min={min} max={max} step={step}
+                    unit={unit}
+                    rounder={rounder}
+                    quickTune={quickTune}
+                    onChange={
+                        e => {
+                            var v = rounder(e.target.value, 10);
+                            dispatch({
+                                type: ACTIONS.UPDATE_SYMBOL,
+                                payload: { id: sym.id, field, value: v }
+                            });
+                        }
+                    }
+                />
             ))}
         </div>
         <div className={localClasses.SectionStylesContainer}>
-            <Box className={classes.Box}>
-                <span className={classes.Label} >Opacity:</span>
-                <span> {sym.opacity}</span>
-                <input type="range" min={0} max={1} step={0.05} value={sym.opacity} onChange={e => {
-                    var v = parseFloat(e.target.value, 10);
-                    dispatch({
-                        type: ACTIONS.UPDATE_SYMBOL,
-                        payload: { id: sym.id, field: 'opacity', value: v }
-                    });
-                }} />
-            </Box>
+            <Uslider key={'opacity'} label={"Opacity"} value={sym.opacity} min={0} max={1} step={0.1}
+                onChange={
+                    e => {
+                        var v = parseFloat(e.target.value, 10);
+                        dispatch({
+                            type: ACTIONS.UPDATE_SYMBOL,
+                            payload: { id: sym.id, field: 'opacity', value: v }
+                        });
+                    }
+                }
+            />
         </div>
     </div>;
 };
