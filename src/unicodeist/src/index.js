@@ -1,5 +1,18 @@
 (function () {
     var script = document.currentScript,
+
+        // must be in synch with src/constants.js
+        FONT_FAMILIES_REDUCTION_MAP = {
+            ar: 'Arial',
+            v: 'Verdana',
+            ta: 'Tahoma',
+            tr: 'Trebuchet MS',
+            tn: 'Times New Roman',
+            ge: 'Georgia',
+            ga: 'Garamond',
+            c: 'Courier New',
+            b: 'Brush Script MT'
+        },
         createElement = function (sty, cnt) {
             var node = document.createElement('div'),
                 styles = [cnt
@@ -12,7 +25,7 @@
                     bgc: function (v) { return 'background-color:' + v; },
                     zi: function (v) { return 'z-index:' + v; },
                     c: function (v) { return 'color:' + v; },
-                    ff: function (v) { return 'font-family:"' + v + '"'; },
+                    ff: function (v) { return 'font-family:"' + FONT_FAMILIES_REDUCTION_MAP[v] + '"'; },
                     fw: function (v) { return 'font-weight:' + v; },
                     o: function (v) { return 'opacity:' + v; },
                     s: function (v) { return v !== 1 ? 'scale(' + v + ')' : ''; },

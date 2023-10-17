@@ -1,4 +1,4 @@
-import { UNICODEIST_SCRIPT_URI } from './constants';
+import { UNICODEIST_SCRIPT_URI, FONT_FAMILIES_REDUCTION_MAP } from './constants';
 
 export const uniqueID = new function () {
     var count = 0,
@@ -113,7 +113,9 @@ const getUnicodeistData = j => JSON.stringify({
         zi: s.zIndex,
         c: s.color,
         // fs: s.fontSize, //px
-        ff: s.fontFamily,
+        ff: Object.keys(FONT_FAMILIES_REDUCTION_MAP).find(
+            k => FONT_FAMILIES_REDUCTION_MAP[k] === s.fontFamily
+        ),
         fw: s.fontWeight,
         o: s.opacity,
         // 'transform-origin': 'center center', 
