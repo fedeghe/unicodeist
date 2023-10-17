@@ -25,7 +25,7 @@
                     bgc: function (v) { return 'background-color:' + v; },
                     zi: function (v) { return 'z-index:' + v; },
                     c: function (v) { return 'color:' + v; },
-                    ff: function (v) { return 'font-family:"' + FONT_FAMILIES_REDUCTION_MAP[v] + '"'; },
+                    ff: function (v) { return 'font-family:' + FONT_FAMILIES_REDUCTION_MAP[v]; },
                     fw: function (v) { return 'font-weight:' + v; },
                     o: function (v) { return 'opacity:' + v; },
                     s: function (v) { return v !== 1 ? 'scale(' + v + ')' : ''; },
