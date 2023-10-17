@@ -55,7 +55,7 @@ const Styles = ({ sym }) => {
             </Box>
         </div>
         <div className={localClasses.SectionStylesContainer}>
-            {scaleRotConfig.map(({ label, field, step, min, max, rounder, unit, quickTune }) => (
+            {scaleRotConfig.map(({ label, field, step, min, max, rounder, unit, fallback, quickTune }) => (
                 <Uslider key={label}
                     label={label} value={sym[field]}
                     min={min} max={max} step={step}
@@ -64,7 +64,7 @@ const Styles = ({ sym }) => {
                     quickTune={quickTune}
                     onChange={
                         e => {
-                            var v = rounder(e.target.value, 10);
+                            var v = rounder(e.target.value, 10) || fallback;
                             dispatch({
                                 type: ACTIONS.UPDATE_SYMBOL,
                                 payload: { id: sym.id, field, value: v }

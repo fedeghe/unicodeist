@@ -10,7 +10,8 @@ export const config = [{
     max: MAX_SCALE,
     step: STEP_SCALE,
     rounder: parseFloat,
-    quickTune: true
+    quickTune: true,
+    fallback: 1
 },{
     label: 'Scale x',
     field: 'scaleX',
@@ -18,7 +19,8 @@ export const config = [{
     max: MAX_SCALE,
     step: STEP_SCALE,
     rounder: parseFloat,
-    quickTune: true
+    quickTune: true,
+    fallback: 1
 },{
     label: 'Scale y',
     field: 'scaleY',
@@ -26,7 +28,8 @@ export const config = [{
     max: MAX_SCALE,
     step: STEP_SCALE,
     rounder: parseFloat,
-    quickTune: true
+    quickTune: true,
+    fallback: 1
 },{
     label: 'Rot. x',
     field: 'rotationX',
@@ -35,7 +38,8 @@ export const config = [{
     step: STEP_ROT,
     rounder: parseInt,
     unit: '°',
-    quickTune: true
+    quickTune: true,
+    fallback: 0
 },{
     label: 'Rot. y',
     field: 'rotationY',
@@ -44,7 +48,8 @@ export const config = [{
     step: STEP_ROT,
     rounder: parseInt,
     unit: '°',
-    quickTune: true
+    quickTune: true,
+    fallback: 0
 },{
     label: 'Rot. z',
     field: 'rotationZ',
@@ -53,7 +58,8 @@ export const config = [{
     step: STEP_ROT,
     rounder: parseInt,
     unit: '°',
-    quickTune: true
+    quickTune: true,
+    fallback: 0
 }];
 
 export default config;

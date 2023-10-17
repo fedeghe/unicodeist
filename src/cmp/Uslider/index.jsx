@@ -39,20 +39,26 @@ const Uslider = ({
 
     return <Box className={classes.Box} key={label}>
         <span className={classes.Label} >{label}:</span>
+        <div className={classes.Mid}>
         {tuning
             ? <input
                 autoFocus={true}
                 onBlur={unTune}
                 pattern="[-+]?[0-9]*[.]?[0-9]+"
                 ref={ref}
-                type="number" value={value} className={classes.Input}
+                type="number" value={value}
+                className={classes.Input}
                 onChange={e => commitChange(e,true)}
+                min={min}
+                max={max}
                 step={step}
                 onKeyDown={mayUntune}
                 onFocus={autoSelect}
             />
-            : <span onClick={onTune}>{value}{unit}</span>
+            : <div onClick={onTune}>{value}{unit}</div>
         }
+        </div>        
+
         <input
             className={classes.Range}
             type="range"

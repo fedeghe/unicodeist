@@ -6,20 +6,31 @@ export default createUseStyles({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        fontWeight:''
+        fontWeight:'',
+        height:'22px'
     },
 
     Label: {//
         marginRight: '10px',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        display:'flex',
+        flex:1
+    },
+    Mid: {
+        display:'flex',
+        flex:1,
+        justifyContent:'center'
     },
     Input: {
         width: '60px',
-        height:'inherit',
+        height:'20px',
         border: 'none',
-        borderBottom: '1px solid red'
+        margin: 'none',
+        outline:'none'
     },
     Range: {
-        width:'80px'
+        width:'80px',
+        display:'flex',
+        flex:1
     }
 });

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 // import Box from '@mui/material/Box';
 
 import ctx from './../../../../../../Context';
+import { WIDTH, HEIGHT, MIN_WIDTH, MIN_HEIGHT } from './../../../../../../constants';
 import Uslider from './../../../../../Uslider';
 import ACTIONS from './../../../../../../reducer/actions';
 import useStyles from './styles';
@@ -21,20 +22,22 @@ const Sizes = () => {
     return <div className={classes.Container}>    
         {[{
             label: 'Width',
-            min: 0,
+            min: MIN_WIDTH,
             max: maxWidth,
             value: width,
             key: 'width',
             unit: 'px',
-            rounder: parseInt
+            rounder: parseInt,
+            fallback: WIDTH
         },{
             label: 'Height',
-            min: 0,
+            min: MIN_HEIGHT,
             max: maxHeight,
             value: height,
             key: 'height',
             unit: 'px',
-            rounder: parseInt
+            rounder: parseInt,
+            fallback: HEIGHT
         }].map(el => <Uslider
                 key={el.key}
                 label={el.label} value={el.value}
@@ -45,7 +48,7 @@ const Sizes = () => {
                 onChange={e => 
                     dispatch({
                         type: ACTIONS.RESIZE,
-                        payload: {what:el.key, value: el.rounder(e.target.value)}
+                        payload: {what:el.key, value: el.rounder(e.target.value) || el.fallback}
                     })}
             />
         )}

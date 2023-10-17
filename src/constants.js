@@ -4,6 +4,8 @@ const h = (new Date()).getHours();
 
 export const WIDTH = 500;
 export const HEIGHT = 500;
+export const MIN_WIDTH = 50;
+export const MIN_HEIGHT = 50;
 export const PANEL_WIDTH = 300;
 export const PANEL_PADDING = 10;
 export const ITEM_PICK_PANEL_MARGIN = 20;
@@ -64,6 +66,7 @@ export const UNSUPPORTEDFILE_MESSAGE = 'File not supported';
 
 const CONSTS = {
     WIDTH, HEIGHT,
+    MIN_WIDTH, MIN_HEIGHT,
     PANEL_WIDTH,
     PANEL_PADDING,
     ITEM_PICK_PANEL_MARGIN,
