@@ -5,7 +5,7 @@ export default createUseStyles({
         display:'flex',
         flexGrow:1,
         overflow: 'scroll',
-        padding:'10px',
+        padding:'0px 10px',
         flexDirection:'column',
         position:'relative'
     }

@@ -1,6 +1,6 @@
 import { useContext, useCallback } from 'react';
 
-
+import IconButton from '@mui/material/IconButton';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
@@ -41,9 +41,12 @@ const Header = () => {
 
     return <div className={classes.Container}>
         <div className={classes.RightSide}>
-            <div className={classes.CloseButton}>
+            <IconButton  className={classes.CloseButton} aria-label="delete" size="large">
+                <RemoveCircleIcon  sx={{ fontSize: '2.5em' }}  className={classes.CloseIcon} onClick={closePanel} /> 
+            </IconButton>
+            {/* <div className={classes.CloseButton}>
                 <RemoveCircleIcon className={classes.CloseIcon} onClick={closePanel} />
-            </div>
+            </div> */}
             <div className={classes.Search}>
                 <input placeholder="search by family or character name" onInput={setFilterBySet} type="text" value={asciiSelectorFilter} />
                 <ClearIcon color={asciiSelectorFilter ? 'action' : 'disabled'} className={classes.ClearIcon} onClick={clearFilter} />

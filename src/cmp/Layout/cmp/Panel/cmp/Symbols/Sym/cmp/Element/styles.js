@@ -42,7 +42,7 @@ export default createUseStyles({
         transform: ({sym:{
             rotationX, rotationY, rotationZ,
             scaleX, scaleY
-        }}) => `rotateX(${rotationX}deg) rotateY(${rotationY}deg) rotateZ(${rotationZ}deg) scaleX(${scaleX}) scaleY(${scaleY})`,
+        }}) => `scaleX(${scaleX}) scaleY(${scaleY}) rotateX(${rotationX}deg) rotateY(${rotationY}deg) rotateZ(${rotationZ}deg)`,
         textShadow: '5px 1px 8px black'
     }
 

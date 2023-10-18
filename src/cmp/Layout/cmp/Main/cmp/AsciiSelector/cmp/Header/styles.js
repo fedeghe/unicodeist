@@ -5,19 +5,23 @@ export default createUseStyles(theme => ({
         justifyContent:'space-between',
         height:'80px',
         minHeight: '80px',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop:'20px'
     },
     RightSide: {marginLeft:'16px', display:'flex',alignItems:'center'},
     CloseButton: {
-        position:'relative',
+        position:'absolute',
+        top:'15px',
+        left:'15px',
         color: 'red',
         cursor:'pointer',
         display:'flex',
         backgroundColor: 'transparent'
     },
     Search: {
-        marginLeft:'20px',
+        marginLeft:'120px',
         display:'flex',
+        alignItems:'center',
         alignSelf:'center',
         '&>input' : {
             fontSize:'2em',
@@ -25,9 +29,7 @@ export default createUseStyles(theme => ({
     },
     ClearIcon: {
         cursor: 'pointer',
-        height: '2em',
         color: theme.foreground,
     },
     LeaveOpenCheck: {marginRight:'20px'},
-    CloseIcon: {fontSize: '3em'}
 }));
