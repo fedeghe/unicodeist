@@ -21,16 +21,19 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
 ---
 - In the top right you can:<img align="right" width="322"  src="src/img/ss1.png?raw=true">
     - set the size of the current _creative_
-    - switch 🌓 theme
-    - export a `.json` file of the current _creative_
-    - import one of the exported `.json` files
-    - change the `background-color` (default is white)
-    - email the html of the _creative_ to someone
-    - get the content as `<div>` usable in a html page or a `<script>` that will automatically render the _creative_ exactly where you put the script.
-    - export a named file choosing between `.png`, `.jpeg` and `.json` (the only then importable).
+    - hover the speed dial button to:
+        - change the `background-color` (default is white)
+        - switch 🌓 theme
+         - get the content as `<div>` usable in a html page or a `<script>` that will automatically render the _creative_ exactly where you put the script.
+        - export either:
+            1) `.json` file of the current _creative_ (afterward importable)
+            2) `.png` or `.jpeg` of the current _creative_
+        - import one of the exported `.json` files
+        
+        - export a named file choosing between `.png`, `.jpeg` and `.json` (the only then importable).
     ---
 
-- Press the ➕ button on the top left (or press `ESC` button) to toggle the symbol selection panel  
+- Press the ➕ button on the **top** **left** (or press `ESC` button) to toggle the symbol selection panel  
 
 - Add one or more symbols and close the panel (through ➖ button or pressing `ESC`)  
 
@@ -42,7 +45,7 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
     - see a preview showing on its left some icons to:
         - throw it away 
         - isolate that from others (useful to be sure to change the right symbol)
-        - clone it  (when clicked, the clone will be automatically the target)
+        - clone it  (when clicked, the clone will be found on the symbol list bottom)
         - bring it to the top (z-index)
         - move it to the bottom (z-index)
         - center horizontally *
@@ -56,6 +59,8 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
         - using the range inputs
         - drag the symbol
         - when focused press <span style="padding:0px 2px;font-size:1.5em;position:relative;top:2px;border:1px solid gray">⇧ + arrow</span> (1px move each)
+
+all range fields can be tuned either mving the range handle either just clicking on the value and scroll up/down left/right or just type the exact value and blur (or hit `esc` | `enter` buttons).
 
 
 

@@ -21,8 +21,7 @@ const Label = ({sym}) => {
     return <div className={localCasses.SectionLabel}>
         <div>
             <Box className={classes.Box}>
-                <input type="text" onInput={updateLabel} size="small" label="Symbol label"  value={sym.label} />
-                <span  className={classes.Label}>z: {sym.zIndex}</span>
+                <strong>Label: </strong><input type="text" onInput={updateLabel} size="small" label="Symbol label"  value={sym.label} />
             </Box>
         </div>
     </div>;

@@ -1,32 +1,26 @@
-
 import { useContext} from 'react';
-import Box from '@mui/material/Box';
 import ctx from './../../../../../../../../../Context';
 import {MIN_ZINDEX, MAX_ZINDEX} from './../../../../../../../../../constants';
+import Uslider from './../../../../../../../../Uslider';
 import ACTIONS from './../../../../../../../../../reducer/actions';
-import useStyles from './../../styles';
-import useElementStyles from './styles';
+import useStyles from './styles';
 
 const Zindex = ({sym}) => {
+    
     const classes = useStyles(),
-        localClasses = useElementStyles(),
         { dispatch} = useContext(ctx);
-    return <div className={localClasses.SectionZindex}>
-        <div>
-            <Box className={classes.Box}>
-                <input className={localClasses.SectionZindexInput}
-                    type="range"
-                    min={MIN_ZINDEX} max={MAX_ZINDEX}
-                    value={sym.zIndex}
-                    onChange={e => 
-                        dispatch({
-                            type: ACTIONS.UPDATE_SYMBOL,
-                            payload: {id: sym.id, field:'zIndex', value: parseInt(e.target.value, 10)}
-                        })
-                    }
-                />
-            </Box>
-        </div>
+        
+    return <div className={classes.SectionZindex}>
+        <Uslider
+                label={'Z-index'} value={sym.zIndex}
+                min={MIN_ZINDEX} max={MAX_ZINDEX} step={1}
+                quickTune={true}
+                onChange={e => 
+                    dispatch({
+                        type: ACTIONS.UPDATE_SYMBOL,
+                        payload: {id: sym.id, field: 'zIndex', value: Math.max(0, parseInt(e.target.value, 10))}
+                    })}
+            />
     </div>;
 };
 
