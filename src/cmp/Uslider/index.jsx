@@ -1,4 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
+
+import ctx from './../../Context';
+import ACTIONS from './../../reducer/actions';
 import Box from '@mui/material/Box';
 
 import useStyles from './styles';
@@ -12,6 +15,7 @@ const Uslider = ({
     quickTune = false,
 }) => {
     const classes = useStyles(),
+        {dispatch} = useContext(ctx),
         ref = useRef(),
         [tuning, setTuning] = useState(false),
         
@@ -24,18 +28,14 @@ const Uslider = ({
             }
         },
         autoSelect = e => e.target.select(),
-        onTune = () => setTuning(quickTune),
-        commitChange = (e, letFocused) => {
-            onChange(e);   
-            !letFocused && setTuning(false);
-        };
+        onTune = () => setTuning(quickTune);
 
-    
     useEffect(() => {
-        if (ref.current) {
-            ref.current.select();
-        }
-    }, [ref]);
+        dispatch({
+            type: ACTIONS.CAN_SCROLL_SYMBOLS,
+            payload: !tuning
+        });
+    }, [tuning]);
 
     return <Box className={classes.Box} key={label}>
         <span className={classes.Label} >{label}:</span>
@@ -48,8 +48,7 @@ const Uslider = ({
                 ref={ref}
                 type="number" value={value}
                 className={classes.Input}
-                onChange={e => commitChange(e,true)}
-                min={min}
+                onChange={onChange}
                 max={max}
                 step={step}
                 onKeyDown={mayUntune}

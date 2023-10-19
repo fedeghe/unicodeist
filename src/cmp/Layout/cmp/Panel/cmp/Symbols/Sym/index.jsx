@@ -17,7 +17,7 @@ const Sym = ({sym}) => {
     const {
             state: {
                 focusedSymbolId,
-                backgroundColor
+                backgroundColor,
             },
             dispatch
         } = useContext(ctx),
@@ -47,14 +47,14 @@ const Sym = ({sym}) => {
     return <div className={classes.Container}>
         <Card onClick={focus} className={classes.Sym}>
             {selected ? 
-            <>
+            <div>
                 <Label sym={sym} />
                 <Zindex sym={sym}/>
                 <Element sym={sym} backgroundColor={backgroundColor}/>
                 <Styles sym={sym} />
                 <hr className={classes.Hr} />
                 <Position sym={sym} />
-            </> : <div className={classes.HoverLight}>
+            </div> : <div className={classes.HoverLight}>
                 <div>
                     <Typography variant="body1">{sym.label}</Typography>
                     <Typography variant="h5">

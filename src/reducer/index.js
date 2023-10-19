@@ -55,7 +55,8 @@ const actions = {
             symbolsFilter: '',
             asciiPanelFilterByIconName: '',
             letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
-            superFocus: false
+            superFocus: false,
+            canScrollSymbols: true
         }),
         
         [ACTIONS.SWITCH_THEME]: ({
@@ -75,6 +76,9 @@ const actions = {
             payload: visibility
         }) => ({
             addPanelVisibility : visibility
+        }),
+        [ACTIONS.CAN_SCROLL_SYMBOLS]: ({payload}) => ({
+            canScrollSymbols : payload
         }),
         
         [ACTIONS.ADD_SYMBOL]: ({
@@ -129,12 +133,13 @@ const actions = {
             oldState: { symbols }
         }) => ({
             focusedSymbolId: id,
+            hoveringId: id,
             superFocus: false, //in case there is one
             // and need to reset faded mode fo all symbols
             symbols: symbols.map(sym => ({
                 ...sym,
                 faded: false
-            }))
+            })),
         }),
         
         [ACTIONS.UPDATE_GLOBAL]: ({

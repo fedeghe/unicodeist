@@ -24,6 +24,7 @@ const INIT = Symbol('init'),
     MOVE_SYMBOL = Symbol('move up down symbol'),
     MOVE_TARGET_ONE_PX = Symbol('move 1px symbol in direction'),
     REMOVE_ERROR = Symbol('remove error'),
+    CAN_SCROLL_SYMBOLS = Symbol('when focused on a wheel'),
     LET_ASCIIPANEL_OPEN_AFTER_SELECTION = Symbol('let the panel open after selection');
 
 const exp = {
@@ -53,7 +54,8 @@ const exp = {
     SET_SYMBOLS_FILTER,
     MOVE_SYMBOL,
     MOVE_TARGET_ONE_PX,
-    REMOVE_ERROR
+    REMOVE_ERROR,
+    CAN_SCROLL_SYMBOLS
 };
 
 export default exp;

@@ -5,14 +5,16 @@ import ctx from '../../../../../../Context';
 import useStyles from './styles';
 
 const Symbols = () => {
-    const classes = useStyles(),
-        {
+    const {
             state: {
                 symbols, symbolsFilter,
-                focusedSymbolId
+                focusedSymbolId,
+                canScrollSymbols
             }
-        } = useContext(ctx);
-
+        } = useContext(ctx),
+        classes = useStyles({canScrollSymbols});
+                
+    console.log({canScrollSymbols});
     return <div className={classes.Container}>{
         symbols.filter(
             sym => sym.label.toLowerCase().includes(symbolsFilter.toLowerCase())
