@@ -37,7 +37,7 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
 
 - Add one or more symbols and close the panel (through ➖ button or pressing `ESC`)  
 
-<img align="right" width="322"  src="src/img/ss2.png?raw=true">  
+<img align="right" width="250"  src="src/img/ss2.png?raw=true">  
 
 - Last symbol added is the current target one, thus on the right panel you will see a tuning card expanded allowing you to:  
     - set a label for it (only useful to search it among added symbols)
@@ -48,8 +48,8 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
         - clone it  (when clicked, the clone will be found on the symbol list bottom)
         - bring it to the top (z-index)
         - move it to the bottom (z-index)
-        - center horizontally *
-        - center vertically *  
+        - center horizontally ...almost  
+        - center vertically ...almost  
             
     - change the `font-family` of the symbol  
     - change the `font-weight` of the symbol
@@ -60,6 +60,8 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
         - drag the symbol
         - when focused press <span style="padding:0px 2px;font-size:1.5em;position:relative;top:2px;border:1px solid gray">⇧ + arrow</span> (1px move each)
 
+
+<img align="right" width="250"  src="src/img/ss3.png?raw=true">  
 all range fields can be tuned either mving the range handle either just clicking on the value and scroll up/down left/right or just type the exact value and blur (or hit `esc` | `enter` buttons).
 
 
@@ -69,6 +71,5 @@ all range fields can be tuned either mving the range handle either just clicking
 To move all symbols together just go to the _Unicodeist_ logo in the right upper part and drag it in one direction, on drop end all symbols will move together in that direction for an amout proportional to the movement.
 
 
----
-\(*) for the moment far from working as desired
+
 

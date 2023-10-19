@@ -264,7 +264,13 @@ const actions = {
                     error: UNSUPPORTEDFILE_MESSAGE
                 };
             }
-            return newState;
+            return {
+                ...newState,
+                symbols: newState.symbols.map(s => ({
+                    ...s,
+                    id: `${uniqueID}`
+                }))
+            };
         },
         
         [ACTIONS.ALIGN_H]: ({payload: id, oldState: {symbols, width}}) => ({
