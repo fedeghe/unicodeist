@@ -1,5 +1,5 @@
 
-import { useContext, useCallback } from 'react';
+import { useContext } from 'react';
 import { Card, Typography} from '@mui/material';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -41,33 +41,35 @@ const Sym = ({sym}) => {
                 payload: {id: sym.id, direction}
             });
         },
-        moveUp = useCallback(e => move(e, -1)),
-        moveDown = useCallback(e => move(e, 1));
+        moveUp = e => move(e, -1),
+        moveDown = e => move(e, 1);
     
-    return <Card onClick={focus} className={classes.Sym}>
-        {selected ? 
-        <>
-            <Label sym={sym} />
-            <Zindex sym={sym}/>
-            <Element sym={sym} backgroundColor={backgroundColor}/>
-            <Styles sym={sym} />
-            <hr className={classes.Hr} />
-            <Position sym={sym} />
-        </> : <div className={classes.HoverLight}>
-            <div>
-                <Typography variant="body1">{sym.label}</Typography>
-                <Typography variant="h5">
-                    <div className={classes.RotatedContainer}>
-                        <div className={classes.Rotated}>{sym.char}</div>
-                    </div>
-                </Typography>
-            </div>
-            <div className={classes.HoverLightActions}>
-                <ArrowDropUpIcon onClick={moveUp}/>
-                <ArrowDropDownIcon onClick={moveDown}/>
-            </div>
-        </div>}
-    </Card>;
+    return <div className={classes.Container}>
+        <Card onClick={focus} className={classes.Sym}>
+            {selected ? 
+            <>
+                <Label sym={sym} />
+                <Zindex sym={sym}/>
+                <Element sym={sym} backgroundColor={backgroundColor}/>
+                <Styles sym={sym} />
+                <hr className={classes.Hr} />
+                <Position sym={sym} />
+            </> : <div className={classes.HoverLight}>
+                <div>
+                    <Typography variant="body1">{sym.label}</Typography>
+                    <Typography variant="h5">
+                        <div className={classes.RotatedContainer}>
+                            <div className={classes.Rotated}>{sym.char}</div>
+                        </div>
+                    </Typography>
+                </div>
+                <div className={classes.HoverLightActions}>
+                    <ArrowDropUpIcon onClick={moveUp}/>
+                    <ArrowDropDownIcon onClick={moveDown}/>
+                </div>
+            </div>}
+        </Card>
+    </div>;
 };
 
 export default Sym;

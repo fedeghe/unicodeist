@@ -30,8 +30,9 @@ export const MAX_ROT= 180;
 export const STEP_ROT = 1;
 export const MIN_ZINDEX = 0;
 export const MAX_ZINDEX = 10000;
-export const EXPANDED_SYM_HEIGHT = 580;
-export const COLLAPSED_SYM_HEIGHT = 50;
+export const EXPANDED_SYM_HEIGHT = 595;
+export const COLLAPSED_SYM_HEIGHT = 70;
+export const COLLAPSING_SYM_TIME = 0.3;
 export const CLOSE_TOAST_TIMEOUT = 1000;
 export const FONT_FAMILIES = [
     'Arial', 'Verdana', 'Tahoma',
@@ -92,6 +93,7 @@ const CONSTS = {
     MAX_ZINDEX,
     EXPANDED_SYM_HEIGHT,
     COLLAPSED_SYM_HEIGHT,
+    COLLAPSING_SYM_TIME,
     CLOSE_TOAST_TIMEOUT,
     FONT_FAMILIES,
     UNICODEIST_SCRIPT_URI,

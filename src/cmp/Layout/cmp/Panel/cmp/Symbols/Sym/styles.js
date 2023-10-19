@@ -1,7 +1,7 @@
 
 import { createUseStyles } from 'react-jss';
 
-import { EXPANDED_SYM_HEIGHT } from '../../../../../../../constants';
+import { EXPANDED_SYM_HEIGHT, COLLAPSED_SYM_HEIGHT, COLLAPSING_SYM_TIME } from '../../../../../../../constants';
 
 
 
@@ -19,8 +19,8 @@ export default createUseStyles(theme => ({
             : theme.sym.background,
         color: theme.sym.foreground,
         cursor: selected ? 'default' : 'pointer',
-        height: selected ? `${EXPANDED_SYM_HEIGHT}px` : `auto`,
-        transition: 'height 0.2s',
+        height: selected ? `${EXPANDED_SYM_HEIGHT}px` : `${COLLAPSED_SYM_HEIGHT}px`,
+        transition: `height ${COLLAPSING_SYM_TIME}s`,
     }),
     Hr: {
         width: '100%',

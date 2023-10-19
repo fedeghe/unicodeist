@@ -122,7 +122,7 @@ const getUnicodeistData = j => JSON.stringify({
         t: {
             trn:[s.left, s.top],
             ...(s.scale !== 1 && {s: s.scale}),
-            ...(s.scaleX !== 1 && {sy: s.scaleX}),
+            ...(s.scaleX !== 1 && {sx: s.scaleX}),
             ...(s.scaleY !== 1 && {sy: s.scaleY}),
             ...(s.rotationX && {rx: s.rotationX}), // deg
             ...(s.rotationY && {ry: s.rotationY}), // deg
