@@ -55,36 +55,26 @@ const Styles = ({ sym }) => {
             </Box>
         </div>
         <div className={localClasses.SectionStylesContainer}>
-            {scaleRotConfig.map(({ label, field, step, min, max, rounder, unit, fallback, quickTune }) => (
+            {scaleRotConfig.map(({ label, field, step, min, max, rounder, unit, quickTune }) => (
                 <Uslider key={label}
                     label={label} value={sym[field]}
                     min={min} max={max} step={step}
                     unit={unit}
                     rounder={rounder}
                     quickTune={quickTune}
-                    onChange={
-                        e => {
-                            var v = rounder(e.target.value, 10) || fallback;
-                            dispatch({
-                                type: ACTIONS.UPDATE_SYMBOL,
-                                payload: { id: sym.id, field, value: v }
-                            });
-                        }
-                    }
+                    onChange={v => dispatch({
+                        type: ACTIONS.UPDATE_SYMBOL,
+                        payload: { id: sym.id, field, value: v }
+                    })}
                 />
             ))}
         </div>
         <div className={localClasses.SectionStylesContainer}>
-            <Uslider key={'opacity'} label={"Opacity"} value={sym.opacity} min={0} max={1} step={0.1}
-                onChange={
-                    e => {
-                        var v = parseFloat(e.target.value, 10);
-                        dispatch({
-                            type: ACTIONS.UPDATE_SYMBOL,
-                            payload: { id: sym.id, field: 'opacity', value: v }
-                        });
-                    }
-                }
+            <Uslider key={'opacity'} label={"Opacity"} value={sym.opacity} min={0} max={1} step={0.01} quickTune rounder={parseFloat}
+                onChange={v => dispatch({
+                    type: ACTIONS.UPDATE_SYMBOL,
+                    payload: { id: sym.id, field: 'opacity', value: v}
+                })}
             />
         </div>
     </div>;

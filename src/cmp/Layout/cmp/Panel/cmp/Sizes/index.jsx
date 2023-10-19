@@ -2,7 +2,7 @@ import { useContext } from 'react';
 // import Box from '@mui/material/Box';
 
 import ctx from './../../../../../../Context';
-import { WIDTH, HEIGHT, MIN_WIDTH, MIN_HEIGHT } from './../../../../../../constants';
+import {  MIN_WIDTH, MIN_HEIGHT } from './../../../../../../constants';
 import Uslider from './../../../../../Uslider';
 import ACTIONS from './../../../../../../reducer/actions';
 import useStyles from './styles';
@@ -28,7 +28,6 @@ const Sizes = () => {
             key: 'width',
             unit: 'px',
             rounder: parseInt,
-            fallback: WIDTH
         },{
             label: 'Height',
             min: MIN_HEIGHT,
@@ -37,7 +36,6 @@ const Sizes = () => {
             key: 'height',
             unit: 'px',
             rounder: parseInt,
-            fallback: HEIGHT
         }].map(el => <Uslider
                 key={el.key}
                 label={el.label} value={el.value}
@@ -45,10 +43,10 @@ const Sizes = () => {
                 unit={el.unit}
                 rounder={el.rounder}
                 quickTune={true}
-                onChange={e => 
+                onChange={v => 
                     dispatch({
                         type: ACTIONS.RESIZE,
-                        payload: {what:el.key, value: el.rounder(e.target.value) || el.fallback}
+                        payload: {what:el.key, value: v}
                     })}
             />
         )}

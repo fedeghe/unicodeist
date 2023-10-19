@@ -22,6 +22,7 @@ export const ITEM_FONTSIZE = '2em';
 export const DEFAULT_THEME = (h > 20 || h < 7) ? 'dark' : 'bright';
 export const FADED_OPACITY = 0.4;
 export const LET_UNICODE_PANEL_OPEN_AFTER_SELECTION = true;
+export const MIN_SCALE_REV = -150;
 export const MIN_SCALE = 0.01;
 export const MAX_SCALE = 150;
 export const STEP_SCALE = 0.01;

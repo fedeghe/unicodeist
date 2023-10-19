@@ -1,4 +1,5 @@
 import {
+    MIN_SCALE_REV,
     MIN_SCALE, MAX_SCALE, STEP_SCALE,
     MIN_ROT, MAX_ROT, STEP_ROT,
 } from './../../../../../../../../../constants';
@@ -11,25 +12,22 @@ export const config = [{
     step: STEP_SCALE,
     rounder: parseFloat,
     quickTune: true,
-    fallback: 1
 },{
     label: 'Scale x',
     field: 'scaleX',
-    min: MIN_SCALE,
+    min: MIN_SCALE_REV,
     max: MAX_SCALE,
     step: STEP_SCALE,
     rounder: parseFloat,
     quickTune: true,
-    fallback: 1
 },{
     label: 'Scale y',
     field: 'scaleY',
-    min: MIN_SCALE,
+    min: MIN_SCALE_REV,
     max: MAX_SCALE,
     step: STEP_SCALE,
     rounder: parseFloat,
     quickTune: true,
-    fallback: 1
 },{
     label: 'Rot. x',
     field: 'rotationX',
@@ -39,7 +37,6 @@ export const config = [{
     rounder: parseInt,
     unit: '°',
     quickTune: true,
-    fallback: 0
 },{
     label: 'Rot. y',
     field: 'rotationY',
@@ -49,7 +46,6 @@ export const config = [{
     rounder: parseInt,
     unit: '°',
     quickTune: true,
-    fallback: 0
 },{
     label: 'Rot. z',
     field: 'rotationZ',
@@ -59,7 +55,6 @@ export const config = [{
     rounder: parseInt,
     unit: '°',
     quickTune: true,
-    fallback: 0
 }];
 
 export default config;

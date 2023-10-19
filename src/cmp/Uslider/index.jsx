@@ -13,6 +13,7 @@ const Uslider = ({
     min, max, step = 1,
     unit = '',
     quickTune = false,
+    rounder = parseInt
 }) => {
     const classes = useStyles(),
         {dispatch} = useContext(ctx),
@@ -28,7 +29,12 @@ const Uslider = ({
             }
         },
         autoSelect = e => e.target.select(),
-        onTune = () => setTuning(quickTune);
+        onTune = () => setTuning(quickTune),
+        validator = val => val >= min && val<= max,
+        change = e => {
+            const v = rounder(e.target.value, 10);
+            validator(v) && onChange(v);
+        };
 
     useEffect(() => {
         dispatch({
@@ -48,7 +54,7 @@ const Uslider = ({
                 ref={ref}
                 type="number" value={value}
                 className={classes.Input}
-                onChange={onChange}
+                onChange={change}
                 max={max}
                 step={step}
                 onKeyDown={mayUntune}
@@ -62,7 +68,7 @@ const Uslider = ({
             className={classes.Range}
             type="range"
             min={min} max={max} step={step}
-            value={value} onChange={onChange}
+            value={value} onChange={change}
         />
     </Box>;
 };

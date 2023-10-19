@@ -15,11 +15,12 @@ const Zindex = ({sym}) => {
                 label={'Z-index'} value={sym.zIndex}
                 min={MIN_ZINDEX} max={MAX_ZINDEX} step={1}
                 quickTune={true}
-                onChange={e => 
+                onChange={v => 
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
-                        payload: {id: sym.id, field: 'zIndex', value: Math.max(0, parseInt(e.target.value, 10))}
-                    })}
+                        payload: {id: sym.id, field: 'zIndex', value: v}
+                    })
+                }
             />
     </div>;
 };
