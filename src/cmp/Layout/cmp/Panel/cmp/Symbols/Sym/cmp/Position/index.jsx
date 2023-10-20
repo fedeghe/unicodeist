@@ -38,10 +38,10 @@ const Position = ({ sym }) => {
                 max={el.max}
                 step={el.step}
                 quickTune={el.quickTune}
-                onChange={e =>
+                onChange={v =>
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
-                        payload: { id: sym.id, field: el.key, value: parseInt(e.target.value, 10) }
+                        payload: { id: sym.id, field: el.key, value: v }
                     })}
             />
         )}
