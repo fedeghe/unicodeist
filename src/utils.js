@@ -1,4 +1,7 @@
-import { UNICODEIST_SCRIPT_URI, FONT_FAMILIES_REDUCTION_MAP } from './constants';
+import {
+    UNICODEIST_SCRIPT_URI,
+    FONT_FAMILIES_REDUCTION_MAP
+} from './constants';
 
 export const uniqueID = new function () {
     var count = 0,

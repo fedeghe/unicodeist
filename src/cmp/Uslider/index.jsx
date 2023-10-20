@@ -60,7 +60,7 @@ const Uslider = ({
                 onKeyDown={mayUntune}
                 onFocus={autoSelect}
             />
-            : <div onClick={onTune}>{value}{unit}</div>
+            : <div className={classes.Num} onClick={onTune}>{value}{unit}</div>
         }
         </div>        
 

@@ -32,5 +32,9 @@ export default createUseStyles({
         width:'80px',
         display:'flex',
         flex:1
+    },
+    Num: {
+        cursor:'pointer',
+        padding:'0 10px'
     }
 });

@@ -24,7 +24,7 @@ const CopyDialog = ({visibility, setVisibility, embedCode, scriptCode}) => {
         }, [scriptCode, onClose]);
 
     return (
-        <div>
+        <>
             <Dialog open={visibility} onClose={onClose} disableRestoreFocus>
                 <div className={classes.Dialog}>
                     <h3>HTML</h3>
@@ -40,7 +40,7 @@ const CopyDialog = ({visibility, setVisibility, embedCode, scriptCode}) => {
                 </div>
             </Dialog>
             {openConfirmation && <CopyDone message="Code copied to clipboard" onClose={onClose} open={openConfirmation} setOpen={setOpenConfirmation}/>}
-        </div>
+        </>
     );
 };
 export default CopyDialog;

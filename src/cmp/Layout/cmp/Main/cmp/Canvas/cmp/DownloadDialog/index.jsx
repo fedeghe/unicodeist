@@ -57,42 +57,40 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
         }, [format, filename]);
 
     useEffect(() => {
-            setDownloadEnabled(format && validFilename && filename.length);
+        setDownloadEnabled(format && validFilename && filename.length);
     }, [format, validFilename]);
 
     return (
-        <div>
-            <Dialog open={visibility} onClose={onClose} disableRestoreFocus>
-                <div className={classes.Dialog}>
-                    <h3>Download as <em>.{format}</em></h3>
-                    <FormGroup>
-                        <TextField
-                            error={!validFilename}
-                            helperText={'your file name is not fitting'}
-                            className={classes.SpaceUp}
-                            required
-                            label="file name without extension" variant="outlined"
-                            value={filename}
-                            onChange={changeName}
-                        />
-                        <Select
-                            className={classes.SpaceUp}
-                            required
-                            value={format}
-                            onChange={changeFormat}
-                        >
-                            {Object.keys(formatToReader).map(format =>
-                                <MenuItem key={format} value={format}>{format}</MenuItem>
-                            )}
-                        </Select>
-                        <FormHelperText className={classes.Warn}>{format === DEFAULT_DOWNLOAD_FORMAT ? 'this is the only importable format' : " "}</FormHelperText>
-                        
-                    </FormGroup>
+        <Dialog open={visibility} onClose={onClose} disableRestoreFocus>
+            <div className={classes.Dialog}>
+                <h3>Download as <em>.{format}</em></h3>
+                <FormGroup>
+                    <TextField
+                        error={!validFilename}
+                        helperText={'your file name is not fitting'}
+                        className={classes.SpaceUp}
+                        required
+                        label="file name without extension" variant="outlined"
+                        value={filename}
+                        onChange={changeName}
+                    />
+                    <Select
+                        className={classes.SpaceUp}
+                        required
+                        value={format}
+                        onChange={changeFormat}
+                    >
+                        {Object.keys(formatToReader).map(format =>
+                            <MenuItem key={format} value={format}>{format}</MenuItem>
+                        )}
+                    </Select>
+                    <FormHelperText className={classes.Warn}>{format === DEFAULT_DOWNLOAD_FORMAT ? 'this is the only importable format' : " "}</FormHelperText>
 
-                    <Button className={classes.DownloadButton} disabled={!downloadEnabled} variant="contained" onClick={doDownload}>Download</Button>
-                </div>
-            </Dialog>
-        </div>
+                </FormGroup>
+
+                <Button className={classes.DownloadButton} disabled={!downloadEnabled} variant="contained" onClick={doDownload}>Download</Button>
+            </div>
+        </Dialog>
     );
 };
 export default DownloadDialog;
