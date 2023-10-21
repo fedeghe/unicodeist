@@ -7,7 +7,7 @@
 A unicode characters based visual editor
 ---
 
-Sometimes creating temporary creative for a logo should be a matter of minutes, using _unicodeist_ is it!
+Sometimes creating temporary creative for a logo should be a matter of minutes, using _unicodeist_ it is!
 
 I created the following in more or less 3 minutes, using 3 different symbols...  
 
