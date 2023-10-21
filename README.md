@@ -16,7 +16,7 @@ I created the following in more or less 3 minutes, using 3 different symbols...
 Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could download exactly that creative and import it in _unicodeist_ .... but I'm sure You can do way better that that 
 
 
-[TTRY IT HERE](https://fedeghe.github.io/Unicodeist/)
+[TRY IT HERE](https://fedeghe.github.io/Unicodeist/)
 
 ---
 - In the top right you can:<img align="right" width="322"  src="src/img/ss1.png?raw=true">
