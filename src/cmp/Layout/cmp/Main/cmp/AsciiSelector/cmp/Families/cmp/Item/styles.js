@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss';
-import {ITEM_SIZE, ITEM_FONTSIZE,COLLAPSING_SELECTOR_TIME } from '../../../../../../../../../../constants';
+import {ITEM_SIZE, ITEM_FONTSIZE} from '../../../../../../../../../../constants';
 export default createUseStyles(theme => ({
     Item: {
         lineHeight: `${ITEM_SIZE/2}px`,
@@ -18,7 +18,7 @@ export default createUseStyles(theme => ({
         display:'inline-block',
         position:'relative',
         zIndex:100,
-        transition: `transform ${COLLAPSING_SELECTOR_TIME}s`,
+        // transition: `opacity  ${COLLAPSING_SELECTOR_TIME}s`,
         '&:hover': {
             opacity: 1,
             color: theme.modal.itemForegroundOver,
