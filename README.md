@@ -30,7 +30,6 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
             2) `.png` or `.jpeg` of the current _creative_
         - import one of the exported `.json` files
         
-        - export a named file choosing between `.png`, `.jpeg` and `.json` (the only then importable).
     ---
 
 - Press the ➕ button on the **top** **left** (or press `ESC` button) to toggle the symbol selection panel  
