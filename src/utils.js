@@ -140,6 +140,17 @@ export const getUnicodeistScriptTag = state => {
     return `<script src="${UNICODEIST_SCRIPT_URI}" data-unicodeist='${dataUnicodeist}'></script>`;
 };
 
+
+export const getCodes = char => {
+    var decimal = char.charCodeAt(0).toString(10),
+        unicode = 'U+' + char.charCodeAt(0).toString(16).padStart(4, '0'),
+        octal = '0' + char.charCodeAt(0).toString(8),
+        hex = '0x' + char.charCodeAt(0).toString(16);
+    return {
+        decimal, unicode, octal, hex
+    };
+};
+
 const def = {
     uniqueID,
     cleanCode,
@@ -148,6 +159,7 @@ const def = {
     importFromFile,
     getUnicodeistData,
     getUnicodeistScriptTag,
-    saveAsFileJSON
+    saveAsFileJSON,
+    getCodes
 };
 export default def;

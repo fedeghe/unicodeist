@@ -8,7 +8,7 @@ const Family = ({ data, label, onSelect }) => {
         <div className={classes.ItemsContainer}>
             {data.map((d, i) => <div key={`${d.title}_${i}`}>
                 <div className={classes.SubfamilyTitle} key={`${uniqueID}`}><h4>{d.title}</h4></div>
-                {d.charSet.map(({char}) => {
+                {d.charSet.map(({c: char}) => {
                     return <Item key={`${uniqueID}`} char={char} onSelect={onSelect} />;
                 })}
             </div>)}

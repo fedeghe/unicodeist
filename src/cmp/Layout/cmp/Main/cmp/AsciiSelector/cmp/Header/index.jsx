@@ -41,14 +41,11 @@ const Header = () => {
 
     return <div className={classes.Container}>
         <div className={classes.RightSide}>
-            <IconButton  className={classes.CloseButton} aria-label="delete" size="large">
-                <RemoveCircleIcon  sx={{ fontSize: '2.5em' }}  className={classes.CloseIcon} onClick={closePanel} /> 
+            <IconButton  className={classes.CloseButton} aria-label="delete" size="large" onClick={closePanel}>
+                <RemoveCircleIcon  sx={{ fontSize: '2.5em' }}  className={classes.CloseIcon}/> 
             </IconButton>
-            {/* <div className={classes.CloseButton}>
-                <RemoveCircleIcon className={classes.CloseIcon} onClick={closePanel} />
-            </div> */}
             <div className={classes.Search}>
-                <input placeholder="search by family or character name" onInput={setFilterBySet} type="text" value={asciiSelectorFilter} />
+                <input placeholder="search by family / character name / dec, oct, hex" onInput={setFilterBySet} type="text" value={asciiSelectorFilter} />
                 <ClearIcon color={asciiSelectorFilter ? 'action' : 'disabled'} className={classes.ClearIcon} onClick={clearFilter} />
             </div>
         </div>

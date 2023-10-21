@@ -20,8 +20,8 @@ const AddButton = () => {
     // return <div className={classes.AddButton}>
     //     <AddCircleRoundedIcon sx={{fontSize:'3em'}} onClick={openPanel}/>
     // </div>;
-    return <IconButton  className={classes.AddButton} aria-label="add" size="large">
-        <AddCircleRoundedIcon sx={{ fontSize: '2.5em' }} onClick={openPanel} />
+    return <IconButton  className={classes.AddButton} aria-label="add" size="large"  onClick={openPanel}>
+        <AddCircleRoundedIcon sx={{ fontSize: '2.5em' }}/>
     </IconButton>;
 };
 export default AddButton;
