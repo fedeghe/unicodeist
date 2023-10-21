@@ -34,9 +34,6 @@ export default createUseStyles(theme => ({
         display:'flex',
         flex:1,
         accentColor: theme.accentColor,
-        // backgroundColor: theme.accentColor,
-        // '-webkit-appearance': 'none',
-        // '-moz-appearance': 'none',
     },
     Num: {
         cursor:'pointer',
