@@ -15,8 +15,7 @@ I created the following in more or less 3 minutes, using 3 different symbols...
 
 Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could download exactly that creative and import it in _unicodeist_ .... but I'm sure You can do way better that that. 
 
-
-### [TRY IT HERE](https://fedeghe.github.io/Unicodeist/){:target="_blank"}
+<h3><a href="https://fedeghe.github.io/Unicodeist/" target="_blank">༺ TRY IT HERE ༻</a></h3>
 
 ---
 - In the top right you can:<img align="right" width="322"  src="src/img/ss1.png?raw=true">
@@ -70,6 +69,7 @@ all range fields can be tuned either mving the range handle either just clicking
 
 To move all symbols together just go to the _Unicodeist_ logo in the right upper part and drag it in one direction, on drop end all symbols will move together in that direction for an amout proportional to the movement.
 
-
+---
+<div style="text-align:center">༺ ᚗᚌ ༻</div>
 
 
