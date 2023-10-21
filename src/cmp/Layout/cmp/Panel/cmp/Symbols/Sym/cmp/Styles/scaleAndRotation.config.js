@@ -34,7 +34,7 @@ export const config = [{
     min: MIN_ROT,
     max: MAX_ROT,
     step: STEP_ROT,
-    rounder: parseInt,
+    rounder: parseFloat,
     unit: '°',
     quickTune: true,
 },{
@@ -43,7 +43,7 @@ export const config = [{
     min: MIN_ROT,
     max: MAX_ROT,
     step: STEP_ROT,
-    rounder: parseInt,
+    rounder: parseFloat,
     unit: '°',
     quickTune: true,
 },{
@@ -52,7 +52,7 @@ export const config = [{
     min: MIN_ROT,
     max: MAX_ROT,
     step: STEP_ROT,
-    rounder: parseInt,
+    rounder: parseFloat,
     unit: '°',
     quickTune: true,
 }];

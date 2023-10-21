@@ -28,13 +28,14 @@ export const MAX_SCALE = 150;
 export const STEP_SCALE = 0.01;
 export const MIN_ROT = -180;
 export const MAX_ROT= 180;
-export const STEP_ROT = 1;
+export const STEP_ROT = 0.1;
 export const MIN_ZINDEX = 0;
 export const MAX_ZINDEX = 10000;
 export const EXPANDED_SYM_HEIGHT = 595;
 export const COLLAPSED_SYM_HEIGHT = 70;
 export const COLLAPSING_SYM_TIME = 0.3;
 export const CLOSE_TOAST_TIMEOUT = 1000;
+export const OFFSET_PERC = 0.3;
 export const FONT_FAMILIES = [
     'Arial', 'Verdana', 'Tahoma',
     'Trebuchet MS',
@@ -100,6 +101,7 @@ const CONSTS = {
     UNICODEIST_SCRIPT_URI,
     DOWNLOAD_FORMATS,
     DEFAULT_DOWNLOAD_FORMAT,
-    UNSUPPORTEDFILE_MESSAGE
+    UNSUPPORTEDFILE_MESSAGE,
+    OFFSET_PERC
 };
 export default CONSTS;

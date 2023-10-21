@@ -32,7 +32,8 @@ const {grayscale : cgs} = colors,
             roundBg: '#5588dd',
             icon: '#ffdd00',
         },
-        unselectedItemHoverBackgound: cgs.mid5
+        unselectedItemHoverBackgound: cgs.mid5,
+        accentColor:cgs.lightE
     };
 
 export default theme;

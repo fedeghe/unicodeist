@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-export default createUseStyles({
+export default createUseStyles(theme => ({
     Box: {
         display: 'flex',
         flexDirection: 'row',
@@ -26,15 +26,20 @@ export default createUseStyles({
         height:'20px',
         border: 'none',
         margin: 'none',
-        outline:'none'
+        outline:'none',
+        
     },
     Range: {
         width:'80px',
         display:'flex',
-        flex:1
+        flex:1,
+        accentColor: theme.accentColor,
+        // backgroundColor: theme.accentColor,
+        // '-webkit-appearance': 'none',
+        // '-moz-appearance': 'none',
     },
     Num: {
         cursor:'pointer',
         padding:'0 10px'
     }
-});
+}));

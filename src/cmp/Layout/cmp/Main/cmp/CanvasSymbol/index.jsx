@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
     useCallback, useContext,
     useState
@@ -10,6 +11,8 @@ import ACTIONS from './../../../../../../reducer/actions';
 
 const CanvasSymbol = ({symbol}) => {
     const {state: { focusedSymbolId}, dispatch} = useContext(ctx),
+        [dragging, setDragging] = useState(false),
+        [pos, setPos] = useState([symbol.left, symbol.top]),
         isTarget = focusedSymbolId===symbol.id,
         {
             id, char, zIndex, left, top, color,
@@ -30,9 +33,17 @@ const CanvasSymbol = ({symbol}) => {
             }),
             [dispatch, id]
         ),
-        onDragStart = e => setStartPoint([e.pageX, e.pageY]),
-        onDrag = e => e.preventDefault(),
+        onDragStart = e => {
+            setDragging(true);
+            e.dataTransfer.effectAllowed = "move";
+            setStartPoint([e.pageX, e.pageY]);
+        },
+        onDrag = e => {
+            setPos([e.pageX, e.pageY]);
+            e.preventDefault();
+        },
         onDragEnd = e => {
+            setDragging(false);
             e.preventDefault();
             const [startX, startY] = startPoint;
             dispatch({
@@ -40,8 +51,8 @@ const CanvasSymbol = ({symbol}) => {
                 payload: {
                     id,
                     update: {
-                        left: parseInt(e.pageX, 10) - parseInt(startX, 10),
-                        top: parseInt(e.pageY, 10) - parseInt(startY, 10)
+                        left: parseInt(pos[0], 10) - parseInt(startX, 10),
+                        top: parseInt(pos[1], 10) - parseInt(startY, 10)
                     }
                 }
             });
@@ -52,6 +63,10 @@ const CanvasSymbol = ({symbol}) => {
             onDragEnd={onDragEnd}
             onDrag={onDrag}
             draggable={isTarget}
+            style={{
+                position:'relative',
+                ...(dragging && {zIndex:1})
+            }}
         >
         <div
             className={classes.CanvasSymbol}

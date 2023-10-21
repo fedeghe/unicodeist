@@ -12,6 +12,10 @@ const {reducer, init} = reducerFactory();
 const App = () => {
     const [state, dispatch] = useReducer(reducer, {}, init);
     const {themeKey} = state;
+    const browser = (() => {
+        if (window.safari !== undefined) return 'safari';
+        return null;
+    })();
     const theme = getTheme(themeKey);
     const debounced = debounce(
         () => dispatch({
@@ -48,7 +52,7 @@ const App = () => {
     
     return (        
         <ThemeProvider theme={theme}>
-            <Context.Provider value={{state, dispatch}}>
+            <Context.Provider value={{state, dispatch, browser}}>
                 <Layout/>
             </Context.Provider>
         </ThemeProvider>
