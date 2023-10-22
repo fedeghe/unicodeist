@@ -46,7 +46,7 @@ const Item = ({char, onSelect}) => {
                 )}
             </div>
         </div>
-        {copyDone && <CopyDone message={`${copyDone} copied to clipboard`} onClose={hideConfirmation} open={copyDone} setOpen={setCopyDone}/>}
+        {copyDone && <CopyDone message={`${copyDone} copied to clipboard`} onClose={hideConfirmation} open={Boolean(copyDone)} setOpen={setCopyDone}/>}
     </>;
 
 };

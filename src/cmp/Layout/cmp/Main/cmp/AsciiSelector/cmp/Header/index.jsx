@@ -35,10 +35,13 @@ const Header = () => {
             type: ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION,
             payload: !letAsciiPanelOpenAfterSelection
         }), [letAsciiPanelOpenAfterSelection] ),
-        clearFilter = () => dispatch({
-            type: ACTIONS.SET_ASCIIPANEL_FILTER,
-            payload: ''
-        }),
+        clearFilter = () => {
+            startTransition(() => setFilter(''));
+            dispatch({
+                type: ACTIONS.SET_ASCIIPANEL_FILTER,
+                payload: ''
+            });
+        },
         closePanel = () => dispatch({
             type: ACTIONS.TOGGLE_ADD_PANEL,
             payload: false
