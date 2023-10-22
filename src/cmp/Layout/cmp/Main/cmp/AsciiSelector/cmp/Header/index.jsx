@@ -25,17 +25,14 @@ const Header = () => {
             setFilter(e.target.value);
             onFilterIn(e);
         },
-        setFilterBySet = useCallback(e =>
-            dispatch({
-                type: ACTIONS.SET_ASCIIPANEL_FILTER,
-                payload: e.target.value
-            }),
-            [dispatch]
-        ),
-        toggleLetOpen = () => dispatch({
+        setFilterBySet = e => dispatch({
+            type: ACTIONS.SET_ASCIIPANEL_FILTER,
+            payload: e.target.value
+        }),
+        toggleLetOpen = useCallback(() => dispatch({
             type: ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION,
             payload: !letAsciiPanelOpenAfterSelection
-        }),
+        }), [letAsciiPanelOpenAfterSelection] ),
         clearFilter = () => dispatch({
             type: ACTIONS.SET_ASCIIPANEL_FILTER,
             payload: ''

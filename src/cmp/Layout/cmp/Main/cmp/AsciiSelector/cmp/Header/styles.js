@@ -25,10 +25,7 @@ export default createUseStyles(theme => ({
         display:'flex',
         flexDirection:'column',
         justifyContent:'flex-end',
-        alignItems:'flex-start',
-        
-        
-        
+        alignItems:'flex-start', 
     },
     'In' :{
         display:'flex',
@@ -46,7 +43,6 @@ export default createUseStyles(theme => ({
     LeaveOpenCheck: {
         marginRight:'20px',
         display:'flex',
-        // width:'360px',
         flexShrink:1
     },
 }));
