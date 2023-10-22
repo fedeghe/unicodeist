@@ -77,36 +77,46 @@ export const debounce = (func, delay) => {
     return ret;
 };
 
-export const filter = ({ symbols, filter }) => filter
-    ? symbols.map(({ label, data }) => {
-        const newData = data.map(({ title, charSet }) => {
-            const filteredCharset = charSet.filter(
-                // eslint-disable-next-line no-unused-vars
-                ({ c: char, d: description = '', de, u, oc,he }) => {
-                    // const der = getCodes(char);
-                    return false
-                        || description.toLowerCase().split(',').some(s => s.includes(filter))
-                        || `${char}`.toLowerCase() === filter.toLowerCase()
-                        || `${title}`.toLowerCase().includes(filter)
-                        // || `${label}`.toLowerCase().includes(lcFilter)
-                        || `${de}`.startsWith(filter)
-                        || `${oc}`.startsWith(filter)
-                        || `${he}`.startsWith(filter)
-                        // || `${u}`.startsWith(filter)
-                        ;
-                }
-            );
-            return filteredCharset.length && {
-                title,
-                charSet: filteredCharset
+export const filter = ({ symbols, filter, debug = false }) => { 
+    let start,
+        end;
+    if (debug) start = +new Date();
+    const res = filter
+        ? symbols.map(({ label, data }) => {
+            const newData = data.map(({ title, charSet }) => {
+                const filteredCharset = charSet.filter(
+                    // eslint-disable-next-line no-unused-vars
+                    ({ c: char, d: description = '', de, u, oc,he }) => {
+                        // const der = getCodes(char);
+                        return false
+                            || description.toLowerCase().split(',').some(s => s.includes(filter))
+                            || `${char}`.toLowerCase() === filter.toLowerCase()
+                            || `${title}`.toLowerCase().includes(filter)
+                            // || `${label}`.toLowerCase().includes(lcFilter)
+                            || `${de}`.startsWith(filter)
+                            || `${oc}`.startsWith(filter)
+                            || `${he}`.startsWith(filter)
+                            // || `${u}`.startsWith(filter)
+                            ;
+                    }
+                );
+                return filteredCharset.length && {
+                    title,
+                    charSet: filteredCharset
+                };
+            }).filter(Boolean);
+            return newData.length && {
+                label,
+                data: newData
             };
-        }).filter(Boolean);
-        return newData.length && {
-            label,
-            data: newData
-        };
-    }).filter(Boolean)
-    : symbols;
+        }).filter(Boolean)
+        : symbols;
+    if (debug)  {
+        end = +new Date();
+        console.log('filtering took: ', end - start);
+    }
+    return res;
+};
 
 /**
  * TODO: here I should allow the use to see the location & name dialog
