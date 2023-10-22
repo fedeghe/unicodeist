@@ -24,3 +24,4 @@ yarn-error.log*
 ascist.bmpr
 test
 .buildNum.json
+src/Symbols/getAllSymbols.js
