@@ -1,15 +1,12 @@
-import { useContext, useCallback } from 'react';
-
-import IconButton from '@mui/material/IconButton';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-
+import { useContext, useCallback, useState } from 'react';
+import {
+    IconButton, Checkbox, FormControlLabel
+} from '@mui/material';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import ClearIcon from '@mui/icons-material/Clear';
-import ThemeSwitch from '../../../../../../../ThemeSwitch';
-
 
 import ctx from '../../../../../../../../Context';
+import {debounce} from '../../../../../../../../utils';
 import ACTIONS from '../../../../../../../../reducer/actions';
 import useStyles from './styles';
 
@@ -18,7 +15,16 @@ const Header = () => {
         { dispatch, state: {
             letAsciiPanelOpenAfterSelection,
             asciiSelectorFilter,
+            filteredCount,
         } } = useContext(ctx),
+        [filter, setFilter] = useState(asciiSelectorFilter),
+        onFilterIn = debounce(e => {
+            setFilterBySet(e);
+        }, 500),
+        onFilter = e => {
+            setFilter(e.target.value);
+            onFilterIn(e);
+        },
         setFilterBySet = useCallback(e =>
             dispatch({
                 type: ACTIONS.SET_ASCIIPANEL_FILTER,
@@ -45,9 +51,13 @@ const Header = () => {
                 <RemoveCircleIcon  sx={{ fontSize: '2.5em' }}  className={classes.CloseIcon}/> 
             </IconButton>
             <div className={classes.Search}>
-                <input placeholder="search by family / character name / dec, oct, hex" onInput={setFilterBySet} type="text" value={asciiSelectorFilter} />
-                <ClearIcon color={asciiSelectorFilter ? 'action' : 'disabled'} className={classes.ClearIcon} onClick={clearFilter} />
+                <div className={classes.In}>
+                    <input placeholder="search by sub family / character" onInput={onFilter} type="text" value={filter} />
+                    <ClearIcon color={filter ? 'action' : 'disabled'} className={classes.ClearIcon} onClick={clearFilter} />
+                </div>
+                <p>{asciiSelectorFilter ? 'Found' : 'Available'} symbols {filteredCount}</p>
             </div>
+            
         </div>
         <div className={classes.LeaveOpenCheck}>
             <FormControlLabel
@@ -58,7 +68,6 @@ const Header = () => {
                 />}
                 label="Leave panel open after selection"
             />
-            <ThemeSwitch />
         </div>
     </div>;
 };

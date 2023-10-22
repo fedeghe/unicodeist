@@ -1,23 +1,53 @@
+import {useState} from 'react';
+import copy from 'copy-to-clipboard';
 import useStyles from './styles';
+import CopyDone from './../../../../../CopyDone';
 import { getCodes } from './../../../../../../../../../../utils';
 const Item = ({char, onSelect}) => {
     const classes = useStyles(),
         codes = getCodes(char),
-        onClick = () => onSelect(char);
-    return <div className={classes.Item} onClick={onClick}>
-        <div className={classes.Char}>{char}</div>
-        <div className={classes.List}>
-            <div>
-                <div className={classes.Small} title="unicode">{codes.unicode}</div>
-                <div className={classes.Small} title="octal">{codes.octal}</div>
-                <div className={classes.Small} title="decimal">{codes.decimal}</div>
+        onClick = () => onSelect(char),
+        [copyDone, setCopyDone] = useState(false),
+        onCopy = e => {
+            const what = e.target.dataset.what;
+            copy(codes[what]);
+            setCopyDone(what);
+            e.stopPropagation();
+        },
+        hideConfirmation = () => {
+            setCopyDone(false);
+        },
+        postTitle = ' (click to copy)';
+    return <>
+        <div className={classes.Item} onClick={onClick}>
+            <div className={classes.Char} title="click to add">{char}</div>
+            <div className={classes.List}>
+                {[{
+                    k: 'k1',
+                    els: [
+                        { label: 'u:', key: 'unicode', title: 'unicode' + postTitle },
+                        { label: 'oct:', key: 'octal', title: 'octal' + postTitle },
+                        { label: 'dec:', key: 'decimal', title: 'decimal' + postTitle }
+                    ]
+                },{
+                    k: 'k2',
+                    els: [
+                        { label: 'hex:', key: 'hex', title: 'hexadecimal' + postTitle },
+                        { label: 'css:', key: 'css', title: 'css content' + postTitle },
+                        { label: 'html:', key: 'html', title: 'html entity' + postTitle }
+                    ]
+                }].map(container => <div key={container.k} className={classes.Col}>{
+                    container.els.map(el =>
+                        <div key={el.key} className={classes.Small} title={el.title} data-what={el.key} onClick={onCopy}>
+                            <span className={classes.Bold}>{el.label}</span> {codes[el.key]}
+                        </div>
+                    )}
+                    </div>
+                )}
             </div>
-            <div>
-                <div className={classes.Small} title="unicode">&nbsp;</div>
-                <div className={classes.Small} title="hexadecimal">{codes.hex}</div>
-                <div className={classes.Small} title="css content">{codes.css}</div>
-            </div> 
         </div>
-    </div>;
+        {copyDone && <CopyDone message={`${copyDone} copied to clipboard`} onClose={hideConfirmation} open={copyDone} setOpen={setCopyDone}/>}
+    </>;
+
 };
 export default Item;

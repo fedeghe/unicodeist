@@ -59,21 +59,54 @@ export const cleanCodeFromState = state => {
     return root.outerHTML;
 };
 
+export const count = symbols => symbols.reduce(
+    (acc, { data }) => acc + data.reduce(
+        (acc0, { charSet }) => acc0 + charSet.length
+        , 0)
+    , 0);
+
 export const debounce = (func, delay) => {
     var to,
-        ret = function () {
-            var args = [].slice.call(arguments),
-                self = this;
+        ret = (...args) => {
             clearTimeout(to);
-            to = setTimeout(function () {
-                return func.apply(self, args);
-            }, delay);
+            to = setTimeout(() => func(...args), delay);
         };
     ret.cancel = function () {
         clearTimeout(to);
     };
     return ret;
 };
+
+export const filter = ({ symbols, filter }) => filter
+    ? symbols.map(({ label, data }) => {
+        const newData = data.map(({ title, charSet }) => {
+            const filteredCharset = charSet.filter(
+                // eslint-disable-next-line no-unused-vars
+                ({ c: char, d: description = '', de, u, oc,he }) => {
+                    // const der = getCodes(char);
+                    return false
+                        || description.toLowerCase().split(',').some(s => s.includes(filter))
+                        || `${char}`.toLowerCase() === filter.toLowerCase()
+                        || `${title}`.toLowerCase().includes(filter)
+                        // || `${label}`.toLowerCase().includes(lcFilter)
+                        || `${de}`.startsWith(filter)
+                        || `${oc}`.startsWith(filter)
+                        || `${he}`.startsWith(filter)
+                        // || `${u}`.startsWith(filter)
+                        ;
+                }
+            );
+            return filteredCharset.length && {
+                title,
+                charSet: filteredCharset
+            };
+        }).filter(Boolean);
+        return newData.length && {
+            label,
+            data: newData
+        };
+    }).filter(Boolean)
+    : symbols;
 
 /**
  * TODO: here I should allow the use to see the location & name dialog
@@ -85,12 +118,12 @@ export const saveAsFileJSON = data => {
         resolve(window.URL.createObjectURL(blob));
     });
 };
-export const importFromFile = ({onContentReady}) => {
+export const importFromFile = ({ onContentReady }) => {
     const link = document.createElement("input");
     link.type = 'file';
     link.addEventListener('change', function (e) {
         const reader = new FileReader();
-        reader.onload = function() {
+        reader.onload = function () {
             onContentReady(reader.result);
         };
         if (e.target.files.length) {
@@ -109,29 +142,29 @@ const getUnicodeistData = j => JSON.stringify({
         bgc: j.backgroundColor,
         // position:'relative'
     },
-    sym: j.symbols.map(s =>({
-      cnt: s.char,
-      sty: {
-        // position:'absolute',
-        zi: s.zIndex,
-        c: s.color,
-        // fs: s.fontSize, //px
-        ff: Object.keys(FONT_FAMILIES_REDUCTION_MAP).find(
-            k => FONT_FAMILIES_REDUCTION_MAP[k] === s.fontFamily
-        ),
-        fw: s.fontWeight,
-        o: s.opacity,
-        // 'transform-origin': 'center center', 
-        t: {
-            trn:[s.left, s.top],
-            ...(s.scale !== 1 && {s: s.scale}),
-            ...(s.scaleX !== 1 && {sx: s.scaleX}),
-            ...(s.scaleY !== 1 && {sy: s.scaleY}),
-            ...(s.rotationX && {rx: s.rotationX}), // deg
-            ...(s.rotationY && {ry: s.rotationY}), // deg
-            ...(s.rotationZ && {rz: s.rotationZ})  // deg
-        },
-      }
+    sym: j.symbols.map(s => ({
+        cnt: s.char,
+        sty: {
+            // position:'absolute',
+            zi: s.zIndex,
+            c: s.color,
+            // fs: s.fontSize, //px
+            ff: Object.keys(FONT_FAMILIES_REDUCTION_MAP).find(
+                k => FONT_FAMILIES_REDUCTION_MAP[k] === s.fontFamily
+            ),
+            fw: s.fontWeight,
+            o: s.opacity,
+            // 'transform-origin': 'center center', 
+            t: {
+                trn: [s.left, s.top],
+                ...(s.scale !== 1 && { s: s.scale }),
+                ...(s.scaleX !== 1 && { sx: s.scaleX }),
+                ...(s.scaleY !== 1 && { sy: s.scaleY }),
+                ...(s.rotationX && { rx: s.rotationX }), // deg
+                ...(s.rotationY && { ry: s.rotationY }), // deg
+                ...(s.rotationZ && { rz: s.rotationZ })  // deg
+            },
+        }
     }))
 });
 
@@ -146,9 +179,10 @@ export const getCodes = char => {
         unicode = 'U+' + char.charCodeAt(0).toString(16).padStart(4, '0'),
         css = '\\' + char.charCodeAt(0).toString(16).padStart(4, '0'),
         octal = '0' + char.charCodeAt(0).toString(8),
-        hex = '0x' + char.charCodeAt(0).toString(16);
+        hex = '0x' + char.charCodeAt(0).toString(16),
+        html = '&#' + decimal + ';';
     return {
-        decimal, unicode, octal, hex, css
+        decimal, unicode, octal, hex, css, html
     };
 };
 
@@ -161,6 +195,8 @@ const def = {
     getUnicodeistData,
     getUnicodeistScriptTag,
     saveAsFileJSON,
-    getCodes
+    getCodes,
+    count,
+    filter
 };
 export default def;

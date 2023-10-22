@@ -4,8 +4,6 @@ import CopyDone from './../../../CopyDone';
 import ctx from '../../../../../../../../Context';
 import ACTIONS from '../../../../../../../../reducer/actions';
 import useStyles from './styles';
-import allSymbols from '../../../../../../../../Symbols';
-import useFilter from './useFilter';
 
 import Family from './cmp/Family';
 
@@ -16,7 +14,9 @@ const Families = () => {
     const [messageChar, setMessageChar] = useState('');
     const {dispatch, state: {
         letAsciiPanelOpenAfterSelection,
-        asciiSelectorFilter
+        
+        availableSymbols,
+        filteredCount
     }} = useContext(ctx);
     
     const closePanel = () => {
@@ -29,7 +29,9 @@ const Families = () => {
         setMessageChar(char);
         setOpen(char.length > 0);
     };
-    const hideConfirmation = () => setOpen(false);
+    const hideConfirmation = () => {
+        setOpen(false);
+    };
     const onSelect = (char) => {
         dispatch({
             type: ACTIONS.ADD_SYMBOL,
@@ -38,15 +40,13 @@ const Families = () => {
         letAsciiPanelOpenAfterSelection ? showConfirmation(char) : closePanel();
     };
 
-    const symbols = useFilter({ allSymbols, filter: asciiSelectorFilter });
-    
+
     return <div className={classes.Container}>
-        {symbols.length
-            ? symbols.map(({label, data}) => <Family key={label} data={data} label={label} onSelect={onSelect}/>)
-            : <h3>0 results</h3>
+        {Boolean(filteredCount) && 
+            availableSymbols.map(({label, data}) => <Family key={label} data={data} label={label} onSelect={onSelect}/>)
         }
-        {/* {symbols.map(r => <Family key={`${uniqueID}`} data={r} label={'lab'} onSelect={onSelect}/>)} */}
         {open && <CopyDone message={`${messageChar} added`} onClose={hideConfirmation} open={open} setOpen={setOpen}/>}
+        
     </div>;
 };
 export default Families;

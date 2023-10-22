@@ -23,17 +23,30 @@ export default createUseStyles(theme => ({
     Search: {
         marginLeft:'40px',
         display:'flex',
+        flexDirection:'column',
+        justifyContent:'flex-end',
+        alignItems:'flex-start',
+        
+        
+        
+    },
+    'In' :{
+        display:'flex',
         alignItems:'center',
         '&>input' : {
             fontSize:'1.5em',
             width:'90%',
-            maxWidth:'550px'
+            maxWidth:'350px'
         },
-        flexGrow:1
     },
     ClearIcon: {
         cursor: 'pointer',
         color: theme.foreground,
     },
-    LeaveOpenCheck: {marginRight:'20px',display:'flex',width:'360px',flexShrink:1},
+    LeaveOpenCheck: {
+        marginRight:'20px',
+        display:'flex',
+        // width:'360px',
+        flexShrink:1
+    },
 }));

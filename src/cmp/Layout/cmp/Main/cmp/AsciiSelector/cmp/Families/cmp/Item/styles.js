@@ -38,14 +38,22 @@ export default createUseStyles(theme => ({
         borderTop:'1px solid gray',
         position:'relative',
         bottom:0,
+        // backgroundColor: theme.modal.itemBackgroundHover
+    },
+    Col: {
+        display:'flex',
+        flexDirection:'column'
     },
     Small: {
         textAlign: 'left',
         paddingLeft:'5px',
         fontSize:'0.3rem',
-        lineHeight:'8px',
+        lineHeight:'6px',
         
     },
-    Uni: {},
-    Others: {},
+    Bold: {
+        fontWeight:'bold',
+        display:'inline-block',
+        marginRight:'0.5em'
+    }
 }));

@@ -13,8 +13,7 @@ export default createUseStyles((theme) => ({
         backgroundColor: theme.background.selectorModal,
         color: theme.foreground,
         display:'flex',
-        flexDirection:'column',
-        
+        flexDirection:'column',        
     },
     Asciis: {
         display:'flex',

@@ -5,8 +5,10 @@ export default createUseStyles({
         display:'flex',
         flexGrow:1,
         overflow: 'scroll',
-        padding:'0px 10px',
+        padding:'15px 10px',
         flexDirection:'column',
-        position:'relative'
+        position:'relative',
+        paddingBottom:'100px',
+        marginBottom:'20px'
     }
 });

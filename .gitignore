@@ -25,3 +25,5 @@ ascist.bmpr
 test
 .buildNum.json
 src/Symbols/getAllSymbols.js
+src/Symbols/out.json
+src/Symbols/migrateSymbols.js

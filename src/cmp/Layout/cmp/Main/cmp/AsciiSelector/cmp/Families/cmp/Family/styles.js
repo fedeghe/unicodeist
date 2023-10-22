@@ -1,11 +1,12 @@
 import { createUseStyles } from 'react-jss';
 
 export default createUseStyles((theme) => ({
-
     Container: {
         display:'flex',
         flexDirection:'column',
-        color: theme.modal.setStringColor
+        color: theme.modal.setStringColor,
+        margin:'0 50px',
+        marginBottom:'100px'
     },
     ItemsContainer: {
         display:'flex',
@@ -17,5 +18,4 @@ export default createUseStyles((theme) => ({
         display:'block',
         width:'100%'
     }
-
 }));

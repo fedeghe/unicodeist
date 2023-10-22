@@ -1,6 +1,7 @@
 
 import ACTIONS from './actions';
-import {uniqueID} from './../utils';
+import {uniqueID, count, filter} from './../utils';
+import allSymbols from './../Symbols';
 import {
     WIDTH, HEIGHT,
     PANEL_WIDTH,
@@ -48,6 +49,8 @@ const actions = {
             maxHeight: HEIGHT,
             themeKey: DEFAULT_THEME,
             symbols: [],
+            availableSymbols: allSymbols,
+            filteredCount: count(allSymbols),
             addPanelVisibility: false,
             focusedSymbolId: null,
             backgroundColor: '#ffffff',
@@ -221,10 +224,18 @@ const actions = {
         }),
         
         [ACTIONS.SET_ASCIIPANEL_FILTER]: ({
-            payload
-        }) => ({
-            asciiSelectorFilter: payload
-        }),
+            payload: asciiSelectorFilter,
+        }) => {
+            const availableSymbols = filter({
+                symbols: allSymbols,
+                filter: asciiSelectorFilter
+            });
+            return {
+                asciiSelectorFilter,
+                availableSymbols,
+                filteredCount: count(availableSymbols) 
+            };
+        },
         
         [ACTIONS.INIT_VIEWPORT]: ({
             payload : {maxWidth, maxHeight},

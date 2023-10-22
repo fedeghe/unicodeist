@@ -10,28 +10,28 @@ import {debounce} from './utils';
 
 const {reducer, init} = reducerFactory();
 const App = () => {
-    const [state, dispatch] = useReducer(reducer, {}, init);
-    const {themeKey} = state;
-    const browser = (() => {
-        if (window.safari !== undefined) return 'safari';
-        return null;
-    })();
-    const theme = getTheme(themeKey);
-    const debounced = debounce(
-        () => dispatch({
-            type: ACTIONS.INIT_VIEWPORT,
-            payload: {
-                maxHeight: ~~window.innerHeight * 0.9,
-                maxWidth: ~~window.innerWidth * 0.9,
-            }
-        }), 500
-    );
-    const storeViewPortData = useCallback(debounced, []);
-    const prevent = useCallback(e => e.preventDefault(), []);
-    // const catchReload = useCallback(e => {
-    //     e.preventDefault();
-    //     e.returnValue = '';
-    // }, []);
+    const [state, dispatch] = useReducer(reducer, {}, init),
+        {themeKey} = state,
+        browser = (() => {
+            if (window.safari !== undefined) return 'safari';
+            return null;
+        })(),
+        theme = getTheme(themeKey),
+        debounced = debounce(
+            () => dispatch({
+                type: ACTIONS.INIT_VIEWPORT,
+                payload: {
+                    maxHeight: ~~window.innerHeight * 0.9,
+                    maxWidth: ~~window.innerWidth * 0.9,
+                }
+            }), 500
+        ),
+        // catchReload = useCallback(e => {
+        //     e.preventDefault();
+        //     e.returnValue = '';
+        // }, []),
+        storeViewPortData = useCallback(debounced, []),
+        prevent = useCallback(e => e.preventDefault(), []);
     useEffect(storeViewPortData, [storeViewPortData]);
     useEffect(() => {
         // window.addEventListener("beforeunload", catchReload);
