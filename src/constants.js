@@ -17,8 +17,10 @@ export const PANEL_BGCOLOR = '#444444';
 export const EDITOR_BGCOLOR = '#222222';
 export const SELECTOR_BGCOLOR = '#AAAAAA';
 export const SELECTOR_FGCOLOR = '#000000';
-export const ITEM_SIZE = 100;
-export const ITEM_FONTSIZE = '2em';
+export const ITEM_WIDTH = 100;
+export const ITEM_HEIGHT = 140;
+export const ITEM_FOOTER_HEIGHT = 30;
+export const ITEM_FONTSIZE = '2.5em';
 export const DEFAULT_THEME = (h > 20 || h < 7) ? 'dark' : 'bright';
 export const FADED_OPACITY = 0.4;
 export const LET_UNICODE_PANEL_OPEN_AFTER_SELECTION = true;
@@ -80,7 +82,9 @@ const CONSTS = {
     EDITOR_BGCOLOR,
     SELECTOR_BGCOLOR,
     SELECTOR_FGCOLOR,
-    ITEM_SIZE,
+    ITEM_WIDTH,
+    ITEM_HEIGHT,
+    ITEM_FOOTER_HEIGHT,
     ITEM_FONTSIZE,
     DEFAULT_THEME,
     FADED_OPACITY,

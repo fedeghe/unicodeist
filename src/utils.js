@@ -144,10 +144,11 @@ export const getUnicodeistScriptTag = state => {
 export const getCodes = char => {
     var decimal = char.charCodeAt(0).toString(10),
         unicode = 'U+' + char.charCodeAt(0).toString(16).padStart(4, '0'),
+        css = '\\' + char.charCodeAt(0).toString(16).padStart(4, '0'),
         octal = '0' + char.charCodeAt(0).toString(8),
         hex = '0x' + char.charCodeAt(0).toString(16);
     return {
-        decimal, unicode, octal, hex
+        decimal, unicode, octal, hex, css
     };
 };
 

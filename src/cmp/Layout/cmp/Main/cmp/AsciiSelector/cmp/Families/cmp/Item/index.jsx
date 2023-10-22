@@ -5,11 +5,19 @@ const Item = ({char, onSelect}) => {
         codes = getCodes(char),
         onClick = () => onSelect(char);
     return <div className={classes.Item} onClick={onClick}>
-        <div>{char}</div>
-        <div className={classes.Small} title="unicode">{codes.unicode}</div>
-        <div className={classes.Small} title="octal">oct: {codes.octal}</div>
-        <div className={classes.Small} title="decimal">dec: {codes.decimal}</div>
-        <div className={classes.Small} title="hexadecimal">hex: {codes.hex}</div>
+        <div className={classes.Char}>{char}</div>
+        <div className={classes.List}>
+            <div>
+                <div className={classes.Small} title="unicode">{codes.unicode}</div>
+                <div className={classes.Small} title="octal">{codes.octal}</div>
+                <div className={classes.Small} title="decimal">{codes.decimal}</div>
+            </div>
+            <div>
+                <div className={classes.Small} title="unicode">&nbsp;</div>
+                <div className={classes.Small} title="hexadecimal">{codes.hex}</div>
+                <div className={classes.Small} title="css content">{codes.css}</div>
+            </div> 
+        </div>
     </div>;
 };
 export default Item;

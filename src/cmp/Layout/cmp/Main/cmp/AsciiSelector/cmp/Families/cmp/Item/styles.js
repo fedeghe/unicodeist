@@ -1,10 +1,10 @@
 import { createUseStyles } from 'react-jss';
-import {ITEM_SIZE, ITEM_FONTSIZE} from '../../../../../../../../../../constants';
+import {ITEM_HEIGHT, ITEM_WIDTH, ITEM_FOOTER_HEIGHT, ITEM_FONTSIZE} from '../../../../../../../../../../constants';
 export default createUseStyles(theme => ({
     Item: {
-        lineHeight: `${ITEM_SIZE/2}px`,
-        height: `${ITEM_SIZE}px`,
-        width: `${ITEM_SIZE}px`,
+        lineHeight: `${ITEM_WIDTH}px`,
+        height: `${ITEM_HEIGHT}px`,
+        width: `${ITEM_WIDTH}px`,
         fontSize: `${ITEM_FONTSIZE}`,
         marginRight:'10px',
         marginBottom:'10px',
@@ -16,9 +16,8 @@ export default createUseStyles(theme => ({
         borderRadius: theme.radius.selectorModalItem,
         opacity:0.8,
         display:'inline-block',
-        position:'relative',
+        position:'relative', //needed for the hovering 
         zIndex:100,
-        // transition: `opacity  ${COLLAPSING_SELECTOR_TIME}s`,
         '&:hover': {
             opacity: 1,
             color: theme.modal.itemForegroundOver,
@@ -28,8 +27,25 @@ export default createUseStyles(theme => ({
             zIndex:101
         }
     },
+    Char: {
+        height: `${ITEM_HEIGHT-ITEM_FOOTER_HEIGHT}px`
+    },
+    List: {
+        padding:0,
+        margin:0,
+        height: `${ITEM_FOOTER_HEIGHT}px`,
+        display:'flex',
+        borderTop:'1px solid gray',
+        position:'relative',
+        bottom:0,
+    },
     Small: {
-        fontSize:'0.5rem',
-        lineHeight:'10px'
-    }
+        textAlign: 'left',
+        paddingLeft:'5px',
+        fontSize:'0.3rem',
+        lineHeight:'8px',
+        
+    },
+    Uni: {},
+    Others: {},
 }));
