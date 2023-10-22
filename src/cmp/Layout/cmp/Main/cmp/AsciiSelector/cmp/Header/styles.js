@@ -45,4 +45,7 @@ export default createUseStyles(theme => ({
         display:'flex',
         flexShrink:1
     },
+    Spinner: {
+        marginLeft:'1em'
+    }
 }));

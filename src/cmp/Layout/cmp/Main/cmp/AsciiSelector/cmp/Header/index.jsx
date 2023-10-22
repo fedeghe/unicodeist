@@ -1,8 +1,9 @@
-import { useContext, useCallback, useState } from 'react';
+import { useContext, useCallback, useState, useTransition } from 'react';
 import {
     IconButton, Checkbox, FormControlLabel
 } from '@mui/material';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import CircularProgress from '@mui/material/CircularProgress';
 import ClearIcon from '@mui/icons-material/Clear';
 
 import ctx from '../../../../../../../../Context';
@@ -18,8 +19,9 @@ const Header = () => {
             filteredCount,
         } } = useContext(ctx),
         [filter, setFilter] = useState(asciiSelectorFilter),
+        [isPending, startTransition] = useTransition(),
         onFilterIn = debounce(e => {
-            setFilterBySet(e);
+            startTransition(() => setFilterBySet(e));
         }, 500),
         onFilter = e => {
             setFilter(e.target.value);
@@ -50,7 +52,12 @@ const Header = () => {
             <div className={classes.Search}>
                 <div className={classes.In}>
                     <input placeholder="search by sub family / character" onInput={onFilter} type="text" value={filter} />
-                    <ClearIcon color={filter ? 'action' : 'disabled'} className={classes.ClearIcon} onClick={clearFilter} />
+                    <div className={classes.Spinner}>
+                        {isPending
+                            ? <CircularProgress size="1rem"/>
+                            : <ClearIcon color={filter ? 'action' : 'disabled'} className={classes.ClearIcon} onClick={clearFilter} />
+                        }
+                    </div>
                 </div>
                 <p>{asciiSelectorFilter ? 'Found' : 'Available'} symbols {filteredCount}</p>
             </div>
