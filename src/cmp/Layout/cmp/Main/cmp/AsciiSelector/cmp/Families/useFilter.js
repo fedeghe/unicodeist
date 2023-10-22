@@ -13,6 +13,7 @@ const useFilter = ({allSymbols, filter}) => {
                                 return false 
                                     || description.toLowerCase().split(',').some(s => s.includes(lcFilter))
                                     || `${char}`.toLowerCase() === lcFilter
+                                    || `${title}`.toLowerCase().includes(lcFilter)
                                     || `${label}`.toLowerCase().includes(lcFilter)
                                     || `${der.decimal}` === lcFilter
                                     || `${der.octal}` === lcFilter
