@@ -9,37 +9,33 @@ import Family from './cmp/Family';
 
 
 const Families = () => {
-    const classes = useStyles({border: 10});
-    const [open, setOpen] = useState(false);
-    const [messageChar, setMessageChar] = useState('');
-    const {dispatch, state: {
-        letAsciiPanelOpenAfterSelection,
-        
-        availableSymbols,
-        filteredCount
-    }} = useContext(ctx);
-    
-    const closePanel = () => {
-        dispatch({
+    const classes = useStyles({border: 10}),
+        [open, setOpen] = useState(false),
+        [messageChar, setMessageChar] = useState(''),
+        {
+            dispatch,
+            state: {
+                letAsciiPanelOpenAfterSelection,
+                availableSymbols,
+                filteredCount
+            }
+        } = useContext(ctx),
+        closePanel = () => dispatch({
             type: ACTIONS.TOGGLE_ADD_PANEL,
             payload: false
-        });
-    };
-    const showConfirmation = char => {
-        setMessageChar(char);
-        setOpen(char.length > 0);
-    };
-    const hideConfirmation = () => {
-        setOpen(false);
-    };
-    const onSelect = (char) => {
-        dispatch({
-            type: ACTIONS.ADD_SYMBOL,
-            payload: char
-        });
-        letAsciiPanelOpenAfterSelection ? showConfirmation(char) : closePanel();
-    };
-
+        }),
+        showConfirmation = char => {
+            setMessageChar(char);
+            setOpen(char.length > 0);
+        },
+        hideConfirmation = () => setOpen(false),
+        onSelect = (char) => {
+            dispatch({
+                type: ACTIONS.ADD_SYMBOL,
+                payload: char
+            });
+            letAsciiPanelOpenAfterSelection ? showConfirmation(char) : closePanel();
+        };
 
     return <div className={classes.Container}>
         {Boolean(filteredCount) && 

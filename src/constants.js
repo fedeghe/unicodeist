@@ -38,6 +38,7 @@ export const COLLAPSED_SYM_HEIGHT = 70;
 export const COLLAPSING_SYM_TIME = 0.3;
 export const CLOSE_TOAST_TIMEOUT = 1000;
 export const OFFSET_PERC = 0.3;
+export const HEADER_HEIGHT = 150;
 export const FONT_FAMILIES = [
     'Arial', 'Verdana', 'Tahoma',
     'Trebuchet MS',
@@ -106,6 +107,7 @@ const CONSTS = {
     DOWNLOAD_FORMATS,
     DEFAULT_DOWNLOAD_FORMAT,
     UNSUPPORTEDFILE_MESSAGE,
-    OFFSET_PERC
+    OFFSET_PERC,
+    HEADER_HEIGHT
 };
 export default CONSTS;

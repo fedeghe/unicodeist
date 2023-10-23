@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-// import Box from '@mui/material/Box';
 
 import ctx from './../../../../../../Context';
 import {  MIN_WIDTH, MIN_HEIGHT } from './../../../../../../constants';
@@ -16,8 +15,6 @@ const Sizes = () => {
             },
             dispatch
         } = useContext(ctx);
-
-    
 
     return <div className={classes.Container}>    
         {[{

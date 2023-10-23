@@ -1,10 +1,11 @@
-/* eslint-disable no-unused-vars */
-import { useCallback, useContext, useState, useRef } from 'react';
-
-import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
+import { useContext, useState } from 'react';
+import {
+    SpeedDial,
+    SpeedDialAction,
+    SpeedDialIcon
+} from '@mui/material';
 
 import SettingsIcon from '@mui/icons-material/Settings';
-import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import GetAppIcon from '@mui/icons-material/GetApp';
@@ -20,11 +21,12 @@ import useStyles from './styles';
 
 
 const Icons = () => {
+    const classes = useStyles();
     const { state, dispatch } = useContext(ctx),
         [open, setOpen] = useState(false),
         handleOpen = () => setOpen(true),
         handleClose = () => setOpen(false),
-        { backgroundColor, themeKey, error } = state,
+        { backgroundColor, error } = state,
         embed = () => {
             handleClose();
             Channel.get('event').pub('embed');
@@ -49,7 +51,7 @@ const Icons = () => {
                 value :e.target.value
             }
         }),
-        removeError = e => dispatch({type: ACTIONS.REMOVE_ERROR}),
+        removeError = () => dispatch({type: ACTIONS.REMOVE_ERROR}),
         actions = [{
             name: 'import',
             icon: <GetAppIcon />,
@@ -62,12 +64,6 @@ const Icons = () => {
             name: 'embed',
             icon: <CodeRoundedIcon />,
             onClick: embed
-        },{
-            name: `switch to ${{bright:'dark', dark:'bright'}[themeKey]} theme`,
-            icon: <ThemeSwitch onChange={handleClose}/>,
-        }, {
-            name: 'change background',
-            icon: <input style={{width:'28px'}} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
         }];
 
     return <>
@@ -89,6 +85,10 @@ const Icons = () => {
                 />
             ))}
         </SpeedDial>
+        <div className={classes.UnderLogo}>
+            <input style={{width:'28px'}} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
+            <ThemeSwitch onChange={handleClose}/>
+        </div>
         {error && <CopyDone message={error} open={error} setOpen={removeError}/>}
     </>;
 };

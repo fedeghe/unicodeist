@@ -45,7 +45,8 @@ const Position = ({ sym }) => {
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
                         payload: { id: sym.id, field: el.key, value: v }
-                    })}
+                    })
+                }
             />
         )}
     </div>;

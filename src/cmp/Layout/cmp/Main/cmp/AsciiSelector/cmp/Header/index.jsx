@@ -20,9 +20,9 @@ const Header = () => {
         } } = useContext(ctx),
         [filter, setFilter] = useState(asciiSelectorFilter),
         [isPending, startTransition] = useTransition(),
-        onFilterIn = debounce(e => {
-            startTransition(() => setFilterBySet(e));
-        }, 500),
+        onFilterIn = debounce(e =>
+            startTransition(() => setFilterBySet(e))
+        , 500),
         onFilter = e => {
             setFilter(e.target.value);
             onFilterIn(e);

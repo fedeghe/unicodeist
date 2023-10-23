@@ -32,10 +32,10 @@ const Main = () => {
                 && e.key !== "Escape"
             ) return e;
 
-            // on escape toggle panel
+            // on escape toggle 
             if (e.key === "Escape") { togglePanel(); e.preventDefault();}
 
-            //on shift +arrow move current target symbol
+            // on shift+arrow move current target symbol
             if (
                 e.shiftKey
                 && ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)

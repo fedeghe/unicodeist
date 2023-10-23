@@ -1,14 +1,14 @@
 import { createUseStyles } from 'react-jss';
-
+import {HEADER_HEIGHT} from './../../../../../../constants';
 
 
 export default createUseStyles({
     PanelHeader: {
         display:'flex', 
-        flexDirection:'row',
-        height:'100px',
-        minHeight:'100px',
-        marginBottom:'1em'
+        flexDirection:'column',
+        height:`${HEADER_HEIGHT}px`,
+        minHeight:`${HEADER_HEIGHT}px`,
+        // marginBottom:'1em'
     },
     Hr: {
         width:'100%',

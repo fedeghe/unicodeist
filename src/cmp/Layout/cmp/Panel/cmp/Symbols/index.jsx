@@ -13,8 +13,7 @@ const Symbols = () => {
             }
         } = useContext(ctx),
         classes = useStyles({canScrollSymbols});
-                
-    
+
     return <div className={classes.Container}>{
         symbols.filter(
             sym => sym.label.toLowerCase().includes(symbolsFilter.toLowerCase())
