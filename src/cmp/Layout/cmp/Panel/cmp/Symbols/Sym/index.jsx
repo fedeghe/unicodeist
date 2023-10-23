@@ -28,7 +28,9 @@ const Sym = ({sym}) => {
             color: sym.color,
             rx: sym.rotationX,
             ry: sym.rotationY,
-            rz: sym.rotationZ
+            rz: sym.rotationZ,
+            skx: sym.skewX,
+            sky: sym.skewY,
         }),
         focus = () => !selected && dispatch({
             type: ACTIONS.FOCUS_ON_SYMBOL,

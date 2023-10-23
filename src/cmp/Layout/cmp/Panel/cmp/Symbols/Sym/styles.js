@@ -85,8 +85,8 @@ export default createUseStyles(theme => ({
         alignItems:'center',
     },
 
-    Rotated: ({ rx, ry, rz } = {}) => ({
-        transform: `rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)`,
+    Rotated: ({ rx, ry, rz, skx, sky } = {}) => ({
+        transform: `rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg) skew(${skx}deg,${sky}deg)`,
         display:'inline-block',
     }),
 }));
