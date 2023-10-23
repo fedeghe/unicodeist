@@ -55,6 +55,24 @@ export const config = [{
     rounder: parseFloat,
     unit: '°',
     quickTune: true,
+},{
+    label: 'Skew. x',
+    field: 'skewX',
+    min: MIN_ROT/2,
+    max: MAX_ROT/2,
+    step: STEP_ROT,
+    rounder: parseFloat,
+    unit: '°',
+    quickTune: true,
+},{
+    label: 'Skew. y',
+    field: 'skewY',
+    min: MIN_ROT/2,
+    max: MAX_ROT/2,
+    step: STEP_ROT,
+    rounder: parseFloat,
+    unit: '°',
+    quickTune: true,
 }];
 
 export default config;

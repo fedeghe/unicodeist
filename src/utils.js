@@ -51,6 +51,7 @@ export const cleanCodeFromState = state => {
                     sym.rotationX && `rotateX(${sym.rotationX}deg)`,
                     sym.rotationY && `rotateY(${sym.rotationY}deg)`,
                     sym.rotationZ && `rotateZ(${sym.rotationZ}deg)`,
+                    (sym.skewX || sym.skewY)&& `skew(${sym.skewX}deg,${sym.skewY}deg)`,
                 ].filter(Boolean).join(' ')
             ].join(';')
         );
@@ -172,7 +173,8 @@ const getUnicodeistData = j => JSON.stringify({
                 ...(s.scaleY !== 1 && { sy: s.scaleY }),
                 ...(s.rotationX && { rx: s.rotationX }), // deg
                 ...(s.rotationY && { ry: s.rotationY }), // deg
-                ...(s.rotationZ && { rz: s.rotationZ })  // deg
+                ...(s.rotationZ && { rz: s.rotationZ }),  // deg
+                ...((s.skewX || s.skewY) && { sk: [s.skewX,s.skewY] })  // deg
             },
         }
     }))
