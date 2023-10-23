@@ -225,14 +225,19 @@ const actions = {
         
         [ACTIONS.SET_ASCIIPANEL_FILTER]: ({
             payload: asciiSelectorFilter,
+            oldState: {
+                availableSymbols,
+                asciiSelectorFilter : oldAsciiSelectorFilter
+            }
         }) => {
-            const availableSymbols = filter({
-                symbols: allSymbols,
-                filter: asciiSelectorFilter
-            });
+            const contained = asciiSelectorFilter.startsWith(oldAsciiSelectorFilter),
+                newAvailableSymbols = filter({
+                    symbols: contained ? availableSymbols : allSymbols,
+                    filter: asciiSelectorFilter
+                });
             return {
                 asciiSelectorFilter,
-                availableSymbols,
+                availableSymbols: newAvailableSymbols,
                 filteredCount: count(availableSymbols) 
             };
         },
