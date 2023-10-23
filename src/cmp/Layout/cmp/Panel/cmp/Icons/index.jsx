@@ -9,12 +9,14 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import GetAppIcon from '@mui/icons-material/GetApp';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 import Channel from '@fedeghe/channeljs';
 
 import CopyDone from '../../../Main/cmp/CopyDone';
 import ThemeSwitch from '../../../../../ThemeSwitch';
 import ctx from './../../../../../../Context';
+
 import ACTIONS from './../../../../../../reducer/actions';
 import { importFromFile } from './../../../../../../utils';
 import useStyles from './styles';
@@ -44,6 +46,7 @@ const Icons = () => {
                 })
             });
         },
+        contribute = () => Channel.get('event').pub('contribute'),
         updateBackgroundColor = e => dispatch({
             type: ACTIONS.UPDATE_GLOBAL,
             payload: {
@@ -64,6 +67,10 @@ const Icons = () => {
             name: 'embed',
             icon: <CodeRoundedIcon />,
             onClick: embed
+        },{
+            name: 'contribute',
+            icon: <GitHubIcon />,
+            onClick: contribute
         }];
 
     return <>

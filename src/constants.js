@@ -2,6 +2,7 @@ const h = (new Date()).getHours();
 // leave that false, scale does the job
 
 
+export const REPO_URL = 'https://github.com/fedeghe/unicodeist';
 export const WIDTH = 500;
 export const HEIGHT = 500;
 export const MIN_WIDTH = 50;
@@ -71,6 +72,7 @@ export const UNSUPPORTEDFILE_MESSAGE = 'File not supported';
 
 
 const CONSTS = {
+    REPO_URL,
     WIDTH, HEIGHT,
     MIN_WIDTH, MIN_HEIGHT,
     PANEL_WIDTH,

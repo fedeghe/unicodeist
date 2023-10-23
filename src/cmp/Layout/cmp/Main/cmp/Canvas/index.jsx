@@ -10,6 +10,7 @@ import ctx from './../../../../../../Context';
 import { cleanCodeFromState, getUnicodeistScriptTag } from './../../../../../../utils';
 import CopyDialog from './cmp/CopyDialog';
 import DownloadDialog from './cmp/DownloadDialog';
+import ContributeDialog from './cmp/ContributeDialog';
 
 const Canvas = () => {
     const {
@@ -23,6 +24,7 @@ const Canvas = () => {
         ref = useRef(),
         [copyDialogVisibility, setCopyDialogVisibility] = useState(false),
         [downloadDialogVisibility, setDownloadDialogVisibility] = useState(false),
+        [contributeDialogVisibility, setContributeDialogVisibility] = useState(false),
         [embedCode, setEmbedCode] = useState(''),
         [scriptCode, setScriptCode] = useState(''),
         refStyles = useMemo(() => ({
@@ -36,6 +38,9 @@ const Canvas = () => {
         onDragOver = e => { e.preventDefault(); },
         exportImage = useCallback(
             () => setDownloadDialogVisibility(true)
+        ),
+        contribute = useCallback(
+            () => setContributeDialogVisibility(true)
         );
 
     useEffect(() => {
@@ -49,16 +54,19 @@ const Canvas = () => {
         if (ref.current) {
             Channel.get('event').sub('embed', embed);
             Channel.get('event').sub('exportImage', exportImage);
+            Channel.get('event').sub('contribute', contribute);
         }
         return () => {
             Channel.get('event').unsub('embed', embed);
             Channel.get('event').unsub('exportImage', exportImage);
+            Channel.get('event').unsub('contribute', contribute);
         };
     }, [ref, state]);
     return (
         <div>
             <CopyDialog visibility={copyDialogVisibility} setVisibility={setCopyDialogVisibility} embedCode={embedCode} scriptCode={scriptCode} />
             <DownloadDialog visibility={downloadDialogVisibility} setVisibility={setDownloadDialogVisibility} domRef={ref} />
+            <ContributeDialog visibility={contributeDialogVisibility} setVisibility={setContributeDialogVisibility} domRef={ref} />
             <div ref={ref} style={refStyles} onDragOver={onDragOver}>
                 {symbols.map(symbol => <CanvasSymbol key={symbol.id} symbol={symbol} />)}
             </div>
