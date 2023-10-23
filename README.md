@@ -20,10 +20,10 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
 
 ---
 - In the top right you can:<img align="right" width="322"  src="src/img/ss1.png?raw=true">
+    - change the `background-color` (default is white)
+    - switch 🌓 theme
     - set the size of the current _creative_
     - hover the speed dial button to:
-        - change the `background-color` (default is white)
-        - switch 🌓 theme
          - get the content as `<div>` usable in a html page or a `<script>` that will automatically render the _creative_ exactly where you put the script.
         - export either:
             1) `.json` file of the current _creative_ (afterward importable)
@@ -66,8 +66,10 @@ all range fields can be tuned either mving the range handle either just clicking
 
 
 ### Move all symbols  
-
 To move all symbols together just go to the _unicodeist_ logo in the right upper part and drag it in one direction, on drop end all symbols will move together in that direction for an amout proportional to the movement.
+
+### Scale all symbols  
+As for the move case but additionally keeping the `shift` key down. Notice that the relative position of all the elements will not change.
 
 
 
