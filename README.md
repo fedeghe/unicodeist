@@ -1,5 +1,5 @@
 
-![Unicodeist](src/img/unicodeist.png?raw=true)
+![unicodeist](src/img/unicodeist.png?raw=true)
 
 
 
@@ -16,7 +16,7 @@ I created the following in more or less 3 minutes, using 3 different symbols...
 Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could download exactly that creative and import it in _unicodeist_ .... but I'm sure You can do way better than that. 
 
 
-### [༺ TRY IT HERE ༻](https://fedeghe.github.io/Unicodeist/)
+### [༺ TRY IT HERE ༻](https://fedeghe.github.io/unicodeist/)
 
 ---
 - In the top right you can:<img align="right" width="322"  src="src/img/ss1.png?raw=true">
@@ -67,7 +67,7 @@ all range fields can be tuned either mving the range handle either just clicking
 
 ### Move all symbols  
 
-To move all symbols together just go to the _Unicodeist_ logo in the right upper part and drag it in one direction, on drop end all symbols will move together in that direction for an amout proportional to the movement.
+To move all symbols together just go to the _unicodeist_ logo in the right upper part and drag it in one direction, on drop end all symbols will move together in that direction for an amout proportional to the movement.
 
 
 
