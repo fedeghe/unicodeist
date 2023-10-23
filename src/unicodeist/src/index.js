@@ -23,7 +23,8 @@
             po:'position',
             cn:'center',
             p:'px',
-            t:'transform'
+            t:'transform',
+            sk:'skew'
         },
         map = {
             w: function (v) { return 'width:' + v + lbs.p; },
@@ -39,7 +40,8 @@
             sy: function (v) { return v !== 1 ? lbs.s + 'Y(' + v + ')' : ''; },
             rx: function (v) { return v ? lbs.r + 'X(' + v + lbs.d + ')' : ''; },
             ry: function (v) { return v ? lbs.r + 'Y(' + v + lbs.d + ')' : ''; },
-            rz: function (v) { return v ? lbs.r + 'Z(' + v + lbs.d + ')' : ''; }
+            rz: function (v) { return v ? lbs.r + 'Z(' + v + lbs.d + ')' : ''; },
+            sk: function (x,y) { return (x||y) ? lbs.sk + '(' + x + lbs.d + ',' + y + lbs.d + ')' : ''; }
         },
         createElement = function (sty, cnt) {
             var node = document.createElement('div'),
@@ -61,6 +63,7 @@
                     'rx' in sty.t && trans.push(map.rx(sty.t.rx));
                     'ry' in sty.t && trans.push(map.ry(sty.t.ry));
                     'rz' in sty.t && trans.push(map.rz(sty.t.rz));
+                    'sk' in sty.t && trans.push(map.sk(sty.t.sk[0],sty.t.sk[1]));
                     styles.push(
                         trans.join(' ') + ';'
                     );

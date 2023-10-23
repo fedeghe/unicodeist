@@ -18,6 +18,7 @@ const CanvasSymbol = ({symbol}) => {
             id, char, zIndex, left, top, color,
             faded,opacity, fontFamily, fontWeight,
             rotationX, rotationY, rotationZ,
+            skewX, skewY,
             scale, scaleX, scaleY,
         } = symbol,
         classes = useStyles({
@@ -79,6 +80,7 @@ const CanvasSymbol = ({symbol}) => {
                     scale(${scale}) 
                     scaleX(${scaleX}) 
                     scaleY(${scaleY}) 
+                    ${(skewX || skewY) ? `skew(${skewX}deg,${skewY}deg)` : '' }  
                     ${rotationX ? `rotateX(${rotationX}deg)` : '' }  
                     ${rotationY ? `rotateY(${rotationY}deg)` : '' }  
                     ${rotationZ ? `rotateZ(${rotationZ}deg)` : '' }  

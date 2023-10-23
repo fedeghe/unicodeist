@@ -29,6 +29,8 @@ const createSymbol = ({ char, zIndex, left, top }) => {
         color: '#000000',
         fontFamily: SYMBOL_BASE_FONTFAMILY,
         fontWeight: SYMBOL_BASE_FONTWEIGHT,
+        skewX: 0,
+        skewY: 0,
         rotationX: 0,
         rotationY: 0,
         rotationZ: 0,

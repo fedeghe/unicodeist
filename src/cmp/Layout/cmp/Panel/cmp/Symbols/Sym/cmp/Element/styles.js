@@ -41,8 +41,16 @@ export default createUseStyles({
         color: ({sym:{color}}) => color,
         transform: ({sym:{
             rotationX, rotationY, rotationZ,
-            scaleX, scaleY
-        }}) => `scaleX(${scaleX}) scaleY(${scaleY}) rotateX(${rotationX}deg) rotateY(${rotationY}deg) rotateZ(${rotationZ}deg)`,
+            scaleX, scaleY,
+            skewX, skewY
+        }}) => [
+            `scaleX(${scaleX})`,
+            `scaleY(${scaleY})`,
+            `rotateX(${rotationX}deg)`,
+            `rotateY(${rotationY}deg)`,
+            `rotateZ(${rotationZ}deg)`,
+            `skew(${skewX}deg, ${skewY}deg)`
+        ].join(' '),
         textShadow: '5px 1px 8px black'
     }
 
