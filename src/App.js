@@ -1,4 +1,3 @@
-import {register} from 'module-alias';
 import { useReducer, useEffect, useCallback } from 'react';
 import { ThemeProvider} from 'react-jss';
 
@@ -9,7 +8,6 @@ import ACTIONS from './reducer/actions';
 import getTheme from './themes';
 import {debounce} from './utils';
 
-register();
 const {reducer, init} = reducerFactory();
 const App = () => {
     const [state, dispatch] = useReducer(reducer, {}, init),
