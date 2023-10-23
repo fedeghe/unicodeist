@@ -75,16 +75,16 @@ const CanvasSymbol = ({symbol}) => {
             style={{
                 position:'absolute',
                 transformOrigin: 'center',
-                transform: `
-                    translate(${left}px,${top}px)
-                    scale(${scale}) 
-                    scaleX(${scaleX}) 
-                    scaleY(${scaleY}) 
-                    ${(skewX || skewY) ? `skew(${skewX}deg,${skewY}deg)` : '' }  
-                    ${rotationX ? `rotateX(${rotationX}deg)` : '' }  
-                    ${rotationY ? `rotateY(${rotationY}deg)` : '' }  
-                    ${rotationZ ? `rotateZ(${rotationZ}deg)` : '' }  
-                `,
+                transform:[
+                    `translate(${left}px,${top}px)`,
+                    `scale(${scale})`, 
+                    `scaleX(${scaleX})`, 
+                    `scaleY(${scaleY})`, 
+                    `${rotationX ? `rotateX(${rotationX}deg)` : '' }`,  
+                    `${rotationY ? `rotateY(${rotationY}deg)` : '' }`, 
+                    `${rotationZ ? `rotateZ(${rotationZ}deg)` : '' }`, 
+                    `${(skewX || skewY) ? `skew(${skewX}deg,${skewY}deg)` : '' }`
+                ].join(' '),
                 color,
                 fontWeight,
                 fontFamily,
