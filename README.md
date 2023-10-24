@@ -61,7 +61,7 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
 
 
 <img align="right" width="250"  src="src/img/ss3.png?raw=true">  
-all range fields can be tuned either mving the range handle either just clicking on the value and scroll up/down left/right or just type the exact value and blur (or hit `esc` | `enter` buttons).
+all range fields can be tuned either moving the range handle either just clicking on the value and scroll up/down left/right or just type the exact value and blur (or hit `esc` | `enter` buttons).
 
 
 
