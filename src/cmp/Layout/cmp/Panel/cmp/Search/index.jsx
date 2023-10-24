@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 
-import ctx from './../../../../../../Context';
-import ACTIONS from './../../../../../../reducer/actions';
+import ctx from 'src/Context';
+import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
 
 const Search = () => {

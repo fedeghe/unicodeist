@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import copy from 'copy-to-clipboard';
 import useStyles from './styles';
-import SnackMessage from '../../../../../../../../../SnackMessage';
-import { getCodes } from './../../../../../../../../../../utils';
+import SnackMessage from 'src/cmp/SnackMessage';
+import { getCodes } from 'src/utils';
 const Item = ({char, onSelect}) => {
     const classes = useStyles(),
         codes = getCodes(char),

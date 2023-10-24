@@ -2,11 +2,11 @@
 import { useContext, useCallback } from 'react';
 import Box from '@mui/material/Box';
 
-import Uslider from './../../../../../../../../Uslider';
-import ctx from './../../../../../../../../../Context';
-import { FONT_FAMILIES } from './../../../../../../../../../constants';
+import Uslider from 'src/cmp/Uslider';
+import ctx from 'src/Context';
+import { FONT_FAMILIES } from 'src/constants';
 import scaleRotConfig from './scaleAndRotation.config';
-import ACTIONS from './../../../../../../../../../reducer/actions';
+import ACTIONS from 'src/reducer/actions';
 import useStyles from './../../styles';
 import useElementStyles from './styles';
 

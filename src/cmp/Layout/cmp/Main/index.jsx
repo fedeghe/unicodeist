@@ -1,11 +1,11 @@
 import { useContext, useEffect, useCallback } from 'react';
-import ctx from './../../../../Context';
+import ctx from 'src/Context';
 import useStyles from './styles';
 
 import AddPanel from './cmp/AsciiSelector';
 import AddButton from './cmp/AddButton';
 import Canvas from './cmp/Canvas';
-import ACTIONS from './../../../../reducer/actions';
+import ACTIONS from 'src/reducer/actions';
 const Main = () => {
     const classes = useStyles(),
         { state: { addPanelVisibility }, dispatch } = useContext(ctx),

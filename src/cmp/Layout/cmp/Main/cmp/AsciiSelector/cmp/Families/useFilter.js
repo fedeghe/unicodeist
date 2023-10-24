@@ -1,5 +1,5 @@
 import {useState, useEffect, useMemo} from 'react';
-// import { getCodes } from './../../../../../../../../utils';
+
 const useFilter = ({allSymbols, filter}) => {    
     const [symbols, setSymbols] = useState(allSymbols),
         lcFilter =`${filter}`.toLowerCase(),

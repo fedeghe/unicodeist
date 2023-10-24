@@ -2,7 +2,7 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { CLOSE_TOAST_TIMEOUT } from '../../constants';
+import { CLOSE_TOAST_TIMEOUT } from 'src/constants';
 
 const SnackMessage = ({
     message, open, setOpen, onClose = () => { } }

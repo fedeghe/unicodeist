@@ -1,8 +1,8 @@
 import { useContext} from 'react';
 import Box from '@mui/material/Box';
 
-import ctx from './../../../../../../../../../Context';
-import ACTIONS from './../../../../../../../../../reducer/actions';
+import ctx from 'src/Context';
+import ACTIONS from 'src/reducer/actions';
 import useStyles from './../../styles';
 import useElementStyles from './styles';
 

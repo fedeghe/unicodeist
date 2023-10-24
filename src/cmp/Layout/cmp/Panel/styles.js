@@ -4,7 +4,7 @@ import {
     PANEL_WIDTH,
     PANEL_PADDING,
     BASE_FONTSIZE,
-} from '../../../../constants';
+} from 'src/constants';
 
 export default createUseStyles(theme => ({
     Container: {

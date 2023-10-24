@@ -7,9 +7,9 @@ import {
 import {
     toPng, toJpeg
 } from 'html-to-image';
-import { DEFAULT_DOWNLOAD_FORMAT, DOWNLOAD_FORMATS } from './../../../constants';
-import { saveAsFileJSON } from './../../../utils';
-import ctx from './../../../Context';
+import { DEFAULT_DOWNLOAD_FORMAT, DOWNLOAD_FORMATS } from 'src/constants';
+import { saveAsFileJSON } from 'src/utils';
+import ctx from 'src/Context';
 import useStyles from './styles';
 
 const DownloadDialog = ({ visibility, setVisibility, domRef }) => {

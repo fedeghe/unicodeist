@@ -1,7 +1,11 @@
 
 import { createUseStyles } from 'react-jss';
 
-import { EXPANDED_SYM_HEIGHT, COLLAPSED_SYM_HEIGHT, COLLAPSING_SYM_TIME } from '../../../../../../../constants';
+import {
+    EXPANDED_SYM_HEIGHT,
+    COLLAPSED_SYM_HEIGHT,
+    COLLAPSING_SYM_TIME
+} from 'src/constants';
 
 
 

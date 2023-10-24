@@ -6,16 +6,16 @@ import {
 import Channel from '@fedeghe/channeljs';
 
 import CanvasSymbol from './CanvasSymbol';
-import ctx from './../../../../../../Context';
+import ctx from 'src/Context';
 import {
     cleanCodeFromState,
     getUnicodeistScriptTag
-} from './../../../../../../utils';
+} from 'src/utils';
 import {
     CopyDialog,
     DownloadDialog,
     ContributeDialog
- } from './../../../../../Dialogs';
+ } from 'src/cmp/Dialogs';
 
 const Canvas = () => {
     const {

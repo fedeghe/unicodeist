@@ -2,7 +2,7 @@ import {
     MIN_SCALE_REV,
     MIN_SCALE, MAX_SCALE, STEP_SCALE,
     MIN_ROT, MAX_ROT, STEP_ROT,
-} from './../../../../../../../../../constants';
+} from 'src/constants';
 
 export const config = [{
     label: 'Scale',

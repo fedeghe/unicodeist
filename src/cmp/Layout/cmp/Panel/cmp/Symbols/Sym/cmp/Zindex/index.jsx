@@ -1,8 +1,8 @@
 import { useContext} from 'react';
-import ctx from './../../../../../../../../../Context';
-import {MIN_ZINDEX, MAX_ZINDEX} from './../../../../../../../../../constants';
-import Uslider from './../../../../../../../../Uslider';
-import ACTIONS from './../../../../../../../../../reducer/actions';
+import ctx from 'src/Context';
+import {MIN_ZINDEX, MAX_ZINDEX} from 'src/constants';
+import Uslider from 'src/cmp/Uslider';
+import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
 
 const Zindex = ({sym}) => {

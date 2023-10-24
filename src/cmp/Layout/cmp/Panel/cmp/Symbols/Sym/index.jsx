@@ -9,8 +9,8 @@ import Zindex from './cmp/Zindex';
 import Element from './cmp/Element';
 import Styles from './cmp/Styles';
 import Position from './cmp/Position';
-import ctx from '../../../../../../../Context';
-import ACTIONS from '../../../../../../../reducer/actions';
+import ctx from 'src/Context';
+import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
 
 const Sym = ({sym}) => {

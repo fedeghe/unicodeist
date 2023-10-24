@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
 
-import SnackMessage from '../../../../../../../SnackMessage';
-import ctx from '../../../../../../../../Context';
-import ACTIONS from '../../../../../../../../reducer/actions';
+import SnackMessage from 'src/cmp/SnackMessage';
+import ctx from 'src/Context';
+import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
 
 import Family from './cmp/Family';

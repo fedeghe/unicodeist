@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { Dialog, Button } from '@mui/material';
 import copy from 'copy-to-clipboard';
 
-import SnackMessage from './../../SnackMessage';
+import SnackMessage from 'src/cmp/SnackMessage';
 import useStyles from './styles';
 
 const CopyDialog = ({visibility, setVisibility, embedCode, scriptCode}) => {

@@ -14,13 +14,13 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import Channel from '@fedeghe/channeljs';
 
 
-import SnackMessage from '../../../../../SnackMessage';
+import SnackMessage from 'src/cmp/SnackMessage';
 
-import ThemeSwitch from '../../../../../ThemeSwitch';
-import ctx from './../../../../../../Context';
+import ThemeSwitch from 'src/cmp/ThemeSwitch';
+import ctx from 'src/Context';
 
-import ACTIONS from './../../../../../../reducer/actions';
-import { importFromFile } from './../../../../../../utils';
+import ACTIONS from 'src/reducer/actions';
+import { importFromFile } from 'src/utils';
 import useStyles from './styles';
 
 

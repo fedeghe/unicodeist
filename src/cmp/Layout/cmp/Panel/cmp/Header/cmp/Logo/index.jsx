@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 
 import useStyles from './styles';
-import ctx from '../../../../../../../../Context';
-import ACTIONS from '../../../../../../../../reducer/actions';
+import ctx from 'src/Context';
+import ACTIONS from 'src/reducer/actions';
 
 const Logo = () => {
     const {dispatch} = useContext(ctx),

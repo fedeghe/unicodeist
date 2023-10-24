@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 
-import ctx from './../../../../../../Context';
-import {  MIN_WIDTH, MIN_HEIGHT } from './../../../../../../constants';
-import Uslider from './../../../../../Uslider';
-import ACTIONS from './../../../../../../reducer/actions';
+import ctx from 'src/Context';
+import {  MIN_WIDTH, MIN_HEIGHT } from 'src/constants';
+import Uslider from 'src/cmp/Uslider';
+import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
 
 const Sizes = () => {

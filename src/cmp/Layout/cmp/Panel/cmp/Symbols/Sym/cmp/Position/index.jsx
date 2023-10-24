@@ -1,10 +1,10 @@
 
 import { useContext } from 'react';
 
-import Uslider from './../../../../../../../../Uslider';
-import ctx from './../../../../../../../../../Context';
-import { OFFSET_PERC } from './../../../../../../../../../constants';
-import ACTIONS from './../../../../../../../../../reducer/actions';
+import Uslider from 'src/cmp/Uslider';
+import ctx from 'src/Context';
+import { OFFSET_PERC } from 'src/constants';
+import ACTIONS from 'src/reducer/actions';
 
 import useStyles from './styles';
 

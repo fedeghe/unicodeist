@@ -1,6 +1,6 @@
 
 import ACTIONS from './actions';
-import {uniqueID, count, filter} from './../utils';
+import {uniqueID, count, filter} from 'src/utils';
 import allSymbols from './../Symbols';
 import {
     WIDTH, HEIGHT,
@@ -14,7 +14,7 @@ import {
     MIN_ZINDEX,
     MAX_ZINDEX,
     UNSUPPORTEDFILE_MESSAGE
-} from './../constants';
+} from 'src/constants';
 
 
 const createSymbol = ({ char, zIndex, left, top }) => {

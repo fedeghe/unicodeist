@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-import bg from './../../../../../../../../../img/bg.png';
+import bg from 'src/img/bg.png';
 
 export default createUseStyles({
     Container: {

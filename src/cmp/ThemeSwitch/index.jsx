@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import Switch from '@mui/material/Switch';
 
-import {DEFAULT_THEME} from './../../constants';
-import ctx from './../../Context';
-import ACTIONS from './../..//reducer/actions';
+import {DEFAULT_THEME} from 'src/constants';
+import ctx from 'src/Context';
+import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
 
 const ThemeSwitch = ({onChange = () => {}}) => {

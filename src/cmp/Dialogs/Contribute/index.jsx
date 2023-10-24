@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { Dialog } from '@mui/material';
-import { REPO_URL } from './../../../constants';
+import { REPO_URL } from 'src/constants';
 
 import useStyles from './styles';
 

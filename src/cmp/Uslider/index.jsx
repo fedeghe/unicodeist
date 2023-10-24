@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useContext } from 'react';
 
-import ctx from './../../Context';
-import ACTIONS from './../../reducer/actions';
+import ctx from 'src/Context';
+import ACTIONS from 'src/reducer/actions';
 import Box from '@mui/material/Box';
 
 import useStyles from './styles';

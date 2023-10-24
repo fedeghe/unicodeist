@@ -6,9 +6,9 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import CircularProgress from '@mui/material/CircularProgress';
 import ClearIcon from '@mui/icons-material/Clear';
 
-import ctx from '../../../../../../../../Context';
-import {debounce} from '../../../../../../../../utils';
-import ACTIONS from '../../../../../../../../reducer/actions';
+import ctx from 'src/Context';
+import {debounce} from 'src/utils';
+import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
 
 const Header = () => {
