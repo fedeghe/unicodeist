@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { Dialog, Button } from '@mui/material';
 import copy from 'copy-to-clipboard';
 
-import CopyDone from '../../../CopyDone';
+import SnackMessage from './../../SnackMessage';
 import useStyles from './styles';
 
 const CopyDialog = ({visibility, setVisibility, embedCode, scriptCode}) => {
@@ -39,7 +39,7 @@ const CopyDialog = ({visibility, setVisibility, embedCode, scriptCode}) => {
                     <Button variant="contained" onClick={onCopyScript}>Copy</Button>
                 </div>
             </Dialog>
-            {openConfirmation && <CopyDone message="Code copied to clipboard" onClose={onClose} open={openConfirmation} setOpen={setOpenConfirmation}/>}
+            {openConfirmation && <SnackMessage message="Code copied to clipboard" onClose={onClose} open={openConfirmation} setOpen={setOpenConfirmation}/>}
         </>
     );
 };

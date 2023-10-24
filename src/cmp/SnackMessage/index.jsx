@@ -2,9 +2,9 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { CLOSE_TOAST_TIMEOUT } from './../../../../../../constants';
+import { CLOSE_TOAST_TIMEOUT } from '../../constants';
 
-const CopyDone = ({
+const SnackMessage = ({
     message, open, setOpen, onClose = () => { } }
 ) => {
     const handleClose = (event, reason) => {
@@ -36,4 +36,4 @@ const CopyDone = ({
     );
 };
 
-export default CopyDone;
+export default SnackMessage;

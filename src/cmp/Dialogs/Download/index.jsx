@@ -7,9 +7,9 @@ import {
 import {
     toPng, toJpeg
 } from 'html-to-image';
-import { DEFAULT_DOWNLOAD_FORMAT, DOWNLOAD_FORMATS } from './../../../../../../../../constants';
-import { saveAsFileJSON } from './../../../../../../../../utils';
-import ctx from './../../../../../../../../Context';
+import { DEFAULT_DOWNLOAD_FORMAT, DOWNLOAD_FORMATS } from './../../../constants';
+import { saveAsFileJSON } from './../../../utils';
+import ctx from './../../../Context';
 import useStyles from './styles';
 
 const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
@@ -85,9 +85,7 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
                         )}
                     </Select>
                     <FormHelperText className={classes.Warn}>{format === DEFAULT_DOWNLOAD_FORMAT ? 'this is the only importable format' : " "}</FormHelperText>
-
                 </FormGroup>
-
                 <Button className={classes.DownloadButton} disabled={!downloadEnabled} variant="contained" onClick={doDownload}>Download</Button>
             </div>
         </Dialog>

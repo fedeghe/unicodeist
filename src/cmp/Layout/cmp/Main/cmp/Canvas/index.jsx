@@ -8,9 +8,9 @@ import Channel from '@fedeghe/channeljs';
 import CanvasSymbol from './../CanvasSymbol';
 import ctx from './../../../../../../Context';
 import { cleanCodeFromState, getUnicodeistScriptTag } from './../../../../../../utils';
-import CopyDialog from './cmp/CopyDialog';
-import DownloadDialog from './cmp/DownloadDialog';
-import ContributeDialog from './cmp/ContributeDialog';
+import CopyDialog from './../../../../../Dialogs/Copy';
+import DownloadDialog from './../../../../../Dialogs/Download';
+import ContributeDialog from './../../../../../Dialogs/Contribute';
 
 const Canvas = () => {
     const {

@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import copy from 'copy-to-clipboard';
 import useStyles from './styles';
-import CopyDone from './../../../../../CopyDone';
+import SnackMessage from '../../../../../../../../../SnackMessage';
 import { getCodes } from './../../../../../../../../../../utils';
 const Item = ({char, onSelect}) => {
     const classes = useStyles(),
@@ -46,7 +46,7 @@ const Item = ({char, onSelect}) => {
                 )}
             </div>
         </div>
-        {copyDone && <CopyDone message={`${copyDone} copied to clipboard`} onClose={hideConfirmation} open={Boolean(copyDone)} setOpen={setCopyDone}/>}
+        {copyDone && <SnackMessage message={`${copyDone} copied to clipboard`} onClose={hideConfirmation} open={Boolean(copyDone)} setOpen={setCopyDone}/>}
     </>;
 
 };

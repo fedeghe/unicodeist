@@ -13,7 +13,9 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 
 import Channel from '@fedeghe/channeljs';
 
-import CopyDone from '../../../Main/cmp/CopyDone';
+
+import SnackMessage from '../../../../../SnackMessage';
+
 import ThemeSwitch from '../../../../../ThemeSwitch';
 import ctx from './../../../../../../Context';
 
@@ -96,7 +98,7 @@ const Icons = () => {
             <input style={{width:'28px'}} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
             <ThemeSwitch onChange={handleClose}/>
         </div>
-        {error && <CopyDone message={error} open={error} setOpen={removeError}/>}
+        {error && <SnackMessage message={error} open={error} setOpen={removeError}/>}
     </>;
 };
 

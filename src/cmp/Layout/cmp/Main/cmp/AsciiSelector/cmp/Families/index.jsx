@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 
-import CopyDone from './../../../CopyDone';
+import SnackMessage from '../../../../../../../SnackMessage';
 import ctx from '../../../../../../../../Context';
 import ACTIONS from '../../../../../../../../reducer/actions';
 import useStyles from './styles';
@@ -41,7 +41,7 @@ const Families = () => {
         {Boolean(filteredCount) && 
             availableSymbols.map(({label, data}) => <Family key={label} data={data} label={label} onSelect={onSelect}/>)
         }
-        {open && <CopyDone message={`${messageChar} added`} onClose={hideConfirmation} open={open} setOpen={setOpen}/>}
+        {open && <SnackMessage message={`${messageChar} added`} onClose={hideConfirmation} open={open} setOpen={setOpen}/>}
         
     </div>;
 };
