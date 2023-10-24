@@ -34,6 +34,7 @@
     "lintfix": "eslint src --fix",
     "unicodeist": "malta src/unicodeist/build.json",
     "predeploy": "yarn build",
+    "deployClean": "gh-pages-clean gh-pages -d build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {

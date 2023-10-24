@@ -22,6 +22,7 @@ import cyrillic from './7-cyrillic';
 import emojii from './8-emojii';
 import math from './9-math';
 import others from './10-others';
+import egyptianHieroglyphs from './11-egyptian-hieroglyphs.js';
 
 
 const exp = [
@@ -35,7 +36,8 @@ const exp = [
     { label: "Cyrillic", data: cyrillic},
     { label: 'Math', data: math},
     { label: 'Emojii', data: emojii },
-    { label: 'Others symbols', data: others }
+    { label: 'Others symbols', data: others },
+    { label: 'Egyptian Hieroglyphs', data: egyptianHieroglyphs }
 ];
 
 export default exp;
