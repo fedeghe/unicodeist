@@ -6,8 +6,8 @@ import {
 
 import useStyles from './styles';
 
-import ctx from './../../../../../../Context';
-import ACTIONS from './../../../../../../reducer/actions';
+import ctx from '../../../../../../../Context';
+import ACTIONS from '../../../../../../../reducer/actions';
 
 const CanvasSymbol = ({symbol}) => {
     const {state: { focusedSymbolId}, dispatch} = useContext(ctx),

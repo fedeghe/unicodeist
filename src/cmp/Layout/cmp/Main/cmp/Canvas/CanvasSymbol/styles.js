@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
 import {
     FADED_OPACITY
-} from './../../../../../../constants';
+} from '../../../../../../../constants';
 
 export default createUseStyles({
     CanvasSymbol: ({isTarget, faded, ownOpacity }) => ({

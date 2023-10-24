@@ -5,12 +5,17 @@ import {
 
 import Channel from '@fedeghe/channeljs';
 
-import CanvasSymbol from './../CanvasSymbol';
+import CanvasSymbol from './CanvasSymbol';
 import ctx from './../../../../../../Context';
-import { cleanCodeFromState, getUnicodeistScriptTag } from './../../../../../../utils';
-import CopyDialog from './../../../../../Dialogs/Copy';
-import DownloadDialog from './../../../../../Dialogs/Download';
-import ContributeDialog from './../../../../../Dialogs/Contribute';
+import {
+    cleanCodeFromState,
+    getUnicodeistScriptTag
+} from './../../../../../../utils';
+import {
+    CopyDialog,
+    DownloadDialog,
+    ContributeDialog
+ } from './../../../../../Dialogs';
 
 const Canvas = () => {
     const {
