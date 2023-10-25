@@ -50,9 +50,10 @@ export default createUseStyles(theme => console.log({theme}) || ({
             `rotateX(${rotationX}deg)`,
             `rotateY(${rotationY}deg)`,
             `rotateZ(${rotationZ}deg)`,
-            `skew(${skewX}deg, ${skewY}deg)`
+            `skew(${skewX}deg,${skewY}deg)`
         ].join(' '),
-        textShadow: '5px 1px 8px black'
+        filter: ({sym:{blur}}) => blur ? `blur(${blur}px)` : '',
+        // textShadow: '5px 1px 8px black'
     }
 
 }));

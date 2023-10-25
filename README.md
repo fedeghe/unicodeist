@@ -53,7 +53,7 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
     - change the `font-family` of the symbol  
     - change the `font-weight` of the symbol
     - change the `color` of the symbol
-    - tune `scale`, `scaleX`, `scaleY`, `rotationX`, `rotationY`, `rotationZ`, `skewX`, `skewY`
+    - tune `scale`, `scaleX`, `scaleY`, `rotationX`, `rotationY`, `rotationZ`, `skewX`, `skewY`, `blur` and `opacity`
     - move the symbol in a different location:  
         - using the range inputs
         - drag the symbol

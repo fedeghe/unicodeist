@@ -2,6 +2,7 @@ import {
     MIN_SCALE_REV,
     MIN_SCALE, MAX_SCALE, STEP_SCALE,
     MIN_ROT, MAX_ROT, STEP_ROT,
+    MIN_BLUR, MAX_BLUR, STEP_BLUR,
 } from 'src/constants';
 
 export const config = [{
@@ -72,6 +73,15 @@ export const config = [{
     step: STEP_ROT,
     rounder: parseFloat,
     unit: '°',
+    quickTune: true,
+},{
+    label: 'Blur',
+    field: 'blur',
+    min: MIN_BLUR,
+    max: MAX_BLUR,
+    step: STEP_BLUR,
+    rounder: parseFloat,
+    unit: '',
     quickTune: true,
 }];
 

@@ -24,6 +24,8 @@
             cn:'center',
             p:'px',
             t:'transform',
+            fl:'filter',
+            b:'blur',
             sk:'skew'
         },
         map = {
@@ -41,7 +43,8 @@
             rx: function (v) { return v ? lbs.r + 'X(' + v + lbs.d + ')' : ''; },
             ry: function (v) { return v ? lbs.r + 'Y(' + v + lbs.d + ')' : ''; },
             rz: function (v) { return v ? lbs.r + 'Z(' + v + lbs.d + ')' : ''; },
-            sk: function (x,y) { return (x||y) ? lbs.sk + '(' + x + lbs.d + ',' + y + lbs.d + ')' : ''; }
+            sk: function (x,y) { return (x||y) ? lbs.sk + '(' + x + lbs.d + ',' + y + lbs.d + ')' : ''; },
+            bl: function (v) { return v ? lbs.b + '(' + v + lbs.p + ')' : ''; },
         },
         createElement = function (sty, cnt) {
             var node = document.createElement('div'),
@@ -52,25 +55,35 @@
                 k;
 
             for (k in sty) {
-                if (k === 't') {
-                    var trans = [
-                        lbs.t + ':translate(' + sty.t.trn[0] + lbs.p + ',' + sty.t.trn[1] + lbs.p + ')'
-                    ];
-                    's' in sty.t && trans.push(map.s(sty.t.s));
-                    'sx' in sty.t && trans.push(map.sx(sty.t.sx));
-                    'sy' in sty.t && trans.push(map.sy(sty.t.sy));
-                    'sy' in sty.t && trans.push(map.rx(sty.t.rx));
-                    'rx' in sty.t && trans.push(map.rx(sty.t.rx));
-                    'ry' in sty.t && trans.push(map.ry(sty.t.ry));
-                    'rz' in sty.t && trans.push(map.rz(sty.t.rz));
-                    'sk' in sty.t && trans.push(map.sk(sty.t.sk[0],sty.t.sk[1]));
-                    styles.push(
-                        trans.join(' ') + ';'
-                    );
-                } else {
-                    k in map && styles.push(
-                        map[k](sty[k])
-                    );
+                switch (k) {
+                    case 't':
+                        var trans = [
+                            lbs[k] + ':translate(' + sty[k].trn[0] + lbs.p + ',' + sty[k].trn[1] + lbs.p + ')'
+                        ];
+                        's' in sty[k] && trans.push(map.s(sty[k].s));
+                        'sx' in sty[k] && trans.push(map.sx(sty[k].sx));
+                        'sy' in sty[k] && trans.push(map.sy(sty[k].sy));
+                        'sy' in sty[k] && trans.push(map.rx(sty[k].rx));
+                        'rx' in sty[k] && trans.push(map.rx(sty[k].rx));
+                        'ry' in sty[k] && trans.push(map.ry(sty[k].ry));
+                        'rz' in sty[k] && trans.push(map.rz(sty[k].rz));
+                        'sk' in sty[k] && trans.push(map.sk(sty[k].sk[0],sty[k].sk[1]));
+                        styles.push(
+                            trans.join(' ') + ';'
+                        );
+                        break;
+                    case 'f':
+                        var filter = [lbs.fl + ':'];
+                        'bl' in sty[k] && filter.push(map.bl(sty[k].bl));
+                        styles.push(
+                            filter.join(' ') + ';'
+                        );
+                        break;
+                    default:        
+                        k in map && styles.push(
+                            map[k](sty[k])
+                        );
+                        break;
                 }
             }
             styles.length && node.setAttribute('style', styles.join(';'));

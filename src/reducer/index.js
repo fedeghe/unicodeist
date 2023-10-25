@@ -34,6 +34,7 @@ const createSymbol = ({ char, zIndex, left, top }) => {
         rotationX: 0,
         rotationY: 0,
         rotationZ: 0,
+        blur: 0,
         opacity: 1,
         scale:1,
         scaleX:1,

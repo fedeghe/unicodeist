@@ -43,6 +43,7 @@ export const cleanCodeFromState = state => {
                 `color:${sym.color}`,
                 `opacity:${sym.opacity}`,
                 `position:absolute;transform-origin:center center`,
+                sym.blur && `filter:blur(${sym.blur}px)`,
                 `transform:` + [
                     `translate(${sym.left}px,${sym.top}px)`,
                     sym.scale !== 1 && `scale(${sym.scale})`,
@@ -53,7 +54,7 @@ export const cleanCodeFromState = state => {
                     sym.rotationZ && `rotateZ(${sym.rotationZ}deg)`,
                     (sym.skewX || sym.skewY)&& `skew(${sym.skewX}deg,${sym.skewY}deg)`,
                 ].filter(Boolean).join(' ')
-            ].join(';')
+            ].filter(Boolean).join(';')
         );
         return child;
     }).forEach(c => root.appendChild(c));
@@ -176,6 +177,9 @@ const getUnicodeistData = j => JSON.stringify({
                 ...(s.rotationZ && { rz: s.rotationZ }),  // deg
                 ...((s.skewX || s.skewY) && { sk: [s.skewX,s.skewY] })  // deg
             },
+            f:{
+                ...(s.blur && { bl: s.blur }),
+            }
         }
     }))
 });

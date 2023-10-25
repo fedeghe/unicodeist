@@ -20,6 +20,7 @@ const CanvasSymbol = ({symbol}) => {
             rotationX, rotationY, rotationZ,
             skewX, skewY,
             scale, scaleX, scaleY,
+            blur
         } = symbol,
         classes = useStyles({
             isTarget,
@@ -75,6 +76,7 @@ const CanvasSymbol = ({symbol}) => {
             style={{
                 position:'absolute',
                 transformOrigin: 'center',
+                
                 transform:[
                     `translate(${left}px,${top}px)`,
                     `scale(${scale})`, 
@@ -85,6 +87,9 @@ const CanvasSymbol = ({symbol}) => {
                     `${rotationZ ? `rotateZ(${rotationZ}deg)` : '' }`, 
                     `${(skewX || skewY) ? `skew(${skewX}deg,${skewY}deg)` : '' }`
                 ].join(' '),
+                filter:[
+                    `blur(${blur}px)`,
+                ].filter(Boolean).join(' '),
                 color,
                 fontWeight,
                 fontFamily,

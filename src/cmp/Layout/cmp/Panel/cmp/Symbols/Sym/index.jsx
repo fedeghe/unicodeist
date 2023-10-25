@@ -31,6 +31,7 @@ const Sym = ({sym}) => {
             rz: sym.rotationZ,
             skx: sym.skewX,
             sky: sym.skewY,
+            blr: sym.blur,
         }),
         focus = () => !selected && dispatch({
             type: ACTIONS.FOCUS_ON_SYMBOL,
