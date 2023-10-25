@@ -36,7 +36,7 @@ const Families = () => {
             });
             letAsciiPanelOpenAfterSelection ? showConfirmation(char) : closePanel();
         };
-
+    
     return <div className={classes.Container}>
         {Boolean(filteredCount) && 
             availableSymbols.map(({label, data}) => <Family key={label} data={data} label={label} onSelect={onSelect}/>)

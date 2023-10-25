@@ -245,20 +245,15 @@ const actions = {
         
         [ACTIONS.SET_ASCIIPANEL_FILTER]: ({
             payload: asciiSelectorFilter,
-            oldState: {
-                availableSymbols,
-                asciiSelectorFilter : oldAsciiSelectorFilter
-            }
         }) => {
-            const contained = asciiSelectorFilter.startsWith(oldAsciiSelectorFilter),
-                newAvailableSymbols = filter({
-                    symbols: contained ? availableSymbols : allSymbols,
-                    filter: asciiSelectorFilter
-                });
+            const newAvailableSymbols = filter({
+                symbols: allSymbols,
+                filter: asciiSelectorFilter
+            });
             return {
                 asciiSelectorFilter,
                 availableSymbols: newAvailableSymbols,
-                filteredCount: count(availableSymbols) 
+                filteredCount: count(newAvailableSymbols) 
             };
         },
         
@@ -332,6 +327,7 @@ const actions = {
                 : sym
             )
         }),
+
         [ACTIONS.MOVE_ALL_SYMBOLS]:({
             payload: {leftTune, topTune},
             oldState: { symbols }
@@ -363,8 +359,11 @@ const actions = {
                 };
             })
         }),
+
         [ACTIONS.SET_SYMBOLS_FILTER] : ({ payload }) => ({ symbolsFilter: payload}),
+
         [ACTIONS.REMOVE_ERROR] : ( ) => ({ error: null}),
+
         [ACTIONS.MOVE_SYMBOL] : ({
             payload: { id, direction },
             oldState: { symbols }
@@ -380,6 +379,7 @@ const actions = {
                 symbols: canProceed ? newSymbols : symbols
             };
         },
+
         [ACTIONS.MOVE_TARGET_ONE_PX]: ({payload : key, oldState: {focusedSymbolId, symbols}}) => {
             const what = {
                 ArrowLeft: {field: 'left', diff: -1},
