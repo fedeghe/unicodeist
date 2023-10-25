@@ -154,24 +154,20 @@ export const importFromFile = ({ onContentReady }) => {
 
 const getUnicodeistData = j => JSON.stringify({
     sty: {
-        w: j.width, //px
-        h: j.height, //px
+        w: j.width,
+        h: j.height,
         bgc: j.backgroundColor,
-        // position:'relative'
     },
     sym: j.symbols.map(s => ({
         cnt: s.char,
         sty: {
-            // position:'absolute',
             zi: s.zIndex,
             c: s.color,
-            // fs: s.fontSize, //px
             ff: Object.keys(FONT_FAMILIES_REDUCTION_MAP).find(
                 k => FONT_FAMILIES_REDUCTION_MAP[k] === s.fontFamily
             ),
             fw: s.fontWeight,
             o: s.opacity,
-            // 'transform-origin': 'center center', 
             t: {
                 trn: [s.left, s.top],
                 ...(s.scale !== 1 && { s: s.scale }),
