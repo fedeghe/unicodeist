@@ -9,5 +9,16 @@ export default createUseStyles({
         justifyContent:'space-evenly',
         // marginTop:'1em'
     },
+    Pointer: {
+        cursor:'pointer'
+    },
+    ColorPicker: {
+        width:'28px'
+    },
+    Separator: {
+        width: 0,
+        borderLeft:`1px dotted gray`,
+        height:'30px'
+    }
     
 });

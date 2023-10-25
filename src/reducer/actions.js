@@ -25,6 +25,7 @@ const INIT = Symbol('init'),
     MOVE_TARGET_ONE_PX = Symbol('move 1px symbol in direction'),
     REMOVE_ERROR = Symbol('remove error'),
     CAN_SCROLL_SYMBOLS = Symbol('when focused on a wheel'),
+    NEW = Symbol('new creativity'),
     LET_ASCIIPANEL_OPEN_AFTER_SELECTION = Symbol('let the panel open after selection');
 
 const exp = {
@@ -55,7 +56,8 @@ const exp = {
     MOVE_SYMBOL,
     MOVE_TARGET_ONE_PX,
     REMOVE_ERROR,
-    CAN_SCROLL_SYMBOLS
+    CAN_SCROLL_SYMBOLS,
+    NEW
 };
 
 export default exp;

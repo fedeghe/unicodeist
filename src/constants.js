@@ -22,7 +22,8 @@ export const ITEM_WIDTH = 100;
 export const ITEM_HEIGHT = 140;
 export const ITEM_FOOTER_HEIGHT = 20;
 export const ITEM_FONTSIZE = '2.5em';
-export const DEFAULT_THEME = (h > 20 || h < 7) ? 'dark' : 'bright';
+export const THEMES = {'dark' : 'dark', 'bright': 'bright'};
+export const DEFAULT_THEME = (h > 20 || h < 7) ? THEMES.dark : THEMES.bright;
 export const FADED_OPACITY = 0.4;
 export const LET_UNICODE_PANEL_OPEN_AFTER_SELECTION = true;
 export const MIN_SCALE_REV = -150;
@@ -42,7 +43,7 @@ export const COLLAPSED_SYM_HEIGHT = 70;
 export const COLLAPSING_SYM_TIME = 0.3;
 export const CLOSE_TOAST_TIMEOUT = 1000;
 export const OFFSET_PERC = 0.3;
-export const HEADER_HEIGHT = 150;
+export const HEADER_HEIGHT = 140;
 export const FONT_FAMILIES = [
     'Arial', 'Verdana', 'Tahoma',
     'Trebuchet MS',
@@ -116,6 +117,7 @@ const CONSTS = {
     DEFAULT_DOWNLOAD_FORMAT,
     UNSUPPORTEDFILE_MESSAGE,
     OFFSET_PERC,
-    HEADER_HEIGHT
+    HEADER_HEIGHT,
+    THEMES
 };
 export default CONSTS;

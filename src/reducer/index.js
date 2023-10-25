@@ -64,6 +64,22 @@ const actions = {
             superFocus: false,
             canScrollSymbols: true
         }),
+        [ACTIONS.NEW]: () => ({
+            width: WIDTH,
+            height: HEIGHT,
+            maxWidth: WIDTH,
+            maxHeight: HEIGHT,
+            symbols: [],
+            addPanelVisibility: false,
+            focusedSymbolId: null,
+            backgroundColor: '#ffffff',
+            asciiSelectorFilter: '',
+            symbolsFilter: '',
+            asciiPanelFilterByIconName: '',
+            letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
+            superFocus: false,
+            canScrollSymbols: true
+        }),
         
         [ACTIONS.SWITCH_THEME]: ({
             oldState: {themeKey}
