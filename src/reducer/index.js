@@ -2,6 +2,7 @@
 import ACTIONS from './actions';
 import {uniqueID, count, filter} from 'src/utils';
 import allSymbols from './../Symbols';
+import uncompress from './utils';
 import {
     WIDTH, HEIGHT,
     PANEL_WIDTH,
@@ -13,7 +14,7 @@ import {
     MAX_SCALE,
     MIN_ZINDEX,
     MAX_ZINDEX,
-    UNSUPPORTEDFILE_MESSAGE
+    UNSUPPORTEDFILE_MESSAGE,
 } from 'src/constants';
 
 
@@ -296,7 +297,7 @@ const actions = {
             let newState;
             try {
                 newState = JSON.parse(payload);
-                if (!('symbolsFilter' in newState)) {
+                if (!('sty' in newState) || !('sym' in newState)) {
                     throw UNSUPPORTEDFILE_MESSAGE;
                 }
             } catch(e) {
@@ -304,13 +305,7 @@ const actions = {
                     error: UNSUPPORTEDFILE_MESSAGE
                 };
             }
-            return {
-                ...newState,
-                symbols: newState.symbols.map(s => ({
-                    ...s,
-                    id: `${uniqueID}`
-                }))
-            };
+            return uncompress(newState);
         },
         
         [ACTIONS.ALIGN_H]: ({payload: id, oldState: {symbols, width}}) => ({

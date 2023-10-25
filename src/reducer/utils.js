@@ -1,0 +1,56 @@
+import {
+    getMaxHeight,
+    getMaxWidth,
+    LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
+} from 'src/constants';
+const FFRM = {
+    ar: 'Arial',
+    v: 'Verdana',
+    ta: 'Tahoma',
+    tr: 'Trebuchet MS',
+    tn: 'Times New Roman',
+    ge: 'Georgia',
+    ga: 'Garamond',
+    c: 'Courier New',
+    b: 'Brush Script MT'
+};
+export const uncompress = c => ({
+    width: c.sty.w,
+    height: c.sty.h,
+    maxWidth: getMaxWidth(),
+    maxHeight: getMaxHeight(),
+    addPanelVisibility: false,
+    focusedSymbolId: null,
+    backgroundColor: c.sty.bgc,
+    asciiSelectorFilter: '',
+    symbolsFilter: '',
+    asciiPanelFilterByIconName: '',
+    letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
+    superFocus: false,
+    canScrollSymbols: true,
+    symbols: c.sym.map(s => ({
+        id: s.id,
+        char: s.cnt,
+        label : s.l,
+        zIndex: s.sty.zi,
+        left:s.sty.t.trn[0],
+        top:s.sty.t.trn[1],
+        color: s.sty.c,
+        fontFamily: FFRM[s.sty.ff],
+        fontWeight: s.sty.fw,
+        skewX: s.sty.t?.sk?.[0] || 0,
+        skewY: s.sty.t?.sk?.[1] || 0,
+        rotationX: s.sty.t?.rx || 0,
+        rotationY: s.sty.t?.ry || 0,
+        rotationZ: s.sty.t?.rz || 0,
+        blur: s.sty?.f?.bl || 0,
+        opacity: s.sty.o || 1,
+        scale: s.sty.t.s || 1,
+        scaleX: s.sty.t.sx || 1,
+        scaleY: s.sty.t.sy || 1,
+        targetUp: false,
+        faded: false
+    }))
+});
+
+export default uncompress;

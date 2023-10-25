@@ -44,6 +44,8 @@ export const COLLAPSING_SYM_TIME = 0.3;
 export const CLOSE_TOAST_TIMEOUT = 1000;
 export const OFFSET_PERC = 0.3;
 export const HEADER_HEIGHT = 140;
+export const getMaxHeight = () => ~~window.innerHeight * 0.9;
+export const getMaxWidth = () => ~~window.innerWidth * 0.9;
 export const FONT_FAMILIES = [
     'Arial', 'Verdana', 'Tahoma',
     'Trebuchet MS',
@@ -118,6 +120,8 @@ const CONSTS = {
     UNSUPPORTEDFILE_MESSAGE,
     OFFSET_PERC,
     HEADER_HEIGHT,
-    THEMES
+    THEMES,
+    getMaxHeight,
+    getMaxWidth
 };
 export default CONSTS;

@@ -124,17 +124,11 @@ export const filter = ({ symbols, filter, debug = false }) => {
  * TODO: here I should allow the use to see the location & name dialog
  * but still do not know how
  */
-export const saveAsFileJSON = data => {
-    // availableSymbols, filteredCount
-    const state = JSON.parse(JSON.stringify(data));
-    state.canScrollSymbols = true;
-    delete state.availableSymbols;
-    delete state.filteredCount;
-    return new Promise(resolve => {
-        const blob = new Blob([JSON.stringify(state)]);
+export const saveAsFileJSON = state => 
+    new Promise(resolve => {
+        const blob = new Blob([getUnicodeistData(state)]);
         resolve(window.URL.createObjectURL(blob));
     });
-};
 export const importFromFile = ({ onContentReady }) => {
     const link = document.createElement("input");
     link.type = 'file';
@@ -159,6 +153,8 @@ const getUnicodeistData = j => JSON.stringify({
         bgc: j.backgroundColor,
     },
     sym: j.symbols.map(s => ({
+        id: s.id,
+        l: s.label,
         cnt: s.char,
         sty: {
             zi: s.zIndex,
@@ -178,9 +174,11 @@ const getUnicodeistData = j => JSON.stringify({
                 ...(s.rotationZ && { rz: s.rotationZ }),  // deg
                 ...((s.skewX || s.skewY) && { sk: [s.skewX,s.skewY] })  // deg
             },
-            f:{
-                ...(s.blur && { bl: s.blur }),
-            }
+            ...(s.blur && {
+                f: {
+                    bl: s.blur
+                }
+            })
         }
     }))
 });
