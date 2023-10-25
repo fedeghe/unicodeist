@@ -19,7 +19,7 @@ import Channel from '@fedeghe/channeljs';
 import SnackMessage from 'src/cmp/SnackMessage';
 
 import ThemeSwitch from 'src/cmp/ThemeSwitch';
-import {THEMES} from 'src/constants';
+import { THEMES } from 'src/constants';
 import ctx from 'src/Context';
 
 import ACTIONS from 'src/reducer/actions';

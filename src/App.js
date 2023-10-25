@@ -1,6 +1,7 @@
 import { useReducer, useEffect, useCallback } from 'react';
 import { ThemeProvider} from 'react-jss';
 
+import {getMaxHeight, getMaxWidth} from 'src/constants';
 import Layout from './cmp/Layout';
 import Context from './Context';
 import reducerFactory from './reducer';
@@ -21,8 +22,8 @@ const App = () => {
             () => dispatch({
                 type: ACTIONS.INIT_VIEWPORT,
                 payload: {
-                    maxHeight: ~~window.innerHeight * 0.9,
-                    maxWidth: ~~window.innerWidth * 0.9,
+                    maxHeight: getMaxHeight(),
+                    maxWidth: getMaxWidth(),
                 }
             }), 500
         ),
