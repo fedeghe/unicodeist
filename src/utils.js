@@ -125,8 +125,13 @@ export const filter = ({ symbols, filter, debug = false }) => {
  * but still do not know how
  */
 export const saveAsFileJSON = data => {
+    // availableSymbols, filteredCount
+    const state = JSON.parse(JSON.stringify(data));
+    state.canScrollSymbols = true;
+    delete state.availableSymbols;
+    delete state.filteredCount;
     return new Promise(resolve => {
-        const blob = new Blob([JSON.stringify(data)]);
+        const blob = new Blob([JSON.stringify(state)]);
         resolve(window.URL.createObjectURL(blob));
     });
 };
