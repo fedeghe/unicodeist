@@ -18,6 +18,7 @@ const {grayscale : cgs} = colors,
             itemForegroundOver: cgs.lightF,
         },
         foreground: cgs.lightE,
+        border: cgs.lightF,
         radius: {
             selectorModal: '5px' ,
             selectorModalItem: '3px' ,

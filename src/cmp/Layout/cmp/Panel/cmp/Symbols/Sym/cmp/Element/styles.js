@@ -1,8 +1,9 @@
 import { createUseStyles } from 'react-jss';
 
-import bg from 'src/img/bg.png';
+import bgBright from 'src/img/bgBright.png';
+import bgDark from 'src/img/bgDark.png';
 
-export default createUseStyles({
+export default createUseStyles(theme => console.log({theme}) || ({
     Container: {
         height: '200px',
         display: 'flex',
@@ -25,9 +26,9 @@ export default createUseStyles({
         flexDirection: 'column',
         justifyContent: 'center',
         fontSize:'4em',
-        border: '1px solid black',
+        outline: `1px solid ${theme.border}`,
         borderRadius: '5px',
-        backgroundImage: `url(${bg})`,
+        backgroundImage: `url(${theme.mode === 'bright' ? bgBright: bgDark})`,
         overflow:'hidden'
     },
     Item: {
@@ -54,4 +55,4 @@ export default createUseStyles({
         textShadow: '5px 1px 8px black'
     }
 
-});
+}));
