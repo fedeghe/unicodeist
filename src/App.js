@@ -1,7 +1,7 @@
 import { useReducer, useEffect, useCallback } from 'react';
 import { ThemeProvider} from 'react-jss';
 
-import {getMaxHeight, getMaxWidth} from 'src/constants';
+
 import Layout from './cmp/Layout';
 import Context from './Context';
 import reducerFactory from './reducer';
@@ -19,13 +19,7 @@ const App = () => {
         })(),
         theme = getTheme(themeKey),
         debounced = debounce(
-            () => dispatch({
-                type: ACTIONS.INIT_VIEWPORT,
-                payload: {
-                    maxHeight: getMaxHeight(),
-                    maxWidth: getMaxWidth(),
-                }
-            }), 500
+            () => dispatch({ type: ACTIONS.INIT_VIEWPORT }), 500
         ),
         // catchReload = useCallback(e => {
         //     e.preventDefault();

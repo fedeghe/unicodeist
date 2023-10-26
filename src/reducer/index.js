@@ -1,6 +1,7 @@
 
 import ACTIONS from './actions';
 import {uniqueID, count, filter} from 'src/utils';
+import {getMaxHeight, getMaxWidth} from 'src/constants';
 import allSymbols from './../Symbols';
 import uncompress from './utils';
 import {
@@ -68,8 +69,8 @@ const actions = {
         [ACTIONS.NEW]: () => ({
             width: WIDTH,
             height: HEIGHT,
-            maxWidth: WIDTH,
-            maxHeight: HEIGHT,
+            maxWidth: getMaxWidth(),
+            maxHeight: getMaxHeight(),
             symbols: [],
             addPanelVisibility: false,
             focusedSymbolId: null,
@@ -258,16 +259,15 @@ const actions = {
         },
         
         [ACTIONS.INIT_VIEWPORT]: ({
-            payload : {maxWidth, maxHeight},
             oldState: {
                 width, height
             }
         }) => {
-            const newMaxWidth = parseInt(maxWidth, 10) - PANEL_WIDTH,
-                newMaxHeight = parseInt(maxHeight, 10);
+            const newMaxWidth = parseInt(getMaxWidth(), 10) - PANEL_WIDTH,
+                newMaxHeight = parseInt(getMaxHeight(), 10);
             return {
                 maxWidth: newMaxWidth,
-                maxHeight: maxHeight,
+                maxHeight: newMaxHeight,
                 width: Math.min(width, newMaxWidth),
                 height: Math.min(height, newMaxHeight),
             };
