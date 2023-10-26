@@ -9,9 +9,10 @@ A unicode characters based visual editor
 
 Sometimes creating temporary creative for a logo should be a matter of minutes, using _unicodeist_ it is!
 
-I created the following in more or less 3 minutes, using 3 different symbols...  
+I created the following in more or less 3 minutes, using 3 different symbols.  
 
-<img width="322"  src="src/img/ss0.png?raw=true">
+<img width="322"  src="src/img/ss0.png?raw=true">  
+
 
 Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could download exactly that creative and import it in _unicodeist_ .... but I'm sure You can do way better than that. 
 
