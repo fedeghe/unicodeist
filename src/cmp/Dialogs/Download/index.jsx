@@ -15,7 +15,7 @@ import useStyles from './styles';
 const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
 
     const classes = useStyles(),
-        { state } = useContext(ctx),
+        { state, state: { backgroundColorAlpha } } = useContext(ctx),
         [format, setFormat] = useState(DEFAULT_DOWNLOAD_FORMAT),
         [filename, setFilename] = useState(''),
         [downloadEnabled, setDownloadEnabled] = useState(false),
@@ -34,10 +34,21 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
             () => saveAsFileJSON(state),
             [state]
         ),
+        alphaFlagLabel = backgroundColorAlpha ? '' : ' (turned OFF)',
         formatToReader = {
-            [DOWNLOAD_FORMATS.json]: toJson,
-            [DOWNLOAD_FORMATS.jpeg]: toJpeg,
-            [DOWNLOAD_FORMATS.png]: toPng,
+            [DOWNLOAD_FORMATS.json]: {
+                executor: toJson,
+                innerHint: 'i/o compliant',
+                outerHint: 'this format is the only importable one'
+            },
+            [DOWNLOAD_FORMATS.jpeg]: {
+                executor: toJpeg
+            },
+            [DOWNLOAD_FORMATS.png]: {
+                executor: toPng,
+                innerHint: `alpha bg compliant${alphaFlagLabel}`,
+                outerHint: `this format supports background alpha transparency${alphaFlagLabel}`
+            },
         },
         changeFormat = e => setFormat(e.target.value),
         changeName = e => {
@@ -46,7 +57,7 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
         },
         doDownload = useCallback(() => {
             const dom = domRef.current;
-            format in formatToReader && formatToReader[format](dom).then(
+            format in formatToReader && formatToReader[format].executor(dom).then(
                 dataUrl => {
                     const a = document.createElement('a');
                     a.href = dataUrl;
@@ -81,10 +92,15 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
                         onChange={changeFormat}
                     >
                         {Object.keys(formatToReader).map(format =>
-                            <MenuItem key={format} value={format}>{format}</MenuItem>
+                            <MenuItem key={format} value={format}>
+                                {format}
+                                {formatToReader[format].innerHint ? <div className={classes.Compliant}>{formatToReader[format].innerHint}</div> : ''}
+                            </MenuItem>
                         )}
                     </Select>
-                    <FormHelperText className={classes.Warn}>{format === DEFAULT_DOWNLOAD_FORMAT ? 'this is the only importable format' : " "}</FormHelperText>
+                    <FormHelperText className={classes.Warn}>{
+                        formatToReader[format].outerHint || " "
+                    }</FormHelperText>
                 </FormGroup>
                 <Button className={classes.DownloadButton} disabled={!downloadEnabled} variant="contained" onClick={doDownload}>Download</Button>
             </div>

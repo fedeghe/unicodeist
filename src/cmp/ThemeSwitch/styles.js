@@ -2,7 +2,7 @@ import { createUseStyles } from 'react-jss';
 
 export default createUseStyles(theme => ({
     Container: {
-        width: 62,
+        // width: 62,
         height: 34,
         padding: 7,
         '& .MuiSwitch-switchBase': {

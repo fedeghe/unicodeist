@@ -23,16 +23,19 @@ export const cleanCode = code => code
     .replace(/draggable=[true|false]/gm, "");              // remove draggable attrs
 
 export const cleanCodeFromState = state => {
-    var root = document.createElement('div');
-    root.setAttribute('style',
-        [
-            `width:${state.width}px`,
-            `height:${state.height}px`,
-            `background-color:${state.backgroundColor}`,
-            `position:relative;overflow:hidden`,
-        ].join(';')
-    );
-    state.symbols.map(sym => {
+    const root = document.createElement('div'),
+        {
+            width, height,
+            backgroundColorAlpha, backgroundColor,
+            symbols
+        } = state;
+    root.setAttribute('style',[
+        `width:${width}px`,
+        `height:${height}px`,
+        `background-color:${backgroundColor}${backgroundColorAlpha ? '00' : ''}`,
+        `position:relative;overflow:hidden`,
+    ].join(';'));
+    symbols.map(sym => {
         var child = document.createElement('div');
         child.innerHTML = sym.char;
         child.setAttribute('style',
@@ -150,7 +153,7 @@ const getUnicodeistData = j => JSON.stringify({
     sty: {
         w: j.width,
         h: j.height,
-        bgc: j.backgroundColor,
+        bgc: `${j.backgroundColor}${j.backgroundColorAlpha ? '00' : ''}`,
     },
     sym: j.symbols.map(s => ({
         id: s.id,
@@ -200,6 +203,14 @@ export const getCodes = char => {
         decimal, unicode, octal, hex, css, html
     };
 };
+
+
+export function changeColorAlpha(opacity) {
+    const _opacity = Math.round(Math.min(Math.max(opacity, 0), 1) * 255);
+    let opacityHex = _opacity.toString(16).toUpperCase();
+    if (opacityHex.length == 1) opacityHex = "0" + opacityHex;
+    return opacityHex;
+}
 
 const def = {
     uniqueID,

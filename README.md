@@ -21,7 +21,10 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
 
 ---
 - In the top right you can:<img align="right" width="322"  src="src/img/ss1.png?raw=true">
+    - contribute to the project 
+    - start a new creative 
     - change the `background-color` (default is white)
+    - toggle background transparency
     - switch 🌓 theme
     - set the size of the current _creative_
     - hover the speed dial button to:

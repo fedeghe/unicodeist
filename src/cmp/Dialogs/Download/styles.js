@@ -28,5 +28,16 @@ export default createUseStyles({
     Warn: {
         color:'orange',
         fontWeight:900
+    },
+    Compliant: {
+        fontSize:'0.7em',
+        marginLeft:'2em',
+        display:'inline-block',
+        '&:before': {
+            content: `' ☞ '`,
+            fontSize: '2em',
+            position:'relative',
+            top:'5px'
+        },
     }
 });

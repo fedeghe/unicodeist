@@ -14,7 +14,8 @@ export default createUseStyles(theme => ({
         marginRight: '10px',
         fontWeight: 'bold',
         display:'flex',
-        flex:1
+        flex:1,
+        textWrap: 'nowrap'
     },
     Mid: {
         display:'flex',

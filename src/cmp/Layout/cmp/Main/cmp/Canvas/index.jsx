@@ -22,7 +22,8 @@ const Canvas = () => {
         state: {
             width, height,
             symbols,
-            backgroundColor
+            backgroundColor,
+            backgroundColorAlpha
         },
         state,
     } = useContext(ctx),
@@ -35,10 +36,11 @@ const Canvas = () => {
         refStyles = useMemo(() => ({
             width: `${width}px`,
             height: `${height}px`,
-            backgroundColor,
+            backgroundColor: backgroundColorAlpha ? `${backgroundColor}00` : backgroundColor,
+            outline: backgroundColorAlpha ? '1px dashed gray' : 'none',
             position: 'relative',
             overflow: 'hidden'
-        }), [height, width, backgroundColor]),
+        }), [height, width, backgroundColor, backgroundColorAlpha]),
 
         onDragOver = e => { e.preventDefault(); },
         exportImage = useCallback(

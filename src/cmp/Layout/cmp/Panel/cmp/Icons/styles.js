@@ -19,6 +19,12 @@ export default createUseStyles({
         width: 0,
         borderLeft:`1px dotted gray`,
         height:'30px'
+    },
+    AlphaSlider: {
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+        height:'30px'
     }
     
 });

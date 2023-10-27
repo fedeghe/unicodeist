@@ -17,6 +17,8 @@ export const SYMBOL_BASE_FONTWEIGHT = '400';
 export const PANEL_BGCOLOR = '#444444';
 export const EDITOR_BGCOLOR = '#222222';
 export const SELECTOR_BGCOLOR = '#AAAAAA';
+export const DEFAULT_BACKGROUND_COLOR = '#FFFFFF';
+export const DEFAULT_SYMBOL_COLOR = '#000000';
 export const SELECTOR_FGCOLOR = '#000000';
 export const ITEM_WIDTH = 100;
 export const ITEM_HEIGHT = 140;
@@ -43,7 +45,8 @@ export const COLLAPSED_SYM_HEIGHT = 70;
 export const COLLAPSING_SYM_TIME = 0.3;
 export const CLOSE_TOAST_TIMEOUT = 1000;
 export const OFFSET_PERC = 0.3;
-export const HEADER_HEIGHT = 140;
+export const HEADER_HEIGHT = 170;
+export const DEFAULT_BACKGROUND_ALPHA = false;
 export const getMaxHeight = () => ~~window.innerHeight * 0.9;
 export const getMaxWidth = () => ~~window.innerWidth * 0.9;
 export const FONT_FAMILIES = [
@@ -122,6 +125,9 @@ const CONSTS = {
     HEADER_HEIGHT,
     THEMES,
     getMaxHeight,
-    getMaxWidth
+    getMaxWidth,
+    DEFAULT_BACKGROUND_ALPHA,
+    DEFAULT_BACKGROUND_COLOR,
+    DEFAULT_SYMBOL_COLOR
 };
 export default CONSTS;

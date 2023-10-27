@@ -16,6 +16,9 @@ import {
     MIN_ZINDEX,
     MAX_ZINDEX,
     UNSUPPORTEDFILE_MESSAGE,
+    DEFAULT_BACKGROUND_ALPHA,
+    DEFAULT_BACKGROUND_COLOR,
+    DEFAULT_SYMBOL_COLOR
 } from 'src/constants';
 
 
@@ -28,7 +31,7 @@ const createSymbol = ({ char, zIndex, left, top }) => {
         zIndex,
         left,
         top,
-        color: '#000000',
+        color: DEFAULT_SYMBOL_COLOR,
         fontFamily: SYMBOL_BASE_FONTFAMILY,
         fontWeight: SYMBOL_BASE_FONTWEIGHT,
         skewX: 0,
@@ -46,42 +49,33 @@ const createSymbol = ({ char, zIndex, left, top }) => {
     };
 };
 
+const base = {
+    backgroundColorAlpha: DEFAULT_BACKGROUND_ALPHA,
+    width: WIDTH,
+    height: HEIGHT,
+    maxWidth: getMaxWidth(),
+    maxHeight: getMaxHeight(),
+    symbols: [],
+    addPanelVisibility: false,
+    focusedSymbolId: null,
+    backgroundColor: DEFAULT_BACKGROUND_COLOR,
+    asciiSelectorFilter: '',
+    symbolsFilter: '',
+    asciiPanelFilterByIconName: '',
+    letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
+    superFocus: false,
+    canScrollSymbols: true
+};
+
+
 const actions = {
         [ACTIONS.INIT]: () => ({
-            width: WIDTH,
-            height: HEIGHT,
-            maxWidth: WIDTH,
-            maxHeight: HEIGHT,
+            ...base,
             themeKey: DEFAULT_THEME,
-            symbols: [],
             availableSymbols: allSymbols,
             filteredCount: count(allSymbols),
-            addPanelVisibility: false,
-            focusedSymbolId: null,
-            backgroundColor: '#ffffff',
-            asciiSelectorFilter: '',
-            symbolsFilter: '',
-            asciiPanelFilterByIconName: '',
-            letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
-            superFocus: false,
-            canScrollSymbols: true
         }),
-        [ACTIONS.NEW]: () => ({
-            width: WIDTH,
-            height: HEIGHT,
-            maxWidth: getMaxWidth(),
-            maxHeight: getMaxHeight(),
-            symbols: [],
-            addPanelVisibility: false,
-            focusedSymbolId: null,
-            backgroundColor: '#ffffff',
-            asciiSelectorFilter: '',
-            symbolsFilter: '',
-            asciiPanelFilterByIconName: '',
-            letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
-            superFocus: false,
-            canScrollSymbols: true
-        }),
+        [ACTIONS.NEW]: () => base,
         
         [ACTIONS.SWITCH_THEME]: ({
             oldState: {themeKey}

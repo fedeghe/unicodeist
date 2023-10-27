@@ -3,7 +3,8 @@ import {
     SpeedDial,
     SpeedDialAction,
     SpeedDialIcon,
-    Tooltip
+    Tooltip,
+    Checkbox
 } from '@mui/material';
 
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -17,6 +18,7 @@ import Channel from '@fedeghe/channeljs';
 
 
 import SnackMessage from 'src/cmp/SnackMessage';
+
 
 import ThemeSwitch from 'src/cmp/ThemeSwitch';
 import { THEMES } from 'src/constants';
@@ -33,7 +35,7 @@ const Icons = () => {
         [open, setOpen] = useState(false),
         handleOpen = () => setOpen(true),
         handleClose = () => setOpen(false),
-        { backgroundColor, error, themeKey } = state,
+        { backgroundColor, error, themeKey, backgroundColorAlpha } = state,
         embed = () => {
             handleClose();
             Channel.get('event').pub('embed');
@@ -61,6 +63,10 @@ const Icons = () => {
         }),
         newCreativity = () => dispatch({type: ACTIONS.NEW}),
         removeError = () => dispatch({type: ACTIONS.REMOVE_ERROR}),
+        toggleAlpha = () => dispatch({
+            type: ACTIONS.UPDATE_GLOBAL,
+            payload: {field:'backgroundColorAlpha', value: !backgroundColorAlpha }
+        }),
         actions = [{
             name: 'import',
             icon: <GetAppIcon />,
@@ -104,6 +110,9 @@ const Icons = () => {
             <div className={classes.Separator}/>
             <Tooltip title="change background color">
                 <input className={[classes.Pointer, classes.ColorPicker].join(' ')} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
+            </Tooltip>
+            <Tooltip title={`toggle background transparency ${backgroundColorAlpha ? 'OFF' : 'ON'}`}>
+                <Checkbox checked={backgroundColorAlpha} onChange={toggleAlpha}/>
             </Tooltip>
             <ThemeSwitch onChange={handleClose} tooltip={`switch to ${themeKey === THEMES.bright ? THEMES.dark : THEMES.bright} theme`}/>
         </div>

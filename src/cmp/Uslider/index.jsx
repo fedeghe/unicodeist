@@ -44,7 +44,7 @@ const Uslider = ({
     }, [tuning]);
 
     return <Box className={classes.Box} key={label}>
-        <span className={classes.Label} >{label}:</span>
+       {label && <span className={classes.Label} >{label}:</span>}
         <div className={classes.Mid}>
         {tuning
             ? <input
