@@ -112,7 +112,7 @@ const Icons = () => {
                 <input className={[classes.Pointer, classes.ColorPicker].join(' ')} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
             </Tooltip>
             <Tooltip title={`toggle background transparency ${backgroundColorAlpha ? 'OFF' : 'ON'}`}>
-                <Checkbox checked={backgroundColorAlpha} onChange={toggleAlpha}/>
+                <Checkbox className={classes.BgAlpha} checked={backgroundColorAlpha} onChange={toggleAlpha}/>
             </Tooltip>
             <ThemeSwitch onChange={handleClose} tooltip={`switch to ${themeKey === THEMES.bright ? THEMES.dark : THEMES.bright} theme`}/>
         </div>

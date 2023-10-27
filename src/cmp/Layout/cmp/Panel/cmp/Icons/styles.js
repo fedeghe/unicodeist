@@ -1,13 +1,10 @@
 import { createUseStyles } from 'react-jss';
 
-export default createUseStyles({
+export default createUseStyles(theme => ({
     UnderLogo: {
-        
         display:'flex',
-        
         alignItems:'center',
         justifyContent:'space-evenly',
-        // marginTop:'1em'
     },
     Pointer: {
         cursor:'pointer'
@@ -20,11 +17,7 @@ export default createUseStyles({
         borderLeft:`1px dotted gray`,
         height:'30px'
     },
-    AlphaSlider: {
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
-        height:'30px'
-    }
-    
-});
+    BgAlpha: {
+        color:theme.foreground
+    },
+}));
