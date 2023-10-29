@@ -2,10 +2,11 @@ import { useContext, useEffect, useCallback } from 'react';
 import ctx from 'src/Context';
 import useStyles from './styles';
 
-import AddPanel from './cmp/AsciiSelector';
+import AsciiSelector from './cmp/AsciiSelector';
 import AddButton from './cmp/AddButton';
 import Canvas from './cmp/Canvas';
 import ACTIONS from 'src/reducer/actions';
+
 const Main = () => {
     const classes = useStyles(),
         { state: { addPanelVisibility }, dispatch } = useContext(ctx),
@@ -23,7 +24,7 @@ const Main = () => {
             }),
             [addPanelVisibility, dispatch]
         ),
-        seekWhat = useCallback(e => {  
+        onKeyDown = useCallback(e => {  
             //for the symbol search
             // if input text and not escape
             // allow the default (e.g. +shilf+a)
@@ -45,12 +46,12 @@ const Main = () => {
         }, [togglePanel]);
 
     useEffect(() => {
-        document.addEventListener("keydown", seekWhat);
-        return () => document.removeEventListener("keydown", seekWhat);
-    }, [seekWhat]);
+        document.addEventListener("keydown", onKeyDown);
+        return () => document.removeEventListener("keydown", onKeyDown);
+    }, [onKeyDown]);
 
     return <div className={classes.Main}>
-        {addPanelVisibility ? <AddPanel /> : <AddButton />}
+        {addPanelVisibility ? <AsciiSelector /> : <AddButton />}
         <Canvas />
     </div>;
 };
