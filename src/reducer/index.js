@@ -64,7 +64,8 @@ const base = {
     asciiPanelFilterByIconName: '',
     letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
     superFocus: false,
-    canScrollSymbols: true
+    canScrollSymbols: true,
+    scrollTop : 0
 };
 
 
@@ -100,7 +101,7 @@ const actions = {
         }),
         
         [ACTIONS.ADD_SYMBOL]: ({
-            payload : char,
+            payload : { char, scrollTop },
             oldState: { symbols, width, height}
         }) => {
             // get highest zindex
@@ -115,6 +116,7 @@ const actions = {
                     zIndex
                 });
             return {
+                scrollTop,
                 focusedSymbolId: newSymbol.id,
                 symbols: [
                     ...symbols,
