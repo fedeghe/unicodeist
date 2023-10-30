@@ -39,9 +39,9 @@ const Families = () => {
                     scrollTop: ref.current.scrollTop
                 }
             });
-           
             letAsciiPanelOpenAfterSelection ? showConfirmation(char) : closePanel();
         };
+
     useEffect(() => {
         ref.current.scrollTop = scrollTop;
     }, []);

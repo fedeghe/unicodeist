@@ -5,8 +5,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import { CLOSE_TOAST_TIMEOUT } from 'src/constants';
 
 const SnackMessage = ({
-    message, open, setOpen, onClose = () => { } }
-) => {
+    message, open, setOpen,
+    onClose = () => { },
+    autoHideDuration = CLOSE_TOAST_TIMEOUT
+}) => {
     const handleClose = (event, reason) => {
             if (reason === 'clickaway') {
                 return;
@@ -28,7 +30,7 @@ const SnackMessage = ({
     return (
         <Snackbar
             open={open}
-            autoHideDuration={CLOSE_TOAST_TIMEOUT}
+            autoHideDuration={autoHideDuration}
             onClose={handleClose}
             message={message}
             action={action}
