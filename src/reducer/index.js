@@ -86,10 +86,22 @@ const actions = {
         }),
         
         [ACTIONS.RESIZE]: ({
-            payload: {what, value}
-        }) => ({
-            [what]: parseInt(value, 10)
-        }),
+            payload: {what, value},
+            oldState
+        }) => {
+            const { symbols } = oldState,
+                v = parseInt(value, 10),
+                offset = v - oldState[what],
+                halfHoffset = offset / 2,
+                posDimention = what === 'height' ? 'top' : 'left';
+            return {
+                [what]: v,
+                symbols: symbols.map(s => ({
+                    ...s,
+                    [posDimention]: s[posDimention] + halfHoffset
+                }))
+            };
+        },
         
         [ACTIONS.TOGGLE_ADD_PANEL]: ({
             payload: visibility
