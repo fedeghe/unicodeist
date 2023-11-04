@@ -12,7 +12,7 @@ import {debounce} from './utils';
 const {reducer, init} = reducerFactory();
 const App = () => {
     const [state, dispatch] = useReducer(reducer, {}, init),
-        {themeKey} = state,
+        { themeKey, preventReload } = state,
         browser = (() => {
             if (window.safari !== undefined) return 'safari';
             return null;
@@ -21,29 +21,34 @@ const App = () => {
         debounced = debounce(
             () => dispatch({ type: ACTIONS.INIT_VIEWPORT }), 500
         ),
-        // catchReload = useCallback(e => {
-        //     e.preventDefault();
-        //     e.returnValue = '';
-        // }, []),
+        catchReload = useCallback(e => {
+            e.preventDefault();
+            e.returnValue = '';
+        }, []),
         storeViewPortData = useCallback(debounced, []),
         prevent = useCallback(e => e.preventDefault(), []);
     useEffect(storeViewPortData, [storeViewPortData]);
     useEffect(() => {
-        // window.addEventListener("beforeunload", catchReload);
         window.addEventListener("resize", storeViewPortData);
         window.addEventListener("scroll", prevent);
-        
-        // history.pushState(null, null, location.href);
-        // window.onpopstate = function () {
-        //     history.go(1);
-        // };
+        if (preventReload) {
+            window.addEventListener("beforeunload", catchReload);
+            window.addEventListener("popstate", catchReload);
+            history.pushState(null, null, location.href);
+            window.onpopstate = function () {
+                history.go(1);
+            };
+        }
         
         return () => {
             window.removeEventListener("resize", storeViewPortData);
             window.removeEventListener("scroll", prevent);
-            // window.removeEventListener("beforeunload", catchReload);
+            if (preventReload) {
+                window.removeEventListener("beforeunload", catchReload);
+                window.removeEventListener("popstate", catchReload);
+            }
         };
-    }, [storeViewPortData]);
+    }, [storeViewPortData, preventReload]);
     
     return (        
         <ThemeProvider theme={theme}>

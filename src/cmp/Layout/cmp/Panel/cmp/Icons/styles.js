@@ -17,7 +17,12 @@ export default createUseStyles(theme => ({
         borderLeft:`1px dotted gray`,
         height:'30px'
     },
-    BgAlpha: {
+    Check: {
+        width:'28px',
+        height:'28px',
         color:theme.foreground
     },
+    BgColor: ({backgroundColorAlpha}) => ({
+        visibility: backgroundColorAlpha ? 'hidden': 'visible'
+    })
 }));

@@ -30,12 +30,12 @@ import useStyles from './styles';
 
 
 const Icons = () => {
-    const classes = useStyles();
     const { state, dispatch } = useContext(ctx),
         [open, setOpen] = useState(false),
         handleOpen = () => setOpen(true),
         handleClose = () => setOpen(false),
-        { backgroundColor, error, themeKey, backgroundColorAlpha } = state,
+        { backgroundColor, error, themeKey, backgroundColorAlpha, preventReload } = state,
+        classes = useStyles({backgroundColorAlpha}),
         embed = () => {
             handleClose();
             Channel.get('event').pub('embed');
@@ -66,6 +66,10 @@ const Icons = () => {
         toggleAlpha = () => dispatch({
             type: ACTIONS.UPDATE_GLOBAL,
             payload: {field:'backgroundColorAlpha', value: !backgroundColorAlpha }
+        }),
+        toggleReload = () => dispatch({
+            type: ACTIONS.UPDATE_GLOBAL,
+            payload: {field:'preventReload', value: !preventReload }
         }),
         actions = [{
             name: 'import',
@@ -102,18 +106,23 @@ const Icons = () => {
         </SpeedDial>
         <div className={classes.UnderLogo}>
             <Tooltip title="contribute">
-                <GitHubIcon onClick={contribute}/>
+                <GitHubIcon className={classes.Pointer} onClick={contribute}/>
             </Tooltip>
             <Tooltip title="New creativity">
                 <FiberNewIcon className={classes.Pointer} onClick={newCreativity}/>
             </Tooltip>
             <div className={classes.Separator}/>
+            
             <Tooltip title="change background color">
-                <input className={[classes.Pointer, classes.ColorPicker].join(' ')} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
+                <input className={[classes.Pointer, classes.ColorPicker, classes.BgColor].join(' ')} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
             </Tooltip>
             <Tooltip title={`toggle background transparency ${backgroundColorAlpha ? 'OFF' : 'ON'}`}>
-                <Checkbox className={classes.BgAlpha} checked={backgroundColorAlpha} onChange={toggleAlpha}/>
+                <Checkbox className={classes.Check} checked={backgroundColorAlpha} onChange={toggleAlpha}/>
             </Tooltip>
+            <Tooltip title={`toggle reload/nav protection ${preventReload ? 'OFF' : 'ON'}`}>
+                <Checkbox className={classes.Check} checked={preventReload} onChange={toggleReload}/>
+            </Tooltip>
+            
             <ThemeSwitch onChange={handleClose} tooltip={`switch to ${themeKey === THEMES.bright ? THEMES.dark : THEMES.bright} theme`}/>
         </div>
         {error && <SnackMessage message={error} open={error} setOpen={removeError}/>}
