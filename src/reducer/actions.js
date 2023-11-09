@@ -16,6 +16,7 @@ const INIT = Symbol('init'),
     INIT_VIEWPORT = Symbol('init sizes'),
     SYMBOL_FOCUS = Symbol('focus symbol toggle'),
     IMPORT = Symbol('import'),
+    IMPORT_KEYFRAMES = Symbol('import keyframes'),
     MOVE_ALL_SYMBOLS = Symbol('global move'),
     PAN_ALL_SYMBOLS = Symbol('global pan'),
     ALIGN_V = Symbol('align vertically'),
@@ -26,7 +27,11 @@ const INIT = Symbol('init'),
     REMOVE_ERROR = Symbol('remove error'),
     CAN_SCROLL_SYMBOLS = Symbol('when focused on a wheel'),
     NEW = Symbol('new creativity'),
-    LET_ASCIIPANEL_OPEN_AFTER_SELECTION = Symbol('let the panel open after selection');
+    LET_ASCIIPANEL_OPEN_AFTER_SELECTION = Symbol('let the panel open after selection'),
+    NEW_KEY_FRAME = Symbol('save a new keyframe'),
+    UPDATE_KEY_FRAME = Symbol('uodate a new keyframe'),
+    REMOVE_KEY_FRAME = Symbol('delete a  keyframe'),
+    REMOVE_ALL_KEY_FRAMES = Symbol('delete all keyframe');
 
 const exp = {
     INIT,
@@ -48,6 +53,7 @@ const exp = {
     SYMBOL_FOCUS,
     INIT_VIEWPORT, 
     IMPORT,
+    IMPORT_KEYFRAMES,
     MOVE_ALL_SYMBOLS,
     PAN_ALL_SYMBOLS,
     ALIGN_V,
@@ -57,7 +63,11 @@ const exp = {
     MOVE_TARGET_ONE_PX,
     REMOVE_ERROR,
     CAN_SCROLL_SYMBOLS,
-    NEW
+    NEW,
+    NEW_KEY_FRAME,
+    UPDATE_KEY_FRAME,
+    REMOVE_KEY_FRAME,
+    REMOVE_ALL_KEY_FRAMES,
 };
 
 export default exp;
