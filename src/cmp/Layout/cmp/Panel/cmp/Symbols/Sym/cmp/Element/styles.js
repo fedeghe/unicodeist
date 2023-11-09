@@ -1,9 +1,9 @@
 import { createUseStyles } from 'react-jss';
-
+import { css2json } from 'src/utils';
 import bgBright from 'src/img/bgBright.png';
 import bgDark from 'src/img/bgDark.png';
 
-export default createUseStyles(theme => console.log({theme}) || ({
+export default createUseStyles((theme) =>  ({
     Container: {
         height: '200px',
         display: 'flex',
@@ -40,7 +40,8 @@ export default createUseStyles(theme => console.log({theme}) || ({
         cursor:'default',
         color:'#888888'
     },
-    Char: {
+    Char: ({sym}) => ({
+        ...(sym.additionalStyles && css2json(sym.additionalStyles)),
         color: ({sym:{color}}) => color,
         transform: ({sym:{
             rotationX, rotationY, rotationZ,
@@ -55,7 +56,6 @@ export default createUseStyles(theme => console.log({theme}) || ({
             `skew(${skewX}deg,${skewY}deg)`
         ].join(' '),
         filter: ({sym:{blur}}) => blur ? `blur(${blur}px)` : '',
-        // textShadow: '5px 1px 8px black'
-    }
+    })
 
 }));
