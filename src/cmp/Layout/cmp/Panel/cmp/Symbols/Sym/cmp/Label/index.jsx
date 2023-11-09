@@ -13,7 +13,6 @@ const Label = ({sym}) => {
         updateLabel = e => dispatch({
             type: ACTIONS.UPDATE_SYMBOL,
             payload: {
-                id: sym.id,
                 field: 'label',
                 value: e.target.value
             }

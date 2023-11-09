@@ -44,7 +44,7 @@ const Position = ({ sym }) => {
                 onChange={v =>
                     dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
-                        payload: { id: sym.id, field: el.key, value: v }
+                        payload: { field: el.key, value: v }
                     })
                 }
             />

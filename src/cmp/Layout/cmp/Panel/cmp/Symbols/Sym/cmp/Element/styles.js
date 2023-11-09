@@ -9,17 +9,18 @@ export default createUseStyles(theme => console.log({theme}) || ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: '10px 0'
+        margin: '10px 0',
+        
     },
     Left: {
         display: 'flex',
-        flexDirection: 'column',
+        flexWrap:'wrap',
+        flexDirection: 'row',
         justifyContent: 'space-evenly',
         flex: 1, textAlign: 'center', height: 'inherit'
     },
     Mid: {
-        
-        flex: 4,
+        flex: 3,
         textAlign: 'center',
         height: 'inherit',
         display: 'flex',
@@ -32,7 +33,8 @@ export default createUseStyles(theme => console.log({theme}) || ({
         overflow:'hidden'
     },
     Item: {
-        cursor: 'pointer'
+        cursor: 'pointer',
+        width:'30px'
     },
     Disabled: {
         cursor:'default',

@@ -1,4 +1,3 @@
-
 import { useContext } from 'react';
 import { Card, Typography} from '@mui/material';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
@@ -9,6 +8,7 @@ import Zindex from './cmp/Zindex';
 import Element from './cmp/Element';
 import Styles from './cmp/Styles';
 import Position from './cmp/Position';
+import Animation from './cmp/Animation';
 import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
@@ -57,6 +57,8 @@ const Sym = ({sym}) => {
                 <Styles sym={sym} />
                 <hr className={classes.Hr} />
                 <Position sym={sym} />
+                <hr className={classes.Hr} />
+                <Animation sym={sym}/>
             </div> : <div className={classes.HoverLight}>
                 <div>
                     <Typography variant="body1">{sym.label}</Typography>
