@@ -56,6 +56,14 @@ export const cleanCodeFromState = state => {
         child.innerHTML = sym.char;
         child.setAttribute('style',
             [
+                ...((sym.animation && sym.animation in state.keyFrames)
+                    ? css2string(state.keyFrames[sym.animation].animate).split(';')
+                    : []
+                ),
+                ...(sym.additionalStyles
+                    ? css2string(sym.additionalStyles).split(';')
+                    : []
+                ),
                 `z-index:${sym.zIndex}`,
                 `font-family:${sym.fontFamily}`,
                 `font-weight:${sym.fontWeight}`,
@@ -63,10 +71,7 @@ export const cleanCodeFromState = state => {
                 `opacity:${sym.opacity}`,
                 `position:absolute;transform-origin:center center`,
                 sym.blur && `filter:blur(${sym.blur}px)`,
-                ...((sym.animation && sym.animation in state.keyFrames)
-                    ? css2string(state.keyFrames[sym.animation].animate).split(';')
-                    : []
-                ),
+                
                 `transform:` + [
                     `translate(${sym.left}px,${sym.top}px)`,
                     sym.scale !== 1 && `scale(${sym.scale})`,
@@ -172,18 +177,18 @@ export const importFromFile = ({ onContentReady }) => {
     });
     link.click();
 };
-
+const cleanCssString = v => v
+    .replace(/^\{/, '')
+    .replace(/\}$/, '')
+    .replace(/\n/g, '');
 const getUnicodeistData = j => JSON.stringify({
     sty: {
         w: j.width,
         h: j.height,
         bgc: `${j.backgroundColor}${j.backgroundColorAlpha ? '00' : ''}`,
-        ...(j.bgStyles &&{
-            bgi: `${j.bgStyles
-                .replace(/^\{/, '')
-                .replace(/\}$/, '')
-                .replace(/\n/g, '')
-            }`}
+        ...(j.bgStyles && {
+                bgi: cleanCssString(j.bgStyles)
+            }
         ),
     },
     kfs: [...new Set(
@@ -203,6 +208,9 @@ const getUnicodeistData = j => JSON.stringify({
         cnt: s.char,
         ani: s.animation,
         sty: {
+            ...(s.additionalStyles && {
+                add: cleanCssString(s.additionalStyles)
+            }),
             zi: s.zIndex,
             c: s.color,
             ff: Object.keys(FONT_FAMILIES_REDUCTION_MAP).find(
