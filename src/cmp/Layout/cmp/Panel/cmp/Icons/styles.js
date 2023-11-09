@@ -12,17 +12,9 @@ export default createUseStyles(theme => ({
     ColorPicker: {
         width:'28px'
     },
-    Separator: {
-        width: 0,
-        borderLeft:`1px dotted gray`,
-        height:'30px'
-    },
     Check: {
         width:'28px',
         height:'28px',
         color:theme.foreground
     },
-    BgColor: ({backgroundColorAlpha}) => ({
-        visibility: backgroundColorAlpha ? 'hidden': 'visible'
-    })
 }));
