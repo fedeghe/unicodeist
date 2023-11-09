@@ -2,7 +2,9 @@ import {
     getMaxHeight,
     getMaxWidth,
     LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
+    LOCALSTORAGE_KEYFRAMES_KEY,
 } from 'src/constants';
+
 const FFRM = {
     ar: 'Arial',
     v: 'Verdana',
@@ -14,7 +16,15 @@ const FFRM = {
     c: 'Courier New',
     b: 'Brush Script MT'
 };
-export const uncompress = c => ({
+
+export const keyFramesManager = {
+    synch : toWrite => 
+        toWrite
+            ? localStorage.setItem(LOCALSTORAGE_KEYFRAMES_KEY, JSON.stringify(toWrite))
+            : JSON.parse(localStorage.getItem(LOCALSTORAGE_KEYFRAMES_KEY) || '{}')
+};
+
+export const uncompress = c => console.log(c) || ({
     width: c.sty.w,
     height: c.sty.h,
     maxWidth: getMaxWidth(),
@@ -28,6 +38,13 @@ export const uncompress = c => ({
     letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
     superFocus: false,
     canScrollSymbols: true,
+    keyFrames: Object.entries(c.kfs).reduce((acc, [k,e]) => {
+        acc[k] = {
+            animate: e.an,
+            keyFrame: e.fk
+        };
+        return acc;
+    }, {}),
     symbols: c.sym.map(s => ({
         id: s.id,
         char: s.cnt,
@@ -36,6 +53,7 @@ export const uncompress = c => ({
         left:s.sty.t.trn[0],
         top:s.sty.t.trn[1],
         color: s.sty.c,
+        animation: s.ani,
         fontFamily: FFRM[s.sty.ff],
         fontWeight: s.sty.fw,
         skewX: s.sty.t?.sk?.[0] || 0,
@@ -53,4 +71,9 @@ export const uncompress = c => ({
     }))
 });
 
-export default uncompress;
+const exp = {
+    uncompress,
+    keyFramesManager
+};
+
+export default exp;
