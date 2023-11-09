@@ -1,4 +1,4 @@
-import { colors } from './base';
+import { colors, spacing } from './base';
 
 const {grayscale : cgs} = colors,
     theme =  {
@@ -34,7 +34,8 @@ const {grayscale : cgs} = colors,
             icon: '#ffdd00',
         },
         unselectedItemHoverBackgound: cgs.mid5,
-        accentColor:cgs.lightE
+        accentColor:cgs.lightE,
+        spacing
     };
 
 export default theme;

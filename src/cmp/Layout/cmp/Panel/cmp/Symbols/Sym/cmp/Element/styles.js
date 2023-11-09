@@ -1,15 +1,16 @@
+/* eslint-disable no-unused-vars */
 import { createUseStyles } from 'react-jss';
 import { css2json } from 'src/utils';
 import bgBright from 'src/img/bgBright.png';
 import bgDark from 'src/img/bgDark.png';
 
-export default createUseStyles((theme) =>  ({
+export default createUseStyles(theme => ({
     Container: {
         height: '200px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: '10px 0',
+        margin: `${theme.spacing.small}px 0px`
         
     },
     Left: {
@@ -40,14 +41,14 @@ export default createUseStyles((theme) =>  ({
         cursor:'default',
         color:'#888888'
     },
-    Char: ({sym}) => ({
-        ...(sym.additionalStyles && css2json(sym.additionalStyles)),
-        color: ({sym:{color}}) => color,
-        transform: ({sym:{
-            rotationX, rotationY, rotationZ,
-            scaleX, scaleY,
-            skewX, skewY
-        }}) => [
+    Char: ({ sym : {
+        color, rotationX, rotationY, rotationZ,
+        scaleX, scaleY, skewX, skewY,
+        additionalStyles, blur, opacity
+    }}) => ({
+        color,
+        ...(additionalStyles && css2json(additionalStyles)),
+        transform:[
             `scaleX(${scaleX})`,
             `scaleY(${scaleY})`,
             `rotateX(${rotationX}deg)`,
@@ -55,7 +56,9 @@ export default createUseStyles((theme) =>  ({
             `rotateZ(${rotationZ}deg)`,
             `skew(${skewX}deg,${skewY}deg)`
         ].join(' '),
-        filter: ({sym:{blur}}) => blur ? `blur(${blur}px)` : '',
+        filter: blur ? `blur(${blur}px)` : '',
+        opacity: opacity,
+        fontSize:'2em'
     })
 
 }));

@@ -10,11 +10,11 @@ export default createUseStyles(theme => ({
         cursor:'pointer'
     },
     ColorPicker: {
-        width:'28px'
+        width:`${theme.spacing.xxxxlarge}px`
     },
     Check: {
-        width:'28px',
-        height:'28px',
+        width:`${theme.spacing.xxxxlarge}px`,
+        height:`${theme.spacing.xxxxlarge}px`,
         color:theme.foreground
     },
 }));

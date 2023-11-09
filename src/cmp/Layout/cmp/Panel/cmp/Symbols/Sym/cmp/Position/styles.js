@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
 
-export default createUseStyles({
+export default createUseStyles(theme =>({
     SectionPosition: {
-        marginBottom:'10px'
+        marginBottom:`${theme.spacing.small}px`
     },
-});
+}));

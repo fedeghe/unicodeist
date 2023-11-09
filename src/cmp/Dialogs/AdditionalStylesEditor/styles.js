@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-export default createUseStyles({
+export default createUseStyles(theme => ({
     Container: {
         display:'flex',
         flexDirection:'column',
@@ -11,7 +11,7 @@ export default createUseStyles({
         display:'flex',
         maxHeight:'200px',
         overflow:'scroll',
-        margin:'10px',
+        margin:`${theme.spacing.small}px`,
         flexShrink: 1
     },
 
@@ -29,7 +29,7 @@ export default createUseStyles({
     
     CloseIcon: {
         cursor: 'pointer',
-        marginTop: '5px',
-        marginLeft: '20px'
+        marginTop: `${theme.spacing.small/2}px`,
+        marginLeft: `${theme.spacing.small*2}px`
     }
-});
+}));

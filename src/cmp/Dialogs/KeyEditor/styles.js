@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-export default createUseStyles({
+export default createUseStyles(theme => ({
     Container: {
         display:'flex',
         flexDirection:'column',
@@ -11,14 +11,14 @@ export default createUseStyles({
         display:'flex',
         maxHeight:'200px',
         overflow:'scroll',
-        margin:'10px',
+        margin:`${theme.spacing.small}px`,
         flexShrink: 1
     },
     Editor2:{
         display:'flex',
         maxHeight:'200px',
         overflow:'scroll',
-        margin:'10px',
+        margin:`${theme.spacing.small}px`,
         flexShrink: 1
     },
     Bottom: {
@@ -41,14 +41,14 @@ export default createUseStyles({
 
     Hint: {
         fontSize:'0.8em',
-        marginLeft:'20px',
+        marginLeft:`${theme.spacing.small*2}px`,
         width:'300px',
 
     },
     
     CloseIcon: {
         cursor: 'pointer',
-        marginTop: '5px',
-        marginLeft: '20px'
+        marginTop: `${theme.spacing.small/2}px`,
+        marginLeft: `${theme.spacing.small*2}px`
     }
-});
+}));

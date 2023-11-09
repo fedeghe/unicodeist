@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-export default createUseStyles({
+export default createUseStyles(theme => ({
     Dialog: {
         width:'400px',
         padding: '2em',
@@ -24,7 +24,7 @@ export default createUseStyles({
             content: `' ☞ '`,
             fontSize: '2em',
             position:'relative',
-            top:'5px'
+            top:`${theme.spacing.small/2}px`
         },
     }
-});
+}));

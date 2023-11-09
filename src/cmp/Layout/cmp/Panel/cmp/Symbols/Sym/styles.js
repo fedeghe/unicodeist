@@ -29,12 +29,6 @@ export default createUseStyles(theme => ({
         margin: 0,
         marginBottom:'10px'
     },
-    HrP: {
-        width: '100%',
-        border: 'none',
-        borderTop: '1px solid gray',
-        margin: 0
-    },
 
     Box: {
         display: 'flex',

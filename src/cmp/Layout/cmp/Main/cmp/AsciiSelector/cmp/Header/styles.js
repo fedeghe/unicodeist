@@ -6,7 +6,7 @@ export default createUseStyles(theme => ({
         height:'80px',
         minHeight: '80px',
         alignItems: 'center',
-        margin:'20px 0px'
+        margin:`${theme.spacing.small*2}px 0px`
     },
     RightSide: {
         display:'flex',
@@ -14,14 +14,14 @@ export default createUseStyles(theme => ({
     },
     CloseButton: {
         top:'3px',
-        left:'16px',
+        left:`${theme.spacing.large}px`,
         color: 'red',
         cursor:'pointer',
         display:'flex',
         backgroundColor: 'transparent'
     },
     Search: {
-        marginLeft:'40px',
+        marginLeft:`${theme.spacing.small*4}px`,
         display:'flex',
         flexDirection:'column',
         justifyContent:'flex-end',
@@ -41,7 +41,7 @@ export default createUseStyles(theme => ({
         color: theme.foreground,
     },
     LeaveOpenCheck: {
-        marginRight:'20px',
+        marginRight:`${theme.spacing.small*2}px`,
         display:'flex',
         flexShrink:1
     },

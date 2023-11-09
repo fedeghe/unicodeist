@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-export default createUseStyles({
+export default createUseStyles(theme => ({
     Container: {
         marginBottom:'1em'
     },
@@ -12,7 +12,7 @@ export default createUseStyles({
         
     },
     Label: {
-        marginRight:'10px',
+        marginRight:`${theme.spacing.small}px`,
         fontWeight:'bold'
     },
-});
+}));
