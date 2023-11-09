@@ -1,25 +1,27 @@
+/* eslint-disable no-unused-vars */
 import { createUseStyles } from 'react-jss';
-
+import { css2json } from 'src/utils';
 import bgBright from 'src/img/bgBright.png';
 import bgDark from 'src/img/bgDark.png';
 
-export default createUseStyles(theme => console.log({theme}) || ({
+export default createUseStyles(theme => ({
     Container: {
         height: '200px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: '10px 0'
+        margin: `${theme.spacing.small}px 0px`
+        
     },
     Left: {
         display: 'flex',
-        flexDirection: 'column',
+        flexWrap:'wrap',
+        flexDirection: 'row',
         justifyContent: 'space-evenly',
         flex: 1, textAlign: 'center', height: 'inherit'
     },
     Mid: {
-        
-        flex: 4,
+        flex: 3,
         textAlign: 'center',
         height: 'inherit',
         display: 'flex',
@@ -32,19 +34,21 @@ export default createUseStyles(theme => console.log({theme}) || ({
         overflow:'hidden'
     },
     Item: {
-        cursor: 'pointer'
+        cursor: 'pointer',
+        width:'30px'
     },
     Disabled: {
         cursor:'default',
         color:'#888888'
     },
-    Char: {
-        color: ({sym:{color}}) => color,
-        transform: ({sym:{
-            rotationX, rotationY, rotationZ,
-            scaleX, scaleY,
-            skewX, skewY
-        }}) => [
+    Char: ({ sym : {
+        color, rotationX, rotationY, rotationZ,
+        scaleX, scaleY, skewX, skewY,
+        additionalStyles, blur, opacity
+    }}) => ({
+        color,
+        ...(additionalStyles && css2json(additionalStyles)),
+        transform:[
             `scaleX(${scaleX})`,
             `scaleY(${scaleY})`,
             `rotateX(${rotationX}deg)`,
@@ -52,8 +56,9 @@ export default createUseStyles(theme => console.log({theme}) || ({
             `rotateZ(${rotationZ}deg)`,
             `skew(${skewX}deg,${skewY}deg)`
         ].join(' '),
-        filter: ({sym:{blur}}) => blur ? `blur(${blur}px)` : '',
-        // textShadow: '5px 1px 8px black'
-    }
+        filter: blur ? `blur(${blur}px)` : '',
+        opacity: opacity,
+        fontSize:'2em'
+    })
 
 }));

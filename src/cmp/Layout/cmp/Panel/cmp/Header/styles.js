@@ -8,7 +8,6 @@ export default createUseStyles({
         flexDirection:'column',
         height:`${HEADER_HEIGHT}px`,
         minHeight:`${HEADER_HEIGHT}px`,
-        // marginBottom:'1em'
     },
     Hr: {
         width:'100%',

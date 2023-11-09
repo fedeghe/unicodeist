@@ -1,4 +1,3 @@
-
 import { useContext, useCallback } from 'react';
 import Box from '@mui/material/Box';
 
@@ -7,6 +6,7 @@ import ctx from 'src/Context';
 import { FONT_FAMILIES } from 'src/constants';
 import scaleRotConfig from './scaleAndRotation.config';
 import ACTIONS from 'src/reducer/actions';
+
 import useStyles from './../../styles';
 import useElementStyles from './styles';
 
@@ -16,15 +16,15 @@ const Styles = ({ sym }) => {
         { dispatch } = useContext(ctx),
         onChangeFontFamily = useCallback(e => dispatch({
             type: ACTIONS.UPDATE_SYMBOL,
-            payload: { id: sym.id, field: 'fontFamily', value: e.target.value }
+            payload: { field: 'fontFamily', value: e.target.value }
         }), []),
         onChangeColor = useCallback(e => dispatch({
             type: ACTIONS.UPDATE_SYMBOL,
-            payload: { id: sym.id, field: 'color', value: e.target.value }
+            payload: {field: 'color', value: e.target.value }
         }), []),
         onChangeFontWeight = useCallback(e => dispatch({
             type: ACTIONS.UPDATE_SYMBOL,
-            payload: { id: sym.id, field: 'fontWeight', value: e.target.value }
+            payload: { field: 'fontWeight', value: e.target.value }
         }), []);
 
     return <div className={localClasses.SectionStyles}>
@@ -64,7 +64,7 @@ const Styles = ({ sym }) => {
                     quickTune={quickTune}
                     onChange={v => dispatch({
                         type: ACTIONS.UPDATE_SYMBOL,
-                        payload: { id: sym.id, field, value: v }
+                        payload: { field, value: v }
                     })}
                 />
             ))}
@@ -73,7 +73,7 @@ const Styles = ({ sym }) => {
             <Uslider key={'opacity'} label={"Opacity"} value={sym.opacity} min={0} max={1} step={0.01} quickTune rounder={parseFloat}
                 onChange={v => dispatch({
                     type: ACTIONS.UPDATE_SYMBOL,
-                    payload: { id: sym.id, field: 'opacity', value: v}
+                    payload: { field: 'opacity', value: v}
                 })}
             />
         </div>

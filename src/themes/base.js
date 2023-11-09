@@ -21,7 +21,21 @@ export const colors = {
     },
     
 };
+export const spacing = {
+    xxxsmall: 2,
+    xxsmall: 4,
+    xsmall: 8,
+    small: 10,
+    medium: 12,
+    large: 16,
+    xlarge: 18,
+    xxlarge: 22,
+    xxxlarge: 26,
+    xxxxlarge: 28,
+    hundred: 100
+};
 const base = {
-    colors
+    colors,
+    spacing
 };
 export default base;

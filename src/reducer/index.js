@@ -1,9 +1,9 @@
-
 import ACTIONS from './actions';
 import {uniqueID, count, filter} from 'src/utils';
 import {getMaxHeight, getMaxWidth} from 'src/constants';
 import allSymbols from './../Symbols';
-import uncompress from './utils';
+import { uncompress, keyFramesManager } from './utils';
+
 import {
     WIDTH, HEIGHT,
     PANEL_WIDTH,
@@ -18,9 +18,9 @@ import {
     UNSUPPORTEDFILE_MESSAGE,
     DEFAULT_BACKGROUND_ALPHA,
     DEFAULT_BACKGROUND_COLOR,
-    DEFAULT_SYMBOL_COLOR
+    DEFAULT_SYMBOL_COLOR,
+    DEFAULT_PREVENT_RELOAD
 } from 'src/constants';
-
 
 const createSymbol = ({ char, zIndex, left, top }) => {
     const u = `${uniqueID}`;
@@ -45,7 +45,9 @@ const createSymbol = ({ char, zIndex, left, top }) => {
         scaleX:1,
         scaleY:1,
         targetUp: false,
-        faded: false
+        faded: false,
+        animation: false,
+        additionalStyles:false
     };
 };
 
@@ -65,7 +67,10 @@ const base = {
     letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
     superFocus: false,
     canScrollSymbols: true,
-    scrollTop : 0
+    scrollTop : 0,
+    bgStyles:false,
+    keyFrames:keyFramesManager.synch(),
+    preventReload: DEFAULT_PREVENT_RELOAD,
 };
 
 
@@ -138,18 +143,16 @@ const actions = {
         },
 
         [ACTIONS.REMOVE_SYMBOL]: ({
-            payload : id,
-            oldState: { symbols }
+            oldState: { symbols, focusedSymbolId }
         }) => ({
-            symbols: symbols.filter(s => s.id !== id),
+            symbols: symbols.filter(s => s.id !== focusedSymbolId),
             focusedSymbolId : null
         }),
 
         [ACTIONS.CLONE_SYMBOL]: ({
-            payload : id,
-            oldState: { symbols }
+            oldState: { symbols, focusedSymbolId }
         }) => {
-            const clone = {...(symbols.find(s => s.id === id))};
+            const clone = {...(symbols.find(s => s.id === focusedSymbolId))};
             clone.id = `${uniqueID}`;
             clone.label = 'Clone0ƒ ' + clone.label;
             return {
@@ -179,10 +182,10 @@ const actions = {
         }) => ({ [field]: value }),
         
         [ACTIONS.UPDATE_SYMBOL]: ({
-            payload: {id, field, value},
-            oldState: {symbols}
+            payload: {field, value},
+            oldState: {symbols, focusedSymbolId}
         }) => ({
-            symbols: symbols.map(sym => sym.id === id
+            symbols: symbols.map(sym => sym.id === focusedSymbolId
                 ? {
                     ...sym,
                     [field]: value
@@ -192,33 +195,33 @@ const actions = {
         }),
 
         [ACTIONS.TUNE_SYMBOL_POSITION]: ({
-            payload: {id, update},
-            oldState: {symbols}
+            payload: {left, top},
+            oldState: {symbols, focusedSymbolId}
         }) => ({
-            symbols: symbols.map(sym => sym.id === id
+            symbols: symbols.map(sym => sym.id === focusedSymbolId
                 ? ({
                     ...sym,
-                    left: parseInt(sym.left, 10) + parseInt(update.left, 10),
-                    top: parseInt(sym.top, 10) + parseInt(update.top, 10),
+                    left: parseInt(sym.left, 10) + parseInt(left, 10),
+                    top: parseInt(sym.top, 10) + parseInt(top, 10),
                 })
                 : sym
             )
         }),
 
         [ACTIONS.MAX_ZI]: ({
-            payload: id,
-            oldState: {symbols}
+            oldState: {symbols, focusedSymbolId}
         }) => {
-            const maxZindex = symbols.reduce(
-                (a, n) => n.zIndex > a ? n.zIndex : a,
-                MIN_ZINDEX
+            const maxZindexSymbol = symbols.reduce(
+                (a, n) => n.zIndex > a.zIndex ? n : a,
+                {zIndex: MIN_ZINDEX}
             );
+            if (maxZindexSymbol.id === focusedSymbolId) return {};
             return {
                 symbols: symbols.map(
-                    sym => sym.id === id
+                    sym => sym.id === focusedSymbolId
                         ? ({
                             ...sym,
-                            zIndex: maxZindex+1
+                            zIndex: maxZindexSymbol.zIndex+1
                         })
                         : sym
                 )
@@ -226,20 +229,18 @@ const actions = {
         },
 
         [ACTIONS.MIN_ZI]: ({
-            payload: id,
-            oldState: {symbols}
+            oldState: {symbols, focusedSymbolId}
         }) => {
-            const minZindex = symbols.reduce(
-                (a, n) => n.zIndex < a
-                    ? n.zIndex
-                    : a,
-                MAX_ZINDEX
+            const minZindexSymbol = symbols.reduce(
+                (a, n) => n.zIndex < a.zIndex ? n : a,
+                {zIndex: MAX_ZINDEX}
             );
+            if (minZindexSymbol.id === focusedSymbolId) return {};
             return {
-                symbols: symbols.map(sym => sym.id === id
+                symbols: symbols.map(sym => sym.id === focusedSymbolId
                     ? ({
                         ...sym,
-                        zIndex: Math.max(0, minZindex-1)
+                        zIndex: Math.max(0, minZindexSymbol.zIndex-1)
                     })
                     : sym
                 )
@@ -296,7 +297,7 @@ const actions = {
             }))
         }),
         
-        [ACTIONS.IMPORT]: ({payload}) => {
+        [ACTIONS.IMPORT]: ({payload, oldState}) => {
             let newState;
             try {
                 newState = JSON.parse(payload);
@@ -308,12 +309,41 @@ const actions = {
                     error: UNSUPPORTEDFILE_MESSAGE
                 };
             }
-            return uncompress(newState);
+            var t = uncompress(newState);
+            return {
+                ...t,
+                keyFrames: {
+                    ...oldState.keyFrames,
+                    ...t.keyFrames
+                }
+            };
+        },
+        [ACTIONS.IMPORT_KEYFRAMES]: ({payload, oldState}) => {
+            let keyFrames;
+            try {
+                keyFrames = JSON.parse(payload);
+                const els = Object.values(keyFrames);
+                if (!('name' in els[0]) || !('keyFrame' in els[0])) {
+                    throw UNSUPPORTEDFILE_MESSAGE;
+                }
+            } catch(e) {
+                return {
+                    error: UNSUPPORTEDFILE_MESSAGE
+                };
+            }
+            return {
+                keyFrames: {
+                    ...oldState.keyFrames,
+                    ...keyFrames
+                }
+            };
         },
         
-        [ACTIONS.ALIGN_H]: ({payload: id, oldState: {symbols, width}}) => ({
+        [ACTIONS.ALIGN_H]: ({
+            oldState: {symbols, width, focusedSymbolId}
+        }) => ({
             symbols: symbols.map(
-                sym => sym.id === id
+                sym => sym.id === focusedSymbolId
                 ? ({
                     ...sym,
                     left: ~~(width/2)
@@ -323,11 +353,10 @@ const actions = {
         }),
 
         [ACTIONS.ALIGN_V]: ({
-            payload: id ,
-            oldState: {symbols, height}
+            oldState: {symbols, height, focusedSymbolId}
         }) => ({
             symbols: symbols.map(
-                sym => sym.id === id
+                sym => sym.id === focusedSymbolId
                 ? ({
                     ...sym,
                     top: ~~(height/2)
@@ -351,11 +380,14 @@ const actions = {
             })
         }),
 
-        [ACTIONS.PAN_ALL_SYMBOLS]: ({payload, oldState: { symbols }}) => ({
+        [ACTIONS.PAN_ALL_SYMBOLS]: ({
+            payload: pan,
+            oldState: { symbols }
+        }) => ({
             symbols: symbols.map(sym => {
                 const minCompliantScale = Math.max(
                     MIN_SCALE,
-                    parseInt(sym.scale, 10) - parseInt(payload, 10)
+                    parseInt(sym.scale, 10) - parseInt(pan, 10)
                 );
                 const compliantScale = Math.min(
                     MAX_SCALE,
@@ -368,10 +400,11 @@ const actions = {
             })
         }),
 
-        [ACTIONS.SET_SYMBOLS_FILTER] : ({ payload }) => ({ symbolsFilter: payload}),
+        [ACTIONS.SET_SYMBOLS_FILTER] : ({ payload: symbolsFilter }) => ({ symbolsFilter }),
 
         [ACTIONS.REMOVE_ERROR] : ( ) => ({ error: null}),
 
+        // not on focusedSymbolId
         [ACTIONS.MOVE_SYMBOL] : ({
             payload: { id, direction },
             oldState: { symbols }
@@ -388,7 +421,12 @@ const actions = {
             };
         },
 
-        [ACTIONS.MOVE_TARGET_ONE_PX]: ({payload : key, oldState: {focusedSymbolId, symbols}}) => {
+        [ACTIONS.MOVE_TARGET_ONE_PX]: ({
+            payload : key,
+            oldState: {
+                focusedSymbolId, symbols
+            }
+        }) => {
             const what = {
                 ArrowLeft: {field: 'left', diff: -1},
                 ArrowRight: {field: 'left', diff: 1},
@@ -402,7 +440,50 @@ const actions = {
                     [what.field]: s[what.field] + what.diff
                 } : s
             ))};
-        }
+        },
+
+        [ACTIONS.UPDATE_KEY_FRAME]: ({
+            payload: {name, keyFrame, animate},
+            oldState: { keyFrames }
+        }) => {
+            const newKeyFrames = {
+                ...keyFrames,
+                [name]: {
+                    name,
+                    keyFrame,
+                    animate
+                }
+            };
+            keyFramesManager.synch(newKeyFrames);
+            return {
+                keyFrames: newKeyFrames
+            };
+        },
+        [ACTIONS.REMOVE_KEY_FRAME]:({
+            payload: { name },
+            oldState: { keyFrames, symbols }
+        }) => {
+            const newKeyFrames = {...keyFrames};
+            delete newKeyFrames[name];
+            keyFramesManager.synch(newKeyFrames);
+            return {
+                keyFrames: newKeyFrames,
+                symbols: symbols.map(s => ({
+                    ...s,
+                    animation: s.animation === name ? null : s.animation
+                }))
+            };
+        },
+        [ACTIONS.REMOVE_ALL_KEY_FRAMES]:({
+            oldState: {symbols}
+        }) => {
+            keyFramesManager.synch({});
+            return {
+                keyFrames: {},
+                symbols: symbols.map(s => ({...s, animation: null}))
+            };
+        },
+
     },
     reducer = (oldState, action) => {
         const { payload = {}, type } = action;

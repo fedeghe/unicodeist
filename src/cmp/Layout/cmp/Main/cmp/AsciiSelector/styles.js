@@ -4,10 +4,10 @@ export default createUseStyles((theme) => ({
     Container: {
         zIndex:10000,
         position:'absolute',
-        top:'5px',
-        left:'5px',
-        width: 'calc(100vw - 10px)',
-        height: 'calc(100vh - 10px)',
+        top:`${theme.spacing.small/2}px`,
+        left:`${theme.spacing.small/2}px`,
+        width: `calc(100vw - ${theme.spacing.small}px)`,
+        height: `calc(100vh - ${theme.spacing.small}px)`,
         borderRadius: theme.radius.selectorModal,
         backgroundColor: theme.background.selectorModal,
         color: theme.foreground,
@@ -18,7 +18,7 @@ export default createUseStyles((theme) => ({
         display:'flex',
         flexGrow:1,
         overflow: 'scroll',
-        padding:'10px',
+        padding:`${theme.spacing.small}px`,
         flexDirection:'column',
         position:'relative'
     },

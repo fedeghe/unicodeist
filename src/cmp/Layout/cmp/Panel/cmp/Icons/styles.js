@@ -10,14 +10,11 @@ export default createUseStyles(theme => ({
         cursor:'pointer'
     },
     ColorPicker: {
-        width:'28px'
+        width:`${theme.spacing.xxxxlarge}px`
     },
-    Separator: {
-        width: 0,
-        borderLeft:`1px dotted gray`,
-        height:'30px'
-    },
-    BgAlpha: {
+    Check: {
+        width:`${theme.spacing.xxxxlarge}px`,
+        height:`${theme.spacing.xxxxlarge}px`,
         color:theme.foreground
     },
 }));

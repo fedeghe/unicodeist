@@ -8,7 +8,7 @@ import {
     toPng, toJpeg
 } from 'html-to-image';
 import { DEFAULT_DOWNLOAD_FORMAT, DOWNLOAD_FORMATS } from 'src/constants';
-import { saveAsFileJSON } from 'src/utils';
+import { saveAsStateFileJSON, downloadAs } from 'src/utils';
 import ctx from 'src/Context';
 import useStyles from './styles';
 
@@ -31,14 +31,14 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
             [setVisibility]
         ),
         toJson = useCallback(
-            () => saveAsFileJSON(state),
+            () => saveAsStateFileJSON(state),
             [state]
         ),
         alphaFlagLabel = backgroundColorAlpha ? '' : ' (turned OFF)',
         formatToReader = {
             [DOWNLOAD_FORMATS.json]: {
                 executor: toJson,
-                innerHint: 'i/o compliant',
+                innerHint: 'I/O',
                 outerHint: 'this format is the only importable one'
             },
             [DOWNLOAD_FORMATS.jpeg]: {
@@ -46,7 +46,7 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
             },
             [DOWNLOAD_FORMATS.png]: {
                 executor: toPng,
-                innerHint: `alpha bg compliant${alphaFlagLabel}`,
+                innerHint: `alpha bg${alphaFlagLabel}`,
                 outerHint: `this format supports background alpha transparency${alphaFlagLabel}`
             },
         },
@@ -58,12 +58,7 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
         doDownload = useCallback(() => {
             const dom = domRef.current;
             format in formatToReader && formatToReader[format].executor(dom).then(
-                dataUrl => {
-                    const a = document.createElement('a');
-                    a.href = dataUrl;
-                    a.setAttribute('download', `${filename}.${format}`);
-                    a.click();
-                }
+                downloadAs(`${filename}.${format}`)
             ).then(onClose);
         }, [format, filename]);
 

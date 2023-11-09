@@ -1,13 +1,9 @@
-
 import { createUseStyles } from 'react-jss';
-
 import {
     EXPANDED_SYM_HEIGHT,
     COLLAPSED_SYM_HEIGHT,
     COLLAPSING_SYM_TIME
 } from 'src/constants';
-
-
 
 export default createUseStyles(theme => ({
     Container: {//
@@ -30,13 +26,8 @@ export default createUseStyles(theme => ({
         width: '100%',
         border: 'none',
         borderTop: '1px dotted gray',
-        margin: 0
-    },
-    HrP: {
-        width: '100%',
-        border: 'none',
-        borderTop: '1px solid gray',
-        margin: 0
+        margin: 0,
+        marginBottom:'10px'
     },
 
     Box: {

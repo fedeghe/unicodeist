@@ -40,15 +40,48 @@ export const MAX_BLUR= 20;
 export const STEP_BLUR = 0.01;
 export const MIN_ZINDEX = 0;
 export const MAX_ZINDEX = 10000;
-export const EXPANDED_SYM_HEIGHT = 640;
+export const EXPANDED_SYM_HEIGHT = 690;
 export const COLLAPSED_SYM_HEIGHT = 70;
 export const COLLAPSING_SYM_TIME = 0.3;
 export const CLOSE_TOAST_TIMEOUT = 1000;
 export const OFFSET_PERC = 0.3;
-export const HEADER_HEIGHT = 170;
+export const HEADER_HEIGHT = 140;
 export const DEFAULT_BACKGROUND_ALPHA = false;
+export const LOCALSTORAGE_KEYFRAMES_KEY = 'keyframes';
+export const UNSELECTED = '__unselected__';
 export const getMaxHeight = () => ~~window.innerHeight * 0.9;
 export const getMaxWidth = () => ~~window.innerWidth * 0.9;
+export const getBaseNamedKeyFrame = name => `@keyframes ${name} {
+    from {color: red;}
+    to {color: blue;}
+    /*
+    0% {color: red;}
+    100% {color: blue;}
+    */
+}`;
+export const getBaseNamedAnimate = name => `{
+    animation-name: ${name};
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    /*
+    animation: ${name} 5s linear 2s infinite alternate;
+    */
+}`;
+export const DEFAULT_BG_STYLES = `{
+    // background-image: linear-gradient(180deg, red, yellow);
+    // background-image: linear-gradient(to bottom right, red, yellow);
+    // background-image: linear-gradient(to right, red , yellow);
+}`;
+export const DEFAULT_ADDITIONAL_STYLES = `{
+    /*
+     * none of the rules added here will overwrite
+     * other relevant styles set through Unicodeist
+     */
+}`;
+
 export const FONT_FAMILIES = [
     'Arial', 'Verdana', 'Tahoma',
     'Trebuchet MS',
@@ -78,6 +111,8 @@ export const DOWNLOAD_FORMATS = {
 };
 export const DEFAULT_DOWNLOAD_FORMAT = 'json';
 export const UNSUPPORTEDFILE_MESSAGE = 'File not supported';
+export const DEFAULT_PREVENT_RELOAD = false;
+
 
 
 const CONSTS = {
@@ -128,6 +163,13 @@ const CONSTS = {
     getMaxWidth,
     DEFAULT_BACKGROUND_ALPHA,
     DEFAULT_BACKGROUND_COLOR,
-    DEFAULT_SYMBOL_COLOR
+    DEFAULT_SYMBOL_COLOR,
+    DEFAULT_PREVENT_RELOAD,
+    getBaseNamedKeyFrame,
+    getBaseNamedAnimate,
+    LOCALSTORAGE_KEYFRAMES_KEY,
+    UNSELECTED,
+    DEFAULT_BG_STYLES,
+    DEFAULT_ADDITIONAL_STYLES
 };
 export default CONSTS;

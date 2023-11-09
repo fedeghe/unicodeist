@@ -13,13 +13,17 @@ import FileUploadIcon from '@mui/icons-material/FileUpload';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
+import KeyIcon from '@mui/icons-material/Key';
+import WallpaperIcon from '@mui/icons-material/Wallpaper';
 
-import Channel from '@fedeghe/channeljs';
+import ReplayIcon from '@mui/icons-material/Replay';
+import ReplayCircleFilledIcon from '@mui/icons-material/ReplayCircleFilled';
+import BlurOnIcon from '@mui/icons-material/BlurOn';
+import BlurOffIcon from '@mui/icons-material/BlurOff';
 
 
+import Channeljs from '@fedeghe/channeljs';
 import SnackMessage from 'src/cmp/SnackMessage';
-
-
 import ThemeSwitch from 'src/cmp/ThemeSwitch';
 import { THEMES } from 'src/constants';
 import ctx from 'src/Context';
@@ -30,19 +34,19 @@ import useStyles from './styles';
 
 
 const Icons = () => {
-    const classes = useStyles();
     const { state, dispatch } = useContext(ctx),
         [open, setOpen] = useState(false),
         handleOpen = () => setOpen(true),
         handleClose = () => setOpen(false),
-        { backgroundColor, error, themeKey, backgroundColorAlpha } = state,
+        { backgroundColor, error, themeKey, backgroundColorAlpha, preventReload } = state,
+        classes = useStyles({backgroundColorAlpha}),
         embed = () => {
             handleClose();
-            Channel.get('event').pub('embed');
+            Channeljs.get('event').pub('embed');
         },
         exportImage = () => {
             handleClose();
-            Channel.get('event').pub('exportImage');
+            Channeljs.get('event').pub('exportImage');
         },
         importState = () => {
             handleClose();
@@ -53,7 +57,8 @@ const Icons = () => {
                 })
             });
         },
-        contribute = () => Channel.get('event').pub('contribute'),
+        contribute = () => Channeljs.get('event').pub('contribute'),
+        openBackgroundStyles = () => Channeljs.get('event').pub('backgrounStyles'),
         updateBackgroundColor = e => dispatch({
             type: ACTIONS.UPDATE_GLOBAL,
             payload: {
@@ -67,6 +72,11 @@ const Icons = () => {
             type: ACTIONS.UPDATE_GLOBAL,
             payload: {field:'backgroundColorAlpha', value: !backgroundColorAlpha }
         }),
+        toggleReload = () => dispatch({
+            type: ACTIONS.UPDATE_GLOBAL,
+            payload: {field:'preventReload', value: !preventReload }
+        }),
+        showKeyEditor = () => Channeljs.get('event').pub('keyEditor'),
         actions = [{
             name: 'import',
             icon: <GetAppIcon />,
@@ -79,6 +89,9 @@ const Icons = () => {
             name: 'embed',
             icon: <CodeRoundedIcon />,
             onClick: embed
+        },{
+            name:'contribute',
+            icon: <GitHubIcon className={classes.Pointer} onClick={contribute}/> 
         }];
 
     return <>
@@ -101,18 +114,35 @@ const Icons = () => {
             ))}
         </SpeedDial>
         <div className={classes.UnderLogo}>
-            <Tooltip title="contribute">
-                <GitHubIcon onClick={contribute}/>
-            </Tooltip>
             <Tooltip title="New creativity">
                 <FiberNewIcon className={classes.Pointer} onClick={newCreativity}/>
             </Tooltip>
-            <div className={classes.Separator}/>
-            <Tooltip title="change background color">
-                <input className={[classes.Pointer, classes.ColorPicker].join(' ')} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
+            
+            <Tooltip title={`${backgroundColorAlpha ? '(disabled) ':''}change background color`}>
+                <input disabled={backgroundColorAlpha} className={[classes.Pointer, classes.ColorPicker].join(' ')} value={backgroundColor} type="color" onChange={updateBackgroundColor} />
             </Tooltip>
+        
             <Tooltip title={`toggle background transparency ${backgroundColorAlpha ? 'OFF' : 'ON'}`}>
-                <Checkbox className={classes.BgAlpha} checked={backgroundColorAlpha} onChange={toggleAlpha}/>
+                <Checkbox className={classes.Check} checked={backgroundColorAlpha} onChange={toggleAlpha}
+                    icon={<BlurOnIcon />}
+                    checkedIcon={<BlurOffIcon />}
+                />
+            </Tooltip>
+
+            <Tooltip title={'background styles'}>
+                <WallpaperIcon className={classes.Pointer} onClick={openBackgroundStyles}/>
+            </Tooltip>
+            <Tooltip title={'open key frames editor'}>
+                <KeyIcon className={classes.Pointer} onClick={showKeyEditor}/>
+            </Tooltip>
+
+            
+
+            <Tooltip title={`toggle reload/nav protection ${preventReload ? 'OFF' : 'ON'}`}>
+                <Checkbox className={classes.Check} checked={preventReload} onChange={toggleReload}
+                    icon={<ReplayIcon />}
+                    checkedIcon={<ReplayCircleFilledIcon />}
+                />
             </Tooltip>
             <ThemeSwitch onChange={handleClose} tooltip={`switch to ${themeKey === THEMES.bright ? THEMES.dark : THEMES.bright} theme`}/>
         </div>

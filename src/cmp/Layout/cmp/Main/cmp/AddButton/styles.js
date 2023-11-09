@@ -1,10 +1,10 @@
 import { createUseStyles } from 'react-jss';
-export default createUseStyles({    
+export default createUseStyles(theme => ({    
     AddButton: {
         position:'absolute',
-        top: '20px',
-        left: '20px',
+        top: `${theme.spacing.small*2}px`,
+        left: `${theme.spacing.small*2}px`,
         color: 'green',
         cursor:'pointer',
     },
-});
+}));
