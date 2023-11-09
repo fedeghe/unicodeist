@@ -1,12 +1,13 @@
 import {
     UNICODEIST_SCRIPT_URI,
-    FONT_FAMILIES_REDUCTION_MAP
+    FONT_FAMILIES_REDUCTION_MAP,
+    UNSELECTED
 } from './constants';
 
 export const uniqueID = new function () {
     var count = 0,
         self = this;
-    this.prefix = 'U-';
+    this.prefix = 'U_';
     this.toString = function () {
         count += 1;
         return self.prefix + count;
@@ -27,14 +28,29 @@ export const cleanCodeFromState = state => {
         {
             width, height,
             backgroundColorAlpha, backgroundColor,
-            symbols
+            symbols,
+            bgStyles
         } = state;
-    root.setAttribute('style',[
+    root.setAttribute('style', [
         `width:${width}px`,
         `height:${height}px`,
         `background-color:${backgroundColor}${backgroundColorAlpha ? '00' : ''}`,
         `position:relative;overflow:hidden`,
+        bgStyles ? css2string(bgStyles) : ''
     ].join(';'));
+
+
+    [...new Set(
+        state.symbols
+            .filter(symbol => symbol.animation && symbol.animation !== UNSELECTED)
+            .map(symbol => symbol.animation)
+    )].forEach(a => {
+        var s = document.createElement('style');
+        s.innerHTML = state.keyFrames[a].keyFrame;
+        root.appendChild(s);
+    });
+    
+    
     symbols.map(sym => {
         var child = document.createElement('div');
         child.innerHTML = sym.char;
@@ -47,6 +63,10 @@ export const cleanCodeFromState = state => {
                 `opacity:${sym.opacity}`,
                 `position:absolute;transform-origin:center center`,
                 sym.blur && `filter:blur(${sym.blur}px)`,
+                ...((sym.animation && sym.animation in state.keyFrames)
+                    ? css2string(state.keyFrames[sym.animation].animate).split(';')
+                    : []
+                ),
                 `transform:` + [
                     `translate(${sym.left}px,${sym.top}px)`,
                     sym.scale !== 1 && `scale(${sym.scale})`,
@@ -55,7 +75,7 @@ export const cleanCodeFromState = state => {
                     sym.rotationX && `rotateX(${sym.rotationX}deg)`,
                     sym.rotationY && `rotateY(${sym.rotationY}deg)`,
                     sym.rotationZ && `rotateZ(${sym.rotationZ}deg)`,
-                    (sym.skewX || sym.skewY)&& `skew(${sym.skewX}deg,${sym.skewY}deg)`,
+                    (sym.skewX || sym.skewY) && `skew(${sym.skewX}deg,${sym.skewY}deg)`,
                 ].filter(Boolean).join(' ')
             ].filter(Boolean).join(';')
         );
@@ -82,7 +102,7 @@ export const debounce = (func, delay) => {
     return ret;
 };
 
-export const filter = ({ symbols, filter, debug = false }) => { 
+export const filter = ({ symbols, filter, debug = false }) => {
     let start,
         end;
     if (debug) start = +new Date();
@@ -91,8 +111,7 @@ export const filter = ({ symbols, filter, debug = false }) => {
             const newData = data.map(({ title, charSet }) => {
                 const filteredCharset = charSet.filter(
                     // eslint-disable-next-line no-unused-vars
-                    ({ c: char, d: description = '', de, u, oc,he }) => {
-                        // const der = getCodes(char);
+                    ({ c: char, d: description = '', de, u, oc, he }) => {
                         return false
                             || description.toLowerCase().split(',').some(s => s.includes(filter))
                             || `${char}`.toLowerCase() === filter.toLowerCase()
@@ -116,7 +135,7 @@ export const filter = ({ symbols, filter, debug = false }) => {
             };
         }).filter(Boolean)
         : symbols;
-    if (debug)  {
+    if (debug) {
         end = +new Date();
         console.log('filtering took: ', end - start);
     }
@@ -127,9 +146,14 @@ export const filter = ({ symbols, filter, debug = false }) => {
  * TODO: here I should allow the use to see the location & name dialog
  * but still do not know how
  */
-export const saveAsFileJSON = state => 
+export const saveAsStateFileJSON = state =>
     new Promise(resolve => {
         const blob = new Blob([getUnicodeistData(state)]);
+        resolve(window.URL.createObjectURL(blob));
+    });
+export const saveAsFileJSON = json =>
+    new Promise(resolve => {
+        const blob = new Blob([JSON.stringify(json)]);
         resolve(window.URL.createObjectURL(blob));
     });
 export const importFromFile = ({ onContentReady }) => {
@@ -154,11 +178,30 @@ const getUnicodeistData = j => JSON.stringify({
         w: j.width,
         h: j.height,
         bgc: `${j.backgroundColor}${j.backgroundColorAlpha ? '00' : ''}`,
+        ...(j.bgStyles &&{
+            bgi: `${j.bgStyles
+                .replace(/^\{/, '')
+                .replace(/\}$/, '')
+                .replace(/\n/g, '')
+            }`}
+        ),
     },
+    kfs: [...new Set(
+        j.symbols
+            .filter(symbol => symbol.animation && symbol.animation !== UNSELECTED)
+            .map(symbol => symbol.animation)
+    )].reduce((acc, animation) => {
+        acc[animation] = {
+            fk: j.keyFrames[animation].keyFrame.replace(/\n/g, ''),
+            an: j.keyFrames[animation].animate.replace(/\n/g, '')
+        };
+        return acc;
+    }, {}),
     sym: j.symbols.map(s => ({
         id: s.id,
         l: s.label,
         cnt: s.char,
+        ani: s.animation,
         sty: {
             zi: s.zIndex,
             c: s.color,
@@ -175,7 +218,7 @@ const getUnicodeistData = j => JSON.stringify({
                 ...(s.rotationX && { rx: s.rotationX }), // deg
                 ...(s.rotationY && { ry: s.rotationY }), // deg
                 ...(s.rotationZ && { rz: s.rotationZ }),  // deg
-                ...((s.skewX || s.skewY) && { sk: [s.skewX,s.skewY] })  // deg
+                ...((s.skewX || s.skewY) && { sk: [s.skewX, s.skewY] })  // deg
             },
             ...(s.blur && {
                 f: {
@@ -191,7 +234,6 @@ export const getUnicodeistScriptTag = state => {
     return `<script src="${UNICODEIST_SCRIPT_URI}" data-unicodeist='${dataUnicodeist}'></script>`;
 };
 
-
 export const getCodes = char => {
     var decimal = char.charCodeAt(0).toString(10),
         unicode = 'U+' + char.charCodeAt(0).toString(16).padStart(4, '0'),
@@ -204,13 +246,69 @@ export const getCodes = char => {
     };
 };
 
-
-export function changeColorAlpha(opacity) {
-    const _opacity = Math.round(Math.min(Math.max(opacity, 0), 1) * 255);
-    let opacityHex = _opacity.toString(16).toUpperCase();
-    if (opacityHex.length == 1) opacityHex = "0" + opacityHex;
-    return opacityHex;
+export function css2json(v) {
+    const first = v.replace(/\n/g, ''),
+        ks = first.matchAll(/([A-Za-z0-9-_]*):(['"A-Za-z0-9-_.,:/()%#\s]*);/g),
+        vals = [...ks],
+        // eslint-disable-next-line no-unused-vars
+        ret = vals.reduce((acc, [_, k, v]) => {
+            const nk = k.replace(/(\w)-(\w)/g, (_, a, b) => `${a}${b.toUpperCase()}`);
+            acc[nk.toString()] = v.toString();
+            return acc;
+        }, {}),
+        sret = JSON.stringify(ret),
+        jret = JSON.parse(sret);
+    return jret;
 }
+export function css2string(v) {
+    const first = v.replace(/\n/g, ''),
+        ks = first.matchAll(/([A-Za-z0-9-_]*):(['"A-Za-z0-9-_.,:/()%#\s]*);/g),
+        vals = [...ks],
+        // eslint-disable-next-line no-unused-vars
+        ret = vals.reduce((acc, [_, k, v]) => `${acc}${k}:${v};`, '');
+    return ret;
+}
+
+export const css2jss = ({ keyFrame, animate }) => ({
+    ani: css2json(animate),
+    kf: keyFrame
+});
+export const css2jstring = ({ keyFrame, animate }) => ({
+    ani: css2string(animate),
+    kf: keyFrame
+});
+
+/* View in fullscreen */
+export const openFullscreen = () => {
+    var elem = document.documentElement;
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+    }
+};
+
+/* Close fullscreen */
+export const closeFullscreen = () => {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    }
+};
+
+export const downloadAs = fileName => {
+    return dataUrl => {
+        const a = document.createElement('a');
+        a.href = dataUrl;
+        a.setAttribute('download', fileName);
+        a.click();
+    };
+};
 
 const def = {
     uniqueID,
@@ -220,9 +318,17 @@ const def = {
     importFromFile,
     getUnicodeistData,
     getUnicodeistScriptTag,
+    saveAsStateFileJSON,
     saveAsFileJSON,
     getCodes,
     count,
-    filter
+    filter,
+    css2jss,
+    css2jstring,
+    css2string,
+    openFullscreen,
+    closeFullscreen,
+    downloadAs,
+    css2json
 };
 export default def;
