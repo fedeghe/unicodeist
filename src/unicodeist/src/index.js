@@ -1,37 +1,24 @@
 (function () {
     var script = document.currentScript,
-
         // must be in synch with src/constants.js
         // FONT_FAMILIES_REDUCTION_MAP
         FFRM = {
-            ar: 'Arial',
-            v: 'Verdana',
-            ta: 'Tahoma',
-            tr: 'Trebuchet MS',
-            tn: 'Times New Roman',
-            ge: 'Georgia',
-            ga: 'Garamond',
-            c: 'Courier New',
-            b: 'Brush Script MT'
+            ar: 'Arial', v: 'Verdana', ta: 'Tahoma', tr: 'Trebuchet MS', tn: 'Times New Roman',
+            ge: 'Georgia', ga: 'Garamond', c: 'Courier New',b: 'Brush Script MT'
         },
         lbs = {
-            r:'rotate',
-            s:'scale',
-            f:'font',
-            c:'color',
-            d:'deg',
-            po:'position',
-            cn:'center',
-            p:'px',
-            t:'transform',
-            fl:'filter',
-            b:'blur',
-            sk:'skew'
+            r:'rotate', s:'scale', f:'font', c:'color',
+            d:'deg', po:'position', cn:'center', p:'px',
+            t:'transform', fl:'filter', b:'blur', sk:'skew'
         },
+        /**
+         * uncompressing function map 
+         */
         map = {
             w: function (v) { return 'width:' + v + lbs.p; },
             h: function (v) { return 'height:' + v + lbs.p; },
             bgc: function (v) { return 'background-' + lbs.c + ':' + v; },
+            bgi: function (v) { return v; },
             zi: function (v) { return 'z-index:' + v; },
             c: function (v) { return lbs.c + ':' + v; },
             ff: function (v) { return lbs.f + '-family:' + FFRM[v]; },
@@ -46,13 +33,24 @@
             sk: function (x,y) { return (x||y) ? lbs.sk + '(' + x + lbs.d + ',' + y + lbs.d + ')' : ''; },
             bl: function (v) { return v ? lbs.b + '(' + v + lbs.p + ')' : ''; },
         },
-        createElement = function (sty, cnt) {
+
+        /**
+         * returns root or symbol
+         */
+        createElement = function (sty, cnt, ani) {
             var node = document.createElement('div'),
                 styles = [cnt
                     ? lbs.po + ':absolute;' + lbs.t + '-origin:' + lbs.cn + ' ' + lbs.cn
                     : lbs.po + ':relative;overflow:hidden'
                 ],
                 k;
+
+            
+            if (ani && ani in data.kfs) {
+                var ks = data.kfs[ani].an.matchAll(/([A-Za-z0-9-_]*):([A-Za-z0-9-_.\s]*);/g),
+                    kz = [...ks];
+                styles = styles.concat(kz);
+            }
 
             for (k in sty) {
                 switch (k) {
@@ -94,9 +92,15 @@
         data = JSON.parse(rawData),
         root = createElement(data.sty);
 
+    for(var k in data.kfs) {
+        var s = document.createElement('style');
+        s.innerHTML = data.kfs[k].fk;
+        root.appendChild(s);
+    }
+    // append children symbols
     data.sym.forEach(function (symbol) {
         root.appendChild(
-            createElement(symbol.sty, symbol.cnt)
+            createElement(symbol.sty, symbol.cnt, symbol.ani)
         );
     });
     script.parentNode.insertBefore(root, script.nextSibling);
