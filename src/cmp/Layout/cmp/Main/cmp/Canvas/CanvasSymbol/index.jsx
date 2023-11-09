@@ -1,26 +1,29 @@
-/* eslint-disable no-unused-vars */
-import {
-    useCallback, useContext,
-    useState
-} from 'react';
-
+import { useContext, useState, useEffect } from 'react';
 import useStyles from './styles';
 
 import ctx from 'src/Context';
+import {css2jss, css2json} from 'src/utils';
 import ACTIONS from 'src/reducer/actions';
 
 const CanvasSymbol = ({symbol}) => {
-    const {state: { focusedSymbolId}, dispatch} = useContext(ctx),
+    const {
+            state: {
+                focusedSymbolId,
+                keyFrames
+            },
+            dispatch
+        } = useContext(ctx),
         [dragging, setDragging] = useState(false),
         [pos, setPos] = useState([symbol.left, symbol.top]),
         isTarget = focusedSymbolId===symbol.id,
         {
-            id, char, zIndex, left, top, color,
+            char, zIndex, left, top, color,
             faded,opacity, fontFamily, fontWeight,
             rotationX, rotationY, rotationZ,
             skewX, skewY,
             scale, scaleX, scaleY,
-            blur
+            blur,
+            additionalStyles
         } = symbol,
         classes = useStyles({
             isTarget,
@@ -28,13 +31,6 @@ const CanvasSymbol = ({symbol}) => {
             ownOpacity: opacity
         }),
         [startPoint, setStartPoint] = useState([left, top]),
-        selectSymbol = useCallback(
-            () => dispatch({
-                type: ACTIONS.FOCUS_ON_SYMBOL,
-                payload: id
-            }),
-            [dispatch, id]
-        ),
         onDragStart = e => {
             setDragging(true);
             e.dataTransfer.effectAllowed = "move";
@@ -51,15 +47,23 @@ const CanvasSymbol = ({symbol}) => {
             dispatch({
                 type: ACTIONS.TUNE_SYMBOL_POSITION,
                 payload: {
-                    id,
-                    update: {
-                        left: parseInt(pos[0], 10) - parseInt(startX, 10),
-                        top: parseInt(pos[1], 10) - parseInt(startY, 10)
-                    }
+                    left: parseInt(pos[0], 10) - parseInt(startX, 10),
+                    top: parseInt(pos[1], 10) - parseInt(startY, 10)
                 }
             });
-        };    
+        },
+        baseAnim = symbol.animation in keyFrames
+            ? css2jss(keyFrames[symbol.animation])
+            : {},
+        [animAnim, setAnimAnim] = useState(baseAnim.animation);
 
+    useEffect(() => {
+        const { ani }  = symbol.animation in keyFrames
+            ? css2jss(keyFrames[symbol.animation])
+            : {};
+        setAnimAnim(ani);
+    }, [keyFrames[symbol.animation], symbol.animation]);
+    
     return <div
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}
@@ -72,11 +76,10 @@ const CanvasSymbol = ({symbol}) => {
         >
         <div
             className={classes.CanvasSymbol}
-            onClick={selectSymbol}
             style={{
+                ...(additionalStyles && css2json(additionalStyles)),
                 position:'absolute',
                 transformOrigin: 'center',
-                
                 transform:[
                     `translate(${left}px,${top}px)`,
                     `scale(${scale})`, 
@@ -95,6 +98,7 @@ const CanvasSymbol = ({symbol}) => {
                 fontFamily,
                 zIndex,
                 ...(!faded && opacity < 1 && {opacity}),
+                ...animAnim,
             }}
         >{char}</div>
     </div>;
