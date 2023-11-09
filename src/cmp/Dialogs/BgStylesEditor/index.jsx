@@ -99,7 +99,7 @@ const BgStylesEditor = ({ visibility, setVisibility }) => {
                         <Tooltip title="close keyFrames editor">
                             <Button onClick={onClose} color="error">Close</Button>
                         </Tooltip>
-                        <Button  color="success" onClick={onSave}>Apply</Button>
+                        <Button  color="success" onClick={onSave}>Apply & close</Button>
                     </div>
                 </div>
                 <SnackMessage message={confirmationMessage} open={confirmationVisibility} setOpen={setConfirmationVisibility} />
