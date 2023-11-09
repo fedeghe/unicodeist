@@ -21,13 +21,17 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
 
 ---
 - In the top right you can:<img align="right" width="322"  src="src/img/ss1.png?raw=true">
-    - contribute to the project 
+
     - start a new creative 
     - change the `background-color` (default is white)
     - toggle background transparency
+    - open the background styles editor
+    - open the keyFrames editor
+    - toggle navigation blocker
     - switch 🌓 theme
     - set the size of the current _creative_
     - hover the speed dial button to:
+        - contribute to the project 
          - get the content as `<div>` usable in a html page or a `<script>` that will automatically render the _creative_ exactly where you put the script.
         - export either:
             1) `.json` file of the current _creative_ (afterward importable)
@@ -62,6 +66,7 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
         - using the range inputs
         - drag the symbol
         - when focused press `⇧ + arrow` (1px move each)
+    - apply one of the `keyFrames` listed (or imported) in the ketFrames editor
 
 
 <img align="right" width="250"  src="src/img/ss3.png?raw=true">  

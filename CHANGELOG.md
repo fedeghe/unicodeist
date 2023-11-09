@@ -11,4 +11,4 @@ on resize tune all symbols to keep their position constant respect to the center
 keyFrames editor dialog  
 reload/navigation protection toggle  
 background styles dialog  
-symbol shadow editor dialog
+additional styles editor dialog
