@@ -71,7 +71,8 @@ const base = {
     bgStyles:false,
     keyFrames:keyFramesManager.synch(),
     preventReload: DEFAULT_PREVENT_RELOAD,
-    fullscreen: false
+    fullscreen: false,
+    availableSymbols: []
 };
 
 
@@ -482,6 +483,30 @@ const actions = {
             return {
                 keyFrames: {},
                 symbols: symbols.map(s => ({...s, animation: null}))
+            };
+        },
+        [ACTIONS.EXPAND_FAMILY]:({
+            oldState: {availableSymbols},
+            payload: label
+        }) => {
+            
+            return {
+                availableSymbols: availableSymbols.map(as => ({
+                    ...as,
+                    expanded: as.label === label
+                }))
+            };
+        },
+        [ACTIONS.COLLAPSE_FAMILY]:({
+            oldState: {availableSymbols},
+            payload: label
+        }) => {
+            
+            return {
+                availableSymbols: availableSymbols.map(as => ({
+                    ...as,
+                    expanded: as.label === label ? false : as.expanded
+                }))
             };
         },
 

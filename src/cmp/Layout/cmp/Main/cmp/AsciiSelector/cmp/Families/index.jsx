@@ -48,7 +48,7 @@ const Families = () => {
     
     return <div className={classes.Container} ref={ref}>
         {Boolean(filteredCount) && 
-            availableSymbols.map(({label, data}) => <Family key={label} data={data} label={label} onSelect={onSelect} />)
+            availableSymbols.map(({label, data, expanded}) => <Family key={label} data={data} label={label} onSelect={onSelect} expanded={expanded} />)
         }
         {open && <SnackMessage message={`${messageChar} added`} onClose={hideConfirmation} open={open} setOpen={setOpen}/>}
         

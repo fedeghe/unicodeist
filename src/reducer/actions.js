@@ -31,7 +31,9 @@ const INIT = Symbol('init'),
     NEW_KEY_FRAME = Symbol('save a new keyframe'),
     UPDATE_KEY_FRAME = Symbol('uodate a new keyframe'),
     REMOVE_KEY_FRAME = Symbol('delete a  keyframe'),
-    REMOVE_ALL_KEY_FRAMES = Symbol('delete all keyframe');
+    REMOVE_ALL_KEY_FRAMES = Symbol('delete all keyframe'),
+    EXPAND_FAMILY = Symbol('expand family'),
+    COLLAPSE_FAMILY = Symbol('collapse family');
 
 const exp = {
     INIT,
@@ -68,6 +70,8 @@ const exp = {
     UPDATE_KEY_FRAME,
     REMOVE_KEY_FRAME,
     REMOVE_ALL_KEY_FRAMES,
+    EXPAND_FAMILY,
+    COLLAPSE_FAMILY
 };
 
 export default exp;
