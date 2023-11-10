@@ -37,6 +37,7 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                 keyFrames,
                 focusedSymbolId,
                 symbols,
+                fullscreen
             }
         } = useContext(ctx),
         getKeyName = () => `kf_${uniqueID}`,
@@ -110,14 +111,14 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
         onName = e => {
             setName(e.target.value);
         },
-        onKeyDown = e => {
-            if (e.key === 'Escape') {
+        onKeyDown = useCallback(e => {
+            if (!fullscreen && e.key === 'Escape') {
                 onClose();
                 e.stopPropagation();
                 e.preventDefault();
                 return false;
             }
-        },
+        }, [fullscreen]),
         showConfirmation = msg => {
             setConfirmationMessage(msg);
             setConfirmationVisibility(true);

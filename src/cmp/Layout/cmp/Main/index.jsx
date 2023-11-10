@@ -9,7 +9,7 @@ import ACTIONS from 'src/reducer/actions';
 
 const Main = () => {
     const classes = useStyles(),
-        { state: { addPanelVisibility }, dispatch } = useContext(ctx),
+        { state: { addPanelVisibility, fullscreen }, dispatch } = useContext(ctx),
         togglePanel = useCallback(() =>
             dispatch({
                 type: ACTIONS.TOGGLE_ADD_PANEL,
@@ -34,7 +34,7 @@ const Main = () => {
             ) return e;
 
             // on escape toggle 
-            if (e.key === "Escape") { togglePanel(); e.preventDefault();}
+            if (!fullscreen && e.key === "Escape") { togglePanel(); e.preventDefault();return false;}
 
             // on shift+arrow move current target symbol
             if (
@@ -43,7 +43,7 @@ const Main = () => {
             ){
                 move(e.key); e.preventDefault();
             }
-        }, [togglePanel]);
+        }, [togglePanel, fullscreen]);
 
     useEffect(() => {
         document.addEventListener("keydown", onKeyDown);

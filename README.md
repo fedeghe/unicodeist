@@ -40,9 +40,9 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
         
     ---
 
-- Press the ➕ button on the **top** **left** (or press `ESC` button) to toggle the symbol selection panel  
+- Press the ➕ button on the **top** **left** (or if fullscreen is not active press `ESC` button) to toggle the symbol selection panel  
 
-- Add one or more symbols and close the panel (through ➖ button or pressing `ESC`)  
+- Add one or more symbols and close the panel (through ➖ button or pressing `ESC`, again the latter only if u are not in fullscreen mode)  
 
 <img align="right" width="250"  src="src/img/ss2.png?raw=true">  
 
@@ -71,7 +71,7 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
 
 <img align="right" width="250"  src="src/img/ss3.png?raw=true">  
 
-all range fields can be tuned either moving the range handle either just clicking on the value and scroll `up/down` or just type the exact value and blur or hit `esc` | `enter` buttons (if a range is focused then the scrolling on the symbols list is disabled).
+all range fields can be tuned either moving the range handle either just clicking on the value and scroll `up/down` or just type the exact value and blur or hit `enter` buttons (if a range is focused then the scrolling on the symbols list is disabled).
 
 
 

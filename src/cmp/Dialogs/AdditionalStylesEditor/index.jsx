@@ -25,7 +25,8 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
             dispatch,
             state: {
                 symbols,
-                focusedSymbolId
+                focusedSymbolId,
+                fullscreen
             }
         } = useContext(ctx),
         additionalStyles = symbols.find(sym =>sym.id === focusedSymbolId).additionalStyles,
@@ -55,18 +56,14 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
             }); 
             onClose();
         },
-        onKeyDown = e => {
-            if (e.key === 'Escape') {
+        onKeyDown = useCallback(e => {
+            if (!fullscreen && e.key === 'Escape') {
                 onClose();
                 e.stopPropagation();
                 e.preventDefault();
                 return false;
             }
-        },
-        showConfirmation = msg => {
-            setConfirmationMessage(msg);
-            setConfirmationVisibility(true);
-        };
+        }, [fullscreen]);
 
     return (
         <Dialog

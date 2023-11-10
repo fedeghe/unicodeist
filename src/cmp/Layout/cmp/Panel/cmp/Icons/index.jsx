@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import {
     SpeedDial,
     SpeedDialAction,
@@ -16,6 +16,9 @@ import FiberNewIcon from '@mui/icons-material/FiberNew';
 import KeyIcon from '@mui/icons-material/Key';
 import WallpaperIcon from '@mui/icons-material/Wallpaper';
 
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
+
 import ReplayIcon from '@mui/icons-material/Replay';
 import ReplayCircleFilledIcon from '@mui/icons-material/ReplayCircleFilled';
 import BlurOnIcon from '@mui/icons-material/BlurOn';
@@ -29,17 +32,25 @@ import { THEMES } from 'src/constants';
 import ctx from 'src/Context';
 
 import ACTIONS from 'src/reducer/actions';
-import { importFromFile } from 'src/utils';
+import { importFromFile, openFullscreen, closeFullscreen } from 'src/utils';
 import useStyles from './styles';
 
 
 const Icons = () => {
     const { state, dispatch } = useContext(ctx),
         [open, setOpen] = useState(false),
+        
         handleOpen = () => setOpen(true),
         handleClose = () => setOpen(false),
-        { backgroundColor, error, themeKey, backgroundColorAlpha, preventReload } = state,
+        { backgroundColor, error, themeKey, backgroundColorAlpha, preventReload, fullscreen } = state,
         classes = useStyles({backgroundColorAlpha}),
+        setFullscreen = v => dispatch({
+            type: ACTIONS.UPDATE_GLOBAL,
+            payload: {
+                field: 'fullscreen',
+                value: v
+            }
+        }),
         embed = () => {
             handleClose();
             Channeljs.get('event').pub('embed');
@@ -77,6 +88,10 @@ const Icons = () => {
             payload: {field:'preventReload', value: !preventReload }
         }),
         showKeyEditor = () => Channeljs.get('event').pub('keyEditor'),
+        toggleFullscreen = () => {
+            (fullscreen ? closeFullscreen : openFullscreen)();
+            setFullscreen(!fullscreen);
+        },
         actions = [{
             name: 'import',
             icon: <GetAppIcon />,
@@ -93,6 +108,26 @@ const Icons = () => {
             name:'contribute',
             icon: <GitHubIcon className={classes.Pointer} onClick={contribute}/> 
         }];
+    useEffect(() => {
+        function setHandler(){
+            document.addEventListener('fullscreenchange', exitHandler, false);
+            document.addEventListener('mozfullscreenchange', exitHandler, false);
+            document.addEventListener('MSFullscreenChange', exitHandler, false);
+            document.addEventListener('webkitfullscreenchange', exitHandler, false);
+        }
+        function exitHandler(){
+            if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
+                setFullscreen(false);
+            }
+        }
+        setHandler();
+        return () => {
+            document.removeEventListener('fullscreenchange', exitHandler);
+            document.removeEventListener('mozfullscreenchange', exitHandler);
+            document.removeEventListener('MSFullscreenChange', exitHandler);
+            document.removeEventListener('webkitfullscreenchange', exitHandler);
+        };
+    }, []);
 
     return <>
         <SpeedDial
@@ -142,6 +177,13 @@ const Icons = () => {
                 <Checkbox className={classes.Check} checked={preventReload} onChange={toggleReload}
                     icon={<ReplayIcon />}
                     checkedIcon={<ReplayCircleFilledIcon />}
+                />
+            </Tooltip>
+
+            <Tooltip title={`toggle fullscreen ${fullscreen ? 'OFF' : 'ON'}`}>
+                <Checkbox className={classes.Check} checked={fullscreen} onChange={toggleFullscreen}
+                    icon={<FullscreenIcon />}
+                    checkedIcon={<FullscreenExitIcon />}
                 />
             </Tooltip>
             <ThemeSwitch onChange={handleClose} tooltip={`switch to ${themeKey === THEMES.bright ? THEMES.dark : THEMES.bright} theme`}/>

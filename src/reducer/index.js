@@ -71,6 +71,7 @@ const base = {
     bgStyles:false,
     keyFrames:keyFramesManager.synch(),
     preventReload: DEFAULT_PREVENT_RELOAD,
+    fullscreen: false
 };
 
 

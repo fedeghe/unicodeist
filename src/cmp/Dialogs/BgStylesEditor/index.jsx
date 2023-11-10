@@ -25,6 +25,7 @@ const BgStylesEditor = ({ visibility, setVisibility }) => {
             dispatch,
             state: {
                 bgStyles,
+                fullscreen
             }
         } = useContext(ctx),
 
@@ -54,18 +55,14 @@ const BgStylesEditor = ({ visibility, setVisibility }) => {
             onClose();
             // showConfirmation('done');
         },
-        onKeyDown = e => {
-            if (e.key === 'Escape') {
+        onKeyDown = useCallback(e => {
+            if (!fullscreen && e.key === 'Escape') {
                 onClose();
                 e.stopPropagation();
                 e.preventDefault();
                 return false;
             }
-        },
-        showConfirmation = msg => {
-            setConfirmationMessage(msg);
-            setConfirmationVisibility(true);
-        };
+        }, [fullscreen]);
 
     return (
         <Dialog

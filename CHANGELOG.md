@@ -11,4 +11,5 @@ on resize tune all symbols to keep their position constant respect to the center
 keyFrames editor dialog  
 reload/navigation protection toggle  
 background styles dialog  
-additional styles editor dialog
+added fullscreen mode toggler  
+additional styles editor dialog  
