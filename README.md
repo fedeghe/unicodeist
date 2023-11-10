@@ -1,5 +1,5 @@
 
-![noai](src/img/noai.png?raw=true)
+![noai](src/img/HumanCoded.png?raw=true)
 ![unicodeist](src/img/unicodeist.png?raw=true)
 
 
@@ -15,7 +15,7 @@ I created the following in more or less 3 minutes, using 3 different symbols.
 <img width="322"  src="src/img/ss0.png?raw=true">  
 
 
-Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could download exactly that creative and import it in _unicodeist_ (the _100% NO AI CODED_ badge is <a href="./src/img/noai.json?raw=true" download>another example</a>).... but I'm sure You can do way better than that. 
+Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could download exactly that creative and import it in _unicodeist_ (the _100% HUMAN CODED_ badge is <a href="./src/img/HumanCoded.json?raw=true" download>another example</a>).... but I'm sure You can do way better than that. 
 
 
 ### [༺ TRY IT HERE ༻](https://fedeghe.github.io/unicodeist/)

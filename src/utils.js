@@ -256,7 +256,7 @@ export const getCodes = char => {
 
 export function css2json(v) {
     const first = v.replace(/\n/g, ''),
-        ks = first.matchAll(/([A-Za-z0-9-_]*):(['"A-Za-z0-9-_.,:/()%#\s]*);/g),
+        ks = first.matchAll(/([A-Za-z0-9-_]*):(['"A-Za-z0-9-_.,:/()%#\s]*);?/g),
         vals = [...ks],
         // eslint-disable-next-line no-unused-vars
         ret = vals.reduce((acc, [_, k, v]) => {
@@ -270,7 +270,7 @@ export function css2json(v) {
 }
 export function css2string(v) {
     const first = v.replace(/\n/g, ''),
-        ks = first.matchAll(/([A-Za-z0-9-_]*):(['"A-Za-z0-9-_.,:/()%#\s]*);/g),
+        ks = first.matchAll(/([A-Za-z0-9-_]*):(['"A-Za-z0-9-_.,:/()%#\s]*);?/g),
         vals = [...ks],
         // eslint-disable-next-line no-unused-vars
         ret = vals.reduce((acc, [_, k, v]) => `${acc}${k}:${v};`, '');

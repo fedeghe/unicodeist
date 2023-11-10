@@ -44,7 +44,6 @@ const Canvas = () => {
         [embedCode, setEmbedCode] = useState(''),
         [scriptCode, setScriptCode] = useState(''),
         refStyles = useMemo(() => ({
-            // ...(additionalStyles ? css2json(additionalStyles) : {}),
             ...(bgStyles ? css2json(bgStyles) : {}),
             width: `${width}px`,
             height: `${height}px`,
