@@ -41,7 +41,7 @@
         createElement = function (sty, cnt, ani) {
             var node = document.createElement('div'),
                 styles = [cnt
-                    ? lbs.po + ':absolute;' + lbs.t + '-origin:' + lbs.cn + ' ' + lbs.cn
+                    ? 'font-size:20px;' + lbs.po + ':absolute;' + lbs.t + '-origin:' + lbs.cn + ' ' + lbs.cn
                     : lbs.po + ':relative;overflow:hidden'
                 ],
                 k;

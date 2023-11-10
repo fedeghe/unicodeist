@@ -81,7 +81,8 @@ export const cleanCodeFromState = state => {
                     sym.rotationY && `rotateY(${sym.rotationY}deg)`,
                     sym.rotationZ && `rotateZ(${sym.rotationZ}deg)`,
                     (sym.skewX || sym.skewY) && `skew(${sym.skewX}deg,${sym.skewY}deg)`,
-                ].filter(Boolean).join(' ')
+                ].filter(Boolean).join(' '),
+                'font-size:20px'
             ].filter(Boolean).join(';')
         );
         return child;
@@ -185,7 +186,7 @@ const getUnicodeistData = j => JSON.stringify({
     sty: {
         w: j.width,
         h: j.height,
-        bgc: `${j.backgroundColor}${j.backgroundColorAlpha ? '00' : ''}`,
+        bgc: `${j.backgroundColorAlpha ? '#ffffff00' : j.backgroundColor}`,
         ...(j.bgStyles && {
                 bgi: cleanCssString(j.bgStyles)
             }

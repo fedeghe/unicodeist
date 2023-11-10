@@ -51,6 +51,7 @@ const Canvas = () => {
             outline: backgroundColorAlpha ? '1px dashed gray' : 'none',
             position: 'relative',
             overflow: 'hidden',
+            fontSize:'20px',
         }), [height, width, backgroundColor, backgroundColorAlpha, bgStyles]),
 
         onDragOver = e => { e.preventDefault(); },
