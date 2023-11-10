@@ -66,7 +66,7 @@ Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could downlo
         - using the range inputs
         - drag the symbol
         - when focused press `⇧ + arrow` (1px move each)
-    - apply one of the `keyFrames` listed (or imported) in the ketFrames editor
+    - apply one of the `keyFrames` listed (or imported) in the keyFrames editor
 
 
 <img align="right" width="250"  src="src/img/ss3.png?raw=true">  

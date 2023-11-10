@@ -18,7 +18,8 @@ export default createUseStyles(theme => ({
         flexWrap:'wrap',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        flex: 1, textAlign: 'center', height: 'inherit'
+        flex: 1,
+        height: 'inherit'
     },
     Mid: {
         flex: 3,
