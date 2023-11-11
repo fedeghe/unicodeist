@@ -96,7 +96,7 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
                         All the css rules inplied by the usage of the setters in the symbol panel will <strong>not</strong> be overriden by any rule specified here, if for example hereby one attempts to set the `transform: scale(23)` this will have no effect.
                     </Alert>
                     <div className={classes.Bottom}>
-                        <Tooltip title="close keyFrames editor">
+                        <Tooltip title="close editor">
                             <Button onClick={onClose} color="error">Close</Button>
                         </Tooltip>
                         <Button color="success" onClick={onSave}>Apply & close</Button>

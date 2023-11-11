@@ -217,7 +217,7 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                         />
                     </div>
                     <div className={classes.Bottom}>
-                        <Tooltip title="close keyFrames editor">
+                        <Tooltip title="close editor">
                             <Button onClick={onClose} color="error">Close</Button>
                         </Tooltip>
                         {updating && <Button color="warning" onClick={onDelete}>Delete</Button>}
