@@ -55,7 +55,17 @@ const CanvasSymbol = ({symbol}) => {
         baseAnim = symbol.animation in keyFrames
             ? css2jss(keyFrames[symbol.animation])
             : {},
-        [animAnim, setAnimAnim] = useState(baseAnim.animation);
+        [animAnim, setAnimAnim] = useState(baseAnim.animation),
+        mergeAdditionalStyles = () => {
+            const ast = additionalStyles ? css2json(additionalStyles) : {},
+                filter = [`blur(${blur}px)`];
+            if ('filter' in ast) {
+                filter.push(ast.filter);
+                delete ast.filter;
+            }
+            ast.filter = filter.join(' ');
+            return ast;
+        };
 
     useEffect(() => {
         const { ani }  = symbol.animation in keyFrames
@@ -77,7 +87,7 @@ const CanvasSymbol = ({symbol}) => {
         <div
             className={classes.CanvasSymbol}
             style={{
-                ...(additionalStyles && css2json(additionalStyles)),
+                ...mergeAdditionalStyles(),
                 position:'absolute',
                 transformOrigin: 'center',
                 transform:[
@@ -90,15 +100,13 @@ const CanvasSymbol = ({symbol}) => {
                     `${rotationZ ? `rotateZ(${rotationZ}deg)` : '' }`, 
                     `${(skewX || skewY) ? `skew(${skewX}deg,${skewY}deg)` : '' }`
                 ].join(' '),
-                filter:[
-                    `blur(${blur}px)`,
-                ].filter(Boolean).join(' '),
                 color,
                 fontWeight,
                 fontFamily,
                 zIndex,
                 ...(!faded && opacity < 1 && {opacity}),
                 ...animAnim,
+                fontSize:'20px'
             }}
         >{char}</div>
     </div>;
