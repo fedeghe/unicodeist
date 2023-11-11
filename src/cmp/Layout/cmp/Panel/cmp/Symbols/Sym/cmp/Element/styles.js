@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { createUseStyles } from 'react-jss';
-import { css2json } from 'src/utils';
+import { css2json, mergeAdditionalStyles, json2string } from 'src/utils';
 import bgBright from 'src/img/bgBright.png';
 import bgDark from 'src/img/bgDark.png';
+import { CropLandscapeOutlined } from '@mui/icons-material';
 
 export default createUseStyles(theme => ({
     Container: {
@@ -36,7 +37,8 @@ export default createUseStyles(theme => ({
     },
     Item: {
         cursor: 'pointer',
-        width:'30px'
+        width:'30px',
+        height:'30px'
     },
     Disabled: {
         cursor:'default',
@@ -45,10 +47,13 @@ export default createUseStyles(theme => ({
     Char: ({ sym : {
         color, rotationX, rotationY, rotationZ,
         scaleX, scaleY, skewX, skewY,
-        additionalStyles, blur, opacity
-    }}) => ({
+        additionalStyles = '', blur = 0, opacity
+    }}) =>  ({
         color,
-        ...(additionalStyles && css2json(additionalStyles)),
+        ...mergeAdditionalStyles({
+            additionalStyles,
+            blur
+        }),
         transform:[
             `scaleX(${scaleX})`,
             `scaleY(${scaleY})`,
@@ -57,7 +62,7 @@ export default createUseStyles(theme => ({
             `rotateZ(${rotationZ}deg)`,
             `skew(${skewX}deg,${skewY}deg)`
         ].join(' '),
-        filter: blur ? `blur(${blur}px)` : '',
+        // filter: blur ? `blur(${blur}px)` : '',
         opacity: opacity,
         fontSize:'2em'
     })

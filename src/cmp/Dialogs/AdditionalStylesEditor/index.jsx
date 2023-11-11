@@ -2,7 +2,7 @@
 import { useCallback, useState, useContext } from 'react';
 import {
     Dialog, DialogTitle, DialogContent,
-    Button, Tooltip,
+    Button, Tooltip, Alert, Chip
 } from '@mui/material';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -11,7 +11,6 @@ import CodeMirror from '@uiw/react-codemirror';
 import { css } from '@codemirror/lang-css';
 import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
-import SnackMessage from 'src/cmp/SnackMessage';
 
 import useStyles from './styles';
 
@@ -29,10 +28,9 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
                 fullscreen
             }
         } = useContext(ctx),
-        additionalStyles = symbols.find(sym =>sym.id === focusedSymbolId).additionalStyles,
+        additionalStyles = symbols.find(sym => sym.id === focusedSymbolId).additionalStyles,
         [value, setValue] = useState(additionalStyles || DEFAULT_ADDITIONAL_STYLES),
-        [confirmationVisibility, setConfirmationVisibility] = useState(false),
-        [confirmationMessage, setConfirmationMessage] = useState(''),
+        [openedInfo, setOpenedInfo] = useState(false),
         reset = () => {
             setValue(DEFAULT_ADDITIONAL_STYLES);
         },
@@ -53,7 +51,7 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
                     field: 'additionalStyles',
                     value
                 }
-            }); 
+            });
             onClose();
         },
         onKeyDown = useCallback(e => {
@@ -63,7 +61,8 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
                 e.preventDefault();
                 return false;
             }
-        }, [fullscreen]);
+        }, [fullscreen]),
+        openInfo = () => setOpenedInfo(!openedInfo);
 
     return (
         <Dialog
@@ -93,14 +92,17 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
                             onChange={onChangeValue}
                         />
                     </div>
+                    <Alert severity="info" style={{ width: '90%' }}>
+                        All the css rules inplied by the usage of the setters in the symbol panel will <strong>not</strong> be overriden by any rule specified here, if for example hereby one attempts to set the `transform: scale(23)` this will have no effect.
+                    </Alert>
                     <div className={classes.Bottom}>
                         <Tooltip title="close keyFrames editor">
                             <Button onClick={onClose} color="error">Close</Button>
                         </Tooltip>
-                        <Button  color="success" onClick={onSave}>Apply & close</Button>
+                        <Button color="success" onClick={onSave}>Apply & close</Button>
                     </div>
                 </div>
-                <SnackMessage message={confirmationMessage} open={confirmationVisibility} setOpen={setConfirmationVisibility} />
+
             </DialogContent>
         </Dialog>
     );

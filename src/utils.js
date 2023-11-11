@@ -54,23 +54,33 @@ export const cleanCodeFromState = state => {
     symbols.map(sym => {
         var child = document.createElement('div');
         child.innerHTML = sym.char;
+        console.log('merge', mergeAdditionalStyles({
+            additionalStyles: sym.additionalStyles,
+            blur: sym.blur
+        }));
         child.setAttribute('style',
             [
                 ...((sym.animation && sym.animation in state.keyFrames)
                     ? css2string(state.keyFrames[sym.animation].animate).split(';')
                     : []
                 ),
-                ...(sym.additionalStyles
-                    ? css2string(sym.additionalStyles).split(';')
-                    : []
-                ),
+                // ...(sym.additionalStyles
+                //     ? css2string(sym.additionalStyles).split(';')
+                //     : []
+                // ),
+                
+                json2string(mergeAdditionalStyles({
+                    additionalStyles: sym.additionalStyles,
+                    blur: sym.blur
+                })),
+                
                 `z-index:${sym.zIndex}`,
                 `font-family:${sym.fontFamily}`,
                 `font-weight:${sym.fontWeight}`,
                 `color:${sym.color}`,
                 `opacity:${sym.opacity}`,
                 `position:absolute;transform-origin:center center`,
-                sym.blur && `filter:blur(${sym.blur}px)`,
+                // sym.blur && `filter:blur(${sym.blur}px)`,
                 
                 `transform:` + [
                     `translate(${sym.left}px,${sym.top}px)`,
@@ -178,6 +188,19 @@ export const importFromFile = ({ onContentReady }) => {
     });
     link.click();
 };
+
+export const mergeAdditionalStyles = ({additionalStyles, blur}) => {
+    const ast = additionalStyles ? css2json(additionalStyles) : {},
+        filter = [`blur(${blur}px)`];
+    if ('filter' in ast) {
+        filter.push(ast.filter);
+        delete ast.filter;
+    }
+    ast.filter = filter.join(' ');
+    return ast;
+};
+
+
 const cleanCssString = v => v
     .replace(/^\{/, '')
     .replace(/\}$/, '')
@@ -209,9 +232,16 @@ const getUnicodeistData = j => JSON.stringify({
         cnt: s.char,
         ani: s.animation,
         sty: {
-            ...(s.additionalStyles && {
-                add: cleanCssString(s.additionalStyles)
-            }),
+            ...(s.additionalStyles ? {
+                add: `${json2string(mergeAdditionalStyles({
+                    additionalStyles: s.additionalStyles,
+                    blur: s.blur || 0
+                }))}`
+            } : (s.blur && {
+                f: {
+                    bl: s.blur
+                }
+            })),
             zi: s.zIndex,
             c: s.color,
             ff: Object.keys(FONT_FAMILIES_REDUCTION_MAP).find(
@@ -229,11 +259,7 @@ const getUnicodeistData = j => JSON.stringify({
                 ...(s.rotationZ && { rz: s.rotationZ }),  // deg
                 ...((s.skewX || s.skewY) && { sk: [s.skewX, s.skewY] })  // deg
             },
-            ...(s.blur && {
-                f: {
-                    bl: s.blur
-                }
-            })
+            
         }
     }))
 });
@@ -255,10 +281,14 @@ export const getCodes = char => {
     };
 };
 
+function seekAllCssRules(css) {
+    const first = css.replace(/\n/g, ''),
+        ks = first.matchAll(/([A-Za-z0-9-_]*):(['"A-Za-z0-9-_.,:/()%#\s]*);?/g);
+    return  [...ks];
+}
+
 export function css2json(v) {
-    const first = v.replace(/\n/g, ''),
-        ks = first.matchAll(/([A-Za-z0-9-_]*):(['"A-Za-z0-9-_.,:/()%#\s]*);?/g),
-        vals = [...ks],
+    const vals = seekAllCssRules(v),
         // eslint-disable-next-line no-unused-vars
         ret = vals.reduce((acc, [_, k, v]) => {
             const nk = k.replace(/(\w)-(\w)/g, (_, a, b) => `${a}${b.toUpperCase()}`);
@@ -269,10 +299,13 @@ export function css2json(v) {
         jret = JSON.parse(sret);
     return jret;
 }
+export function json2string(o){
+    return Object.entries(o).reduce((acc, [k,e]) => {
+        return `${acc}${k}:${e};`;
+    }, '');
+}
 export function css2string(v) {
-    const first = v.replace(/\n/g, ''),
-        ks = first.matchAll(/([A-Za-z0-9-_]*):(['"A-Za-z0-9-_.,:/()%#\s]*);?/g),
-        vals = [...ks],
+    const vals = seekAllCssRules(v),
         // eslint-disable-next-line no-unused-vars
         ret = vals.reduce((acc, [_, k, v]) => `${acc}${k}:${v};`, '');
     return ret;
@@ -338,6 +371,7 @@ const def = {
     openFullscreen,
     closeFullscreen,
     downloadAs,
-    css2json
+    css2json,
+    mergeAdditionalStyles
 };
 export default def;

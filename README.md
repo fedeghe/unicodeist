@@ -18,7 +18,7 @@ I created the following in more or less 3 minutes, using 3 different symbols.
 Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could download exactly that creative and import it in _unicodeist_ (the _100% HUMAN CODED_ badge is <a href="./src/img/HumanCoded.json?raw=true" download>another example</a>).... but I'm sure You can do way better than that.   
 
 One thing to notice here is that most of the times the size comparison is quite relevant:
-| example    | png | unicounicodeist (json) |
+| example    | png | unicodeist (json) |
 | -------- | ------- | ------- |
 | [<img src="src/img/fg.png" width="50"/>](image.png)  | <strong style="color:red">44 KB</strong>    | <strong style="color:green">641 B</strong>    |
 | [<img src="src/img/unicodeist.png" width="50"/>](image.png) | <strong style="color:red">87 KB</strong>     | <strong style="color:green">6 KB</strong>    |

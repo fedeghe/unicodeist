@@ -87,7 +87,7 @@ const CanvasSymbol = ({symbol}) => {
         <div
             className={classes.CanvasSymbol}
             style={{
-                ...mergeAdditionalStyles(),
+                ...mergeAdditionalStyles({additionalStyles, blur}),
                 position:'absolute',
                 transformOrigin: 'center',
                 transform:[
