@@ -31,5 +31,8 @@ export default createUseStyles(theme => ({
         cursor: 'pointer',
         marginTop: `${theme.spacing.small/2}px`,
         marginLeft: `${theme.spacing.small*2}px`
+    },
+    Chip: {
+        margin: '10px 10px 0px 0px'
     }
 }));
