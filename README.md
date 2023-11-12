@@ -1,6 +1,6 @@
 
 ![noai](https://www.jmvc.org/img/HumanCoded.png?raw=true)
-![unicodeist](src/img/unicodeist.png?raw=true)
+![unicodeist](src/img/comparison/unicodeist.png?raw=true)
 
 
 
@@ -12,17 +12,23 @@ Sometimes creating temporary creative for a logo should be a matter of minutes, 
 
 I created the following in more or less 3 minutes, using 3 different symbols.  
 
-<img width="322"  src="src/img/fg.png?raw=true">  
+<img width="322"  src="src/img/comparison/fg.png?raw=true">  
 
 
-Clicking <a href="./src/img/fg.json?raw=true" download>here</a> you could download exactly that creative and import it in _unicodeist_ (the _100% HUMAN CODED_ badge is <a href="./src/img/HumanCoded.json?raw=true" download>another example</a>).... but I'm sure You can do way better than that.   
+Clicking <a href="./src/img/comparison/fg.json?raw=true" download>here</a> you could download exactly that creative and import it in _unicodeist_ (the _100% HUMAN CODED_ badge is <a href="./src/img/comparison/HumanCoded.json?raw=true" download>another example</a>).... but I'm sure You can do way better than that.   
 
 One thing to notice here is that most of the times the size comparison is quite relevant:
-| example    | png | unicodeist (json) |
-| -------- | ------- | ------- |
-| [<img src="src/img/fg.png" width="50"/>](image.png)  | <strong style="color:red">44 KB</strong>    | <strong style="color:green">641 B</strong>    |
-| [<img src="src/img/unicodeist.png" width="50"/>](image.png) | <strong style="color:red">87 KB</strong>     | <strong style="color:green">6 KB</strong>    |
-| [<img src="src/img/HumanCoded.png" width="50"/>](image.png) | <strong style="color:red">3 KB</strong>     | <strong style="color:green">2 KB</strong>    |
+
+
+| example    | .jpeg | .png | .json | embed html | embed script |
+| -------- | ------- | ------- | ------- | ------- | ------- |
+| [<img src="src/img/comparison/fg.png" width="50"/>](image)<br/>500x350  | 160 KB | 44 KB | 641 B  | 1.1 KB | 724 B |
+| [<img src="src/img/comparison/fg.png" width="50"/>](image)<br/>1000x700  | 373 KB | 136 KB | 640 B  | 994 B | 723 B |
+| [<img src="src/img/comparison/unicodeist.png" width="50"/>](image)<br/>1006 x 503 | 141 KB | 87 KB | 6 KB | 2.4 KB | 1.5KB |
+| [<img src="src/img/comparison/unicodeist.png" width="50"/>](image)<br/>500 x 250 | 63 KB | 40 KB | 1.4 KB | 2.4 KB | 1.5KB |
+| [<img src="src/img/comparison/HumanCoded.png" width="50"/>](image) | 10 KB | 3 KB | 2 KB | 3.8KB | 2.2 KB |
+
+Seems clear (and quite obvious also the reason) that whenever few elements can potentially compose the creative then the benefits of using one of the _unicodeist_ embedding options grow proportionally to the image size, cause the exported image can only grow while the embedding html or script remains unchanged.
 
 ... aaaand ... yes I have definitely a bold palette preference!   
 

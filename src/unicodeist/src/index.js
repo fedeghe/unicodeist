@@ -17,7 +17,7 @@
         map = {
             w: function (v) { return 'width:' + v + lbs.p; },
             h: function (v) { return 'height:' + v + lbs.p; },
-            bgc: function (v) { return 'background-' + lbs.c + ':' + v; },
+            bgc: function (v) { return 'background-' + lbs.c + ':' + v.c + (v.a ? '00' : 'ff'); },
             bgi: function (v) { return v; },
             zi: function (v) { return 'z-index:' + v; },
             c: function (v) { return lbs.c + ':' + v; },
