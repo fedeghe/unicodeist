@@ -29,28 +29,31 @@ const Element = ({ sym }) => {
 
     return <div className={classes.Container}>
         <div className={classes.Left}>
-            <Tooltip title="remove symbol">
-                <div className={classes.Item}><DeleteIcon onClick={onDelete} /></div>
-            </Tooltip>
-            <Tooltip title="focus on this">
-                <div className={classes.Item}><AdsClickIcon onClick={onFocusToggle} /></div>
-            </Tooltip>
-            <Tooltip title="maximize z-index">
-                <div className={classes.Item}><VerticalAlignTopIcon onClick={onTopZi} /></div>
-            </Tooltip>
-            <Tooltip title="minimize z-index">
-                <div className={classes.Item}><VerticalAlignBottomIcon onClick={onBottomZi} /></div>
-            </Tooltip>
-            <Tooltip title="align horizontally">
-                <div className={classes.Item}><AlignHorizontalCenterIcon onClick={onAlignH} /></div>
-            </Tooltip>
-            <Tooltip title="align vertically">
-                <div className={classes.Item}><AlignVerticalCenterIcon onClick={onAlignV} /></div>
-            </Tooltip>
-            <Tooltip title="clone symbol">
+            <Tooltip disableInteractive title="clone symbol">
                 <div className={classes.Item}><ContentCopyIcon onClick={onClone} /></div>
             </Tooltip>
-            <Tooltip title="open additional styles editor">
+            <Tooltip disableInteractive title="remove symbol">
+                <div className={classes.Item}><DeleteIcon onClick={onDelete} /></div>
+            </Tooltip>
+            <Tooltip disableInteractive title="focus on this">
+                <div className={classes.Item}><AdsClickIcon onClick={onFocusToggle} /></div>
+            </Tooltip>
+            <div className={classes.LB}/>
+            <Tooltip disableInteractive title="maximize z-index">
+                <div className={classes.Item}><VerticalAlignTopIcon onClick={onTopZi} /></div>
+            </Tooltip>
+            <Tooltip disableInteractive title="minimize z-index">
+                <div className={classes.Item}><VerticalAlignBottomIcon onClick={onBottomZi} /></div>
+            </Tooltip>
+            <div className={classes.LB}/>
+            <Tooltip disableInteractive title="align horizontally">
+                <div className={classes.Item}><AlignHorizontalCenterIcon onClick={onAlignH} /></div>
+            </Tooltip>
+            <Tooltip disableInteractive title="align vertically">
+                <div className={classes.Item}><AlignVerticalCenterIcon onClick={onAlignV} /></div>
+            </Tooltip>
+            <div className={classes.LB}/>
+            <Tooltip disableInteractive title="open additional styles editor">
                 <div className={classes.Item}><StyleIcon onClick={onShadow} /></div>
             </Tooltip>
         </div>

@@ -100,12 +100,12 @@ const actions = {
                 v = parseInt(value, 10),
                 offset = v - oldState[what],
                 halfHoffset = offset / 2,
-                posDimention = what === 'height' ? 'top' : 'left';
+                posDimension = what === 'height' ? 'top' : 'left';
             return {
                 [what]: v,
                 symbols: symbols.map(s => ({
                     ...s,
-                    [posDimention]: s[posDimention] + halfHoffset
+                    [posDimension]: s[posDimension] + halfHoffset
                 }))
             };
         },
@@ -271,16 +271,26 @@ const actions = {
         
         [ACTIONS.INIT_VIEWPORT]: ({
             oldState: {
-                width, height
+                width, height,
+                symbols
             }
         }) => {
             const newMaxWidth = parseInt(getMaxWidth(), 10) - PANEL_WIDTH,
-                newMaxHeight = parseInt(getMaxHeight(), 10);
+                newMaxHeight = parseInt(getMaxHeight(), 10),
+                newWidth = Math.min(width, newMaxWidth),
+                newHeight = Math.min(height, newMaxHeight),
+                offsetLeft = Math.min(0, newWidth - width) / 2,
+                offsetTop = Math.min(0, newHeight - height) / 2;
             return {
                 maxWidth: newMaxWidth,
                 maxHeight: newMaxHeight,
-                width: Math.min(width, newMaxWidth),
-                height: Math.min(height, newMaxHeight),
+                width: newWidth,
+                height: newHeight,
+                symbols: symbols.map(sym => ({
+                    ...sym,
+                    top: sym.top + offsetTop,
+                    left: sym.left + offsetLeft,
+                }))
             };
         },
 
