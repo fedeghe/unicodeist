@@ -47,7 +47,8 @@ export default createUseStyles(theme => ({
     Char: ({ sym : {
         color, rotationX, rotationY, rotationZ,
         scaleX, scaleY, skewX, skewY,
-        additionalStyles = '', blur = 0, opacity
+        additionalStyles = '', blur = 0, opacity,
+        fontWeight
     }}) =>  ({
         color,
         ...mergeAdditionalStyles({
@@ -62,7 +63,7 @@ export default createUseStyles(theme => ({
             `rotateZ(${rotationZ}deg)`,
             `skew(${skewX}deg,${skewY}deg)`
         ].join(' '),
-        // filter: blur ? `blur(${blur}px)` : '',
+        fontWeight,
         opacity: opacity,
         fontSize:'2em'
     })

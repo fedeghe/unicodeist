@@ -30,11 +30,12 @@ export const cleanCodeFromState = state => {
             backgroundColorAlpha, backgroundColor,
             symbols,
             bgStyles
-        } = state;
+        } = state,
+        bgColor = backgroundColorAlpha ? `${backgroundColor}00` : backgroundColor;
     root.setAttribute('style', [
         `width:${width}px`,
         `height:${height}px`,
-        `background-color:${backgroundColor}${backgroundColorAlpha ? '00' : ''}`,
+        `background-color:${bgColor.substring(0,9)}`,
         `position:relative;overflow:hidden`,
         bgStyles ? css2string(bgStyles) : ''
     ].join(';'));
@@ -64,11 +65,6 @@ export const cleanCodeFromState = state => {
                     ? css2string(state.keyFrames[sym.animation].animate).split(';')
                     : []
                 ),
-                // ...(sym.additionalStyles
-                //     ? css2string(sym.additionalStyles).split(';')
-                //     : []
-                // ),
-                
                 json2string(mergeAdditionalStyles({
                     additionalStyles: sym.additionalStyles,
                     blur: sym.blur
@@ -209,7 +205,10 @@ const getUnicodeistData = j => JSON.stringify({
     sty: {
         w: j.width,
         h: j.height,
-        bgc: `${j.backgroundColorAlpha ? '#ffffff00' : j.backgroundColor}`,
+        bgc: {
+            c: j.backgroundColor,
+            a : j.backgroundColorAlpha
+        },
         ...(j.bgStyles && {
                 bgi: cleanCssString(j.bgStyles)
             }

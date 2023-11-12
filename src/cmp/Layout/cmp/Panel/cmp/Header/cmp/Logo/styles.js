@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss';
-import bg from 'src/img/unicodeist.png';
+import bg from 'src/img/comparison/unicodeist.png';
 export default createUseStyles({
     Logo: {
         // flex:2,
