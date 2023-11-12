@@ -7,7 +7,7 @@ import { CropLandscapeOutlined } from '@mui/icons-material';
 
 export default createUseStyles(theme => ({
     Container: {
-        height: '200px',
+        height: '120px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -18,12 +18,14 @@ export default createUseStyles(theme => ({
         display: 'flex',
         flexWrap:'wrap',
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        flex: 1,
-        height: 'inherit'
+        justifyContent: 'flex-start',
+        alignContent:'flex-start',
+        flex:5,
+        height: 'inherit',
+        
     },
     Mid: {
-        flex: 3,
+        flex: 6,
         textAlign: 'center',
         height: 'inherit',
         display: 'flex',
@@ -65,7 +67,10 @@ export default createUseStyles(theme => ({
         ].join(' '),
         fontWeight,
         opacity: opacity,
-        fontSize:'2em'
-    })
+        fontSize:'1.2em'
+    }),
+    LB:{
+        width:'100%'
+    }
 
 }));
