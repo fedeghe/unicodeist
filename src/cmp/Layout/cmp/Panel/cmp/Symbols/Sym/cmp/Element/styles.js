@@ -63,7 +63,6 @@ export default createUseStyles(theme => ({
             `rotateZ(${rotationZ}deg)`,
             `skew(${skewX}deg,${skewY}deg)`
         ].join(' '),
-        // filter: blur ? `blur(${blur}px)` : '',
         fontWeight,
         opacity: opacity,
         fontSize:'2em'
