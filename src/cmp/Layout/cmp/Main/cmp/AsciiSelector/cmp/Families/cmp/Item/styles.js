@@ -24,6 +24,7 @@ export default createUseStyles(theme => ({
             backgroundColor: theme.modal.itemBackgroundHover,
             outline: `4px solid ${theme.modal.hoverOutline}`,
             transform: 'scale(2)',
+            transformOrigin: 'centern center',
             zIndex:101
         }
     },
