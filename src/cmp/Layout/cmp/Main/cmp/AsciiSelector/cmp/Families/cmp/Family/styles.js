@@ -6,7 +6,6 @@ export default createUseStyles(theme => ({
         flexDirection:'column',
         color: theme.modal.setStringColor,
         margin:'0 50px',
-        // marginBottom:'100px'
     },
     ItemsContainer: {
         display:'flex',

@@ -5,7 +5,6 @@ import KeyEditor from './KeyEditor';
 import BgStylesEditor from './BgStylesEditor';
 import AdditionalStylesEditor from './AdditionalStylesEditor';
 
-
 export const ContributeDialog = Contribute;
 export const CopyDialog = Copy;
 export const DownloadDialog = Download;

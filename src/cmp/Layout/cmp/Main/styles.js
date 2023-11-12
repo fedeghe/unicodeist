@@ -9,5 +9,4 @@ export default createUseStyles((theme) =>({
         backgroundColor: theme.background.main,
         position:'relative',
     },
-
 }));

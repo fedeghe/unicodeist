@@ -1,7 +1,6 @@
 import { createUseStyles } from 'react-jss';
 import {HEADER_HEIGHT} from 'src/constants';
 
-
 export default createUseStyles({
     PanelHeader: {
         display:'flex', 

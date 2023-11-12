@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useCallback, useState, useContext } from 'react';
 import {
     Dialog, DialogTitle, DialogContent,
@@ -11,7 +10,6 @@ import CodeMirror from '@uiw/react-codemirror';
 import { css } from '@codemirror/lang-css';
 import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
-import SnackMessage from 'src/cmp/SnackMessage';
 
 import useStyles from './styles';
 
@@ -30,8 +28,6 @@ const BgStylesEditor = ({ visibility, setVisibility }) => {
         } = useContext(ctx),
 
         [value, setValue] = useState(bgStyles || DEFAULT_BG_STYLES),
-        [confirmationVisibility, setConfirmationVisibility] = useState(false),
-        [confirmationMessage, setConfirmationMessage] = useState(''),
         reset = () => {
             setValue(DEFAULT_BG_STYLES);
         },
@@ -99,7 +95,6 @@ const BgStylesEditor = ({ visibility, setVisibility }) => {
                         <Button  color="success" onClick={onSave}>Apply & close</Button>
                     </div>
                 </div>
-                <SnackMessage message={confirmationMessage} open={confirmationVisibility} setOpen={setConfirmationVisibility} />
             </DialogContent>
         </Dialog>
     );
