@@ -20,10 +20,12 @@ const Family = ({ data, label, onSelect, expanded }) => {
             payload: label
         });
     return <div className={classes.Container}>
-        <h1 className={classes.Exp} onClick={expanded ? collapse : expand}>{label} {expanded ? <ExpandLessIcon/> : <ExpandMoreIcon/>}</h1>
+        <h1 className={classes.Exp} onClick={expanded ? collapse : expand}>{label} ({
+            data.reduce((acc, e) => acc+e.charSet.length, 0)
+        }) {expanded ? <ExpandLessIcon/> : <ExpandMoreIcon/>}</h1>
         {expanded && <div className={classes.ItemsContainer}>
             {data.map((d, i) => <div key={`${d.title}_${i}`}>
-                <div className={classes.SubfamilyTitle} key={`${uniqueID}`}><h4>{d.title}</h4></div>
+                <div className={classes.SubfamilyTitle} key={`${uniqueID}`}><h4>{d.title} ({d.charSet.length})</h4></div>
                 {d.charSet.map(({c: char}) => {
                     return <Item key={`${uniqueID}`} char={char} onSelect={onSelect} />;
                 })}
