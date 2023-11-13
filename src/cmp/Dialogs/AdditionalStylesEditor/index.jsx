@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
 import { useCallback, useState, useContext } from 'react';
 import {
     Dialog, DialogTitle, DialogContent,
-    Button, Tooltip, Alert, Chip
+    Button, Tooltip, Alert
 } from '@mui/material';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -30,7 +29,6 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
         } = useContext(ctx),
         additionalStyles = symbols.find(sym => sym.id === focusedSymbolId).additionalStyles,
         [value, setValue] = useState(additionalStyles || DEFAULT_ADDITIONAL_STYLES),
-        [openedInfo, setOpenedInfo] = useState(false),
         reset = () => {
             setValue(DEFAULT_ADDITIONAL_STYLES);
         },
@@ -61,8 +59,7 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
                 e.preventDefault();
                 return false;
             }
-        }, [fullscreen]),
-        openInfo = () => setOpenedInfo(!openedInfo);
+        }, [fullscreen]);
 
     return (
         <Dialog

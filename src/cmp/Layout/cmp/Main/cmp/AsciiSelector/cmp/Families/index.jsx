@@ -1,12 +1,9 @@
 import { useContext, useState, useEffect, useRef } from 'react';
-
 import SnackMessage from 'src/cmp/SnackMessage';
 import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
-
 import Family from './cmp/Family';
-
 
 const Families = () => {
     const classes = useStyles({border: 10}),

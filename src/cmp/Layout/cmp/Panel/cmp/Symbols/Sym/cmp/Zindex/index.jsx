@@ -3,14 +3,10 @@ import ctx from 'src/Context';
 import {MIN_ZINDEX, MAX_ZINDEX} from 'src/constants';
 import Uslider from 'src/cmp/Uslider';
 import ACTIONS from 'src/reducer/actions';
-import useStyles from './styles';
 
-const Zindex = ({sym}) => {
-    
-    const classes = useStyles(),
-        { dispatch} = useContext(ctx);
-        
-    return <div className={classes.SectionZindex}>
+const Zindex = ({sym}) => {    
+    const { dispatch} = useContext(ctx);
+    return <div>
         <Uslider
                 label={'Z-index'} value={sym.zIndex}
                 min={MIN_ZINDEX} max={MAX_ZINDEX} step={1}

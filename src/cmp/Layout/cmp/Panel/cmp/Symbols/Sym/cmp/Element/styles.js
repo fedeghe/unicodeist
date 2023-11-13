@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
 import { createUseStyles } from 'react-jss';
-import { css2json, mergeAdditionalStyles, json2string } from 'src/utils';
+import { mergeAdditionalStyles } from 'src/utils';
 import bgBright from 'src/img/bgBright.png';
 import bgDark from 'src/img/bgDark.png';
-import { CropLandscapeOutlined } from '@mui/icons-material';
 
 export default createUseStyles(theme => ({
     Container: {
