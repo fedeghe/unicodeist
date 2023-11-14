@@ -5,7 +5,12 @@ import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
 
 const Logo = () => {
-    const {dispatch} = useContext(ctx),
+    const {
+            dispatch,
+            state: {
+                selected
+            }
+        } = useContext(ctx),
         [startPoint, setStartPoint] = useState([0, 0]),
         [dragging, setDragging] = useState(false),
         [panning, setPanning] = useState(false),
@@ -38,11 +43,11 @@ const Logo = () => {
         };
     
     return <div
-        onMouseDown={onDragStart}
-        onMouseUp={onDragEnd}
-        onMouseLeave={discard}
-        className={classes.Logo}
-    />;
+            onMouseDown={onDragStart}
+            onMouseUp={onDragEnd}
+            onMouseLeave={discard}
+            className={classes.Logo}
+    >{Boolean(selected.length) && <div className={classes.Badge}>{selected.length}</div>}</div>;
 };
 
 export default Logo;

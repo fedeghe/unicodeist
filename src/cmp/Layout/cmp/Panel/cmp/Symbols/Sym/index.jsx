@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Card, Typography} from '@mui/material';
+import { Card, Typography, Checkbox} from '@mui/material';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
@@ -18,12 +18,13 @@ const Sym = ({sym}) => {
             state: {
                 focusedSymbolId,
                 backgroundColor,
+                selected
             },
             dispatch
         } = useContext(ctx),
-        selected = focusedSymbolId === sym.id,
+        expanded = focusedSymbolId === sym.id,
         classes = useStyles({
-            selected,
+            expanded,
             backgroundColor,
             color: sym.color,
             rx: sym.rotationX,
@@ -33,10 +34,17 @@ const Sym = ({sym}) => {
             sky: sym.skewY,
             blr: sym.blur,
         }),
-        focus = () => !selected && dispatch({
+        focus = () => !expanded && dispatch({
             type: ACTIONS.FOCUS_ON_SYMBOL,
             payload: sym.id
         }),
+        onCheckToggle = e => {
+            e.stopPropagation();
+            dispatch({
+                type: ACTIONS.TOGGLE_SYMBOL_SELECTION,
+                payload: sym.id,
+            });
+        },
         move = (e, direction) => {
             e.stopPropagation();
             dispatch({
@@ -46,12 +54,12 @@ const Sym = ({sym}) => {
         },
         moveUp = e => move(e, -1),
         moveDown = e => move(e, 1);
-    
+    // console.log({selected});
     return <div className={classes.Container}>
         <Card onClick={focus} className={classes.Sym}>
-            {selected ? 
+            {expanded ? 
             <div>
-                <Label sym={sym} />
+                <Label sym={sym} checked={selected.includes(sym.id)} onClick={onCheckToggle}/>
                 <Zindex sym={sym}/>
                 <Element sym={sym} backgroundColor={backgroundColor}/>
                 <Styles sym={sym} />
@@ -60,6 +68,9 @@ const Sym = ({sym}) => {
                 <hr className={classes.Hr} />
                 <Animation sym={sym}/>
             </div> : <div className={classes.HoverLight}>
+                <div>
+                    <Checkbox checked={selected.includes(sym.id)} onClick={onCheckToggle}/>
+                </div>
                 <div>
                     <Typography variant="body1">{sym.label}</Typography>
                     <Typography variant="h5">

@@ -9,17 +9,17 @@ export default createUseStyles(theme => ({
     Container: {//
         flex: 1,
     },
-    Sym: ({ selected = false } = {}) => ({
+    Sym: ({ expanded = false } = {}) => ({
         display: 'flex',
         flexDirection: 'column',
         padding: '10px',
         margin: '5px',
-        backgroundColor: selected
+        backgroundColor: expanded
             ? theme.sym.backgroundSelected
             : theme.sym.background,
         color: theme.sym.foreground,
-        cursor: selected ? 'default' : 'pointer',
-        height: selected ? `${EXPANDED_SYM_HEIGHT}px` : `${COLLAPSED_SYM_HEIGHT}px`,
+        cursor: expanded ? 'default' : 'pointer',
+        height: expanded ? `${EXPANDED_SYM_HEIGHT}px` : `${COLLAPSED_SYM_HEIGHT}px`,
         transition: `height ${COLLAPSING_SYM_TIME}s`,
     }),
     Hr: {

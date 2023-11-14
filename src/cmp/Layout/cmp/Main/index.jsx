@@ -4,12 +4,19 @@ import useStyles from './styles';
 
 import AsciiSelector from './cmp/AsciiSelector';
 import AddButton from './cmp/AddButton';
+import BulkActions from './cmp/BulkActions';
 import Canvas from './cmp/Canvas';
 import ACTIONS from 'src/reducer/actions';
 
 const Main = () => {
     const classes = useStyles(),
-        { state: { addPanelVisibility, fullscreen }, dispatch } = useContext(ctx),
+        {
+            state: {
+                addPanelVisibility, fullscreen,
+                selected
+            },
+            dispatch
+        } = useContext(ctx),
         togglePanel = useCallback(() =>
             dispatch({
                 type: ACTIONS.TOGGLE_ADD_PANEL,
@@ -52,6 +59,7 @@ const Main = () => {
 
     return <div className={classes.Main}>
         {addPanelVisibility ? <AsciiSelector /> : <AddButton />}
+        {Boolean(selected.length >= 2) && <BulkActions/>}
         <Canvas />
     </div>;
 };

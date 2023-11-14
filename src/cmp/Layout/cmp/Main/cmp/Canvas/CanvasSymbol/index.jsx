@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import useStyles from './styles';
 
 import ctx from 'src/Context';
-import {css2jss, mergeAdditionalStyles} from 'src/utils';
+import {css2jss, css2json} from 'src/utils';
 import ACTIONS from 'src/reducer/actions';
 
 const CanvasSymbol = ({symbol}) => {
@@ -55,7 +55,17 @@ const CanvasSymbol = ({symbol}) => {
         baseAnim = symbol.animation in keyFrames
             ? css2jss(keyFrames[symbol.animation])
             : {},
-        [animAnim, setAnimAnim] = useState(baseAnim.animation);
+        [animAnim, setAnimAnim] = useState(baseAnim.animation),
+        mergeAdditionalStyles = () => {
+            const ast = additionalStyles ? css2json(additionalStyles) : {},
+                filter = [`blur(${blur}px)`];
+            if ('filter' in ast) {
+                filter.push(ast.filter);
+                delete ast.filter;
+            }
+            ast.filter = filter.join(' ');
+            return ast;
+        };
 
     useEffect(() => {
         const { ani }  = symbol.animation in keyFrames

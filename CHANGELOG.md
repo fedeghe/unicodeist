@@ -13,3 +13,11 @@ reload/navigation protection toggle
 background styles dialog  
 added fullscreen mode toggler  
 additional styles editor dialog  
+
+0.0.11
+bulk actions:  
+- move, scale on top logo
+- through bulk actions panel
+    - align on mean vert/horiz
+    - space evenly vert/horiz
+    - delete
