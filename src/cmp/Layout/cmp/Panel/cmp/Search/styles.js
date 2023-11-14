@@ -5,7 +5,10 @@ export default createUseStyles(theme => ({
         marginBottom:'0.5em',
         
         display:'flex',
-        justifyContent: 'right'
+        justifyContent: 'space-between'
+    },
+    Right: {
+        display:'flex',
     },
     ClearIcon: {
         cursor:'pointer',
@@ -14,4 +17,7 @@ export default createUseStyles(theme => ({
         alignSelf: 'center',
         color: theme.foreground,
     },
+    Pointer: {
+        cursor:'pointer'
+    }
 }));

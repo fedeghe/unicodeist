@@ -16,8 +16,8 @@ additional styles editor dialog
 
 0.0.11
 bulk actions:  
-- align on mean vert/horiz
-- space evenly vert/horiz
-- delete
-switch symbol
-flash on select
+- move, scale on top logo
+- through bulk actions panel
+    - align on mean vert/horiz
+    - space evenly vert/horiz
+    - delete

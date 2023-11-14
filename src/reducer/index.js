@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import ACTIONS from './actions';
 import {uniqueID, count, filter} from 'src/utils';
 import {getMaxHeight, getMaxWidth} from 'src/constants';
@@ -72,7 +73,8 @@ const base = {
     keyFrames:keyFramesManager.synch(),
     preventReload: DEFAULT_PREVENT_RELOAD,
     fullscreen: false,
-    availableSymbols: []
+    availableSymbols: [],
+    selected: []
 };
 
 
@@ -145,10 +147,19 @@ const actions = {
         },
 
         [ACTIONS.REMOVE_SYMBOL]: ({
-            oldState: { symbols, focusedSymbolId }
+            oldState: { symbols, focusedSymbolId, selected }
         }) => ({
             symbols: symbols.filter(s => s.id !== focusedSymbolId),
-            focusedSymbolId : null
+            focusedSymbolId : null,
+            selected: selected.filter(id => id !== focusedSymbolId)
+        }),
+
+        [ACTIONS.BULK_DELETE]: ({
+            oldState: { symbols, focusedSymbolId, selected }
+        }) => ({
+            symbols: symbols.filter(s => !(selected.includes(s.id))),
+            focusedSymbolId : selected.includes(focusedSymbolId) ? null : focusedSymbolId,
+            selected: []
         }),
 
         [ACTIONS.CLONE_SYMBOL]: ({
@@ -379,11 +390,12 @@ const actions = {
 
         [ACTIONS.MOVE_ALL_SYMBOLS]:({
             payload: {leftTune, topTune},
-            oldState: { symbols }
+            oldState: { symbols, selected }
         }) => ({
             symbols: symbols.map(sym => {
-                const newLeft = parseInt(sym.left + leftTune, 10);
-                const newTop = parseInt(sym.top + topTune, 10);
+                const tuned = !selected.length || selected.includes(sym.id),
+                    newLeft = parseInt(sym.left + (tuned ? leftTune : 0), 10),
+                    newTop = parseInt(sym.top + (tuned ? topTune : 0), 10);
                 return {
                     ...sym,
                     left: newLeft,
@@ -394,17 +406,18 @@ const actions = {
 
         [ACTIONS.PAN_ALL_SYMBOLS]: ({
             payload: pan,
-            oldState: { symbols }
+            oldState: { symbols, selected }
         }) => ({
             symbols: symbols.map(sym => {
-                const minCompliantScale = Math.max(
-                    MIN_SCALE,
-                    parseInt(sym.scale, 10) - parseInt(pan, 10)
-                );
-                const compliantScale = Math.min(
-                    MAX_SCALE,
-                    minCompliantScale
-                );
+                const tuned = !selected.length || selected.includes(sym.id),
+                    minCompliantScale = Math.max(
+                        MIN_SCALE,
+                        parseInt(sym.scale, 10) - (tuned ? parseInt(pan, 10) : 0)
+                    ),
+                    compliantScale = Math.min(
+                        MAX_SCALE,
+                        minCompliantScale
+                    );
                 return {
                     ...sym,
                     scale: compliantScale
@@ -422,7 +435,7 @@ const actions = {
             oldState: { symbols }
         }) => {
             const position = symbols.findIndex(s =>s.id === id),
-                newSymbols = symbols.filter(s =>s.id !== id),
+                newSymbols = symbols.filter(s => s.id !== id),
                 newPosition = position + direction,
                 canProceed = newPosition >= 0 && newPosition <= symbols.length;
             if (canProceed) {
@@ -517,6 +530,80 @@ const actions = {
                     ...as,
                     expanded: as.label === label ? false : as.expanded
                 }))
+            };
+        },
+
+        [ACTIONS.TOGGLE_SYMBOL_SELECTION]: ({payload: id, oldState: {selected}}) => ({
+            selected: selected.includes(id)
+                ? selected.filter(i => i!==id)
+                : [...selected, id]
+        }),
+        [ACTIONS.TOGGLE_SYMBOLS_SELECTION]: ({payload: what, oldState: {selected, symbols}}) => {
+            switch(what) {
+                case 'selectAll': 
+                    return {selected: symbols.map(s =>s.id)};
+                case  'unselectAll': 
+                    return {selected: []};
+                case 'invertAll': 
+                    return {
+                        selected: symbols
+                            .filter(sym =>!(selected.includes(sym.id)))
+                            .map(sym => sym.id)};
+            }
+            return {};
+        },
+
+        [ACTIONS.BULK_ALIGNV]: ({
+            oldState: { symbols, selected }
+        }) => {
+            const mean = symbols
+                .filter(({id}) => selected.includes(id))
+                .reduce((acc, {top}) => acc + top, 0) / selected.length;
+            
+            return {
+                symbols: symbols.map(
+                    sym => selected.includes(sym.id)
+                        ? {...sym, top: mean}
+                        : sym
+                )
+            };
+        },
+        [ACTIONS.BULK_ALIGNH]: ({
+            oldState: { symbols, selected }
+        }) => {
+            const mean = symbols
+                .filter(({id}) => selected.includes(id))
+                .reduce((acc, {left}) => acc + left, 0) / selected.length;
+            
+            return {
+                symbols: symbols.map(
+                    sym => selected.includes(sym.id)
+                        ? {...sym, left: mean}
+                        : sym
+                )
+            };
+        },
+        [ACTIONS.BULK_SPACE]: ({ oldState: { symbols, selected }, payload : what}) => {
+            const sortedSymbols = symbols
+                    .filter(({id})=> selected.includes(id))
+                    .sort((a, b) => a[what] < b[what]),
+                lastIndex = sortedSymbols.length - 1,
+                min = sortedSymbols[0][what],
+                max = sortedSymbols[lastIndex][what],
+                span = max - min,
+                step = span / lastIndex;
+
+            return {
+                symbols: symbols.map(sym => {
+                    const index = sortedSymbols.findIndex(({id}) => id ===sym.id);
+                    if (index>=0) {
+                        return {
+                            ...sortedSymbols[index],
+                            [what]: min + index * step
+                        };
+                    }
+                    return sym;
+                })
             };
         },
 

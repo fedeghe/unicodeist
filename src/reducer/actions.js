@@ -33,7 +33,15 @@ const INIT = Symbol('init'),
     REMOVE_KEY_FRAME = Symbol('delete a  keyframe'),
     REMOVE_ALL_KEY_FRAMES = Symbol('delete all keyframe'),
     EXPAND_FAMILY = Symbol('expand family'),
-    COLLAPSE_FAMILY = Symbol('collapse family');
+    COLLAPSE_FAMILY = Symbol('collapse family'),
+    TOGGLE_SYMBOL_SELECTION = Symbol('select toggle symbol for bulk action'),
+    TOGGLE_SYMBOLS_SELECTION = Symbol('select toggle symbols'),
+    
+    BULK_ALIGNV = Symbol('bulk vertical align'),
+    BULK_ALIGNH = Symbol('bulk horizontal align'),
+    BULK_SPACE= Symbol('bulk horiz / vert space'),
+    BULK_DELETE = Symbol('bulk delete'),
+    SWITCH_SYMBOL = Symbol('switch_symbol');
 
 const exp = {
     INIT,
@@ -71,7 +79,16 @@ const exp = {
     REMOVE_KEY_FRAME,
     REMOVE_ALL_KEY_FRAMES,
     EXPAND_FAMILY,
-    COLLAPSE_FAMILY
+    COLLAPSE_FAMILY,
+
+    
+    BULK_ALIGNV,
+    BULK_ALIGNH,
+    BULK_SPACE,
+    BULK_DELETE,
+    SWITCH_SYMBOL,
+    TOGGLE_SYMBOL_SELECTION,
+    TOGGLE_SYMBOLS_SELECTION
 };
 
 export default exp;

@@ -2,6 +2,7 @@ import { createUseStyles } from 'react-jss';
 import bg from 'src/img/comparison/unicodeist.png';
 export default createUseStyles({
     Logo: {
+        position:'relative',
         display:'flex',
         width:'200px',
         height:'100px',
@@ -15,5 +16,17 @@ export default createUseStyles({
             
             return 'pointer';
         }
+    },
+    Badge: {
+        position:'absolute',
+        left:'10px',
+        top:'10px',
+        width:'20px',
+        hright:'20px',
+        borderRadius:'10px',
+        backgroundColor:'yellow',
+        color:'black',
+        fontWeight:'bold',
+        textAlign:'center'
     }
 });
