@@ -94,10 +94,10 @@ all range fields can be tuned either moving the range handle either just clickin
 ### Bulk actions 
 <img align="right" width="250"  src="src/img/ss7.png?raw=true">  
 
-When more than one symbol is added, then you will see a checkbox (for both expanded and collapsed ones). Then when more than one symbol is selected an additional dpeed dial menu will appear allowing to:  
+When more than one symbol is added, then you will see a checkbox (for both expanded and collapsed ones). Then when more than one symbol is selected an additional speed dial menu will appear allowing to:  
 
-1) thrash the selected symbols  
-2) equally space them holizontally (min. 3 symbols are needed in the selection)  
+1) trash the selected symbols  
+2) equally space them horizontally (when min. 3 symbols selection)  
 3) equally space them vertically (min. 3 symbols also here)  
 4) align the vertically  
 5) align the horizontally  
