@@ -37,7 +37,7 @@ const {grayscale : cgs} = colors,
         accentColor:cgs.lightE,
         spacing,
         palette: {
-            // mode: 'dark'
+            mode: 'dark'
         }
     };
 

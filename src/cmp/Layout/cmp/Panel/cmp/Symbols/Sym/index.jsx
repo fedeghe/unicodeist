@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Card, Typography, Checkbox} from '@mui/material';
+import { Card, Typography, Checkbox } from '@mui/material';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
@@ -13,15 +13,16 @@ import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
 
-const Sym = ({sym}) => {
+const Sym = ({ sym }) => {
     const {
-            state: {
-                focusedSymbolId,
-                backgroundColor,
-                selected
-            },
-            dispatch
-        } = useContext(ctx),
+        state: {
+            focusedSymbolId,
+            backgroundColor,
+            selected,
+            symbols
+        },
+        dispatch
+    } = useContext(ctx),
         expanded = focusedSymbolId === sym.id,
         classes = useStyles({
             expanded,
@@ -49,7 +50,7 @@ const Sym = ({sym}) => {
             e.stopPropagation();
             dispatch({
                 type: ACTIONS.MOVE_SYMBOL,
-                payload: {id: sym.id, direction}
+                payload: { id: sym.id, direction }
             });
         },
         moveUp = e => move(e, -1),
@@ -57,33 +58,34 @@ const Sym = ({sym}) => {
     // console.log({selected});
     return <div className={classes.Container}>
         <Card onClick={focus} className={classes.Sym}>
-            {expanded ? 
-            <div>
-                <Label sym={sym} checked={selected.includes(sym.id)} onClick={onCheckToggle}/>
-                <Zindex sym={sym}/>
-                <Element sym={sym} backgroundColor={backgroundColor}/>
-                <Styles sym={sym} />
-                <hr className={classes.Hr} />
-                <Position sym={sym} />
-                <hr className={classes.Hr} />
-                <Animation sym={sym}/>
-            </div> : <div className={classes.HoverLight}>
+            {expanded ?
                 <div>
-                    <Checkbox checked={selected.includes(sym.id)} onClick={onCheckToggle}/>
-                </div>
-                <div>
-                    <Typography variant="body1">{sym.label}</Typography>
-                    <Typography variant="h5">
-                        <div className={classes.RotatedContainer}>
-                            <div className={classes.Rotated}>{sym.char}</div>
-                        </div>
-                    </Typography>
-                </div>
-                <div className={classes.HoverLightActions}>
-                    <ArrowDropUpIcon onClick={moveUp}/>
-                    <ArrowDropDownIcon onClick={moveDown}/>
-                </div>
-            </div>}
+                    <Label sym={sym} checked={selected.includes(sym.id)} onClick={onCheckToggle} />
+                    <Zindex sym={sym} />
+                    <Element sym={sym} backgroundColor={backgroundColor} />
+                    <Styles sym={sym} />
+                    <hr className={classes.Hr} />
+                    <Position sym={sym} />
+                    <hr className={classes.Hr} />
+                    <Animation sym={sym} />
+                </div> : <div className={classes.HoverLight}>
+                    {Boolean(symbols.length > 1) &&
+                        <div>
+                            <Checkbox checked={selected.includes(sym.id)} onClick={onCheckToggle} />
+                        </div>}
+                    <div>
+                        <Typography variant="body1">{sym.label}</Typography>
+                        <Typography variant="h5">
+                            <div className={classes.RotatedContainer}>
+                                <div className={classes.Rotated}>{sym.char}</div>
+                            </div>
+                        </Typography>
+                    </div>
+                    <div className={classes.HoverLightActions}>
+                        <ArrowDropUpIcon onClick={moveUp} />
+                        <ArrowDropDownIcon onClick={moveDown} />
+                    </div>
+                </div>}
         </Card>
     </div>;
 };

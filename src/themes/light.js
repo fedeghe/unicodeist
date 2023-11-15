@@ -2,7 +2,7 @@ import { colors, spacing } from './base';
 
 const {grayscale : cgs } = colors,
     theme =  {
-        mode: 'bright',
+        mode: 'light',
         background: {
             main: cgs.lightE,
             panel: cgs.lightD,
@@ -36,7 +36,7 @@ const {grayscale : cgs } = colors,
         accentColor:cgs.dark5,
         spacing,
         palette: {
-            // mode: 'light'
+            mode: 'light'
         }
     };  
 

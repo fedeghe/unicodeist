@@ -1,9 +1,9 @@
 import dark from './dark';
-import bright from './bright';
+import light from './light';
 
 const themes = {
     dark,
-    bright
+    light
 };
 const getTheme = t => themes[t];
 

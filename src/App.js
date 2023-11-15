@@ -1,16 +1,15 @@
 import { useReducer, useEffect, useCallback } from 'react';
-import { ThemeProvider} from 'react-jss';
-
-
+import { ThemeProvider } from 'react-jss';
+import { ThemeProvider as MThemeProvider, createTheme } from '@mui/material/styles';
 
 import Layout from './cmp/Layout';
 import Context from './Context';
 import reducerFactory from './reducer';
 import ACTIONS from './reducer/actions';
 import getTheme from './themes';
-import {debounce} from './utils';
+import { debounce } from './utils';
 
-const {reducer, init} = reducerFactory();
+const { reducer, init } = reducerFactory();
 const App = () => {
     const [state, dispatch] = useReducer(reducer, {}, init),
         { themeKey, preventReload } = state,
@@ -27,7 +26,12 @@ const App = () => {
             e.returnValue = '';
         }, []),
         storeViewPortData = useCallback(debounced, []),
-        prevent = useCallback(e => e.preventDefault(), []);
+        prevent = useCallback(e => e.preventDefault(), []),
+        mtheme = createTheme({
+            palette: {
+                mode: themeKey,
+            },
+        });
     useEffect(storeViewPortData, [storeViewPortData]);
     useEffect(() => {
         window.addEventListener("resize", storeViewPortData);
@@ -40,7 +44,7 @@ const App = () => {
                 history.go(1);
             };
         }
-        
+
         return () => {
             window.removeEventListener("resize", storeViewPortData);
             window.removeEventListener("scroll", prevent);
@@ -50,13 +54,15 @@ const App = () => {
             }
         };
     }, [storeViewPortData, preventReload]);
-    
-    return (        
-        <ThemeProvider theme={theme}>
-            <Context.Provider value={{state, dispatch, browser}}>
-                <Layout/>
-            </Context.Provider>
-        </ThemeProvider>
+
+    return (
+        <MThemeProvider theme={mtheme}>
+            <ThemeProvider theme={theme}>
+                <Context.Provider value={{ state, dispatch, browser }}>
+                    <Layout />
+                </Context.Provider>
+            </ThemeProvider>
+        </MThemeProvider>
     );
 };
 

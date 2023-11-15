@@ -16,6 +16,7 @@ const Search = () => {
             state: {
                 symbols,
                 symbolsFilter,
+                selected
             },
             dispatch
         } = useContext(ctx),
@@ -36,19 +37,24 @@ const Search = () => {
         invertAll = () => dispatch({
             type: ACTIONS.TOGGLE_SYMBOLS_SELECTION,
             payload: 'invertAll'
-        })
-        ;
+        }),
+        syL = symbols.length,
+        seL = selected.length,
+        showSelectAll = Boolean(syL),
+        showUnselectAll = Boolean(seL),
+        showInvertSelection = Boolean(seL);
+        
     return Boolean(symbols.length) && <div className={classes.Container}>
         <div>
-            <Tooltip disableInteractive title="select all" className={classes.Pointer}>
+            {showSelectAll && <Tooltip disableInteractive title="select all" className={classes.Pointer}>
                 <DoneAllIcon onClick={selectAll}/>
-            </Tooltip>
-            <Tooltip disableInteractive title="unselect all" className={classes.Pointer}>
+            </Tooltip>}
+            {showUnselectAll && <Tooltip disableInteractive title="unselect all" className={classes.Pointer}>
                 <RemoveDoneIcon onClick={unselectAll}/>
-            </Tooltip>
-            <Tooltip disableInteractive title="invert selection" className={classes.Pointer}>
+            </Tooltip>}
+            {showInvertSelection && <Tooltip disableInteractive title="invert selection" className={classes.Pointer}>
                 <FlakyIcon onClick={invertAll}/>
-            </Tooltip>
+            </Tooltip>}
         </div>
         <div className={classes.Right}>
             <input placeholder="filter by label" type="text" value={symbolsFilter} onInput={updateFilter}/>

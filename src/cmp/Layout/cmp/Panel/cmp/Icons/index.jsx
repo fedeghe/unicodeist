@@ -186,7 +186,7 @@ const Icons = () => {
                     checkedIcon={<FullscreenExitIcon />}
                 />
             </Tooltip>
-            <ThemeSwitch onChange={handleClose} tooltip={`switch to ${themeKey === THEMES.bright ? THEMES.dark : THEMES.bright} theme`}/>
+            <ThemeSwitch onChange={handleClose} tooltip={`switch to ${themeKey === THEMES.light ? THEMES.dark : THEMES.light} theme`}/>
         </div>
         {error && <SnackMessage message={error} open={error} setOpen={removeError}/>}
     </>;

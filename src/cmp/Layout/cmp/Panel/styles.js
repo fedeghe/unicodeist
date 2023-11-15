@@ -19,7 +19,7 @@ export default createUseStyles(theme => ({
         borderRadius:'25px',
         borderTopRightRadius: 0,
         borderBottomRightRadius: 0,
-        boxShadow: `30px 0px 80px -7px ${theme.mode === 'bright' ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.75)'}`,
+        boxShadow: `30px 0px 80px -7px ${theme.mode === 'light' ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.75)'}`,
         zIndex: 0
     },
 }));

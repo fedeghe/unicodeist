@@ -90,8 +90,8 @@ const actions = {
         [ACTIONS.SWITCH_THEME]: ({
             oldState: {themeKey}
         }) => ({
-            themeKey: themeKey === 'bright'
-                ? 'dark' : 'bright'
+            themeKey: themeKey === 'light'
+                ? 'dark' : 'light'
         }),
         
         [ACTIONS.RESIZE]: ({

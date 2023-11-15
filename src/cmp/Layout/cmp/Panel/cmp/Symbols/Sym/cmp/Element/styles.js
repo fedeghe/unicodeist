@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 import { mergeAdditionalStyles } from 'src/utils';
-import bgBright from 'src/img/bgBright.png';
+import bgLight from 'src/img/bgLight.png';
 import bgDark from 'src/img/bgDark.png';
 
 export default createUseStyles(theme => ({
@@ -32,7 +32,7 @@ export default createUseStyles(theme => ({
         fontSize:'4em',
         outline: `1px solid ${theme.border}`,
         borderRadius: '5px',
-        backgroundImage: `url(${theme.mode === 'bright' ? bgBright: bgDark})`,
+        backgroundImage: `url(${theme.mode === 'light' ? bgLight: bgDark})`,
         overflow:'hidden'
     },
     Item: {
