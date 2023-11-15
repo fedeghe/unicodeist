@@ -55,10 +55,6 @@ export const cleanCodeFromState = state => {
     symbols.map(sym => {
         var child = document.createElement('div');
         child.innerHTML = sym.char;
-        console.log('merge', mergeAdditionalStyles({
-            additionalStyles: sym.additionalStyles,
-            blur: sym.blur
-        }));
         child.setAttribute('style',
             [
                 ...((sym.animation && sym.animation in state.keyFrames)

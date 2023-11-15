@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-export default createUseStyles(theme => console.log({theme}) || ({
+export default createUseStyles(theme =>({
     Box: {
         display: 'flex',
         flexDirection: 'row',
