@@ -556,9 +556,12 @@ const actions = {
         [ACTIONS.BULK_ALIGNV]: ({
             oldState: { symbols, selected }
         }) => {
-            const mean = symbols
-                .filter(({id}) => selected.includes(id))
-                .reduce((acc, {top}) => acc + top, 0) / selected.length;
+            const mean = parseInt(
+                symbols
+                    .filter(({id}) => selected.includes(id))
+                    .reduce((acc, {top}) => acc + top, 0) / selected.length,
+                10
+            );
             
             return {
                 symbols: symbols.map(
@@ -571,9 +574,12 @@ const actions = {
         [ACTIONS.BULK_ALIGNH]: ({
             oldState: { symbols, selected }
         }) => {
-            const mean = symbols
-                .filter(({id}) => selected.includes(id))
-                .reduce((acc, {left}) => acc + left, 0) / selected.length;
+            const mean = parseInt(
+                symbols
+                    .filter(({id}) => selected.includes(id))
+                    .reduce((acc, {left}) => acc + left, 0) / selected.length,
+                10
+            );
             
             return {
                 symbols: symbols.map(
@@ -599,7 +605,7 @@ const actions = {
                     if (index>=0) {
                         return {
                             ...sortedSymbols[index],
-                            [what]: min + index * step
+                            [what]: parseInt(min + index * step, 10)
                         };
                     }
                     return sym;
