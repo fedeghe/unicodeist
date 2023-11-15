@@ -44,6 +44,7 @@ Seems clear (and quite obvious also the reason) that whenever few elements can p
     - open the background styles editor
     - open the keyFrames editor
     - toggle navigation blocker
+    - toggle full screen  
     - switch 🌓 theme
     - set the size of the current _creative_
     - hover the speed dial button to:
@@ -63,6 +64,7 @@ Seems clear (and quite obvious also the reason) that whenever few elements can p
 <img align="right" width="250"  src="src/img/ss2.png?raw=true">  
 
 - Last symbol added is the current target one, thus on the right panel you will see a tuning card expanded allowing you to:  
+    - select the symbol for one of the bulk actions (see below, this checkbox is visible only when more than one symbol is added)
     - set a label for it (only useful to search it among added symbols)
     - set the `z-index`
     - see a preview showing on its left some icons to:
@@ -89,7 +91,19 @@ Seems clear (and quite obvious also the reason) that whenever few elements can p
 
 all range fields can be tuned either moving the range handle either just clicking on the value and scroll `up/down` or just type the exact value and blur or hit `enter` buttons (if a range is focused then the scrolling on the symbols list is disabled).
 
+### Bulk actions 
+<img align="right" width="250"  src="src/img/ss7.png?raw=true">  
 
+When more than one symbol is added, then you will see a checkbox (for both expanded and collapsed ones). Then when more than one symbol is selected an additional dpeed dial menu will appear allowing to:  
+
+1) thrash the selected symbols  
+2) equally space them holizontally (min. 3 symbols are needed in the selection)  
+3) equally space them vertically (min. 3 symbols also here)  
+4) align the vertically  
+5) align the horizontally  
+
+**2** and **3** use as boundaries the most left/top one and the most right/bottom one;  
+**4** and **5** align on the mean vertical/horizontal position.
 
 ### Move | scale all symbols  
 To move all _symbols_ together just go to the _unicodeist_ logo in the right upper part and drag within the logo, on mouse release all symbols will move together in that direction for an amout proportional to the movement.  
