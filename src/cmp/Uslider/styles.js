@@ -1,17 +1,17 @@
 import { createUseStyles } from 'react-jss';
 
-export default createUseStyles(theme => ({
+export default createUseStyles(theme => console.log({theme}) || ({
     Box: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         fontWeight:'',
-        height:'22px'
+        height:`${theme.spacing.xxlarge}px`
     },
 
-    Label: {//
-        marginRight: '10px',
+    Label: {
+        marginRight: `${theme.spacing.small}px`,
         fontWeight: 'bold',
         display:'flex',
         flex:1,
@@ -24,7 +24,7 @@ export default createUseStyles(theme => ({
     },
     Input: {
         width: '60px',
-        height:'20px',
+        height:`${theme.spacing.x1large}px`,
         border: 'none',
         margin: 'none',
         outline:'none',

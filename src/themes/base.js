@@ -29,6 +29,7 @@ export const spacing = {
     medium: 12,
     large: 16,
     xlarge: 18,
+    x1large: 20,
     xxlarge: 22,
     xxxlarge: 26,
     xxxxlarge: 28,

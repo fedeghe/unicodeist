@@ -3,7 +3,7 @@ import { createUseStyles } from 'react-jss';
 export default createUseStyles({
     Dialog: {
         padding: '2em',
-        backgroundColor: '#eeeeee'
+        // backgroundColor: '#eeeeee'
     },
     TopMargined: {
         marginTop: '4em'
@@ -11,7 +11,8 @@ export default createUseStyles({
     Code: {
         marginBottom: '0.5em',
         marginTop: '2em',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#dddddd',
+        color:'#000000',
         overflow: 'auto',
         padding: '1em',
         borderRadius: '3px',

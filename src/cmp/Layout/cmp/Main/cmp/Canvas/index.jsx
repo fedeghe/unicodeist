@@ -1,6 +1,6 @@
 import {
     useRef, useContext, useMemo,
-    useEffect, useState, useCallback
+    useEffect, useState
 } from 'react';
 
 import Channel from '@fedeghe/channeljs';
@@ -55,21 +55,11 @@ const Canvas = () => {
         }), [height, width, backgroundColor, backgroundColorAlpha, bgStyles]),
 
         onDragOver = e => { e.preventDefault(); },
-        exportImage = useCallback(
-            () => setDownloadDialogVisibility(true)
-        ),
-        contribute = useCallback(
-            () => setContributeDialogVisibility(true)
-        ),
-        keyEditor = useCallback(
-            () => setKeyEditorDialogVisibility(true)
-        ),
-        backgrounStyles = useCallback(
-            () => setBackgrounStylesDialogVisibility(true)
-        ),
-        shadowEditor = useCallback(
-            () => setAdditionalStylesEditorDialogVisibility(true)
-        );
+        exportImage = () => setDownloadDialogVisibility(true),
+        contribute = () => setContributeDialogVisibility(true),
+        keyEditor = () => setKeyEditorDialogVisibility(true),
+        backgrounStyles = () => setBackgrounStylesDialogVisibility(true),
+        shadowEditor = () => setAdditionalStylesEditorDialogVisibility(true);
 
     useEffect(() => {
         const embed = () => {
@@ -106,8 +96,8 @@ const Canvas = () => {
                 cause it must access the localstorage everytime
             */}
             {Boolean(backgrounStylesDialogVisibility) && <BgStylesEditorDialog visibility={backgrounStylesDialogVisibility} setVisibility={setBackgrounStylesDialogVisibility} />}
-            {Boolean(keyEditorDialogVisibility) && <KeyEditorDialog visibility={keyEditorDialogVisibility} setVisibility={setKeyEditorDialogVisibility} />}
             {Boolean(additionalStylesEditorDialogVisibility) && <AdditionalStylesEditorDialog visibility={additionalStylesEditorDialogVisibility} setVisibility={setAdditionalStylesEditorDialogVisibility} />}
+            {Boolean(keyEditorDialogVisibility) && <KeyEditorDialog visibility={keyEditorDialogVisibility} setVisibility={setKeyEditorDialogVisibility} />}
             <div ref={ref} style={refStyles} onDragOver={onDragOver}>
                 {/* first load all single used keyframes */}
                 {[...new Set(

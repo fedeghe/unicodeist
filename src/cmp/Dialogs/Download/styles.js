@@ -4,7 +4,6 @@ export default createUseStyles(theme => ({
     Dialog: {
         width:'400px',
         padding: '2em',
-        backgroundColor: '#eeeeee'
     },
     SpaceUp: {
         marginTop: '1em'

@@ -16,10 +16,9 @@ const Uslider = ({
     rounder = parseInt
 }) => {
     const classes = useStyles(),
-        {dispatch} = useContext(ctx),
+        { dispatch } = useContext(ctx),
         ref = useRef(),
         [tuning, setTuning] = useState(false),
-        
         unTune = () => setTuning(false),
         mayUntune = e => {
             if (['Enter', 'Escape'].includes(e.key)) {
@@ -36,12 +35,10 @@ const Uslider = ({
             validator(v) && onChange(v);
         };
 
-    useEffect(() => {
-        dispatch({
-            type: ACTIONS.CAN_SCROLL_SYMBOLS,
-            payload: !tuning
-        });
-    }, [tuning]);
+    useEffect(() => dispatch({
+        type: ACTIONS.CAN_SCROLL_SYMBOLS,
+        payload: !tuning
+    }), [tuning]);
 
     return <Box className={classes.Box} key={label}>
        {label && <span className={classes.Label} >{label}:</span>}
@@ -52,7 +49,8 @@ const Uslider = ({
                 onBlur={unTune}
                 pattern="[-+]?[0-9]*[.]?[0-9]+"
                 ref={ref}
-                type="number" value={value}
+                type="number"
+                value={value}
                 className={classes.Input}
                 onChange={change}
                 max={max}
@@ -62,13 +60,13 @@ const Uslider = ({
             />
             : <div className={classes.Num} onClick={onTune}>{value}{unit}</div>
         }
-        </div>        
-
+        </div>
         <input
             className={classes.Range}
             type="range"
             min={min} max={max} step={step}
-            value={value} onChange={change}
+            value={value}
+            onChange={change}
         />
     </Box>;
 };
