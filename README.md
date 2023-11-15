@@ -108,7 +108,7 @@ When more than one symbol is added, then you will see a checkbox (for both expan
 ### Move | scale all symbols  
 To move all _symbols_ together just go to the _unicodeist_ logo in the right upper part and drag within the logo, on mouse release all symbols will move together in that direction for an amout proportional to the movement.  
 If you do the same with the `shift` key down then all symbols will be up or down scaled depending on the movement direction. Notice that the relative position of all the elements will **not** change.  
-When sme symbols are selected then only those will be moved or scaled.
+When some symbols are selected then only those will be moved or scaled.
 
 
 
