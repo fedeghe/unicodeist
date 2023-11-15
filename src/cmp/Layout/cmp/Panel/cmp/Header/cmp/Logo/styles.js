@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss';
-import bg from 'src/img/comparison/unicodeist.png';
+import bg from 'src/img/comparison/unicodeistLogo.png';
 export default createUseStyles({
     Logo: {
         position:'relative',

@@ -1,6 +1,6 @@
 
 ![noai](https://www.jmvc.org/img/HumanCoded.png?raw=true)
-![unicodeist](src/img/comparison/unicodeist.png?raw=true)
+![unicodeist](src/img/comparison/unicodeistLogo.png?raw=true)
 
 
 
