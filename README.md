@@ -77,6 +77,7 @@ Seems clear (and quite obvious also the reason) that whenever few elements can p
         - center it vertically ...almost  
             
     - change the `font-family`  
+    - toggle italic style  
     - change the `font-weight`
     - change the `color`
     - tune `scale`, `scaleX`, `scaleY`, `rotationX`, `rotationY`, `rotationZ`, `skewX`, `skewY`, `blur` and `opacity`
