@@ -21,3 +21,6 @@ bulk actions:
     - align on mean vert/horiz
     - space evenly vert/horiz
     - delete
+
+0.0.12
+- italic option added

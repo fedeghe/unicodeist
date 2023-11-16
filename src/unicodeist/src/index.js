@@ -33,6 +33,7 @@
             sk: function (x,y) { return (x||y) ? lbs.sk + '(' + x + lbs.d + ',' + y + lbs.d + ')' : ''; },
             bl: function (v) { return v ? lbs.b + '(' + v + lbs.p + ')' : ''; },
             add: function (v) { return v;},
+            it: function (v) { return v ? lbs.f + '-style:italic' : ''; },
         },
 
         /**

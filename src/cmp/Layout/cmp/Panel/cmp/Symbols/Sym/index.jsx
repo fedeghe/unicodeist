@@ -15,42 +15,48 @@ import useStyles from './styles';
 
 const Sym = ({ sym }) => {
     const {
-        state: {
-            focusedSymbolId,
-            backgroundColor,
-            selected,
-            symbols
-        },
-        dispatch
-    } = useContext(ctx),
-        expanded = focusedSymbolId === sym.id,
+            state: {
+                focusedSymbolId,
+                backgroundColor,
+                selected,
+                symbols
+            },
+            dispatch
+        } = useContext(ctx),
+        {
+            id, color,
+            rotationX, rotationY, rotationZ,
+            skewX, skewY,
+            blur, label, char
+        } = sym,
+        expanded = focusedSymbolId === id,
         classes = useStyles({
             expanded,
             backgroundColor,
-            color: sym.color,
-            rx: sym.rotationX,
-            ry: sym.rotationY,
-            rz: sym.rotationZ,
-            skx: sym.skewX,
-            sky: sym.skewY,
-            blr: sym.blur,
+            color,
+            rx: rotationX,
+            ry: rotationY,
+            rz: rotationZ,
+            skx: skewX,
+            sky: skewY,
+            blr: blur,
         }),
         focus = () => !expanded && dispatch({
             type: ACTIONS.FOCUS_ON_SYMBOL,
-            payload: sym.id
+            payload: id
         }),
         onCheckToggle = e => {
             e.stopPropagation();
             dispatch({
                 type: ACTIONS.TOGGLE_SYMBOL_SELECTION,
-                payload: sym.id,
+                payload: id,
             });
         },
         move = (e, direction) => {
             e.stopPropagation();
             dispatch({
                 type: ACTIONS.MOVE_SYMBOL,
-                payload: { id: sym.id, direction }
+                payload: { id: id, direction }
             });
         },
         moveUp = e => move(e, -1),
@@ -60,7 +66,7 @@ const Sym = ({ sym }) => {
         <Card onClick={focus} className={classes.Sym}>
             {expanded ?
                 <div>
-                    <Label sym={sym} checked={selected.includes(sym.id)} onClick={onCheckToggle} />
+                    <Label sym={sym} checked={selected.includes(id)} onClick={onCheckToggle} />
                     <Zindex sym={sym} />
                     <Element sym={sym} backgroundColor={backgroundColor} />
                     <Styles sym={sym} />
@@ -71,13 +77,13 @@ const Sym = ({ sym }) => {
                 </div> : <div className={classes.HoverLight}>
                     {Boolean(symbols.length > 1) &&
                         <div>
-                            <Checkbox checked={selected.includes(sym.id)} onClick={onCheckToggle} />
+                            <Checkbox checked={selected.includes(id)} onClick={onCheckToggle} />
                         </div>}
                     <div>
-                        <Typography variant="body1">{sym.label}</Typography>
+                        <Typography variant="body1">{label}</Typography>
                         <Typography variant="h5">
                             <div className={classes.RotatedContainer}>
-                                <div className={classes.Rotated}>{sym.char}</div>
+                                <div className={classes.Rotated}>{char}</div>
                             </div>
                         </Typography>
                     </div>

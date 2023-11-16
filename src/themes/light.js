@@ -34,10 +34,7 @@ const {grayscale : cgs } = colors,
         },
         unselectedItemHoverBackgound: cgs.lightC,
         accentColor:cgs.dark5,
-        spacing,
-        palette: {
-            mode: 'light'
-        }
+        spacing
     };  
 
 export default theme;

@@ -48,7 +48,7 @@ export default createUseStyles(theme => ({
         color, rotationX, rotationY, rotationZ,
         scaleX, scaleY, skewX, skewY,
         additionalStyles = '', blur = 0, opacity,
-        fontWeight
+        fontWeight, italic
     }}) =>  ({
         color,
         ...mergeAdditionalStyles({
@@ -65,6 +65,7 @@ export default createUseStyles(theme => ({
         ].join(' '),
         fontWeight,
         opacity: opacity,
+        fontStyle: italic ? 'italic': 'normal',
         fontSize:'1.2em'
     }),
     LB:{

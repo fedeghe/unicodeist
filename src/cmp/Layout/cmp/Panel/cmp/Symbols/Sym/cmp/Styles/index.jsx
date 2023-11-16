@@ -12,6 +12,10 @@ import useElementStyles from './styles';
 
 const Styles = ({ sym }) => {
     const classes = useStyles(),
+        {
+            italic = false, fontFamily,
+            color, fontWeight, opacity
+        } = sym,
         localClasses = useElementStyles(),
         { dispatch } = useContext(ctx),
         onChangeFontFamily = useCallback(e => dispatch({
@@ -25,6 +29,9 @@ const Styles = ({ sym }) => {
         onChangeFontWeight = useCallback(e => dispatch({
             type: ACTIONS.UPDATE_SYMBOL,
             payload: { field: 'fontWeight', value: e.target.value }
+        }), []),
+        onChangeFontItalic = useCallback(() => dispatch({
+            type: ACTIONS.TOGGLE_ITALIC
         }), []);
 
     return <div className={localClasses.SectionStyles}>
@@ -32,13 +39,13 @@ const Styles = ({ sym }) => {
             <Box className={classes.Box}>
                 <div>
                     <span className={classes.Label} >Font:</span>
-                    <select className={classes.FontFamilyAndWeight} value={sym.fontFamily} onChange={onChangeFontFamily}>{FONT_FAMILIES.map(family =>
+                    <select className={classes.FontFamilyAndWeight} value={fontFamily} onChange={onChangeFontFamily}>{FONT_FAMILIES.map(family =>
                         <option key={family} value={family}>{family}</option>
                     )}</select>
                 </div>
                 <div>
                     <span className={classes.Label} >Color:</span>
-                    <input className={classes.Color} type="color" onChange={onChangeColor} value={sym.color} />
+                    <input className={classes.Color} type="color" onChange={onChangeColor} value={color} />
                 </div>
             </Box>
         </div>
@@ -46,11 +53,15 @@ const Styles = ({ sym }) => {
             <Box className={classes.Box}>
                 <div>
                     <span className={classes.Label} >Weight:</span>
-                    <select className={classes.FontFamilyAndWeight} value={sym.fontWeight} onChange={onChangeFontWeight}>
+                    <select className={classes.FontFamilyAndWeight} value={fontWeight} onChange={onChangeFontWeight}>
                         {Array.from({ length: 9 }, (_, i) => (i + 1) * 100).map(
                             weight => <option key={weight} value={weight}>{weight}</option>
                         )}
                     </select>
+                </div>
+                <div>
+                    <span className={classes.Label} >Italic:</span>
+                    <input type="checkbox" checked={italic} onChange={onChangeFontItalic}/>
                 </div>
             </Box>
         </div>
@@ -70,7 +81,7 @@ const Styles = ({ sym }) => {
             ))}
         </div>
         <div className={localClasses.SectionStylesContainer}>
-            <Uslider key={'opacity'} label={"Opacity"} value={sym.opacity} min={0} max={1} step={0.01} quickTune rounder={parseFloat}
+            <Uslider key={'opacity'} label={"Opacity"} value={opacity} min={0} max={1} step={0.01} quickTune rounder={parseFloat}
                 onChange={v => dispatch({
                     type: ACTIONS.UPDATE_SYMBOL,
                     payload: { field: 'opacity', value: v}

@@ -12,7 +12,8 @@ const Position = ({ sym }) => {
     const localClasses = useStyles(),
         { state: { width, height }, dispatch } = useContext(ctx),
         w = parseInt(width, 10),
-        h = parseInt(height, 10);
+        h = parseInt(height, 10),
+        { left, top } = sym;
 
     return <div className={localClasses.SectionPosition}>
         {[{
@@ -20,7 +21,7 @@ const Position = ({ sym }) => {
             min: 0,
             max: w,
             offset: w * OFFSET_PERC, 
-            value: sym.left,
+            value: left,
             key: 'left',
             quickTune: true
         }, {
@@ -28,7 +29,7 @@ const Position = ({ sym }) => {
             min: 0,
             max: h,
             offset: h * OFFSET_PERC,
-            value: sym.top,
+            value: top,
             key: 'top',
             quickTune: true
         }].map(el => 

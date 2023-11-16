@@ -5,10 +5,11 @@ import Uslider from 'src/cmp/Uslider';
 import ACTIONS from 'src/reducer/actions';
 
 const Zindex = ({sym}) => {    
-    const { dispatch} = useContext(ctx);
+    const { dispatch} = useContext(ctx),
+        { zIndex } = sym;
     return <div>
         <Uslider
-                label={'Z-index'} value={sym.zIndex}
+                label={'Z-index'} value={zIndex}
                 min={MIN_ZINDEX} max={MAX_ZINDEX} step={1}
                 quickTune={true}
                 onChange={v => 

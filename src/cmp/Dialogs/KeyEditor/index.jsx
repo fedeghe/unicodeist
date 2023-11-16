@@ -123,8 +123,9 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
             setConfirmationMessage(msg);
             setConfirmationVisibility(true);
         },
-        updating = Object.keys(keyFrames).includes(name),
-        hasKeyFrames = Object.keys(keyFrames).length;
+        keyFramesKeys = Object.keys(keyFrames),
+        updating = keyFramesKeys.includes(name),
+        hasKeyFrames = keyFramesKeys.length;
 
     return (
         <Dialog
@@ -142,28 +143,33 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                         ariaLabel="keyFrames editor"
                         direction="right"
                     >
-                        {[{
-                            title: "clear all existing key frames",
-                            icon: <DeleteForeverIcon />,
-                            onClick: onDeleteAll
-                        },{
-                            title: "import",
-                            icon: <GetAppIcon />,
-                            onClick: () => importFromFile({
-                                onContentReady: cnt => {
-                                    dispatch({
-                                        type: ACTIONS.IMPORT_KEYFRAMES,
-                                        payload: cnt
-                                    });
-                                    setVisibility(false);
-                                }
-                            })
-                        },{
-                            title: "export",
-                            icon: <FileUploadIcon />,
-                            onClick: () => saveAsFileJSON(keyFrames)
-                                .then(downloadAs('keyframes.json'))
-                        }].map(action => <SpeedDialAction
+                        {[
+                            hasKeyFrames && {
+                                title: "clear all existing key frames",
+                                icon: <DeleteForeverIcon />,
+                                onClick: onDeleteAll
+                            },
+                            {
+                                title: "import",
+                                icon: <GetAppIcon />,
+                                onClick: () => importFromFile({
+                                    onContentReady: cnt => {
+                                        dispatch({
+                                            type: ACTIONS.IMPORT_KEYFRAMES,
+                                            payload: cnt
+                                        });
+                                        setVisibility(false);
+                                    }
+                                })
+                            },
+                            hasKeyFrames && {
+                                title: "export",
+                                icon: <FileUploadIcon />,
+                                onClick: () => saveAsFileJSON(keyFrames)
+                                    .then(downloadAs('keyframes.json'))
+                            }
+                        ].filter(Boolean)
+                        .map(action => <SpeedDialAction
                             key={action.title}
                             icon={action.icon}
                             tooltipTitle={action.title}
@@ -180,21 +186,18 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
             </DialogTitle>
             <DialogContent>
                 <div className={classes.Container}>
-                    <div className={classes.Selector}>
-                        {Boolean(hasKeyFrames) && (
-                            <>
-                                <span>Available:</span>
-                                <Select onChange={loadKeyFrame} value={selected}>
-                                    <MenuItem value={UNSELECTED}>select an existing one</MenuItem>
-                                    {Object.keys(keyFrames).map(key => <MenuItem key={key} value={key}>{key}</MenuItem>)}
-                                </Select>
-                            </>
-                        )}
-                        {selected !== name && selected !== UNSELECTED &&
-                            <Alert className={classes.Hint} severity="warning">remember to update the animation-name in both to a valid unused one</Alert>
-                        }
-                    </div>
-
+                    {Boolean(hasKeyFrames) && (
+                        <div className={classes.Selector}>
+                            <span>Available:</span>
+                            <Select onChange={loadKeyFrame} value={selected}>
+                                <MenuItem value={UNSELECTED}>select an existing one</MenuItem>
+                                {Object.keys(keyFrames).map(key => <MenuItem key={key} value={key}>{key}</MenuItem>)}
+                            </Select>    
+                            {selected !== name && selected !== UNSELECTED &&
+                                <Alert className={classes.Hint} severity="warning">remember to update the animation-name in both to a valid unused one</Alert>
+                            }
+                        </div>
+                    )}
                     <TextField required label="Name it" variant="standard" value={name} onInput={onName} />
                     <div className={classes.Editor1}>
                         <CodeMirror

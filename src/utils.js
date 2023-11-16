@@ -68,6 +68,7 @@ export const cleanCodeFromState = state => {
                 
                 `z-index:${sym.zIndex}`,
                 `font-family:${sym.fontFamily}`,
+                sym.italic && 'font-style:italic',
                 `font-weight:${sym.fontWeight}`,
                 `color:${sym.color}`,
                 `opacity:${sym.opacity}`,
@@ -244,6 +245,7 @@ const getUnicodeistData = j => JSON.stringify({
             ),
             fw: s.fontWeight,
             o: s.opacity,
+            it: s.italic,
             t: {
                 trn: [s.left, s.top],
                 ...(s.scale !== 1 && { s: s.scale }),
