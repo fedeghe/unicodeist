@@ -23,7 +23,6 @@ export default createUseStyles(theme => ({
     },
     Bottom: {
         width:'100%',
-        backgroundColor: 'white',
         display:'flex',
         justifyContent:'space-between',
     },
