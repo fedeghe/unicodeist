@@ -603,7 +603,6 @@ const actions = {
                 symbols: symbols.map(sym => {
                     const index = sortedSymbols.findIndex(({id}) => id === sym.id);
                     if (index >= 0) {
-                        console.log(index);
                         return {
                             ...sortedSymbols[index],
                             [what]: parseInt(min + index * step, 10)
