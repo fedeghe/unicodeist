@@ -9,6 +9,7 @@ import VerticalAlignTopIcon from '@mui/icons-material/VerticalAlignTop';
 import VerticalAlignBottomIcon from '@mui/icons-material/VerticalAlignBottom';
 import AlignHorizontalCenterIcon from '@mui/icons-material/AlignHorizontalCenter';
 import AlignVerticalCenterIcon from '@mui/icons-material/AlignVerticalCenter';
+import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import StyleIcon from '@mui/icons-material/Style';
 
 import ctx from 'src/Context';
@@ -26,7 +27,8 @@ const Element = ({ sym }) => {
         onFocusToggle = () => dispatch({ type: ACTIONS.SYMBOL_FOCUS }),
         onAlignH = () => dispatch({ type: ACTIONS.ALIGN_H }),
         onAlignV = () => dispatch({ type: ACTIONS.ALIGN_V }),
-        onShadow = () => Channeljs.get('event').pub('shadowEditor');
+        onShadow = () => Channeljs.get('event').pub('shadowEditor'),
+        onSwap = () => Channeljs.get('event').pub('swap');
 
     return <div className={classes.Container}>
         <div className={classes.Left}>
@@ -56,6 +58,9 @@ const Element = ({ sym }) => {
             <div className={classes.LB}/>
             <Tooltip disableInteractive title="open additional styles editor">
                 <div className={classes.Item}><StyleIcon onClick={onShadow} /></div>
+            </Tooltip>
+            <Tooltip disableInteractive title="change symbol">
+                <div className={classes.Item}><ChangeCircleIcon onClick={onSwap} /></div>
             </Tooltip>
         </div>
         <div className={classes.Mid}>

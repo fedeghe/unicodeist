@@ -41,6 +41,7 @@ export default createUseStyles(theme => ({
         color: theme.foreground,
     },
     LeaveOpenCheck: {
+        visibility: ({swapMode}) => swapMode ? 'hidden' : 'visible',
         marginRight:`${theme.spacing.small*2}px`,
         display:'flex',
         flexShrink:1

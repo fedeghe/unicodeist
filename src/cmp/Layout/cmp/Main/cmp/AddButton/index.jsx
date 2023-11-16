@@ -12,7 +12,9 @@ const AddButton = () => {
     const openPanel = () => {
         dispatch({
             type: ACTIONS.TOGGLE_ADD_PANEL,
-            payload: true
+            payload: {
+                visibility: true
+            }
         });
     };
     return <IconButton  className={classes.AddButton} aria-label="add" size="large"  onClick={openPanel}>

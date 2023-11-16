@@ -24,3 +24,4 @@ bulk actions:
 
 0.0.12
 - italic option added
+- swap symbol

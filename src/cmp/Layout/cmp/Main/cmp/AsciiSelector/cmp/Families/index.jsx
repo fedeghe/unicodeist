@@ -16,12 +16,15 @@ const Families = () => {
                 letAsciiPanelOpenAfterSelection,
                 availableSymbols,
                 filteredCount,
-                scrollTop
+                scrollTop,
+                swapMode
             }
         } = useContext(ctx),
         closePanel = () => dispatch({
             type: ACTIONS.TOGGLE_ADD_PANEL,
-            payload: false
+            payload: {
+                visibility: false
+            }
         }),
         showConfirmation = char => {
             setMessageChar(char);
@@ -30,13 +33,13 @@ const Families = () => {
         hideConfirmation = () => setOpen(false),
         onSelect = (char) => {
             dispatch({
-                type: ACTIONS.ADD_SYMBOL,
+                type: swapMode ? ACTIONS.SWAP_SYMBOL : ACTIONS.ADD_SYMBOL,
                 payload: {
                     char,
-                    scrollTop: ref.current.scrollTop
+                    scrollTop: ref.current.scrollTop //not consumed inswapMode
                 }
             });
-            letAsciiPanelOpenAfterSelection ? showConfirmation(char) : closePanel();
+            letAsciiPanelOpenAfterSelection && !swapMode ? showConfirmation(char) : closePanel();
         };
 
     useEffect(() => {

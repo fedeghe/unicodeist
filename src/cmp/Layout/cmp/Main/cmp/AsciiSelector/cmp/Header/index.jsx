@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useCallback, useState, useTransition } from 'react';
 import {
     IconButton, Checkbox, FormControlLabel
@@ -12,12 +13,16 @@ import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
 
 const Header = () => {
-    const classes = useStyles({ border: 10 }),
-        { dispatch, state: {
-            letAsciiPanelOpenAfterSelection,
-            asciiSelectorFilter,
-            filteredCount,
-        } } = useContext(ctx),
+    const {
+            dispatch,
+            state: {
+                letAsciiPanelOpenAfterSelection,
+                asciiSelectorFilter,
+                filteredCount,
+                swapMode
+            }
+        } = useContext(ctx),
+        classes = useStyles({ border: 10, swapMode }),
         [filter, setFilter] = useState(asciiSelectorFilter),
         [isPending, startTransition] = useTransition(),
         onFilterIn = debounce(e =>
@@ -42,10 +47,13 @@ const Header = () => {
                 payload: ''
             });
         },
-        closePanel = () => dispatch({
-            type: ACTIONS.TOGGLE_ADD_PANEL,
-            payload: false
-        });
+        closePanel = () => 
+            dispatch({
+                type: ACTIONS.TOGGLE_ADD_PANEL,
+                payload: {
+                    visibility: false,
+                }
+            });
 
     return <div className={classes.Container}>
         <div className={classes.RightSide}>
@@ -66,6 +74,7 @@ const Header = () => {
             </div>
             
         </div>
+
         <div className={classes.LeaveOpenCheck}>
             <FormControlLabel
                 labelPlacement="start"

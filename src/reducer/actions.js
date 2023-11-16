@@ -36,6 +36,7 @@ const INIT = Symbol('init'),
     COLLAPSE_FAMILY = Symbol('collapse family'),
     TOGGLE_SYMBOL_SELECTION = Symbol('select toggle symbol for bulk action'),
     TOGGLE_SYMBOLS_SELECTION = Symbol('select toggle symbols'),
+    SWAP_SYMBOL = Symbol('swap a symbol'),
     
     BULK_ALIGNV = Symbol('bulk vertical align'),
     BULK_ALIGNH = Symbol('bulk horizontal align'),
@@ -82,6 +83,7 @@ const exp = {
     EXPAND_FAMILY,
     COLLAPSE_FAMILY,
     TOGGLE_ITALIC,
+    SWAP_SYMBOL,
 
     
     BULK_ALIGNV,
