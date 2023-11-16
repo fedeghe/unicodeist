@@ -75,6 +75,8 @@ Seems clear (and quite obvious also the reason) that whenever few elements can p
         - move it to the bottom (`z-index`)
         - center it horizontally ...almost  
         - center it vertically ...almost  
+        - open an additional styles editor  
+        - swap the symbol into a different one
             
     - change the `font-family`  
     - toggle italic style  

@@ -75,7 +75,8 @@ const base = {
     preventReload: DEFAULT_PREVENT_RELOAD,
     fullscreen: false,
     availableSymbols: [],
-    selected: []
+    selected: [],
+    swapMode: false 
 };
 
 
@@ -114,9 +115,13 @@ const actions = {
         },
         
         [ACTIONS.TOGGLE_ADD_PANEL]: ({
-            payload: visibility
+            payload: {
+                visibility,
+                swapMode = false
+            }
         }) => ({
-            addPanelVisibility : visibility
+            addPanelVisibility : visibility,
+            swapMode
         }),
         [ACTIONS.CAN_SCROLL_SYMBOLS]: ({payload}) => ({
             canScrollSymbols : payload
@@ -146,6 +151,18 @@ const actions = {
                 ]
             };
         },
+        [ACTIONS.SWAP_SYMBOL]: ({
+            payload : { char },
+            oldState: { symbols, focusedSymbolId}
+        }) => ({
+            symbols: symbols.map(symbol =>
+                symbol.id === focusedSymbolId
+                ? ({
+                    ...symbol,
+                    char
+                }) : symbol
+            )
+        }),
 
         [ACTIONS.REMOVE_SYMBOL]: ({
             oldState: { symbols, focusedSymbolId, selected }

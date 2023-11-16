@@ -8,6 +8,8 @@ import BulkActions from './cmp/BulkActions';
 import Canvas from './cmp/Canvas';
 import ACTIONS from 'src/reducer/actions';
 
+import Channel from '@fedeghe/channeljs';
+
 const Main = () => {
     const classes = useStyles(),
         {
@@ -17,10 +19,13 @@ const Main = () => {
             },
             dispatch
         } = useContext(ctx),
-        togglePanel = useCallback(() =>
+        togglePanel = useCallback(({ swapMode = false } = {}) =>
             dispatch({
                 type: ACTIONS.TOGGLE_ADD_PANEL,
-                payload: !addPanelVisibility
+                payload: {
+                    visibility: !addPanelVisibility,
+                    swapMode
+                }
             }),
             [addPanelVisibility, dispatch]
         ),
@@ -52,6 +57,14 @@ const Main = () => {
             }
         }, [togglePanel, fullscreen]);
 
+    // allow open panel in swap mode
+    useEffect(() => {
+        Channel.get('event').sub(
+            'swap',
+            () => togglePanel({ swapMode: true })
+        );
+        return () => Channel('event').unsub('swap');
+    }, []);
     useEffect(() => {
         document.addEventListener("keydown", onKeyDown);
         return () => document.removeEventListener("keydown", onKeyDown);
