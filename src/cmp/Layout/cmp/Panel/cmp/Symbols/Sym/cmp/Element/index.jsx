@@ -18,6 +18,7 @@ import useStyles from './styles';
 const Element = ({ sym }) => {
     const classes = useStyles({ sym }),
         { dispatch } = useContext(ctx),
+        { char } = sym,
         onDelete = () => dispatch({ type: ACTIONS.REMOVE_SYMBOL }),
         onClone = () => dispatch({ type: ACTIONS.CLONE_SYMBOL }),
         onTopZi = () => dispatch({ type: ACTIONS.MAX_ZI }),
@@ -58,7 +59,7 @@ const Element = ({ sym }) => {
             </Tooltip>
         </div>
         <div className={classes.Mid}>
-            <div className={classes.Char}>{sym.char}</div>
+            <div className={classes.Char}>{char}</div>
         </div>
     </div>;
 };

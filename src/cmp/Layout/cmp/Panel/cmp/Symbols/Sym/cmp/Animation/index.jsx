@@ -7,6 +7,7 @@ import useStyles from './../../styles';
 
 const Animation = ({sym}) => {
     const classes = useStyles({sym}),
+        { animation } = sym,
         { dispatch, state: { keyFrames} } = useContext(ctx),
         hasSome = Object.keys(keyFrames).length,
         onChange = e => dispatch({
@@ -18,7 +19,7 @@ const Animation = ({sym}) => {
             <div>
                 <span className={classes.Label} >Animation:</span>
                 {hasSome ? 
-                    <select onChange={onChange} value={sym.animation || UNSELECTED}>
+                    <select onChange={onChange} value={animation || UNSELECTED}>
                         <option value={UNSELECTED}>no animation selected</option>
                         {Object.keys(keyFrames).map(key => <option key={key} value={key}>{key}</option>)}
                     </select>

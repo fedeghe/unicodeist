@@ -48,7 +48,8 @@ const createSymbol = ({ char, zIndex, left, top }) => {
         targetUp: false,
         faded: false,
         animation: false,
-        additionalStyles:false
+        additionalStyles:false,
+        italic: false
     };
 };
 
@@ -428,6 +429,20 @@ const actions = {
         [ACTIONS.SET_SYMBOLS_FILTER] : ({ payload: symbolsFilter }) => ({ symbolsFilter }),
 
         [ACTIONS.REMOVE_ERROR] : ( ) => ({ error: null}),
+        [ACTIONS.TOGGLE_ITALIC] : ({
+            oldState:{
+                symbols,
+                focusedSymbolId
+            }
+        }) => ({ 
+            symbols: symbols.map(symbol => symbol.id === focusedSymbolId
+                ? ({
+                    ...symbol,
+                    italic: !symbol.italic
+                })
+                : symbol
+            )
+        }),
 
         // not on focusedSymbolId
         [ACTIONS.MOVE_SYMBOL] : ({

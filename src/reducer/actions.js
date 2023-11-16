@@ -41,7 +41,8 @@ const INIT = Symbol('init'),
     BULK_ALIGNH = Symbol('bulk horizontal align'),
     BULK_SPACE= Symbol('bulk horiz / vert space'),
     BULK_DELETE = Symbol('bulk delete'),
-    SWITCH_SYMBOL = Symbol('switch_symbol');
+    SWITCH_SYMBOL = Symbol('switch_symbol'),
+    TOGGLE_ITALIC = Symbol('toggle italic');
 
 const exp = {
     INIT,
@@ -80,6 +81,7 @@ const exp = {
     REMOVE_ALL_KEY_FRAMES,
     EXPAND_FAMILY,
     COLLAPSE_FAMILY,
+    TOGGLE_ITALIC,
 
     
     BULK_ALIGNV,
@@ -88,7 +90,7 @@ const exp = {
     BULK_DELETE,
     SWITCH_SYMBOL,
     TOGGLE_SYMBOL_SELECTION,
-    TOGGLE_SYMBOLS_SELECTION
+    TOGGLE_SYMBOLS_SELECTION,
 };
 
 export default exp;

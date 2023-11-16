@@ -11,6 +11,7 @@ import useElementStyles from './styles';
 
 const Label = ({sym, checked, onClick}) => {
     const classes = useStyles(),
+        { label } = sym,
         localCasses = useElementStyles(),
         {  dispatch, state: {symbols}} = useContext(ctx),
         updateLabel = e => dispatch({
@@ -24,7 +25,7 @@ const Label = ({sym, checked, onClick}) => {
         <div>
             <Box className={classes.Box}>
                 {Boolean(symbols.length > 1) && <Checkbox checked={checked} onClick={onClick}/>}
-                <strong>Label: </strong><input type="text" onInput={updateLabel} size="small" label="Symbol label"  value={sym.label} />
+                <strong>Label: </strong><input type="text" onInput={updateLabel} size="small" label="Symbol label"  value={label} />
             </Box>
         </div>
     </div>;

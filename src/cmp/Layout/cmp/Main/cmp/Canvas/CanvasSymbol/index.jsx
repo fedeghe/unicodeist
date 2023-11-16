@@ -23,7 +23,8 @@ const CanvasSymbol = ({symbol}) => {
             skewX, skewY,
             scale, scaleX, scaleY,
             blur,
-            additionalStyles
+            additionalStyles,
+            italic
         } = symbol,
         classes = useStyles({
             isTarget,
@@ -106,6 +107,7 @@ const CanvasSymbol = ({symbol}) => {
                 zIndex,
                 ...(!faded && opacity < 1 && {opacity}),
                 ...animAnim,
+                fontStyle: italic ? 'italic' : 'normal',
                 fontSize:'20px'
             }}
         >{char}</div>
