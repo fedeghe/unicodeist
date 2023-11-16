@@ -592,7 +592,7 @@ const actions = {
         [ACTIONS.BULK_SPACE]: ({ oldState: { symbols, selected }, payload : what}) => {
             const sortedSymbols = symbols
                     .filter(({id})=> selected.includes(id))
-                    .sort((a, b) => a[what] < b[what]),
+                    .sort((a, b) => a[what] - b[what]),
                 lastIndex = sortedSymbols.length - 1,
                 min = sortedSymbols[0][what],
                 max = sortedSymbols[lastIndex][what],
@@ -601,8 +601,9 @@ const actions = {
 
             return {
                 symbols: symbols.map(sym => {
-                    const index = sortedSymbols.findIndex(({id}) => id ===sym.id);
-                    if (index>=0) {
+                    const index = sortedSymbols.findIndex(({id}) => id === sym.id);
+                    if (index >= 0) {
+                        console.log(index);
                         return {
                             ...sortedSymbols[index],
                             [what]: parseInt(min + index * step, 10)
