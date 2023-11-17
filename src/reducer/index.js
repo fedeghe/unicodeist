@@ -645,6 +645,48 @@ const actions = {
             };
         },
 
+        [ACTIONS.BULK_CENTER_HORIZONALLY]: ({oldState: {symbols, width, selected}}) => {
+            const {min, max} = symbols
+                .filter(({id}) => selected.includes(id))
+                .reduce(
+                    (acc, symbol) => {
+                        symbol.left < acc.min && (acc.min = symbol.left);
+                        symbol.left > acc.max && (acc.max = symbol.left);
+                        return acc;
+                    }
+                , {min: Number.POSITIVE_INFINITY, max:Number.NEGATIVE_INFINITY}),
+                meanLeft = (min+max) / 2,
+
+                targetLeft = width / 2,
+                diffLeft = targetLeft - meanLeft;
+            return {
+                symbols: symbols.map(symbol => selected.includes(symbol.id)
+                    ? {...symbol, left: symbol.left + diffLeft}
+                    : symbol
+                )
+            };
+        },
+        [ACTIONS.BULK_CENTER_VERTICALLY]: ({oldState: {symbols, height, selected}}) => {
+            const {min, max} = symbols
+                .filter(({id}) => selected.includes(id))
+                .reduce(
+                    (acc, symbol) => {
+                        symbol.top < acc.min && (acc.min = symbol.top);
+                        symbol.top > acc.max && (acc.max = symbol.top);
+                        return acc;
+                    }
+                , {min: Number.POSITIVE_INFINITY, max:Number.NEGATIVE_INFINITY}),
+                meanTop = (min+max) / 2,
+                targetTop = height / 2,
+                diffTop = targetTop - meanTop;
+            return {
+                symbols: symbols.map(symbol => selected.includes(symbol.id)
+                    ? {...symbol, top: symbol.top + diffTop}
+                    : symbol
+                )
+            };
+        },
+
     },
     reducer = (oldState, action) => {
         const { payload = {}, type } = action;

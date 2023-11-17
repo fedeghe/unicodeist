@@ -8,6 +8,8 @@ import { useContext } from 'react';
 
 
 import ctx from 'src/Context';
+import AlignHorizontalCenterIcon from '@mui/icons-material/AlignHorizontalCenter';
+import AlignVerticalCenterIcon from '@mui/icons-material/AlignVerticalCenter';
 import BorderVerticalIcon from '@mui/icons-material/BorderVertical';
 import BorderHorizontalIcon from '@mui/icons-material/BorderHorizontal';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
@@ -25,6 +27,8 @@ const BulkActions = () => {
             }
         } = useContext(ctx),
         classes = useStyles(),
+        centerVertically = () => dispatch({type: ACTIONS.BULK_CENTER_VERTICALLY}),
+        centerHorizontally = () => dispatch({type: ACTIONS.BULK_CENTER_HORIZONALLY}),
         alignVertically = () => {
             dispatch({type: ACTIONS.BULK_ALIGNV});
         },
@@ -45,28 +49,32 @@ const BulkActions = () => {
         },
         actions = [
             {
+                name:'center vertically',
+                icon: <AlignVerticalCenterIcon/>,
+                onClick: centerVertically
+            },{
+                name:'center horizontally',
+                icon: <AlignHorizontalCenterIcon/>,
+                onClick: centerHorizontally
+            },{
                 name:'align vertically',
                 icon: <BorderHorizontalIcon/>,
                 onClick: alignVertically
-            },
-            {
+            },{
                 name:'align horizontally',
                 icon: <BorderVerticalIcon/>,
                 onClick: alignHorizontally
-            },
-            {
+            },{
                 name:'space evenly vertically',
                 icon: <DensityMediumIcon/>,
                 onClick: spaceVertically,
                 disabled: selected.length < 3
-            },
-            {
+            },{
                 name:'space evenly horizontally',
                 icon: <DensityMediumIcon className={classes.Rot}/>,
                 onClick: spaceHorizontally,
                 disabled: selected.length < 3
-            },
-            {
+            },{
                 name:'delete all',
                 icon: <DeleteIcon />,
                 onClick: deleteAll

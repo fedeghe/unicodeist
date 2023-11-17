@@ -42,6 +42,8 @@ const INIT = Symbol('init'),
     BULK_ALIGNH = Symbol('bulk horizontal align'),
     BULK_SPACE= Symbol('bulk horiz / vert space'),
     BULK_DELETE = Symbol('bulk delete'),
+    BULK_CENTER_VERTICALLY = Symbol('bulk center vertically'),
+    BULK_CENTER_HORIZONALLY = Symbol('bulk center horizontally'),
     SWITCH_SYMBOL = Symbol('switch_symbol'),
     TOGGLE_ITALIC = Symbol('toggle italic');
 
@@ -90,6 +92,8 @@ const exp = {
     BULK_ALIGNH,
     BULK_SPACE,
     BULK_DELETE,
+    BULK_CENTER_VERTICALLY,
+    BULK_CENTER_HORIZONALLY,
     SWITCH_SYMBOL,
     TOGGLE_SYMBOL_SELECTION,
     TOGGLE_SYMBOLS_SELECTION,
