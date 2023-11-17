@@ -102,11 +102,14 @@ When more than one symbol is added, then you will see a checkbox (for both expan
 1) trash the selected symbols  
 2) equally space them horizontally (when min. 3 symbols selection)  
 3) equally space them vertically (min. 3 symbols also here)  
-4) align the vertically  
-5) align the horizontally  
+4) align horizontally  
+5) align vertically  
+6) center horizontally  
+7) center vertically  
 
 **2** and **3** use as boundaries the most left/top one and the most right/bottom one;  
-**4** and **5** align on the mean vertical/horizontal position.
+**4** and **5** align on the mean vertical/horizontal position;  
+**6** and **7** center moving the mid point between min & max left / top distance;
 
 ### Move | scale all symbols  
 To move all _symbols_ together just go to the _unicodeist_ logo in the right upper part and drag within the logo, on mouse release all symbols will move together in that direction for an amout proportional to the movement.  

@@ -25,3 +25,6 @@ bulk actions:
 0.0.12
 - italic option added
 - swap symbol
+
+0.0.13
+- bulk center horizontally / vertically
