@@ -1,5 +1,5 @@
 
-![noai](https://www.jmvc.org/img/HumanCoded100.png?raw=true)
+<!-- ![noai](https://www.jmvc.org/img/HumanCoded100.png?raw=true) -->
 ![unicodeist](src/img/comparison/unicodeistLogo.png?raw=true)
 
 
