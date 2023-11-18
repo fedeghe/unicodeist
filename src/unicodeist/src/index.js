@@ -24,16 +24,16 @@
             ff: function (v) { return lbs.f + '-family:' + FFRM[v]; },
             fw: function (v) { return lbs.f + '-weight:' + v; },
             o: function (v) { return 'opacity:' + v; },
-            s: function (v) { return v !== 1 ? lbs.s + '(' + v + ')' : ''; },
-            sx: function (v) { return v !== 1 ? lbs.s + 'X(' + v + ')' : ''; },
-            sy: function (v) { return v !== 1 ? lbs.s + 'Y(' + v + ')' : ''; },
-            rx: function (v) { return v ? lbs.r + 'X(' + v + lbs.d + ')' : ''; },
-            ry: function (v) { return v ? lbs.r + 'Y(' + v + lbs.d + ')' : ''; },
-            rz: function (v) { return v ? lbs.r + 'Z(' + v + lbs.d + ')' : ''; },
-            sk: function (x,y) { return (x||y) ? lbs.sk + '(' + x + lbs.d + ',' + y + lbs.d + ')' : ''; },
-            bl: function (v) { return v ? lbs.b + '(' + v + lbs.p + ')' : ''; },
+            s: function (v) { return v !== 1 ? lbs.s + '(' + v + ')' : false; },
+            sx: function (v) { return v !== 1 ? lbs.s + 'X(' + v + ')' : false; },
+            sy: function (v) { return v !== 1 ? lbs.s + 'Y(' + v + ')' : false; },
+            rx: function (v) { return v ? lbs.r + 'X(' + v + lbs.d + ')' : false; },
+            ry: function (v) { return v ? lbs.r + 'Y(' + v + lbs.d + ')' : false; },
+            rz: function (v) { return v ? lbs.r + 'Z(' + v + lbs.d + ')' : false; },
+            sk: function (x,y) { return (x||y) ? lbs.sk + '(' + x + lbs.d + ',' + y + lbs.d + ')' : false; },
+            bl: function (v) { return v ? lbs.b + '(' + v + lbs.p + ')' : false; },
             add: function (v) { return v;},
-            it: function (v) { return v ? lbs.f + '-style:italic' : ''; },
+            it: function (v) { return v ? lbs.f + '-style:italic' : false; },
         },
 
         /**
@@ -42,7 +42,7 @@
         createElement = function (sty, cnt, ani) {
             var node = document.createElement('div'),
                 styles = [cnt
-                    ? 'font-size:20px;' + lbs.po + ':absolute;' + lbs.t + '-origin:' + lbs.cn + ' ' + lbs.cn
+                    ? lbs.f + '-size:20' + lbs.p + ';' + lbs.po + ':absolute;' + lbs.t + '-origin:' + lbs.cn + ' ' + lbs.cn
                     : lbs.po + ':relative;overflow:hidden'
                 ],
                 k;
@@ -69,7 +69,7 @@
                         'rz' in sty[k] && trans.push(map.rz(sty[k].rz));
                         'sk' in sty[k] && trans.push(map.sk(sty[k].sk[0],sty[k].sk[1]));
                         styles.push(
-                            trans.join(' ') + ';'
+                            trans.filter(Boolean).join(' ') + ';'
                         );
                         break;
                     case 'f':
@@ -86,7 +86,7 @@
                         break;
                 }
             }
-            styles.length && node.setAttribute('style', styles.join(';'));
+            styles.length && node.setAttribute('style', styles.filter(Boolean).join(';'));
             cnt && (node.innerHTML = cnt);
             return node;
         },
