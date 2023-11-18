@@ -13,8 +13,8 @@ import ctx from 'src/Context';
 import useStyles from './styles';
 
 const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
-
     const classes = useStyles(),
+        isRetina = window.devicePixelRatio > 1,
         { state, state: { backgroundColorAlpha } } = useContext(ctx),
         [format, setFormat] = useState(DEFAULT_DOWNLOAD_FORMAT),
         [filename, setFilename] = useState(''),
@@ -35,19 +35,21 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
             [state]
         ),
         alphaFlagLabel = backgroundColorAlpha ? '' : ' (turned OFF)',
+        retinaHint = ' Seems like this device uses a retina resolution, exported size will be affected proportionally.', 
         formatToReader = {
             [DOWNLOAD_FORMATS.json]: {
                 executor: toJson,
                 innerHint: 'I/O',
-                outerHint: 'this format is the only importable one'
+                outerHint: `This format is the only importable one.`
             },
             [DOWNLOAD_FORMATS.jpeg]: {
-                executor: toJpeg
+                executor: toJpeg,
+                outerHint: isRetina ? retinaHint : false
             },
             [DOWNLOAD_FORMATS.png]: {
                 executor: toPng,
                 innerHint: `alpha bg${alphaFlagLabel}`,
-                outerHint: `this format supports background alpha transparency${alphaFlagLabel}`
+                outerHint: `This format supports background alpha transparency${alphaFlagLabel}.${isRetina ? retinaHint : ''}`
             },
         },
         changeFormat = e => setFormat(e.target.value),
