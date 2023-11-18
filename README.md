@@ -1,5 +1,5 @@
 
-![noai](https://www.jmvc.org/img/HumanCoded.png?raw=true)
+![noai](https://www.jmvc.org/img/HumanCoded100.png?raw=true)
 ![unicodeist](src/img/comparison/unicodeistLogo.png?raw=true)
 
 
@@ -15,7 +15,7 @@ I created the following in more or less 3 minutes, using 3 different symbols.
 <img width="322"  src="src/img/comparison/fg.png?raw=true">  
 
 
-Clicking <a href="./src/img/comparison/fg.json?raw=true" download>here</a> you could download exactly that creative and import it in _unicodeist_ (the _100% HUMAN CODED_ badge is <a href="./src/img/comparison/HumanCoded.json?raw=true" download>another example</a>).... but I'm sure You can do way better than that.   
+Clicking <a href="./src/img/comparison/fg.json?raw=true" download>here</a> you could download exactly that creative and import it in _unicodeist_ (the _100% HUMAN CODED_ badge is <a href="./src/img/comparison/HumanCoded100.json?raw=true" download>another example</a>).... but I'm sure You can do way better than that.   
 
 One thing to notice here is that most of the times the size comparison is quite relevant:
 
