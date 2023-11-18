@@ -45,7 +45,7 @@ const CanvasSymbol = ({symbol}) => {
             setDragging(false);
             e.preventDefault();
             const [startX, startY] = startPoint;
-            dispatch({
+            pos[0] && pos[1] && dispatch({
                 type: ACTIONS.TUNE_SYMBOL_POSITION,
                 payload: {
                     left: parseInt(pos[0], 10) - parseInt(startX, 10),
