@@ -166,11 +166,15 @@ const actions = {
 
         [ACTIONS.REMOVE_SYMBOL]: ({
             oldState: { symbols, focusedSymbolId, selected }
-        }) => ({
-            symbols: symbols.filter(s => s.id !== focusedSymbolId),
-            focusedSymbolId : null,
-            selected: selected.filter(id => id !== focusedSymbolId)
-        }),
+        }) => {
+            const newSymbols = symbols.filter(s => s.id !== focusedSymbolId),
+                newSelected = selected.filter(id => id !== focusedSymbolId);
+            return {
+                symbols: newSymbols,
+                focusedSymbolId : null,
+                selected: newSelected.length > 1 ? newSelected : []
+            };
+        },
 
         [ACTIONS.BULK_DELETE]: ({
             oldState: { symbols, focusedSymbolId, selected }
