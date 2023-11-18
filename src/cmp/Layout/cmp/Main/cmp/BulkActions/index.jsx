@@ -49,21 +49,21 @@ const BulkActions = () => {
         },
         actions = [
             {
-                name:'center vertically',
+                name:'center vertically respect selected',
                 icon: <AlignVerticalCenterIcon/>,
-                onClick: centerVertically
-            },{
-                name:'center horizontally',
-                icon: <AlignHorizontalCenterIcon/>,
-                onClick: centerHorizontally
-            },{
-                name:'align vertically',
-                icon: <BorderHorizontalIcon/>,
                 onClick: alignVertically
             },{
-                name:'align horizontally',
-                icon: <BorderVerticalIcon/>,
+                name:'center horizontally respect selected',
+                icon: <AlignHorizontalCenterIcon/>,
                 onClick: alignHorizontally
+            },{
+                name:'align vertically respect image',
+                icon: <BorderHorizontalIcon/>,
+                onClick: centerVertically
+            },{
+                name:'align horizontally respect image',
+                icon: <BorderVerticalIcon/>,
+                onClick: centerHorizontally
             },{
                 name:'space evenly vertically',
                 icon: <DensityMediumIcon/>,

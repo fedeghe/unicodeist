@@ -65,7 +65,6 @@ export const cleanCodeFromState = state => {
                     additionalStyles: sym.additionalStyles,
                     blur: sym.blur
                 })),
-                
                 `z-index:${sym.zIndex}`,
                 `font-family:${sym.fontFamily}`,
                 sym.italic && 'font-style:italic',
@@ -73,8 +72,6 @@ export const cleanCodeFromState = state => {
                 `color:${sym.color}`,
                 `opacity:${sym.opacity}`,
                 `position:absolute;transform-origin:center center`,
-                // sym.blur && `filter:blur(${sym.blur}px)`,
-                
                 `transform:` + [
                     `translate(${sym.left}px,${sym.top}px)`,
                     sym.scale !== 1 && `scale(${sym.scale})`,
