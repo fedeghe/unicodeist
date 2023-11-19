@@ -58,7 +58,6 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
         },
         doDownload = useCallback(() => {
             const dom = domRef.current;
-            console.log({dom});
             format in formatToReader && formatToReader[format].executor(dom).then(
                 downloadAs(`${filename}.${format}`)
             ).then(onClose);

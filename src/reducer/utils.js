@@ -24,7 +24,7 @@ export const keyFramesManager = {
             : JSON.parse(localStorage.getItem(LOCALSTORAGE_KEYFRAMES_KEY) || '{}')
 };
 
-export const uncompress = c => console.log({c}) || ({
+export const uncompress = c => ({
     width: c.sty.w,
     height: c.sty.h,
     maxWidth: getMaxWidth(),
