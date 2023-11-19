@@ -14,7 +14,6 @@ import useStyles from './styles';
 
 const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
     const classes = useStyles(),
-        isRetina = window.devicePixelRatio > 1,
         { state, state: { backgroundColorAlpha } } = useContext(ctx),
         [format, setFormat] = useState(DEFAULT_DOWNLOAD_FORMAT),
         [filename, setFilename] = useState(''),
@@ -35,21 +34,21 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
             [state]
         ),
         alphaFlagLabel = backgroundColorAlpha ? '' : ' (turned OFF)',
-        retinaHint = ' Seems like this device uses a retina resolution, exported size will be affected proportionally.', 
+        retinaHint = ' If this device uses a retina resolution, exported size will be affected proportionally.', 
         formatToReader = {
             [DOWNLOAD_FORMATS.json]: {
                 executor: toJson,
                 innerHint: 'I/O',
-                outerHint: `This format is the only importable one.`
+                outerHint: ['This format is the only importable one.']
             },
             [DOWNLOAD_FORMATS.jpeg]: {
                 executor: toJpeg,
-                outerHint: isRetina ? retinaHint : false
+                outerHint: [retinaHint]
             },
             [DOWNLOAD_FORMATS.png]: {
                 executor: toPng,
                 innerHint: `alpha bg${alphaFlagLabel}`,
-                outerHint: `This format supports background alpha transparency${alphaFlagLabel}.${isRetina ? retinaHint : ''}`
+                outerHint: [`This format supports background alpha transparency${alphaFlagLabel}.`, retinaHint]
             },
         },
         changeFormat = e => setFormat(e.target.value),
@@ -96,9 +95,9 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
                             </MenuItem>
                         )}
                     </Select>
-                    <FormHelperText className={classes.Warn}>{
-                        formatToReader[format].outerHint || " "
-                    }</FormHelperText>
+                    {formatToReader[format].outerHint.map(oh => 
+                        <FormHelperText key={oh} className={classes.Warn}>{oh}</FormHelperText>
+                    )}
                 </FormGroup>
                 <Button className={classes.DownloadButton} disabled={!downloadEnabled} variant="contained" onClick={doDownload}>Download</Button>
             </div>
