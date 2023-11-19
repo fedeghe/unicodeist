@@ -35,7 +35,7 @@ export const cleanCodeFromState = state => {
     root.setAttribute('style', [
         `width:${width}px`,
         `height:${height}px`,
-        `background-color:${bgColor.substring(0,9)}`,
+        `background-color:${bgColor.substring(0, 9)}`,
         `position:relative;overflow:hidden`,
         bgStyles ? css2string(bgStyles) : ''
     ].join(';'));
@@ -50,8 +50,8 @@ export const cleanCodeFromState = state => {
         s.innerHTML = state.keyFrames[a].keyFrame;
         root.appendChild(s);
     });
-    
-    
+
+
     symbols.map(sym => {
         var child = document.createElement('div');
         child.innerHTML = sym.char;
@@ -179,7 +179,7 @@ export const importFromFile = ({ onContentReady }) => {
     link.click();
 };
 
-export const mergeAdditionalStyles = ({additionalStyles, blur}) => {
+export const mergeAdditionalStyles = ({ additionalStyles, blur }) => {
     const ast = additionalStyles ? css2json(additionalStyles) : {},
         filter = [`blur(${blur}px)`];
     if ('filter' in ast) {
@@ -201,11 +201,11 @@ const getUnicodeistData = j => JSON.stringify({
         h: j.height,
         bgc: {
             c: j.backgroundColor,
-            a : j.backgroundColorAlpha
+            a: j.backgroundColorAlpha
         },
         ...(j.bgStyles && {
-                bgi: cleanCssString(j.bgStyles)
-            }
+            bgi: cleanCssString(j.bgStyles)
+        }
         ),
     },
     kfs: [...new Set(
@@ -220,7 +220,7 @@ const getUnicodeistData = j => JSON.stringify({
         return acc;
     }, {}),
     sym: j.symbols.map(s => ({
-        id: s.id,
+        id: s.id.replace(/U_/, 'U_i'),
         l: s.label,
         cnt: s.char,
         ani: s.animation,
@@ -253,7 +253,7 @@ const getUnicodeistData = j => JSON.stringify({
                 ...(s.rotationZ && { rz: s.rotationZ }),  // deg
                 ...((s.skewX || s.skewY) && { sk: [s.skewX, s.skewY] })  // deg
             },
-            
+
         }
     }))
 });
@@ -278,7 +278,7 @@ export const getCodes = char => {
 function seekAllCssRules(css) {
     const first = css.replace(/\n/g, ''),
         ks = first.matchAll(/([A-Za-z0-9-_]*):(['"A-Za-z0-9-_.,:/()%#\s]*);?/g);
-    return  [...ks];
+    return [...ks];
 }
 
 export function css2json(v) {
@@ -293,8 +293,8 @@ export function css2json(v) {
         jret = JSON.parse(sret);
     return jret;
 }
-export function json2string(o){
-    return Object.entries(o).reduce((acc, [k,e]) => {
+export function json2string(o) {
+    return Object.entries(o).reduce((acc, [k, e]) => {
         return `${acc}${k}:${e};`;
     }, '');
 }
@@ -346,6 +346,7 @@ export const downloadAs = fileName => {
     };
 };
 
+
 const def = {
     uniqueID,
     cleanCode,
@@ -366,6 +367,6 @@ const def = {
     closeFullscreen,
     downloadAs,
     css2json,
-    mergeAdditionalStyles
+    mergeAdditionalStyles,
 };
 export default def;
