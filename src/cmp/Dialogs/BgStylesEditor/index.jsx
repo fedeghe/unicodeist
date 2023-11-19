@@ -1,6 +1,7 @@
 import { useCallback, useState, useContext } from 'react';
 import {
     Dialog, DialogTitle, DialogContent,
+    // DialogActions,
     Button, Tooltip,
 } from '@mui/material';
 
@@ -96,6 +97,14 @@ const BgStylesEditor = ({ visibility, setVisibility }) => {
                     </div>
                 </div>
             </DialogContent>
+            {/* <DialogActions>
+                <div className={classes.Bottom}>
+                    <Tooltip title="close editor">
+                        <Button onClick={onClose} color="error">Close</Button>
+                    </Tooltip>
+                    <Button  color="success" onClick={onSave}>Apply & close</Button>
+                </div>
+            </DialogActions> */}
         </Dialog>
     );
 };

@@ -1,9 +1,8 @@
-/* eslint-disable no-debugger */
 import ACTIONS from './actions';
-import {uniqueID, count, filter} from 'src/utils';
+import {uniqueID, count, filter, uncompressStateForImport} from 'src/utils';
 import {getMaxHeight, getMaxWidth} from 'src/constants';
 import allSymbols from './../Symbols';
-import { uncompress, keyFramesManager } from './utils';
+import { keyFramesManager } from './utils';
 
 import {
     WIDTH, HEIGHT,
@@ -346,7 +345,7 @@ const actions = {
             let newState;
             try {
                 newState = JSON.parse(payload);
-                if (!('sty' in newState) || !('sym' in newState)) {
+                if (!('sy' in newState) || !('kf' in newState)) {
                     throw UNSUPPORTEDFILE_MESSAGE;
                 }
             } catch(e) {
@@ -354,7 +353,8 @@ const actions = {
                     error: UNSUPPORTEDFILE_MESSAGE
                 };
             }
-            var t = uncompress(newState);
+            var t = uncompressStateForImport(newState);
+            console.log({t});
             return {
                 ...t,
                 keyFrames: {

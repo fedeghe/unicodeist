@@ -147,6 +147,175 @@ export const filter = ({ symbols, filter, debug = false }) => {
     }
     return res;
 };
+export const uncompressStateForImport = cstate => {
+    const {
+        bgca: backgroundColorAlpha,
+        w: width,
+        h: height,
+        mw: maxWidth,
+        mh: maxHeight,
+        apv: addPanelVisibility,
+        fsid: focusedSymbolId,
+        bgc: backgroundColor,
+        asf: asciiSelectorFilter,
+        sf: symbolsFilter,
+        apf: asciiPanelFilterByIconName,
+        alapoas: letAsciiPanelOpenAfterSelection,
+        suf: superFocus,
+        css: canScrollSymbols,
+        sc: scrollTop,
+        bgs: bgStyles,
+        pr: preventReload,
+        fs: fullscreen,
+        s: selected,
+        sm: swapMode,
+        tk: themeKey,
+        fc: filteredCount,
+        hid: hoveringId,
+        sy: symbols, 
+        kf: keyFrames
+    } = cstate;
+    return {
+        backgroundColorAlpha,
+        width,
+        height,
+        maxWidth,
+        maxHeight,
+        addPanelVisibility,
+        focusedSymbolId: focusedSymbolId?.replace(/U_/, 'U_i'),
+        backgroundColor,
+        asciiSelectorFilter,
+        symbolsFilter,
+        asciiPanelFilterByIconName,
+        letAsciiPanelOpenAfterSelection,
+        superFocus,
+        canScrollSymbols,
+        scrollTop,
+        bgStyles,
+        preventReload,
+        fullscreen,
+        selected,
+        swapMode,
+        themeKey,
+        filteredCount,
+        hoveringId,
+        symbols: symbols.map(({
+            i, ch, lb, zi, l, t, c, a, ff, fw, 
+            skx, sky, rx, ry, rz, b, o,
+            s, sx, sy, as, tu, f
+        }) => ({
+            id: i.replace(/U_/, 'U_i'),
+            char: ch,
+            label: lb, 
+            zIndex: zi, 
+            left: l, 
+            top: t, 
+            color: c, 
+            animation: a, 
+            fontFamily: ff, 
+            fontWeight: fw, 
+            skewX: skx,
+            skewY: sky,
+            rotationX: rx,
+            rotationY: ry,
+            rotationZ: rz, 
+            blur: b,
+            opacity: o,  
+            scale: s, 
+            scaleX: sx, 
+            scaleY: sy, 
+            additionalStyles: as, 
+            targetUp: tu, 
+            faded: f,
+        })),
+        keyFrames: Object.entries(keyFrames)
+            .reduce((acc, [k, {n: name, kf: keyFrame, a: animate}]) => {
+                acc[k] = {
+                    name,
+                    keyFrame,
+                    animate
+                };
+            }, {})
+    };
+};
+
+export const compressStateForExport = state => {
+    const {
+        backgroundColorAlpha: bgca,
+        width: w,
+        height: h,
+        maxWidth: mw,
+        maxHeight: mh,
+        addPanelVisibility: apv,
+        focusedSymbolId: fsid,
+        backgroundColor: bgc,
+        asciiSelectorFilter: asf,
+        symbolsFilter: sf,
+        asciiPanelFilterByIconName: apf,
+        letAsciiPanelOpenAfterSelection: alapoas,
+        superFocus: suf,
+        canScrollSymbols: css,
+        scrollTop: sc,
+        bgStyles: bgs,
+        preventReload: pr,
+        fullscreen: fs,
+        selected: s,
+        swapMode: sm,
+        themeKey: tk,
+        filteredCount: fc,
+        hoveringId: hid,
+        symbols, 
+        keyFrames
+    } = state;
+    const exp = {
+        bgca, bgc,
+        w, h, mw, mh,
+        apv,
+        fsid, asf, sf, apf, alapoas,
+        suf, css, sc, bgs, pr, fs,
+        s, sm, tk, fc, hid, 
+        sy: symbols.map(({
+            id: i,
+            char: ch,
+            label: lb, 
+            zIndex: zi, 
+            left: l, 
+            top: t, 
+            color: c, 
+            animation: a, 
+            fontFamily: ff, 
+            fontWeight: fw, 
+            skewX: skx,
+            skewY: sky,
+            rotationX: rx,
+            rotationY: ry,
+            rotationZ: rz, 
+            blur: b,
+            opacity: o,  
+            scale: s, 
+            scaleX: sx, 
+            scaleY: sy, 
+            additionalStyles: as, 
+            targetUp: tu, 
+            faded: f, 
+        }) => ({
+            i, ch, lb, zi, l, t, c, a, ff, fw, 
+            skx, sky, rx, ry, rz, b, o,
+            s, sx, sy, as, tu, f
+        })),
+        kf: Object.entries(keyFrames).reduce((acc, [k, {
+            name: n,
+            keyFrame: kf,
+            animate: a
+        }]) => {
+            acc[k] = {n, kf, a};
+            return acc;
+        }, {})
+
+    };
+    delete exp.availableSymbols;
+    return JSON.stringify(exp);
+};
 
 /**
  * TODO: here I should allow the use to see the location & name dialog
@@ -154,7 +323,8 @@ export const filter = ({ symbols, filter, debug = false }) => {
  */
 export const saveAsStateFileJSON = state =>
     new Promise(resolve => {
-        const blob = new Blob([getUnicodeistData(state)]);
+        // const blob = new Blob([getUnicodeistData(state)]);
+        const blob = new Blob([compressStateForExport(state)]);
         resolve(window.URL.createObjectURL(blob));
     });
 export const saveAsFileJSON = json =>
@@ -368,5 +538,7 @@ const def = {
     downloadAs,
     css2json,
     mergeAdditionalStyles,
+    compressStateForExport,
+    uncompressStateForImport,
 };
 export default def;
