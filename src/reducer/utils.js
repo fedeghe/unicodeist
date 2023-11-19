@@ -24,7 +24,7 @@ export const keyFramesManager = {
             : JSON.parse(localStorage.getItem(LOCALSTORAGE_KEYFRAMES_KEY) || '{}')
 };
 
-export const uncompress = c => ({
+export const uncompress = c => console.log({c}) || ({
     width: c.sty.w,
     height: c.sty.h,
     maxWidth: getMaxWidth(),
@@ -36,6 +36,7 @@ export const uncompress = c => ({
     asciiSelectorFilter: '',
     symbolsFilter: '',
     asciiPanelFilterByIconName: '',
+    bgStyles: c.sty.bgi,
     letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
     superFocus: false,
     canScrollSymbols: true,
@@ -67,6 +68,7 @@ export const uncompress = c => ({
         scale: s.sty.t.s || 1,
         scaleX: s.sty.t.sx || 1,
         scaleY: s.sty.t.sy || 1,
+        additionalStyles: s.sty.add,
         targetUp: false,
         faded: false
     }))

@@ -180,7 +180,7 @@ export const importFromFile = ({ onContentReady }) => {
 };
 
 export const mergeAdditionalStyles = ({ additionalStyles, blur }) => {
-    const ast = additionalStyles ? css2json(additionalStyles) : {},
+    const ast = additionalStyles ? css2json(additionalStyles, false) : {},
         filter = [`blur(${blur}px)`];
     if ('filter' in ast) {
         filter.push(ast.filter);
@@ -281,11 +281,11 @@ function seekAllCssRules(css) {
     return [...ks];
 }
 
-export function css2json(v) {
+export function css2json(v, jssify = true) {
     const vals = seekAllCssRules(v),
         // eslint-disable-next-line no-unused-vars
         ret = vals.reduce((acc, [_, k, v]) => {
-            const nk = k.replace(/(\w)-(\w)/g, (_, a, b) => `${a}${b.toUpperCase()}`);
+            const nk = jssify ? k.replace(/(\w)-(\w)/g, (_, a, b) => `${a}${b.toUpperCase()}`) : k;
             acc[nk.toString()] = v.toString();
             return acc;
         }, {}),
