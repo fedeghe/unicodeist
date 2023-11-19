@@ -14,6 +14,7 @@ import useStyles from './styles';
 
 const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
     const classes = useStyles(),
+        maybeRetina = devicePixelRatio === 2,
         { state, state: { backgroundColorAlpha } } = useContext(ctx),
         [format, setFormat] = useState(DEFAULT_DOWNLOAD_FORMAT),
         [filename, setFilename] = useState(''),
@@ -34,7 +35,7 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
             [state]
         ),
         alphaFlagLabel = backgroundColorAlpha ? '' : ' (turned OFF)',
-        retinaHint = ' If this device uses a retina resolution, exported size will be affected proportionally.', 
+        retinaHint = 'Seems like this device uses a retina resolution, exported size will be affected proportionally.', 
         formatToReader = {
             [DOWNLOAD_FORMATS.json]: {
                 executor: toJson,
@@ -43,12 +44,12 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
             },
             [DOWNLOAD_FORMATS.jpeg]: {
                 executor: toJpeg,
-                outerHint: [retinaHint]
+                outerHint: [maybeRetina ? retinaHint : false]
             },
             [DOWNLOAD_FORMATS.png]: {
                 executor: toPng,
                 innerHint: `alpha bg${alphaFlagLabel}`,
-                outerHint: [`This format supports background alpha transparency${alphaFlagLabel}.`, retinaHint]
+                outerHint: [`This format supports background alpha transparency${alphaFlagLabel}.`, maybeRetina ? retinaHint : false]
             },
         },
         changeFormat = e => setFormat(e.target.value),
@@ -94,7 +95,7 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
                             </MenuItem>
                         )}
                     </Select>
-                    {formatToReader[format].outerHint.map(oh => 
+                    {formatToReader[format].outerHint.filter(Boolean).map(oh => 
                         <FormHelperText key={oh} className={classes.Warn}>{oh}</FormHelperText>
                     )}
                 </FormGroup>
