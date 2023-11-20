@@ -1,6 +1,6 @@
 
 ![noai](https://www.jmvc.org/img/HumanCoded100.png?x=2)
-![unicodeist](src/img/comparison/unicodeistLogo.png?raw=true)
+![unicodeist](src/img/comparison/unicodeist.png?raw=true)
 
 
 
@@ -26,7 +26,7 @@ One thing to notice here is that most of the times the size comparison is quite 
 | [<img src="src/img/comparison/fg.png" width="50"/>](image)<br/>1000x700  | 373 KB | 136 KB | 640 B  | 994 B | 723 B |
 | [<img src="src/img/comparison/unicodeist.png" width="50"/>](image)<br/>500 x 250 | 63 KB | 40 KB | 1.4 KB | 2.4 KB | 1.5KB |
 | [<img src="src/img/comparison/unicodeist.png" width="50"/>](image)<br/>1006 x 503 | 141 KB | 87 KB | 6 KB | 2.4 KB | 1.5KB |
-| [<img src="src/img/comparison/HumanCoded.png" width="50"/>](image) | 10 KB | 3 KB | 2 KB | 3.8KB | 2.2 KB |
+| [<img src="src/img/comparison/HumanCoded100.png" width="50"/>](image) | 10 KB | 3 KB | 2 KB | 3.8KB | 2.2 KB |
 
 Seems clear (and quite obvious also the reason) that whenever few elements can potentially compose the creative then the benefits of using one of the _unicodeist_ embedding options grow proportionally to the image size, cause the exported image can only grow while the embedding html or script remains unchanged.
 
