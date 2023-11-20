@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
 import { createUseStyles } from 'react-jss';
 
-export default createUseStyles((theme) =>({
+export default createUseStyles({
     Rot: {
         transform: 'rotate(90deg)'
     },
-}));
+});

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useContext} from 'react';
 import { Box, Checkbox } from '@mui/material';
 
@@ -6,8 +5,6 @@ import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
 import useStyles from './../../styles';
 import useElementStyles from './styles';
-
-
 
 const Label = ({sym, checked, onClick}) => {
     const classes = useStyles(),

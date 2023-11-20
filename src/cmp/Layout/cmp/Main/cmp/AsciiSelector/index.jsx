@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import useStyles from './styles';
 import Header from './cmp/Header';
 import Families from './cmp/Families';

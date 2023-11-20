@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useContext, useCallback, useState, useTransition } from 'react';
 import {
     IconButton, Checkbox, FormControlLabel
