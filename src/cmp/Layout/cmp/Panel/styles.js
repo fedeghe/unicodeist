@@ -3,12 +3,12 @@ import { createUseStyles } from 'react-jss';
 import {
     PANEL_WIDTH,
     PANEL_PADDING,
-    BASE_FONTSIZE,
+    PANEL_FONTSIZE,
 } from 'src/constants';
 
 export default createUseStyles(theme => ({
     Container: {
-        fontSize: `${BASE_FONTSIZE}px`,
+        fontSize: `${PANEL_FONTSIZE}px`,
         minWidth: `${PANEL_WIDTH}px`,
         width: `${PANEL_WIDTH}px`,
         height:`calc(100vh - ${2*PANEL_PADDING}px)`,

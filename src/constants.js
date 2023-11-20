@@ -9,16 +9,11 @@ export const MIN_WIDTH = 1;
 export const MIN_HEIGHT = 1;
 export const PANEL_WIDTH = 300;
 export const PANEL_PADDING = 10;
-export const ITEM_PICK_PANEL_MARGIN = 20;
-export const BASE_FONTSIZE = 14;
+export const PANEL_FONTSIZE = 14;
 export const SYMBOL_BASE_FONTFAMILY = 'Verdana';
 export const SYMBOL_BASE_FONTWEIGHT = '400';
-export const PANEL_BGCOLOR = '#444444';
-export const EDITOR_BGCOLOR = '#222222';
-export const SELECTOR_BGCOLOR = '#AAAAAA';
 export const DEFAULT_BACKGROUND_COLOR = '#FFFFFF';
 export const DEFAULT_SYMBOL_COLOR = '#000000';
-export const SELECTOR_FGCOLOR = '#000000';
 export const ITEM_WIDTH = 100;
 export const ITEM_HEIGHT = 140;
 export const ITEM_FOOTER_HEIGHT = 20;
@@ -39,7 +34,7 @@ export const MAX_BLUR= 20;
 export const STEP_BLUR = 0.01;
 export const MIN_ZINDEX = 0;
 export const MAX_ZINDEX = 10000;
-export const EXPANDED_SYM_HEIGHT = 610;
+export const EXPANDED_SYM_HEIGHT = 600;
 export const COLLAPSED_SYM_HEIGHT = 70;
 export const COLLAPSING_SYM_TIME = 0.3;
 export const CLOSE_TOAST_TIMEOUT = 1000;
@@ -120,13 +115,8 @@ const CONSTS = {
     MIN_WIDTH, MIN_HEIGHT,
     PANEL_WIDTH,
     PANEL_PADDING,
-    ITEM_PICK_PANEL_MARGIN,
-    BASE_FONTSIZE,
+    PANEL_FONTSIZE,
     SYMBOL_BASE_FONTFAMILY,
-    PANEL_BGCOLOR,
-    EDITOR_BGCOLOR,
-    SELECTOR_BGCOLOR,
-    SELECTOR_FGCOLOR,
     ITEM_WIDTH,
     ITEM_HEIGHT,
     ITEM_FOOTER_HEIGHT,

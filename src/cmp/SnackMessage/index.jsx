@@ -1,5 +1,4 @@
-import Snackbar from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
+import {Snackbar, IconButton} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { CLOSE_TOAST_TIMEOUT } from 'src/constants';
