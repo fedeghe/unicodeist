@@ -1,10 +1,16 @@
 import { useContext, useCallback, useState, useTransition } from 'react';
 import {
-    IconButton, Checkbox, FormControlLabel
+    IconButton, Checkbox, FormControlLabel,
+    CircularProgress
 } from '@mui/material';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import CircularProgress from '@mui/material/CircularProgress';
-import ClearIcon from '@mui/icons-material/Clear';
+// import CircularProgress from '@mui/material/CircularProgress';
+
+// import ClearIcon from '@mui/icons-material/Clear';
+// import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import {
+    Clear as ClearIcon,
+    RemoveCircle as RemoveCircleIcon
+} from '@mui/icons-material';
 
 import ctx from 'src/Context';
 import {debounce} from 'src/utils';

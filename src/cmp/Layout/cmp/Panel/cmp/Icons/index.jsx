@@ -1,3 +1,4 @@
+import Channeljs from '@fedeghe/channeljs';
 import { useContext, useState, useEffect } from 'react';
 import {
     SpeedDial,
@@ -6,32 +7,29 @@ import {
     Tooltip,
     Checkbox
 } from '@mui/material';
+import {
+    BlurOff as BlurOffIcon,
+    BlurOn as BlurOnIcon,
+    CodeRounded as CodeRoundedIcon,
+    FiberNew as FiberNewIcon,
+    FileUpload as FileUploadIcon,
+    Fullscreen as FullscreenIcon,
+    FullscreenExit as FullscreenExitIcon,
+    GetApp as GetAppIcon,
+    GitHub as GitHubIcon,
+    Key as KeyIcon,
+    Replay as ReplayIcon,
+    ReplayCircleFilled as ReplayCircleFilledIcon,
+    Wallpaper as WallpaperIcon,
+    Settings as SettingsIcon,
+} from '@mui/icons-material';
 
-import SettingsIcon from '@mui/icons-material/Settings';
-import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
-import GetAppIcon from '@mui/icons-material/GetApp';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import FiberNewIcon from '@mui/icons-material/FiberNew';
-import KeyIcon from '@mui/icons-material/Key';
-import WallpaperIcon from '@mui/icons-material/Wallpaper';
 
-import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
-
-import ReplayIcon from '@mui/icons-material/Replay';
-import ReplayCircleFilledIcon from '@mui/icons-material/ReplayCircleFilled';
-import BlurOnIcon from '@mui/icons-material/BlurOn';
-import BlurOffIcon from '@mui/icons-material/BlurOff';
-
-
-import Channeljs from '@fedeghe/channeljs';
+import ctx from 'src/Context';
+import ACTIONS from 'src/reducer/actions';
 import SnackMessage from 'src/cmp/SnackMessage';
 import ThemeSwitch from 'src/cmp/ThemeSwitch';
 import { THEMES } from 'src/constants';
-import ctx from 'src/Context';
-
-import ACTIONS from 'src/reducer/actions';
 import { importFromFile, openFullscreen, closeFullscreen } from 'src/utils';
 import useStyles from './styles';
 

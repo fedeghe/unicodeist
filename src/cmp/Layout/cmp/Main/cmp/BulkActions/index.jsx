@@ -1,20 +1,21 @@
+
+
+import { useContext } from 'react';
+import ctx from 'src/Context';
+import ACTIONS from 'src/reducer/actions';
 import {
     SpeedDial,
     SpeedDialAction,
     SpeedDialIcon
 } from "@mui/material";
-import { useContext } from 'react';
-
-
-import ctx from 'src/Context';
-import AlignHorizontalCenterIcon from '@mui/icons-material/AlignHorizontalCenter';
-import AlignVerticalCenterIcon from '@mui/icons-material/AlignVerticalCenter';
-import BorderVerticalIcon from '@mui/icons-material/BorderVertical';
-import BorderHorizontalIcon from '@mui/icons-material/BorderHorizontal';
-import DensityMediumIcon from '@mui/icons-material/DensityMedium';
-import DeleteIcon from '@mui/icons-material/Delete';
-
-import ACTIONS from 'src/reducer/actions';
+import {
+    AlignHorizontalCenter as AlignHorizontalCenterIcon,
+    AlignVerticalCenter as AlignVerticalCenterIcon,
+    BorderVertical as BorderVerticalIcon,
+    BorderHorizontal as BorderHorizontalIcon,
+    DensityMedium as DensityMediumIcon,
+    Delete as DeleteIcon
+} from '@mui/icons-material';
 
 import useStyles from './styles';
 

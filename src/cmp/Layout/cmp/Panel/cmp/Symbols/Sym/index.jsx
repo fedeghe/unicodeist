@@ -1,16 +1,17 @@
 import { useContext } from 'react';
-import { Card, Typography, Checkbox } from '@mui/material';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
-import Label from './cmp/Label';
-import Zindex from './cmp/Zindex';
-import Element from './cmp/Element';
-import Styles from './cmp/Styles';
-import Position from './cmp/Position';
-import Animation from './cmp/Animation';
 import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
+import { Card, Typography, Checkbox } from '@mui/material';
+import {
+    ArrowDropUp as ArrowDropUpIcon,
+    ArrowDropDown as ArrowDropDownIcon
+} from '@mui/icons-material';
+
+import {
+    Label, Zindex, Element,
+    Styles, Position, Animation
+} from './cmp';
+
 import useStyles from './styles';
 
 const Sym = ({ sym }) => {

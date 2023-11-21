@@ -1,14 +1,15 @@
 import { useContext } from 'react';
-import ClearIcon from '@mui/icons-material/Clear';
 import { Tooltip } from '@mui/material';
+import {
+    Clear as ClearIcon,
+    DoneAll as DoneAllIcon,
+    RemoveDone as RemoveDoneIcon,
+    Flaky as FlakyIcon
+} from '@mui/icons-material';
 
 import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
-import RemoveDoneIcon from '@mui/icons-material/RemoveDone';
-import FlakyIcon from '@mui/icons-material/Flaky';
-
 
 const Search = () => {
     const classes = useStyles(),

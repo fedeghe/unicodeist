@@ -7,11 +7,19 @@ import {
     SpeedDial, SpeedDialAction, 
 } from '@mui/material';
 
-import SettingsIcon from '@mui/icons-material/Settings';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
-import GetAppIcon from '@mui/icons-material/GetApp';
-import CloseIcon from '@mui/icons-material/Close';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import {
+    Settings as SettingsIcon,
+    FileUpload as FileUploadIcon,
+    GetApp as GetAppIcon,
+    Close as CloseIcon,
+    Delete as DeleteForeverIcon
+
+} from '@mui/icons-material';
+// import GetAppIcon from '@mui/icons-material/GetApp';
+// import CloseIcon from '@mui/icons-material/Close';
+// import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+// import FileUploadIcon from '@mui/icons-material/FileUpload';
+// import SettingsIcon from '@mui/icons-material/Settings';
 
 import CodeMirror from '@uiw/react-codemirror';
 import { css } from '@codemirror/lang-css';

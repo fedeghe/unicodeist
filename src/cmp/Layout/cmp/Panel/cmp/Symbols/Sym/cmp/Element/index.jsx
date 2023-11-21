@@ -2,15 +2,26 @@ import { useContext } from 'react';
 import Channeljs from '@fedeghe/channeljs';
 import Tooltip from '@mui/material/Tooltip';
 
-import AdsClickIcon from '@mui/icons-material/AdsClick';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import VerticalAlignTopIcon from '@mui/icons-material/VerticalAlignTop';
-import VerticalAlignBottomIcon from '@mui/icons-material/VerticalAlignBottom';
-import AlignHorizontalCenterIcon from '@mui/icons-material/AlignHorizontalCenter';
-import AlignVerticalCenterIcon from '@mui/icons-material/AlignVerticalCenter';
-import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
-import StyleIcon from '@mui/icons-material/Style';
+// import AdsClickIcon from '@mui/icons-material/AdsClick';
+// import DeleteIcon from '@mui/icons-material/Delete';
+// import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+// import VerticalAlignTopIcon from '@mui/icons-material/VerticalAlignTop';
+// import VerticalAlignBottomIcon from '@mui/icons-material/VerticalAlignBottom';
+// import AlignHorizontalCenterIcon from '@mui/icons-material/AlignHorizontalCenter';
+// import AlignVerticalCenterIcon from '@mui/icons-material/AlignVerticalCenter';
+// import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
+// import StyleIcon from '@mui/icons-material/Style';
+import {
+    AdsClick as AdsClickIcon,
+    Delete as DeleteIcon,
+    ContentCopy as ContentCopyIcon,
+    VerticalAlignTop as VerticalAlignTopIcon,
+    VerticalAlignBottom as VerticalAlignBottomIcon,
+    AlignHorizontalCenter as AlignHorizontalCenterIcon,
+    AlignVerticalCenter as AlignVerticalCenterIcon,
+    ChangeCircle as ChangeCircleIcon,
+    Style as StyleIcon
+} from '@mui/icons-material';
 
 import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
