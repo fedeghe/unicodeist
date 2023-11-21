@@ -26,7 +26,7 @@ const CopyDialog = ({visibility, setVisibility}) => {
                 <p>If you come across any issues or have ideas for improvements, feel free to file an issue or open a pull request. I`ll do my best to review and provide feedback promptly.</p>
                 <p>Thank you for considering contributing to this project.</p>
                 <p>Best regards,</p>
-                <p>Federico</p>
+                <p>Federico & Gabriele</p>
             </div>
         </Dialog>
     );
