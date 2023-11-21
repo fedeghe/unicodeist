@@ -7,7 +7,10 @@ import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
 
 const ThemeSwitch = ({onChange = () => {}, tooltip}) => {
-    const {state: { themeKey}, dispatch} = useContext(ctx),
+    const {
+            state: { themeKey },
+            dispatch
+        } = useContext(ctx),
         classes = useStyles({themeKey}),
         switchTheme = () => {
             dispatch({ type: ACTIONS.SWITCH_THEME });
