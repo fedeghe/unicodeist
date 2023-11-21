@@ -1,6 +1,7 @@
 import useStyles from './styles';
-import Panel from './cmp/Panel';
-import Main from './cmp/Main';
+import {
+    Panel, Main 
+} from './cmp';
 
 const Layout = () => {
     const classes = useStyles();
