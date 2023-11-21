@@ -3,10 +3,6 @@ import {
     IconButton, Checkbox, FormControlLabel,
     CircularProgress
 } from '@mui/material';
-// import CircularProgress from '@mui/material/CircularProgress';
-
-// import ClearIcon from '@mui/icons-material/Clear';
-// import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import {
     Clear as ClearIcon,
     RemoveCircle as RemoveCircleIcon
