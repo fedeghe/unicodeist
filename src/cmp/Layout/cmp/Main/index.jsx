@@ -6,6 +6,7 @@ import AsciiSelector from './cmp/AsciiSelector';
 import AddButton from './cmp/AddButton';
 import BulkActions from './cmp/BulkActions';
 import Canvas from './cmp/Canvas';
+import Zoom from './cmp/Zoom';
 import ACTIONS from 'src/reducer/actions';
 
 import Channel from '@fedeghe/channeljs';
@@ -15,7 +16,7 @@ const Main = () => {
         {
             state: {
                 addPanelVisibility, fullscreen,
-                selected
+                selected, zoomLevel
             },
             dispatch
         } = useContext(ctx),
@@ -36,6 +37,18 @@ const Main = () => {
             }),
             [addPanelVisibility, dispatch]
         ),
+        zoom = useCallback(key => {
+                const type = {
+                    '=': ACTIONS.ZOOM_IN,
+                    '+': ACTIONS.ZOOM_IN,
+                    '-': ACTIONS.ZOOM_OUT,
+                    '_': ACTIONS.ZOOM_OUT,
+                    '0': ACTIONS.ZOOM_ZERO,
+                }[key];
+                dispatch({ type });
+            },
+            [addPanelVisibility, dispatch]
+        ),
         onKeyDown = useCallback(e => {  
             //for the symbol search
             // if input text and not escape
@@ -48,12 +61,20 @@ const Main = () => {
             // on escape toggle 
             if (!fullscreen && e.key === "Escape") { togglePanel(); e.preventDefault();return false;}
 
+            
             // on shift+arrow move current target symbol
             if (
                 e.shiftKey
                 && ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)
             ){
                 move(e.key); e.preventDefault();
+            }
+            // on shift+arrow move current target symbol
+            if (
+                e.metaKey
+                && ["=", "+", "-", "_", "0"].includes(e.key)
+            ){
+                zoom(e.key); e.preventDefault();
             }
         }, [togglePanel, fullscreen]);
 
@@ -73,6 +94,7 @@ const Main = () => {
     return <div className={classes.Main}>
         {addPanelVisibility ? <AsciiSelector /> : <AddButton />}
         {Boolean(selected.length >= 2) && <BulkActions/>}
+        <Zoom zoom={zoomLevel}/>
         <Canvas />
     </div>;
 };

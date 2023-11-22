@@ -57,26 +57,26 @@ Seems clear (and quite obvious also the reason) that whenever few elements can p
         
     ---
 
-- Press the ➕ button on the **top** **left** (or if fullscreen is not active press `ESC` button) to toggle the symbol selection panel  
+- Press the ➕ button on the **top** **left** (or if fullscreen is not active press `ESC` button) to toggle the _symbol_ selection panel  
 
-- Add one or more symbols and close the panel (through ➖ button or pressing `ESC`, again the latter only if u are not in fullscreen mode)  
+- Add one or more _symbols_ and close the panel (through ➖ button or pressing `ESC`, again the latter only if u are not in fullscreen mode)  
 
 <img align="right" width="250"  src="src/img/ss2.png?raw=true">  
 
-- Last symbol added is the current target one, thus on the right panel you will see a tuning card expanded allowing you to:  
-    - select the symbol for one of the bulk actions (see below, this checkbox is visible only when more than one symbol is added)
-    - set a label for it (only useful to search it among added symbols)
+- Last _symbol_ added is the current target one, thus on the right panel you will see a tuning card expanded allowing you to:  
+    - select the _symbol_ for one of the bulk actions (see below, this checkbox is visible only when more than one _symbol_ is added)
+    - set a label for it (only useful to search it among added _symbols_)
     - set the `z-index`
     - see a preview showing on its left some icons to:
         - thrash it 
         - isolate that from others (useful to be sure to change the right _symbol_)
-        - clone it (when clicked, the clone will be found on the symbol list bottom)
+        - clone it (when clicked, the clone will be found on the _symbol_ list bottom)
         - bring it to the top (`z-index`)
         - move it to the bottom (`z-index`)
         - center it horizontally ...almost  
         - center it vertically ...almost  
         - open an additional styles editor  
-        - swap the symbol into a different one
+        - swap the _symbol_ into a different one
             
     - change the `font-family`  
     - toggle italic style  
@@ -85,23 +85,23 @@ Seems clear (and quite obvious also the reason) that whenever few elements can p
     - tune `scale`, `scaleX`, `scaleY`, `rotationX`, `rotationY`, `rotationZ`, `skewX`, `skewY`, `blur` and `opacity`
     - move to a different location:  
         - using the range inputs
-        - drag the symbol
+        - drag the _symbol_
         - when focused press `⇧ + arrow` (1px move each)
     - apply one of the `keyFrames` listed (or imported) in the keyFrames editor
 
 
 <img align="right" width="250"  src="src/img/ss3.png?raw=true">  
 
-all range fields can be tuned either moving the range handle either just clicking on the value and scroll `up/down` or just type the exact value and blur or hit `enter` buttons (if a range is focused then the scrolling on the symbols list is disabled).
+all range fields can be tuned either moving the range handle either just clicking on the value and scroll `up/down` or just type the exact value and blur or hit `enter` buttons (if a range is focused then the scrolling on the _symbols_ list is disabled).
 
 ### Bulk actions 
 <img align="right" width="250"  src="src/img/ss7.png?raw=true">  
 
-When more than one symbol is added, then you will see a checkbox (for both expanded and collapsed ones). Then when more than one symbol is selected an additional speed dial menu will appear allowing to:  
+When more than one _symbol_ is added, then you will see a checkbox (for both expanded and collapsed ones). Then when more than one _symbol_ is selected an additional speed dial menu will appear allowing to:  
 
-1) trash the selected symbols  
-2) equally space them horizontally (when min. 3 symbols selection)  
-3) equally space them vertically (min. 3 symbols also here)  
+1) trash the selected _symbols_  
+2) equally space them horizontally (when min. 3 _symbols_ selection)  
+3) equally space them vertically (min. 3 _symbols_ also here)  
 4) align horizontally respect image center  
 5) align vertically respect image center  
 6) center horizontally respect selection bounding-box  
@@ -111,11 +111,16 @@ When more than one symbol is added, then you will see a checkbox (for both expan
 **4** and **5** align on the mean vertical/horizontal position;  
 **6** and **7** center moving the mid point between min & max left / top distance;
 
-### Move | scale all symbols  
-To move all _symbols_ together just go to the _unicodeist_ logo in the right upper part and drag within the logo, on mouse release all symbols will move together in that direction for an amout proportional to the movement.  
-If you do the same with the `shift` key down then all symbols will be up or down scaled depending on the movement direction. Notice that the relative position of all the elements will **not** change.  
-When some symbols are selected then only those will be moved or scaled.
+### Move | scale all _symbols_  
+To move all _symbols_ together just go to the _unicodeist_ logo in the right upper part and drag within the logo, on mouse release all _symbols_ will move together in that direction for an amout proportional to the movement.  
+If you do the same with the `shift` key down then all _symbols_ will be up or down scaled depending on the movement direction. Notice that the relative position of all the elements will **not** change.  
+When some _symbols_ are selected then only those will be moved or scaled.
 
+### Zoom
+Sometimes it might be useful to _zoom-in_ or _zoom-out_ the creative, use  
+- `+` to zoom in
+- `-` to zoom out
+- `0` to reset the zoom
 
 
 ---

@@ -28,3 +28,6 @@ bulk actions:
 
 0.0.13
 - bulk center horizontally / vertically
+
+0.0.14
+- zoom 0 / in / out

@@ -75,7 +75,8 @@ const base = {
     fullscreen: false,
     availableSymbols: [],
     selected: [],
-    swapMode: false 
+    swapMode: false,
+    zoomLevel: 1 
 };
 
 
@@ -210,7 +211,19 @@ const actions = {
                 faded: false
             })),
         }),
-        
+        [ACTIONS.ZOOM_ZERO]: () => ({ zoomLevel: 1 }),
+        [ACTIONS.ZOOM_IN]: ({
+            oldState: { zoomLevel }
+        }) => ({ zoomLevel: parseFloat((zoomLevel+0.1).toFixed(1)) }),
+        [ACTIONS.ZOOM_OUT]: ({
+            oldState: { zoomLevel }
+        }) => ({
+            zoomLevel: Math.max(
+                parseFloat((zoomLevel-0.1).toFixed(1)),
+                0.1
+            )
+        }),
+
         [ACTIONS.UPDATE_GLOBAL]: ({
             payload: {field, value}
         }) => ({ [field]: value }),
@@ -230,13 +243,13 @@ const actions = {
 
         [ACTIONS.TUNE_SYMBOL_POSITION]: ({
             payload: {left, top},
-            oldState: {symbols, focusedSymbolId}
+            oldState: {symbols, focusedSymbolId, zoomLevel}
         }) => ({
             symbols: symbols.map(sym => sym.id === focusedSymbolId
                 ? ({
                     ...sym,
-                    left: parseInt(sym.left, 10) + parseInt(left, 10),
-                    top: parseInt(sym.top, 10) + parseInt(top, 10),
+                    left: parseInt(sym.left, 10) + parseInt(left / zoomLevel, 10),
+                    top: parseInt(sym.top, 10) + parseInt(top / zoomLevel, 10),
                 })
                 : sym
             )

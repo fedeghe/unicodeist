@@ -31,6 +31,7 @@ const Canvas = () => {
             backgroundColorAlpha,
             keyFrames,
             bgStyles,
+            zoomLevel
         },
         state,
     } = useContext(ctx),
@@ -52,7 +53,8 @@ const Canvas = () => {
             position: 'relative',
             overflow: 'hidden',
             fontSize:'20px',
-        }), [height, width, backgroundColor, backgroundColorAlpha, bgStyles]),
+            zoom: zoomLevel
+        }), [height, width, backgroundColor, backgroundColorAlpha, bgStyles, zoomLevel]),
 
         onDragOver = e => { e.preventDefault(); },
         exportImage = () => setDownloadDialogVisibility(true),

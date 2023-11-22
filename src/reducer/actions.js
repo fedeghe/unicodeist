@@ -45,7 +45,10 @@ const INIT = Symbol('init'),
     BULK_CENTER_VERTICALLY = Symbol('bulk center vertically'),
     BULK_CENTER_HORIZONALLY = Symbol('bulk center horizontally'),
     SWITCH_SYMBOL = Symbol('switch_symbol'),
-    TOGGLE_ITALIC = Symbol('toggle italic');
+    TOGGLE_ITALIC = Symbol('toggle italic'),
+    ZOOM_ZERO = Symbol('zoom zero'),
+    ZOOM_IN = Symbol('zoom in'),
+    ZOOM_OUT = Symbol('zoom out');
 
 const exp = {
     INIT,
@@ -97,6 +100,9 @@ const exp = {
     SWITCH_SYMBOL,
     TOGGLE_SYMBOL_SELECTION,
     TOGGLE_SYMBOLS_SELECTION,
+    ZOOM_IN,
+    ZOOM_OUT,
+    ZOOM_ZERO
 };
 
 export default exp;
