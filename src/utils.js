@@ -172,7 +172,7 @@ export const uncompressStateForImport = cstate => {
         tk: themeKey,
         fc: filteredCount,
         hid: hoveringId,
-        z: zoomLevel,
+        z: zoomLevel = 1,
         sy: symbols, 
         kf: keyFrames
     } = cstate;
