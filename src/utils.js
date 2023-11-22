@@ -172,6 +172,7 @@ export const uncompressStateForImport = cstate => {
         tk: themeKey,
         fc: filteredCount,
         hid: hoveringId,
+        z: zoomLevel,
         sy: symbols, 
         kf: keyFrames
     } = cstate;
@@ -199,6 +200,7 @@ export const uncompressStateForImport = cstate => {
         themeKey,
         filteredCount,
         hoveringId,
+        zoomLevel,
         symbols: symbols.map(({
             i, ch, lb, zi, l, t, c, a, ff, fw, 
             skx, sky, rx, ry, rz, b, o,
@@ -264,8 +266,9 @@ export const compressStateForExport = state => {
         themeKey: tk,
         filteredCount: fc,
         hoveringId: hid,
+        zoomLevel: z,
         symbols, 
-        keyFrames
+        keyFrames,
     } = state;
     const exp = {
         bgca, bgc,
@@ -274,6 +277,7 @@ export const compressStateForExport = state => {
         fsid, asf, sf, apf, alapoas,
         suf, css, sc, bgs, pr, fs,
         s, sm, tk, fc, hid, 
+        z,
         sy: symbols.map(({
             id: i,
             char: ch,
