@@ -367,7 +367,6 @@ const actions = {
                 };
             }
             var t = uncompressStateForImport(newState);
-            console.log({t});
             return {
                 ...t,
                 keyFrames: {
