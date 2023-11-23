@@ -7,7 +7,7 @@ export default createUseStyles((theme) => ({
         display:'flex',
         alignContent:'center',
         alignItems:'center',
-        top:`${theme.spacing.xxxlarge}px`,
+        bottom:`${theme.spacing.xxxlarge}px`,
         right:`${theme.spacing.xxxlarge}px`,
         cursor:'pointer'    
     }
