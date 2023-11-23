@@ -87,8 +87,10 @@ const actions = {
             availableSymbols: allSymbols,
             filteredCount: count(allSymbols),
         }),
-        [ACTIONS.NEW]: () => base,
-        
+        [ACTIONS.NEW]: () => ({
+            ...base,
+            availableSymbols: allSymbols,
+        }),
         [ACTIONS.SWITCH_THEME]: ({
             oldState: {themeKey}
         }) => ({
