@@ -49,6 +49,7 @@ const Main = () => {
             },
             [addPanelVisibility, dispatch]
         ),
+        resetZoom = () => dispatch({ type: ACTIONS.ZOOM_ZERO }),
         onKeyDown = useCallback(e => {  
             //for the symbol search
             // if input text and not escape
@@ -94,7 +95,7 @@ const Main = () => {
     return <div className={classes.Main}>
         {addPanelVisibility ? <AsciiSelector /> : <AddButton />}
         {Boolean(selected.length >= 2) && <BulkActions/>}
-        <Zoom zoom={zoomLevel}/>
+        <Zoom zoom={zoomLevel} reset={resetZoom}/>
         <Canvas />
     </div>;
 };
