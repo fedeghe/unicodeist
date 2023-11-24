@@ -31,3 +31,6 @@ bulk actions:
 
 0.0.14
 - zoom 0 / in / out
+
+0.0.15
+- undo added

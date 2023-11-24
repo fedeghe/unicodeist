@@ -43,6 +43,7 @@ export const HEADER_HEIGHT = 140;
 export const DEFAULT_BACKGROUND_ALPHA = false;
 export const LOCALSTORAGE_KEYFRAMES_KEY = 'keyframes';
 export const UNSELECTED = '__unselected__';
+export const SHOW_UNDO_ICON = true;
 export const getMaxHeight = () => ~~window.innerHeight * 0.9;
 export const getMaxWidth = () => ~~window.innerWidth * 0.9;
 export const getBaseNamedKeyFrame = name => `@keyframes ${name} {
@@ -158,6 +159,7 @@ const CONSTS = {
     LOCALSTORAGE_KEYFRAMES_KEY,
     UNSELECTED,
     DEFAULT_BG_STYLES,
-    DEFAULT_ADDITIONAL_STYLES
+    DEFAULT_ADDITIONAL_STYLES,
+    SHOW_UNDO_ICON
 };
 export default CONSTS;

@@ -107,6 +107,20 @@ export const debounce = (func, delay) => {
     };
     return ret;
 };
+export const unbounce = (func, delay) => {
+    var calls = true,
+        to,
+        ret = (...args) => {
+            clearTimeout(to);
+            to = setTimeout(() => {calls = true;}, delay);
+            if (calls) func(...args);
+            calls = false;
+        };
+    ret.cancel = function () {
+        clearTimeout(to);
+    };
+    return ret;
+};
 
 export const filter = ({ symbols, filter, debug = false }) => {
     let start,
@@ -526,6 +540,7 @@ const def = {
     cleanCode,
     cleanCodeFromState,
     debounce,
+    unbounce,
     importFromFile,
     getUnicodeistData,
     getUnicodeistScriptTag,

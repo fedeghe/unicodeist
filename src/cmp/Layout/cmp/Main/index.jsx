@@ -1,5 +1,6 @@
 import { useContext, useEffect, useCallback } from 'react';
 import ctx from 'src/Context';
+import { SHOW_UNDO_ICON } from 'src/constants';
 import useStyles from './styles';
 
 import AsciiSelector from './cmp/AsciiSelector';
@@ -7,6 +8,7 @@ import AddButton from './cmp/AddButton';
 import BulkActions from './cmp/BulkActions';
 import Canvas from './cmp/Canvas';
 import Zoom from './cmp/Zoom';
+import Undo from './cmp/Undo';
 import ACTIONS from 'src/reducer/actions';
 
 import Channel from '@fedeghe/channeljs';
@@ -16,7 +18,8 @@ const Main = () => {
         {
             state: {
                 addPanelVisibility, fullscreen,
-                selected, zoomLevel
+                selected, zoomLevel,
+                canUndo, undos
             },
             dispatch
         } = useContext(ctx),
@@ -50,6 +53,7 @@ const Main = () => {
             [addPanelVisibility, dispatch]
         ),
         resetZoom = () => dispatch({ type: ACTIONS.ZOOM_ZERO }),
+        undo = () => dispatch({ type: ACTIONS.UNDO }),
         onKeyDown = useCallback(e => {  
             //for the symbol search
             // if input text and not escape
@@ -77,6 +81,13 @@ const Main = () => {
             ){
                 zoom(e.key); e.preventDefault();
             }
+            if (
+                
+                e.metaKey
+                && e.key === "z"
+            ){
+                undo(); e.preventDefault();
+            }
         }, [togglePanel, fullscreen]);
 
     // allow open panel in swap mode
@@ -96,6 +107,7 @@ const Main = () => {
         {addPanelVisibility ? <AsciiSelector /> : <AddButton />}
         {Boolean(selected.length >= 2) && <BulkActions/>}
         <Zoom zoom={zoomLevel} reset={resetZoom}/>
+        {SHOW_UNDO_ICON && canUndo && <Undo undo={undo} undos={undos} />}
         <Canvas />
     </div>;
 };
