@@ -1,6 +1,6 @@
 import ACTIONS from './actions';
-import {uniqueID, count, filter, uncompressStateForImport} from 'src/utils';
-import {getMaxHeight, getMaxWidth} from 'src/constants';
+import { uniqueID, count, filter, uncompressStateForImport, unbounce } from 'src/utils';
+import { getMaxHeight, getMaxWidth } from 'src/constants';
 import allSymbols from './../Symbols';
 import { keyFramesManager } from './utils';
 
@@ -22,65 +22,70 @@ import {
     DEFAULT_PREVENT_RELOAD
 } from 'src/constants';
 
-const createSymbol = ({ char, zIndex, left, top }) => {
-    const u = `${uniqueID}`;
-    return {
-        id: u,
-        char,
-        label : `${u}`,
-        zIndex,
-        left,
-        top,
-        color: DEFAULT_SYMBOL_COLOR,
-        fontFamily: SYMBOL_BASE_FONTFAMILY,
-        fontWeight: SYMBOL_BASE_FONTWEIGHT,
-        skewX: 0,
-        skewY: 0,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
-        blur: 0,
-        opacity: 1,
-        scale:1,
-        scaleX:1,
-        scaleY:1,
-        targetUp: false,
-        faded: false,
-        animation: false,
-        additionalStyles:false,
-        italic: false
-    };
-};
+import undoableActions from './undoables';
 
-const base = {
-    backgroundColorAlpha: DEFAULT_BACKGROUND_ALPHA,
-    width: WIDTH,
-    height: HEIGHT,
-    maxWidth: getMaxWidth(),
-    maxHeight: getMaxHeight(),
-    symbols: [],
-    addPanelVisibility: false,
-    focusedSymbolId: null,
-    backgroundColor: DEFAULT_BACKGROUND_COLOR,
-    asciiSelectorFilter: '',
-    symbolsFilter: '',
-    asciiPanelFilterByIconName: '',
-    letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
-    superFocus: false,
-    canScrollSymbols: true,
-    scrollTop : 0,
-    bgStyles:false,
-    keyFrames:keyFramesManager.synch(),
-    preventReload: DEFAULT_PREVENT_RELOAD,
-    fullscreen: false,
-    availableSymbols: [],
-    selected: [],
-    swapMode: false,
-    zoomLevel: 1 
-};
+let tot = 0,
+    historyCursor = 0;
 
+const history = [],
+    createSymbol = ({ char, zIndex, left, top }) => {
+        const u = `${uniqueID}`;
+        return {
+            id: u,
+            char,
+            label: `${u}`,
+            zIndex,
+            left,
+            top,
+            color: DEFAULT_SYMBOL_COLOR,
+            fontFamily: SYMBOL_BASE_FONTFAMILY,
+            fontWeight: SYMBOL_BASE_FONTWEIGHT,
+            skewX: 0,
+            skewY: 0,
+            rotationX: 0,
+            rotationY: 0,
+            rotationZ: 0,
+            blur: 0,
+            opacity: 1,
+            scale: 1,
+            scaleX: 1,
+            scaleY: 1,
+            targetUp: false,
+            faded: false,
+            animation: false,
+            additionalStyles: false,
+            italic: false
+        };
+    },
 
-const actions = {
+    base = {
+        backgroundColorAlpha: DEFAULT_BACKGROUND_ALPHA,
+        width: WIDTH,
+        height: HEIGHT,
+        maxWidth: getMaxWidth(),
+        maxHeight: getMaxHeight(),
+        symbols: [],
+        addPanelVisibility: false,
+        focusedSymbolId: null,
+        backgroundColor: DEFAULT_BACKGROUND_COLOR,
+        asciiSelectorFilter: '',
+        symbolsFilter: '',
+        asciiPanelFilterByIconName: '',
+        letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
+        superFocus: false,
+        canScrollSymbols: true,
+        scrollTop: 0,
+        bgStyles: false,
+        keyFrames: keyFramesManager.synch(),
+        preventReload: DEFAULT_PREVENT_RELOAD,
+        fullscreen: false,
+        availableSymbols: [],
+        selected: [],
+        swapMode: false,
+        zoomLevel: 1
+    },
+
+    actions = {
         [ACTIONS.INIT]: () => ({
             ...base,
             themeKey: DEFAULT_THEME,
@@ -92,14 +97,14 @@ const actions = {
             availableSymbols: allSymbols,
         }),
         [ACTIONS.SWITCH_THEME]: ({
-            oldState: {themeKey}
+            oldState: { themeKey }
         }) => ({
             themeKey: themeKey === 'light'
                 ? 'dark' : 'light'
         }),
-        
+
         [ACTIONS.RESIZE]: ({
-            payload: {what, value},
+            payload: { what, value },
             oldState
         }) => {
             const { symbols } = oldState,
@@ -115,29 +120,29 @@ const actions = {
                 }))
             };
         },
-        
+
         [ACTIONS.TOGGLE_ADD_PANEL]: ({
             payload: {
                 visibility,
                 swapMode = false
             }
         }) => ({
-            addPanelVisibility : visibility,
+            addPanelVisibility: visibility,
             swapMode
         }),
-        [ACTIONS.CAN_SCROLL_SYMBOLS]: ({payload}) => ({
-            canScrollSymbols : payload
+        [ACTIONS.CAN_SCROLL_SYMBOLS]: ({ payload }) => ({
+            canScrollSymbols: payload
         }),
-        
+
         [ACTIONS.ADD_SYMBOL]: ({
-            payload : { char, scrollTop },
-            oldState: { symbols, width, height}
+            payload: { char, scrollTop },
+            oldState: { symbols, width, height }
         }) => {
             // get highest zindex
             const zIndex = Object.values(symbols).reduce(
-                    (acc, {zIndex}) => acc > zIndex ? acc : zIndex,
-                    0
-                ) + 1,
+                (acc, { zIndex }) => acc > zIndex ? acc : zIndex,
+                0
+            ) + 1,
                 newSymbol = createSymbol({
                     char,
                     left: width / 2,
@@ -154,15 +159,15 @@ const actions = {
             };
         },
         [ACTIONS.SWAP_SYMBOL]: ({
-            payload : { char },
-            oldState: { symbols, focusedSymbolId}
+            payload: { char },
+            oldState: { symbols, focusedSymbolId }
         }) => ({
             symbols: symbols.map(symbol =>
                 symbol.id === focusedSymbolId
-                ? ({
-                    ...symbol,
-                    char
-                }) : symbol
+                    ? ({
+                        ...symbol,
+                        char
+                    }) : symbol
             )
         }),
 
@@ -173,7 +178,7 @@ const actions = {
                 newSelected = selected.filter(id => id !== focusedSymbolId);
             return {
                 symbols: newSymbols,
-                focusedSymbolId : null,
+                focusedSymbolId: null,
                 selected: newSelected.length > 1 ? newSelected : []
             };
         },
@@ -182,14 +187,14 @@ const actions = {
             oldState: { symbols, focusedSymbolId, selected }
         }) => ({
             symbols: symbols.filter(s => !(selected.includes(s.id))),
-            focusedSymbolId : selected.includes(focusedSymbolId) ? null : focusedSymbolId,
+            focusedSymbolId: selected.includes(focusedSymbolId) ? null : focusedSymbolId,
             selected: []
         }),
 
         [ACTIONS.CLONE_SYMBOL]: ({
             oldState: { symbols, focusedSymbolId }
         }) => {
-            const clone = {...(symbols.find(s => s.id === focusedSymbolId))};
+            const clone = { ...(symbols.find(s => s.id === focusedSymbolId)) };
             clone.id = `${uniqueID}`;
             clone.label = 'Clone0ƒ ' + clone.label;
             return {
@@ -201,7 +206,7 @@ const actions = {
         },
 
         [ACTIONS.FOCUS_ON_SYMBOL]: ({
-            payload : id,
+            payload: id,
             oldState: { symbols }
         }) => ({
             focusedSymbolId: id,
@@ -216,23 +221,23 @@ const actions = {
         [ACTIONS.ZOOM_ZERO]: () => ({ zoomLevel: 1 }),
         [ACTIONS.ZOOM_IN]: ({
             oldState: { zoomLevel }
-        }) => ({ zoomLevel: parseFloat((zoomLevel+0.1).toFixed(1)) }),
+        }) => ({ zoomLevel: parseFloat((zoomLevel + 0.1).toFixed(1)) }),
         [ACTIONS.ZOOM_OUT]: ({
             oldState: { zoomLevel }
         }) => ({
             zoomLevel: Math.max(
-                parseFloat((zoomLevel-0.1).toFixed(1)),
+                parseFloat((zoomLevel - 0.1).toFixed(1)),
                 0.1
             )
         }),
 
         [ACTIONS.UPDATE_GLOBAL]: ({
-            payload: {field, value}
+            payload: { field, value }
         }) => ({ [field]: value }),
-        
+
         [ACTIONS.UPDATE_SYMBOL]: ({
-            payload: {field, value},
-            oldState: {symbols, focusedSymbolId}
+            payload: { field, value },
+            oldState: { symbols, focusedSymbolId }
         }) => ({
             symbols: symbols.map(sym => sym.id === focusedSymbolId
                 ? {
@@ -244,8 +249,8 @@ const actions = {
         }),
 
         [ACTIONS.TUNE_SYMBOL_POSITION]: ({
-            payload: {left, top},
-            oldState: {symbols, focusedSymbolId, zoomLevel}
+            payload: { left = 0, top = 0 },
+            oldState: { symbols, focusedSymbolId, zoomLevel }
         }) => ({
             symbols: symbols.map(sym => sym.id === focusedSymbolId
                 ? ({
@@ -258,11 +263,11 @@ const actions = {
         }),
 
         [ACTIONS.MAX_ZI]: ({
-            oldState: {symbols, focusedSymbolId}
+            oldState: { symbols, focusedSymbolId }
         }) => {
             const maxZindexSymbol = symbols.reduce(
                 (a, n) => n.zIndex > a.zIndex ? n : a,
-                {zIndex: MIN_ZINDEX}
+                { zIndex: MIN_ZINDEX }
             );
             if (maxZindexSymbol.id === focusedSymbolId) return {};
             return {
@@ -270,7 +275,7 @@ const actions = {
                     sym => sym.id === focusedSymbolId
                         ? ({
                             ...sym,
-                            zIndex: maxZindexSymbol.zIndex+1
+                            zIndex: maxZindexSymbol.zIndex + 1
                         })
                         : sym
                 )
@@ -278,30 +283,30 @@ const actions = {
         },
 
         [ACTIONS.MIN_ZI]: ({
-            oldState: {symbols, focusedSymbolId}
+            oldState: { symbols, focusedSymbolId }
         }) => {
             const minZindexSymbol = symbols.reduce(
                 (a, n) => n.zIndex < a.zIndex ? n : a,
-                {zIndex: MAX_ZINDEX}
+                { zIndex: MAX_ZINDEX }
             );
             if (minZindexSymbol.id === focusedSymbolId) return {};
             return {
                 symbols: symbols.map(sym => sym.id === focusedSymbolId
                     ? ({
                         ...sym,
-                        zIndex: Math.max(0, minZindexSymbol.zIndex-1)
+                        zIndex: Math.max(0, minZindexSymbol.zIndex - 1)
                     })
                     : sym
                 )
             };
         },
-        
-        [ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION] : ({
+
+        [ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION]: ({
             payload
         }) => ({
             letAsciiPanelOpenAfterSelection: payload
         }),
-        
+
         [ACTIONS.SET_ASCIIPANEL_FILTER]: ({
             payload: asciiSelectorFilter,
         }) => {
@@ -312,10 +317,10 @@ const actions = {
             return {
                 asciiSelectorFilter,
                 availableSymbols: newAvailableSymbols,
-                filteredCount: count(newAvailableSymbols) 
+                filteredCount: count(newAvailableSymbols)
             };
         },
-        
+
         [ACTIONS.INIT_VIEWPORT]: ({
             oldState: {
                 width, height,
@@ -355,15 +360,15 @@ const actions = {
                     : sym.id !== focusedSymbolId
             }))
         }),
-        
-        [ACTIONS.IMPORT]: ({payload, oldState}) => {
+
+        [ACTIONS.IMPORT]: ({ payload, oldState }) => {
             let newState;
             try {
                 newState = JSON.parse(payload);
                 if (!('sy' in newState) || !('kf' in newState)) {
                     throw UNSUPPORTEDFILE_MESSAGE;
                 }
-            } catch(e) {
+            } catch (e) {
                 return {
                     error: UNSUPPORTEDFILE_MESSAGE
                 };
@@ -377,7 +382,7 @@ const actions = {
                 }
             };
         },
-        [ACTIONS.IMPORT_KEYFRAMES]: ({payload, oldState}) => {
+        [ACTIONS.IMPORT_KEYFRAMES]: ({ payload, oldState }) => {
             let keyFrames;
             try {
                 keyFrames = JSON.parse(payload);
@@ -385,7 +390,7 @@ const actions = {
                 if (!('name' in els[0]) || !('keyFrame' in els[0])) {
                     throw UNSUPPORTEDFILE_MESSAGE;
                 }
-            } catch(e) {
+            } catch (e) {
                 return {
                     error: UNSUPPORTEDFILE_MESSAGE
                 };
@@ -397,35 +402,35 @@ const actions = {
                 }
             };
         },
-        
+
         [ACTIONS.ALIGN_H]: ({
-            oldState: {symbols, width, focusedSymbolId}
+            oldState: { symbols, width, focusedSymbolId }
         }) => ({
             symbols: symbols.map(
                 sym => sym.id === focusedSymbolId
-                ? ({
-                    ...sym,
-                    left: ~~(width/2)
-                })
-                : sym
+                    ? ({
+                        ...sym,
+                        left: ~~(width / 2)
+                    })
+                    : sym
             )
         }),
 
         [ACTIONS.ALIGN_V]: ({
-            oldState: {symbols, height, focusedSymbolId}
+            oldState: { symbols, height, focusedSymbolId }
         }) => ({
             symbols: symbols.map(
                 sym => sym.id === focusedSymbolId
-                ? ({
-                    ...sym,
-                    top: ~~(height/2)
-                })
-                : sym
+                    ? ({
+                        ...sym,
+                        top: ~~(height / 2)
+                    })
+                    : sym
             )
         }),
 
-        [ACTIONS.MOVE_ALL_SYMBOLS]:({
-            payload: {leftTune, topTune},
+        [ACTIONS.MOVE_ALL_SYMBOLS]: ({
+            payload: { leftTune, topTune },
             oldState: { symbols, selected }
         }) => ({
             symbols: symbols.map(sym => {
@@ -461,15 +466,15 @@ const actions = {
             })
         }),
 
-        [ACTIONS.SET_SYMBOLS_FILTER] : ({ payload: symbolsFilter }) => ({ symbolsFilter }),
+        [ACTIONS.SET_SYMBOLS_FILTER]: ({ payload: symbolsFilter }) => ({ symbolsFilter }),
 
-        [ACTIONS.REMOVE_ERROR] : ( ) => ({ error: null}),
-        [ACTIONS.TOGGLE_ITALIC] : ({
-            oldState:{
+        [ACTIONS.REMOVE_ERROR]: () => ({ error: null }),
+        [ACTIONS.TOGGLE_ITALIC]: ({
+            oldState: {
                 symbols,
                 focusedSymbolId
             }
-        }) => ({ 
+        }) => ({
             symbols: symbols.map(symbol => symbol.id === focusedSymbolId
                 ? ({
                     ...symbol,
@@ -480,11 +485,11 @@ const actions = {
         }),
 
         // not on focusedSymbolId
-        [ACTIONS.MOVE_SYMBOL] : ({
+        [ACTIONS.MOVE_SYMBOL]: ({
             payload: { id, direction },
             oldState: { symbols }
         }) => {
-            const position = symbols.findIndex(s =>s.id === id),
+            const position = symbols.findIndex(s => s.id === id),
                 newSymbols = symbols.filter(s => s.id !== id),
                 newPosition = position + direction,
                 canProceed = newPosition >= 0 && newPosition <= symbols.length;
@@ -497,28 +502,30 @@ const actions = {
         },
 
         [ACTIONS.MOVE_TARGET_ONE_PX]: ({
-            payload : key,
+            payload: key,
             oldState: {
                 focusedSymbolId, symbols
             }
         }) => {
             const what = {
-                ArrowLeft: {field: 'left', diff: -1},
-                ArrowRight: {field: 'left', diff: 1},
-                ArrowUp: {field: 'top', diff: -1},
-                ArrowDown: {field: 'top', diff: 1},
+                ArrowLeft: { field: 'left', diff: -1 },
+                ArrowRight: { field: 'left', diff: 1 },
+                ArrowUp: { field: 'top', diff: -1 },
+                ArrowDown: { field: 'top', diff: 1 },
             }[key];
-            return {symbols: symbols.map(s => (
-                s.id === focusedSymbolId ? 
-                {
-                    ...s,
-                    [what.field]: s[what.field] + what.diff
-                } : s
-            ))};
+            return {
+                symbols: symbols.map(s => (
+                    s.id === focusedSymbolId ?
+                        {
+                            ...s,
+                            [what.field]: s[what.field] + what.diff
+                        } : s
+                ))
+            };
         },
 
         [ACTIONS.UPDATE_KEY_FRAME]: ({
-            payload: {name, keyFrame, animate},
+            payload: { name, keyFrame, animate },
             oldState: { keyFrames }
         }) => {
             const newKeyFrames = {
@@ -534,11 +541,11 @@ const actions = {
                 keyFrames: newKeyFrames
             };
         },
-        [ACTIONS.REMOVE_KEY_FRAME]:({
+        [ACTIONS.REMOVE_KEY_FRAME]: ({
             payload: { name },
             oldState: { keyFrames, symbols }
         }) => {
-            const newKeyFrames = {...keyFrames};
+            const newKeyFrames = { ...keyFrames };
             delete newKeyFrames[name];
             keyFramesManager.synch(newKeyFrames);
             return {
@@ -549,20 +556,20 @@ const actions = {
                 }))
             };
         },
-        [ACTIONS.REMOVE_ALL_KEY_FRAMES]:({
-            oldState: {symbols}
+        [ACTIONS.REMOVE_ALL_KEY_FRAMES]: ({
+            oldState: { symbols }
         }) => {
             keyFramesManager.synch({});
             return {
                 keyFrames: {},
-                symbols: symbols.map(s => ({...s, animation: null}))
+                symbols: symbols.map(s => ({ ...s, animation: null }))
             };
         },
-        [ACTIONS.EXPAND_FAMILY]:({
-            oldState: {availableSymbols},
+        [ACTIONS.EXPAND_FAMILY]: ({
+            oldState: { availableSymbols },
             payload: label
         }) => {
-            
+
             return {
                 availableSymbols: availableSymbols.map(as => ({
                     ...as,
@@ -570,11 +577,11 @@ const actions = {
                 }))
             };
         },
-        [ACTIONS.COLLAPSE_FAMILY]:({
-            oldState: {availableSymbols},
+        [ACTIONS.COLLAPSE_FAMILY]: ({
+            oldState: { availableSymbols },
             payload: label
         }) => {
-            
+
             return {
                 availableSymbols: availableSymbols.map(as => ({
                     ...as,
@@ -583,22 +590,23 @@ const actions = {
             };
         },
 
-        [ACTIONS.TOGGLE_SYMBOL_SELECTION]: ({payload: id, oldState: {selected}}) => ({
+        [ACTIONS.TOGGLE_SYMBOL_SELECTION]: ({ payload: id, oldState: { selected } }) => ({
             selected: selected.includes(id)
-                ? selected.filter(i => i!==id)
+                ? selected.filter(i => i !== id)
                 : [...selected, id]
         }),
-        [ACTIONS.TOGGLE_SYMBOLS_SELECTION]: ({payload: what, oldState: {selected, symbols}}) => {
-            switch(what) {
-                case 'selectAll': 
-                    return {selected: symbols.map(s =>s.id)};
-                case  'unselectAll': 
-                    return {selected: []};
-                case 'invertAll': 
+        [ACTIONS.TOGGLE_SYMBOLS_SELECTION]: ({ payload: what, oldState: { selected, symbols } }) => {
+            switch (what) {
+                case 'selectAll':
+                    return { selected: symbols.map(s => s.id) };
+                case 'unselectAll':
+                    return { selected: [] };
+                case 'invertAll':
                     return {
                         selected: symbols
-                            .filter(sym =>!(selected.includes(sym.id)))
-                            .map(sym => sym.id)};
+                            .filter(sym => !(selected.includes(sym.id)))
+                            .map(sym => sym.id)
+                    };
             }
             return {};
         },
@@ -608,15 +616,15 @@ const actions = {
         }) => {
             const mean = parseInt(
                 symbols
-                    .filter(({id}) => selected.includes(id))
-                    .reduce((acc, {top}) => acc + top, 0) / selected.length,
+                    .filter(({ id }) => selected.includes(id))
+                    .reduce((acc, { top }) => acc + top, 0) / selected.length,
                 10
             );
-            
+
             return {
                 symbols: symbols.map(
                     sym => selected.includes(sym.id)
-                        ? {...sym, top: mean}
+                        ? { ...sym, top: mean }
                         : sym
                 )
             };
@@ -626,23 +634,23 @@ const actions = {
         }) => {
             const mean = parseInt(
                 symbols
-                    .filter(({id}) => selected.includes(id))
-                    .reduce((acc, {left}) => acc + left, 0) / selected.length,
+                    .filter(({ id }) => selected.includes(id))
+                    .reduce((acc, { left }) => acc + left, 0) / selected.length,
                 10
             );
-            
+
             return {
                 symbols: symbols.map(
                     sym => selected.includes(sym.id)
-                        ? {...sym, left: mean}
+                        ? { ...sym, left: mean }
                         : sym
                 )
             };
         },
-        [ACTIONS.BULK_SPACE]: ({ oldState: { symbols, selected }, payload : what}) => {
+        [ACTIONS.BULK_SPACE]: ({ oldState: { symbols, selected }, payload: what }) => {
             const sortedSymbols = symbols
-                    .filter(({id})=> selected.includes(id))
-                    .sort((a, b) => a[what] - b[what]),
+                .filter(({ id }) => selected.includes(id))
+                .sort((a, b) => a[what] - b[what]),
                 lastIndex = sortedSymbols.length - 1,
                 min = sortedSymbols[0][what],
                 max = sortedSymbols[lastIndex][what],
@@ -651,7 +659,7 @@ const actions = {
 
             return {
                 symbols: symbols.map(sym => {
-                    const index = sortedSymbols.findIndex(({id}) => id === sym.id);
+                    const index = sortedSymbols.findIndex(({ id }) => id === sym.id);
                     if (index >= 0) {
                         return {
                             ...sortedSymbols[index],
@@ -663,56 +671,95 @@ const actions = {
             };
         },
 
-        [ACTIONS.BULK_CENTER_HORIZONALLY]: ({oldState: {symbols, width, selected}}) => {
-            const {min, max} = symbols
-                .filter(({id}) => selected.includes(id))
+        [ACTIONS.BULK_CENTER_HORIZONALLY]: ({ oldState: { symbols, width, selected } }) => {
+            const { min, max } = symbols
+                .filter(({ id }) => selected.includes(id))
                 .reduce(
                     (acc, symbol) => {
                         symbol.left < acc.min && (acc.min = symbol.left);
                         symbol.left > acc.max && (acc.max = symbol.left);
                         return acc;
                     }
-                , {min: Number.POSITIVE_INFINITY, max:Number.NEGATIVE_INFINITY}),
-                meanLeft = (min+max) / 2,
+                    , { min: Number.POSITIVE_INFINITY, max: Number.NEGATIVE_INFINITY }),
+                meanLeft = (min + max) / 2,
 
                 targetLeft = width / 2,
                 diffLeft = targetLeft - meanLeft;
             return {
                 symbols: symbols.map(symbol => selected.includes(symbol.id)
-                    ? {...symbol, left: symbol.left + diffLeft}
+                    ? { ...symbol, left: symbol.left + diffLeft }
                     : symbol
                 )
             };
         },
-        [ACTIONS.BULK_CENTER_VERTICALLY]: ({oldState: {symbols, height, selected}}) => {
-            const {min, max} = symbols
-                .filter(({id}) => selected.includes(id))
+        [ACTIONS.BULK_CENTER_VERTICALLY]: ({ oldState: { symbols, height, selected } }) => {
+            const { min, max } = symbols
+                .filter(({ id }) => selected.includes(id))
                 .reduce(
                     (acc, symbol) => {
                         symbol.top < acc.min && (acc.min = symbol.top);
                         symbol.top > acc.max && (acc.max = symbol.top);
                         return acc;
                     }
-                , {min: Number.POSITIVE_INFINITY, max:Number.NEGATIVE_INFINITY}),
-                meanTop = (min+max) / 2,
+                    , { min: Number.POSITIVE_INFINITY, max: Number.NEGATIVE_INFINITY }),
+                meanTop = (min + max) / 2,
                 targetTop = height / 2,
                 diffTop = targetTop - meanTop;
             return {
                 symbols: symbols.map(symbol => selected.includes(symbol.id)
-                    ? {...symbol, top: symbol.top + diffTop}
+                    ? { ...symbol, top: symbol.top + diffTop }
                     : symbol
                 )
             };
         },
-
+        [ACTIONS.UNDO]: () => {
+            const previous = history[historyCursor - 1];
+            historyCursor--;
+            return { ...previous };
+        }
     },
+
+    unbounced = unbounce((next, prev, type) => {
+        const newL = JSON.stringify(next).length,
+            oldL = JSON.stringify(prev).length,
+            variance = newL - oldL;
+        tot += newL;
+        false && console.log({
+            type: type.description,
+            oldL,
+            newL,
+            variance,
+            tot: tot / (2 ** 10)
+        });
+        history[historyCursor++] = prev;
+
+        console.log({ type, history });
+    }, 1000),
+
     reducer = (oldState, action) => {
         const { payload = {}, type } = action;
         if (typeof type === 'undefined') throw new Error('Action type not given');
-        if (type in actions){
+        if (type in actions) {
+
+            const changes = actions[type]({ payload, oldState }),
+                newState = {
+                    ...oldState,
+                    ...changes
+                },
+                changedKeys = Object.keys(changes);
+
+            undoableActions.includes(type) && unbounced(
+                changes,
+                Object.entries(oldState).reduce((acc, [k, v]) => {
+                    if (changedKeys.includes(k)) acc[k] = v;
+                    return acc;
+                }, {}),
+                type
+            );
             return {
-                ...oldState,
-                ...actions[type]({payload, oldState})
+                ...newState,
+                canUndo: historyCursor > 0,
+                undos: historyCursor
             };
         } else {
             console.warn(`Action ${type} not expected`);
@@ -722,7 +769,7 @@ const actions = {
 
 const exp = () => ({
     reducer,
-    init: (cnf = {}) => reducer({}, {type: ACTIONS.INIT, payload: cnf})
+    init: (cnf = {}) => reducer({}, { type: ACTIONS.INIT, payload: cnf })
 });
 
 export default exp;

@@ -122,6 +122,8 @@ Sometimes it might be useful to _zoom-in_ or _zoom-out_ the creative, use
 - `-` to zoom out
 - `0` to reset the zoom
 
+### Undos  
+Most of the relevant changes get piles in a history and undos are available, either clicking on the undo icon on the bottom left corner of the screen either using the `z` shortcut.  
 
 ---
 ༺ ᚗᚌ ༻
