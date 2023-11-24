@@ -251,6 +251,7 @@ export const uncompressStateForImport = cstate => {
                     keyFrame,
                     animate
                 };
+                return acc;
             }, {})
     };
 };
