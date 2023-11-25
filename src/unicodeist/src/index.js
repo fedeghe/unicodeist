@@ -43,7 +43,7 @@
             var node = document.createElement('div'),
                 styles = [cnt
                     ? lbs.f + '-size:20' + lbs.p + ';' + lbs.po + ':absolute;' + lbs.t + '-origin:' + lbs.cn + ' ' + lbs.cn
-                    : lbs.po + ':relative;overflow:hidden'
+                    : lbs.po + ':relative;overflow:hidden;pointer-events:none'
                 ],
                 k;
 
