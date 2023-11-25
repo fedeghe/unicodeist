@@ -1,5 +1,5 @@
 import { useContext} from 'react';
-import { Box, Checkbox } from '@mui/material';
+import { Box } from '@mui/material';
 
 import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
@@ -21,7 +21,7 @@ const Label = ({sym, checked, onClick}) => {
     return <div className={localCasses.SectionLabel}>
         <div>
             <Box className={classes.Box}>
-                {Boolean(symbols.length > 1) && <Checkbox checked={checked} onClick={onClick}/>}
+                {Boolean(symbols.length > 1) && <input type="checkbox" checked={checked} onClick={onClick}/>}
                 <strong>Label: </strong><input type="text" onInput={updateLabel} size="small" label="Symbol label"  value={label} />
             </Box>
         </div>

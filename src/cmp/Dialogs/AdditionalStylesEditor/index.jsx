@@ -1,7 +1,7 @@
 import { useCallback, useState, useContext } from 'react';
 import {
     Dialog, DialogTitle, DialogContent,
-    Button, Tooltip, Alert
+    Button, Tooltip, Alert, Chip
 } from '@mui/material';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -24,7 +24,8 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
             state: {
                 symbols,
                 focusedSymbolId,
-                fullscreen
+                fullscreen,
+                keyFrames
             }
         } = useContext(ctx),
         additionalStyles = symbols.find(sym => sym.id === focusedSymbolId).additionalStyles,
@@ -59,8 +60,10 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
                 e.preventDefault();
                 return false;
             }
-        }, [fullscreen]);
-
+        }, [fullscreen]),
+        keyFrameNames = Object.keys(keyFrames),
+        keyFramesNum = keyFrameNames.length;
+    console.log({keyFrames});
     return (
         <Dialog
             open={visibility}
@@ -89,7 +92,11 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
                             onChange={onChangeValue}
                         />
                     </div>
-                    <Alert severity="info" style={{ width: '90%' }}>
+                    {Boolean(keyFramesNum) && <Alert severity="info" style={{ width: '90%' }}>
+                        {keyFramesNum} `keyframe{keyFramesNum > 1 ? 's' : ''}` can be used : {keyFrameNames.map(kf => <Chip key={kf} label={kf}/>)}
+                    </Alert>}
+                    <br />
+                    <Alert severity="warning" style={{ width: '90%' }}>
                         All the css rules inplied by the usage of the setters in the symbol panel will <strong>not</strong> be overriden by any rule specified here, if for example hereby one attempts to set the `transform: scale(23)` this will have no effect.
                     </Alert>
                     <div className={classes.Bottom}>

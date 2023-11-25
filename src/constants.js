@@ -34,7 +34,7 @@ export const MAX_BLUR= 20;
 export const STEP_BLUR = 0.01;
 export const MIN_ZINDEX = 0;
 export const MAX_ZINDEX = 10000;
-export const EXPANDED_SYM_HEIGHT = 600;
+export const EXPANDED_SYM_HEIGHT = 540;
 export const COLLAPSED_SYM_HEIGHT = 70;
 export const COLLAPSING_SYM_TIME = 0.3;
 export const CLOSE_TOAST_TIMEOUT = 1000;
@@ -44,9 +44,11 @@ export const DEFAULT_BACKGROUND_ALPHA = false;
 export const LOCALSTORAGE_KEYFRAMES_KEY = 'keyframes';
 export const UNSELECTED = '__unselected__';
 export const SHOW_UNDO_ICON = true;
+export const UNDO_UNBOUNCING = 1000;
 export const getMaxHeight = () => ~~window.innerHeight * 0.9;
 export const getMaxWidth = () => ~~window.innerWidth * 0.9;
-export const getBaseNamedKeyFrame = name => `@keyframes ${name} {
+
+export const getBaseNamedKeyFrame = `@keyframes {
     from {color: red;}
     to {color: blue;}
     /*
@@ -54,27 +56,20 @@ export const getBaseNamedKeyFrame = name => `@keyframes ${name} {
     100% {color: blue;}
     */
 }`;
-export const getBaseNamedAnimate = name => `{
-    animation-name: ${name};
-    animation-duration: 5s;
-    animation-timing-function: linear;
-    animation-delay: 2s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    /*
-    animation: ${name} 5s linear 2s infinite alternate;
-    */
-}`;
+
 export const DEFAULT_BG_STYLES = `{
     // background-image: linear-gradient(180deg, red, yellow);
     // background-image: linear-gradient(to bottom right, red, yellow);
     // background-image: linear-gradient(to right, red , yellow);
 }`;
 export const DEFAULT_ADDITIONAL_STYLES = `{
-    /*
-     * none of the rules added here will overwrite
-     * other relevant styles set through Unicodeist
-     */
+    // animation: example 5s linear 2s infinite alternate;
+    // animation-name: example;
+    // animation-duration: 5s;
+    // animation-timing-function: linear;
+    // animation-delay: 2s;
+    // animation-iteration-count: infinite;
+    // animation-direction: alternate;
 }`;
 
 export const FONT_FAMILIES = [
@@ -155,7 +150,6 @@ const CONSTS = {
     DEFAULT_SYMBOL_COLOR,
     DEFAULT_PREVENT_RELOAD,
     getBaseNamedKeyFrame,
-    getBaseNamedAnimate,
     LOCALSTORAGE_KEYFRAMES_KEY,
     UNSELECTED,
     DEFAULT_BG_STYLES,

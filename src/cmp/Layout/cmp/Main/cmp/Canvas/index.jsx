@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
     useRef, useContext, useMemo,
     useEffect, useState
@@ -10,9 +11,9 @@ import ctx from 'src/Context';
 import {
     cleanCodeFromState,
     getUnicodeistScriptTag,
-    css2jss, css2json
+    css2string, css2json
 } from 'src/utils';
-import { UNSELECTED } from 'src/constants';
+// import { UNSELECTED } from 'src/constants';
 import {
     CopyDialog,
     DownloadDialog,
@@ -35,6 +36,7 @@ const Canvas = () => {
         },
         state,
     } = useContext(ctx),
+        keyFramesNames = Object.keys(keyFrames),
         ref = useRef(),
         [copyDialogVisibility, setCopyDialogVisibility] = useState(false),
         [downloadDialogVisibility, setDownloadDialogVisibility] = useState(false),
@@ -101,15 +103,21 @@ const Canvas = () => {
             {Boolean(additionalStylesEditorDialogVisibility) && <AdditionalStylesEditorDialog visibility={additionalStylesEditorDialogVisibility} setVisibility={setAdditionalStylesEditorDialogVisibility} />}
             {Boolean(keyEditorDialogVisibility) && <KeyEditorDialog visibility={keyEditorDialogVisibility} setVisibility={setKeyEditorDialogVisibility} />}
             <div ref={ref} style={refStyles} onDragOver={onDragOver}>
-                {/* first load all single used keyframes */}
-                {[...new Set(
-                    symbols
-                    .filter(symbol => symbol.animation && symbol.animation !== UNSELECTED)
-                    .map(symbol => symbol.animation)
-                )].map(animation => {
-                    const {kf} = css2jss(keyFrames[animation]);
-                    return <style key={animation}>{kf}</style>;
-                })}
+                {
+                    /**
+                     * need to loop through all symbols additionalStyles
+                     * and collect all keyframes names found not repeated
+                     * then set the style tag for each
+                     */
+                    symbols.reduce((acc, {additionalStyles}) => {
+                        if (!additionalStyles) return acc;
+                        const foundKf = keyFramesNames.find(kfn => additionalStyles.includes(` ${kfn} `));
+                        if (foundKf && !acc.includes(foundKf)) acc.push(foundKf);
+                        return acc;
+                    }, []).map(
+                        kf => <style key={kf}>{keyFrames[kf]}</style>
+                    )
+                }
                 {symbols.map(symbol => <CanvasSymbol key={symbol.id} symbol={symbol} />)}
             </div>
 

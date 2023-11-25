@@ -19,7 +19,8 @@ import {
     DEFAULT_BACKGROUND_ALPHA,
     DEFAULT_BACKGROUND_COLOR,
     DEFAULT_SYMBOL_COLOR,
-    DEFAULT_PREVENT_RELOAD
+    DEFAULT_PREVENT_RELOAD,
+    UNDO_UNBOUNCING,
 } from 'src/constants';
 
 import undoableActions from './undoables';
@@ -52,7 +53,6 @@ const history = [],
             scaleY: 1,
             targetUp: false,
             faded: false,
-            animation: false,
             additionalStyles: false,
             italic: false
         };
@@ -365,7 +365,7 @@ const history = [],
             let newState;
             try {
                 newState = JSON.parse(payload);
-                if (!('sy' in newState) || !('kf' in newState)) {
+                if (!('sy' in newState)) {
                     throw UNSUPPORTEDFILE_MESSAGE;
                 }
             } catch (e) {
@@ -530,16 +530,12 @@ const history = [],
         },
 
         [ACTIONS.UPDATE_KEY_FRAME]: ({
-            payload: { name, keyFrame, animate },
+            payload: { name, keyFrame },
             oldState: { keyFrames }
         }) => {
             const newKeyFrames = {
                 ...keyFrames,
-                [name]: {
-                    name,
-                    keyFrame,
-                    animate
-                }
+                [name]: keyFrame
             };
             keyFramesManager.synch(newKeyFrames);
             return {
@@ -548,26 +544,19 @@ const history = [],
         },
         [ACTIONS.REMOVE_KEY_FRAME]: ({
             payload: { name },
-            oldState: { keyFrames, symbols }
+            oldState: { keyFrames }
         }) => {
             const newKeyFrames = { ...keyFrames };
             delete newKeyFrames[name];
             keyFramesManager.synch(newKeyFrames);
             return {
                 keyFrames: newKeyFrames,
-                symbols: symbols.map(s => ({
-                    ...s,
-                    animation: s.animation === name ? null : s.animation
-                }))
             };
         },
-        [ACTIONS.REMOVE_ALL_KEY_FRAMES]: ({
-            oldState: { symbols }
-        }) => {
+        [ACTIONS.REMOVE_ALL_KEY_FRAMES]: () => {
             keyFramesManager.synch({});
             return {
                 keyFrames: {},
-                symbols: symbols.map(s => ({ ...s, animation: null }))
             };
         },
         [ACTIONS.EXPAND_FAMILY]: ({
@@ -737,9 +726,7 @@ const history = [],
             tot: tot / (2 ** 10)
         });
         history[historyCursor++] = prev;
-
-        console.log({ type, history });
-    }, 1000),
+    }, UNDO_UNBOUNCING),
 
     reducer = (oldState, action) => {
         const { payload = {}, type } = action;

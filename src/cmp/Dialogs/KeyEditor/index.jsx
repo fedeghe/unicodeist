@@ -12,8 +12,7 @@ import {
     FileUpload as FileUploadIcon,
     GetApp as GetAppIcon,
     Close as CloseIcon,
-    Delete as DeleteForeverIcon
-
+    Delete as DeleteIcon
 } from '@mui/icons-material';
 
 import CodeMirror from '@uiw/react-codemirror';
@@ -23,13 +22,12 @@ import ctx from 'src/Context';
 
 import useStyles from './styles';
 
-import { uniqueID, saveAsFileJSON, importFromFile, downloadAs } from 'src/utils';
+import { saveAsFileJSON, importFromFile, downloadAs } from 'src/utils';
 import ACTIONS from 'src/reducer/actions';
 import SnackMessage from 'src/cmp/SnackMessage';
 import {
     getBaseNamedKeyFrame,
-    getBaseNamedAnimate,
-    UNSELECTED
+    UNSELECTED,
 } from 'src/constants';
 
 const KeyEditorDialog = ({ visibility, setVisibility }) => {
@@ -43,21 +41,21 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                 fullscreen
             }
         } = useContext(ctx),
-        getKeyName = () => `kf_${uniqueID}`,
+        // getKeyName = () => `kf_${uniqueID}`,
         preselectedAnimation = symbols.find(s => s.id === focusedSymbolId)?.animation,
         preselected = preselectedAnimation in keyFrames ? keyFrames[preselectedAnimation] : {},
 
-        keyName = getKeyName(),
-        [keyFrame, setKeyFrame] = useState(preselected.keyFrame || getBaseNamedKeyFrame(keyName)),
-        [animate, setAnimate] = useState(preselected?.animate || getBaseNamedAnimate(keyName)),
+        // keyName = getKeyName(),
+        [keyFrame, setKeyFrame] = useState(preselected.keyFrame || getBaseNamedKeyFrame),
+        
         [selected, setSelected] = useState(preselected.name || UNSELECTED),
         [name, setName] = useState(preselected.name || ''),
         [confirmationVisibility, setConfirmationVisibility] = useState(false),
         [confirmationMessage, setConfirmationMessage] = useState(''),
         reset = () => {
-            const kn = getKeyName();
-            setKeyFrame(getBaseNamedKeyFrame(kn));
-            setAnimate(getBaseNamedAnimate(kn));
+            // const kn = getKeyName();
+            // setKeyFrame(getBaseNamedKeyFrame(kn));
+            
             setName('');
             setSelected(UNSELECTED);
         },
@@ -70,15 +68,20 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
             },
             [setVisibility]
         ),
-        onChangeKeyFrame = useCallback(val => setKeyFrame(val), []),
-        onChangeAnimate = useCallback(val => setAnimate(val), []),
+        getKeyFrameName = kf => {
+            const n = kf.match(/@keyframes\s([a-zA-Z0-9_-]*\s?)\{.*/);
+            return n ? n[1] : false;
+        },
+        onChangeKeyFrame = useCallback(val => {
+            const n = getKeyFrameName(val);
+            if (n) setName(n);
+            setKeyFrame(val);
+        }, []),
         loadKeyFrame = e => {
             const v = e.target.value;
             if (v !== UNSELECTED) {
-                const { keyFrame: kf, animate: a } = keyFrames[v];
                 setName(v);
-                setAnimate(a);
-                setKeyFrame(kf);
+                setKeyFrame(keyFrames[v]);
                 setSelected(v);
             } else {
                 reset();
@@ -88,7 +91,7 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
             dispatch({
                 type: ACTIONS.UPDATE_KEY_FRAME,
                 payload: {
-                    name, keyFrame, animate
+                    name, keyFrame
                 }
             });
             showConfirmation(updating ? 'updated' : 'saved');
@@ -112,7 +115,9 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
             reset();// setVisibility(false);
         },
         onName = e => {
-            setName(e.target.value);
+            const n = e.target.value;
+            setName(n);
+            setKeyFrame(keyFrame.replace(/@keyframes\s.*\s?\{/, `@keyframes ${n}{`));
         },
         onKeyDown = useCallback(e => {
             if (!fullscreen && e.key === 'Escape') {
@@ -149,7 +154,7 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                         {[
                             hasKeyFrames && {
                                 title: "clear all existing key frames",
-                                icon: <DeleteForeverIcon />,
+                                icon: <DeleteIcon />,
                                 onClick: onDeleteAll
                             },
                             {
@@ -197,7 +202,15 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                                 {Object.keys(keyFrames).map(key => <MenuItem key={key} value={key}>{key}</MenuItem>)}
                             </Select>    
                             {selected !== name && selected !== UNSELECTED &&
-                                <Alert className={classes.Hint} severity="warning">remember to update the animation-name in both to a valid unused one</Alert>
+                                /*
+                                    TODO:
+                                    here I need to add an additional condition so to show this warning
+                                    only if the "name" named keyframes is used in at least one
+                                    symbol.additionalStyles
+                                    then at that point when shown would be good to show the labels of
+                                    all symbols that are using it
+                                */
+                                <Alert className={classes.Hint} severity="warning">remember to update the animation-name where used</Alert>
                             }
                         </div>
                     )}
@@ -212,16 +225,7 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                             onChange={onChangeKeyFrame}
                         />
                     </div>
-                    <div className={classes.Editor2}>
-                        <CodeMirror
-                            extensions={[css()]}
-                            value={animate}
-                            height="200px"
-                            width="500px"
-                            theme="dark"
-                            onChange={onChangeAnimate}
-                        />
-                    </div>
+
                     <div className={classes.Bottom}>
                         <Tooltip title="close editor">
                             <Button onClick={onClose} color="error">Close</Button>

@@ -87,7 +87,6 @@ Seems clear (and quite obvious also the reason) that whenever few elements can p
         - using the range inputs
         - drag the _symbol_
         - when focused press `⇧ + arrow` (1px move each)
-    - apply one of the `keyFrames` listed (or imported) in the keyFrames editor
 
 
 <img align="right" width="250"  src="src/img/ss3.png?raw=true">  

@@ -1,15 +1,14 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import useStyles from './styles';
 
 import ctx from 'src/Context';
-import {css2jss, css2json} from 'src/utils';
+import {css2json} from 'src/utils';
 import ACTIONS from 'src/reducer/actions';
 
 const CanvasSymbol = ({symbol}) => {
     const {
             state: {
                 focusedSymbolId,
-                keyFrames
             },
             dispatch
         } = useContext(ctx),
@@ -18,7 +17,7 @@ const CanvasSymbol = ({symbol}) => {
         isTarget = focusedSymbolId===symbol.id,
         {
             char, zIndex, left, top, color,
-            faded,opacity, fontFamily, fontWeight,
+            faded, opacity, fontFamily, fontWeight,
             rotationX, rotationY, rotationZ,
             skewX, skewY,
             scale, scaleX, scaleY,
@@ -53,10 +52,6 @@ const CanvasSymbol = ({symbol}) => {
                 }
             });
         },
-        baseAnim = symbol.animation in keyFrames
-            ? css2jss(keyFrames[symbol.animation])
-            : {},
-        [animAnim, setAnimAnim] = useState(baseAnim.animation),
         mergeAdditionalStyles = () => {
             const ast = additionalStyles ? css2json(additionalStyles) : {},
                 filter = [`blur(${blur}px)`];
@@ -67,13 +62,6 @@ const CanvasSymbol = ({symbol}) => {
             ast.filter = filter.join(' ');
             return ast;
         };
-
-    useEffect(() => {
-        const { ani }  = symbol.animation in keyFrames
-            ? css2jss(keyFrames[symbol.animation])
-            : {};
-        setAnimAnim(ani);
-    }, [keyFrames[symbol.animation], symbol.animation]);
     
     return <div
             onDragStart={onDragStart}
@@ -106,7 +94,6 @@ const CanvasSymbol = ({symbol}) => {
                 fontFamily,
                 zIndex,
                 ...(!faded && opacity < 1 && {opacity}),
-                ...animAnim,
                 fontStyle: italic ? 'italic' : 'normal',
                 fontSize:'20px'
             }}
