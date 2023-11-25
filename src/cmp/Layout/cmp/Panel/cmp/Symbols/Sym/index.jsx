@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
-import { Card, Typography, Checkbox } from '@mui/material';
+import { Card, Typography } from '@mui/material';
 import {
     ArrowDropUp as ArrowDropUpIcon,
     ArrowDropDown as ArrowDropDownIcon
@@ -9,7 +9,7 @@ import {
 
 import {
     Label, Zindex, Element,
-    Styles, Position, Animation
+    Styles, Position
 } from './cmp';
 
 import useStyles from './styles';
@@ -73,12 +73,10 @@ const Sym = ({ sym }) => {
                     <Styles sym={sym} />
                     <hr className={classes.Hr} />
                     <Position sym={sym} />
-                    <hr className={classes.Hr} />
-                    <Animation sym={sym} />
                 </div> : <div className={classes.HoverLight}>
                     {Boolean(symbols.length > 1) &&
                         <div>
-                            <Checkbox checked={selected.includes(id)} onClick={onCheckToggle} />
+                            <input type="checkbox" checked={selected.includes(id)} onClick={onCheckToggle} />
                         </div>}
                     <div>
                         <Typography variant="body1">{label}</Typography>

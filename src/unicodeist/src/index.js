@@ -39,20 +39,13 @@
         /**
          * returns root or symbol
          */
-        createElement = function (sty, cnt, ani) {
+        createElement = function (sty, cnt) {
             var node = document.createElement('div'),
                 styles = [cnt
                     ? lbs.f + '-size:20' + lbs.p + ';' + lbs.po + ':absolute;' + lbs.t + '-origin:' + lbs.cn + ' ' + lbs.cn
                     : lbs.po + ':relative;overflow:hidden'
                 ],
                 k;
-
-            
-            if (ani && ani in data.kfs) {
-                var ks = data.kfs[ani].an.matchAll(/([A-Za-z0-9-_]*):([A-Za-z0-9-_.\s]*);/g),
-                    kz = [...ks];
-                styles = styles.concat(kz);
-            }
 
             for (k in sty) {
                 switch (k) {
@@ -96,13 +89,13 @@
 
     for(var k in data.kfs) {
         var s = document.createElement('style');
-        s.innerHTML = data.kfs[k].fk;
+        s.innerHTML = data.kfs[k];
         root.appendChild(s);
     }
     // append children symbols
     data.sym.forEach(function (symbol) {
         root.appendChild(
-            createElement(symbol.sty, symbol.cnt, symbol.ani)
+            createElement(symbol.sty, symbol.cnt)
         );
     });
     script.parentNode.insertBefore(root, script.nextSibling);

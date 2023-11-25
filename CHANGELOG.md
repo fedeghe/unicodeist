@@ -34,3 +34,6 @@ bulk actions:
 
 0.0.15
 - undo added
+
+0.0.16
+- changed the way the keyframes are supposed to be used

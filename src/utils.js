@@ -1,7 +1,7 @@
 import {
     UNICODEIST_SCRIPT_URI,
     FONT_FAMILIES_REDUCTION_MAP,
-    UNSELECTED
+    // UNSELECTED
 } from './constants';
 
 export const uniqueID = new function () {
@@ -23,44 +23,49 @@ export const cleanCode = code => code
     .replace(/,\s/gm, ",")              // remove spaces after ,
     .replace(/draggable=[true|false]/gm, "");              // remove draggable attrs
 
+const cleanKf = kf => kf.replace(/\n/g, '').replace(/\/\*[^]*?\*\//g, '');
+
 export const cleanCodeFromState = state => {
     const root = document.createElement('div'),
         {
             width, height,
             backgroundColorAlpha, backgroundColor,
             symbols,
-            bgStyles
+            bgStyles,
+            keyFrames
         } = state,
         bgColor = backgroundColorAlpha ? `${backgroundColor}00` : backgroundColor;
     root.setAttribute('style', [
         `width:${width}px`,
         `height:${height}px`,
+        'pointer-events: none',
         `background-color:${bgColor.substring(0, 9)}`,
         `position:relative;overflow:hidden`,
         bgStyles ? css2string(bgStyles) : ''
     ].join(';'));
 
-
-    [...new Set(
-        state.symbols
-            .filter(symbol => symbol.animation && symbol.animation !== UNSELECTED)
-            .map(symbol => symbol.animation)
-    )].forEach(a => {
+    Object.keys(keyFrames).reduce((acc, k) => {
+        const inSymbols = symbols.find(({additionalStyles}) => 
+            additionalStyles.includes(` ${k} `)
+        );
+        if (inSymbols && !acc.includes(k)) acc.push(k);
+        return acc;
+    }, []).forEach(a => {
         var s = document.createElement('style');
-        s.innerHTML = state.keyFrames[a].keyFrame;
+        s.innerHTML = cleanKf(keyFrames[a]);
         root.appendChild(s);
     });
-
 
     symbols.map(sym => {
         var child = document.createElement('div');
         child.innerHTML = sym.char;
         child.setAttribute('style',
             [
-                ...((sym.animation && sym.animation in state.keyFrames)
-                    ? css2string(state.keyFrames[sym.animation].animate).split(';')
-                    : []
-                ),
+                // ...((sym.animation && sym.animation in state.keyFrames)
+                //     ? css2string(state.keyFrames[sym.animation].animate).split(';')
+                //     : []
+                // ),
+                
                 json2string(mergeAdditionalStyles({
                     additionalStyles: sym.additionalStyles,
                     blur: sym.blur
@@ -87,6 +92,7 @@ export const cleanCodeFromState = state => {
         );
         return child;
     }).forEach(c => root.appendChild(c));
+    // console.log({r:1});
     return root.outerHTML;
 };
 
@@ -215,8 +221,9 @@ export const uncompressStateForImport = cstate => {
         filteredCount,
         hoveringId,
         zoomLevel,
+        keyFrames,
         symbols: symbols.map(({
-            i, ch, lb, zi, l, t, c, a, ff, fw, 
+            i, ch, lb, zi, l, t, c, ff, fw, 
             skx, sky, rx, ry, rz, b, o,
             s, sx, sy, as, tu, f
         }) => ({
@@ -227,7 +234,6 @@ export const uncompressStateForImport = cstate => {
             left: l, 
             top: t, 
             color: c, 
-            animation: a, 
             fontFamily: ff, 
             fontWeight: fw, 
             skewX: skx,
@@ -243,16 +249,7 @@ export const uncompressStateForImport = cstate => {
             additionalStyles: as, 
             targetUp: tu, 
             faded: f,
-        })),
-        keyFrames: Object.entries(keyFrames)
-            .reduce((acc, [k, {n: name, kf: keyFrame, a: animate}]) => {
-                acc[k] = {
-                    name,
-                    keyFrame,
-                    animate
-                };
-                return acc;
-            }, {})
+        }))
     };
 };
 
@@ -283,7 +280,7 @@ export const compressStateForExport = state => {
         hoveringId: hid,
         zoomLevel: z,
         symbols, 
-        keyFrames,
+        keyFrames: kf,
     } = state;
     const exp = {
         bgca, bgc,
@@ -293,6 +290,7 @@ export const compressStateForExport = state => {
         suf, css, sc, bgs, pr, fs,
         s, sm, tk, fc, hid, 
         z,
+        kf,
         sy: symbols.map(({
             id: i,
             char: ch,
@@ -301,7 +299,6 @@ export const compressStateForExport = state => {
             left: l, 
             top: t, 
             color: c, 
-            animation: a, 
             fontFamily: ff, 
             fontWeight: fw, 
             skewX: skx,
@@ -318,19 +315,10 @@ export const compressStateForExport = state => {
             targetUp: tu, 
             faded: f, 
         }) => ({
-            i, ch, lb, zi, l, t, c, a, ff, fw, 
+            i, ch, lb, zi, l, t, c, ff, fw, 
             skx, sky, rx, ry, rz, b, o,
             s, sx, sy, as, tu, f
-        })),
-        kf: Object.entries(keyFrames).reduce((acc, [k, {
-            name: n,
-            keyFrame: kf,
-            animate: a
-        }]) => {
-            acc[k] = {n, kf, a};
-            return acc;
-        }, {})
-
+        }))
     };
     delete exp.availableSymbols;
     return JSON.stringify(exp);
@@ -397,22 +385,17 @@ const getUnicodeistData = j => JSON.stringify({
         }
         ),
     },
-    kfs: [...new Set(
-        j.symbols
-            .filter(symbol => symbol.animation && symbol.animation !== UNSELECTED)
-            .map(symbol => symbol.animation)
-    )].reduce((acc, animation) => {
-        acc[animation] = {
-            fk: j.keyFrames[animation].keyFrame.replace(/\n/g, ''),
-            an: j.keyFrames[animation].animate.replace(/\n/g, '')
-        };
+    kfs: Object.keys(j.keyFrames).reduce((acc, k) => {
+        const inSymbols = j.symbols.find(({additionalStyles}) => 
+            additionalStyles.includes(` ${k} `)
+        );
+        if (inSymbols) acc[k] = cleanKf(j.keyFrames[k]);
         return acc;
     }, {}),
     sym: j.symbols.map(s => ({
         id: s.id.replace(/U_/, 'U_i'),
         l: s.label,
         cnt: s.char,
-        ani: s.animation,
         sty: {
             ...(s.additionalStyles ? {
                 add: `${json2string(mergeAdditionalStyles({
@@ -494,14 +477,6 @@ export function css2string(v) {
     return ret;
 }
 
-export const css2jss = ({ keyFrame, animate }) => ({
-    ani: css2json(animate),
-    kf: keyFrame
-});
-export const css2jstring = ({ keyFrame, animate }) => ({
-    ani: css2string(animate),
-    kf: keyFrame
-});
 
 /* View in fullscreen */
 export const openFullscreen = () => {
@@ -550,8 +525,6 @@ const def = {
     getCodes,
     count,
     filter,
-    css2jss,
-    css2jstring,
     css2string,
     openFullscreen,
     closeFullscreen,
