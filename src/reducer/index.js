@@ -504,18 +504,23 @@ const history = [],
         [ACTIONS.MOVE_TARGET_ONE_PX]: ({
             payload: key,
             oldState: {
-                focusedSymbolId, symbols
+                focusedSymbolId, symbols,
+                selected
             }
         }) => {
             const what = {
-                ArrowLeft: { field: 'left', diff: -1 },
-                ArrowRight: { field: 'left', diff: 1 },
-                ArrowUp: { field: 'top', diff: -1 },
-                ArrowDown: { field: 'top', diff: 1 },
-            }[key];
+                    ArrowLeft: { field: 'left', diff: -1 },
+                    ArrowRight: { field: 'left', diff: 1 },
+                    ArrowUp: { field: 'top', diff: -1 },
+                    ArrowDown: { field: 'top', diff: 1 },
+                }[key],
+                mustConsider = selected.length
+                    ? ({ id }) => selected.includes(id)
+                    : ({ id }) => id === focusedSymbolId;
+
             return {
                 symbols: symbols.map(s => (
-                    s.id === focusedSymbolId ?
+                    mustConsider(s) ?
                         {
                             ...s,
                             [what.field]: s[what.field] + what.diff
