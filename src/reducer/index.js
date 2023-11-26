@@ -387,7 +387,7 @@ const history = [],
             try {
                 keyFrames = JSON.parse(payload);
                 const els = Object.values(keyFrames);
-                if (!('name' in els[0]) || !('keyFrame' in els[0])) {
+                if ( els.length === 0 ) {
                     throw UNSUPPORTEDFILE_MESSAGE;
                 }
             } catch (e) {

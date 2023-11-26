@@ -166,7 +166,6 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                                             type: ACTIONS.IMPORT_KEYFRAMES,
                                             payload: cnt
                                         });
-                                        setVisibility(false);
                                     }
                                 })
                             },
