@@ -63,7 +63,7 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
         }, [fullscreen]),
         keyFrameNames = Object.keys(keyFrames),
         keyFramesNum = keyFrameNames.length;
-    console.log({keyFrames});
+    
     return (
         <Dialog
             open={visibility}

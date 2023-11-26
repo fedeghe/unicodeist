@@ -3,7 +3,6 @@ import {
     Dialog, DialogTitle, DialogContent,
     Button, TextField, Tooltip,
     Select, MenuItem,
-    Alert,
     SpeedDial, SpeedDialAction, 
 } from '@mui/material';
 
@@ -41,21 +40,21 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                 fullscreen
             }
         } = useContext(ctx),
-        // getKeyName = () => `kf_${uniqueID}`,
-        preselectedAnimation = symbols.find(s => s.id === focusedSymbolId)?.animation,
-        preselected = preselectedAnimation in keyFrames ? keyFrames[preselectedAnimation] : {},
-
-        // keyName = getKeyName(),
-        [keyFrame, setKeyFrame] = useState(preselected.keyFrame || getBaseNamedKeyFrame),
+        // list all used keyframes
+        usedKeyFrames = Object.keys(keyFrames).filter(k => symbols.some(s => s.additionalStyles.includes(` ${k} `))),
         
-        [selected, setSelected] = useState(preselected.name || UNSELECTED),
-        [name, setName] = useState(preselected.name || ''),
+        // check if the current focused symbol uses a keyframe
+        focusedSymbol = focusedSymbolId ? symbols.find(s => s.id === focusedSymbolId) : false,
+        maybeSymbolUsesKeyframe = focusedSymbol
+            ? Object.keys(keyFrames).find(k => focusedSymbol.additionalStyles.includes(` ${k} `))
+            : false,
+        // and in case preselect it
+        [keyFrame, setKeyFrame] = useState(maybeSymbolUsesKeyframe ? keyFrames[maybeSymbolUsesKeyframe] : getBaseNamedKeyFrame),
+        [selected, setSelected] = useState(maybeSymbolUsesKeyframe || UNSELECTED),
+        [name, setName] = useState(maybeSymbolUsesKeyframe || ''),
         [confirmationVisibility, setConfirmationVisibility] = useState(false),
         [confirmationMessage, setConfirmationMessage] = useState(''),
         reset = () => {
-            // const kn = getKeyName();
-            // setKeyFrame(getBaseNamedKeyFrame(kn));
-            
             setName('');
             setSelected(UNSELECTED);
         },
@@ -161,12 +160,11 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                                 title: "import",
                                 icon: <GetAppIcon />,
                                 onClick: () => importFromFile({
-                                    onContentReady: cnt => {
+                                    onContentReady: cnt => 
                                         dispatch({
                                             type: ACTIONS.IMPORT_KEYFRAMES,
                                             payload: cnt
-                                        });
-                                    }
+                                        })
                                 })
                             },
                             hasKeyFrames && {
@@ -199,18 +197,7 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                             <Select onChange={loadKeyFrame} value={selected}>
                                 <MenuItem value={UNSELECTED}>select an existing one</MenuItem>
                                 {Object.keys(keyFrames).map(key => <MenuItem key={key} value={key}>{key}</MenuItem>)}
-                            </Select>    
-                            {selected !== name && selected !== UNSELECTED &&
-                                /*
-                                    TODO:
-                                    here I need to add an additional condition so to show this warning
-                                    only if the "name" named keyframes is used in at least one
-                                    symbol.additionalStyles
-                                    then at that point when shown would be good to show the labels of
-                                    all symbols that are using it
-                                */
-                                <Alert className={classes.Hint} severity="warning">remember to update the animation-name where used</Alert>
-                            }
+                            </Select>
                         </div>
                     )}
                     <TextField required label="Name it" variant="standard" value={name} onInput={onName} />
@@ -229,7 +216,7 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                         <Tooltip title="close editor">
                             <Button onClick={onClose} color="error">Close</Button>
                         </Tooltip>
-                        {updating && <Button color="warning" onClick={onDelete}>Delete</Button>}
+                        {updating && <Button color="warning" disabled={usedKeyFrames.includes(name)} onClick={onDelete}>Delete</Button>}
                         <Button disabled={!name} color="success" onClick={onSave}>{updating ? "Update" : "Save"}</Button>
                     </div>
                 </div>
