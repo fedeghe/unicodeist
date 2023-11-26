@@ -63,7 +63,6 @@ export const DEFAULT_BG_STYLES = `{
     // background-image: linear-gradient(to right, red , yellow);
 }`;
 export const DEFAULT_ADDITIONAL_STYLES = `{
-    // animation: example 5s linear 2s infinite alternate;
     // animation-name: example;
     // animation-duration: 5s;
     // animation-timing-function: linear;
