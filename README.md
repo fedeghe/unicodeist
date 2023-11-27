@@ -20,11 +20,11 @@ Clicking <a href="./src/img/comparison/fg.json?raw=true" download>here</a> you c
 One thing to notice here is that most of the times the size comparison is quite relevant:
 
 
-| example    | .jpeg | .png | .json | embed html | embed script |
+| example    | .jpeg | .png | .json | embed script | embed html |
 | -------- | ------- | ------- | ------- | ------- | ------- |
-| [<img src="src/img/comparison/fg.png" width="50"/>](image)<br/>500x350  | 160 KB | 44 KB | 540 B  | 1 KB | 627 B |
-| [<img src="src/img/comparison/unicodeist.png" width="50"/>](image)<br/>500 x 250 | 63 KB | 40 KB | 1.2 KB | 2.5 KB | 1.3KB |
-| [<img src="src/img/comparison/HumanCoded100.png" width="50"/>](image) | 10 KB | 3 KB | 1.5 KB | 3.5KB | 1.6 KB |
+| [<img src="src/img/comparison/fg.png" width="50"/>](src/img/comparison/fg.png)<br/>500x350  | 160 KB | 44 KB | 540 B  | 627 B | 1 KB |
+| [<img src="src/img/comparison/unicodeist.png" width="50"/>](src/img/comparison/unicodeist.png)<br/>500 x 250 | 63 KB | 40 KB | 1.2 KB | 1.3KB | 2.5 KB |
+| [<img src="src/img/comparison/HumanCoded100.png" width="50"/>](src/img/comparison/HumanCoded100.png) | 10 KB | 3 KB | 1.5 KB | 1.6 KB | 3.5KB |
 
 Seems clear (and quite obvious also the reason) that whenever few elements can potentially compose the creative then the benefits of using one of the _unicodeist_ embedding options grow proportionally to the image size, cause the exported image can only grow while the embedding html or script remains unchanged.
 
