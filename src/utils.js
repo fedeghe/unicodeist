@@ -1,8 +1,10 @@
 import {
     UNICODEIST_SCRIPT_URI,
     FONT_FAMILIES_REDUCTION_MAP,
-    // UNSELECTED
 } from './constants';
+
+import io from 'src/io';
+
 
 export const uniqueID = new function () {
     var count = 0,
@@ -25,15 +27,14 @@ export const cleanCode = code => code
 
 const cleanKf = kf => kf.replace(/\n/g, '').replace(/\/\*[^]*?\*\//g, '');
 
-export const cleanCodeFromState = state => {
+export const cleanCodeFromState = ({
+    width, height,
+    backgroundColorAlpha, backgroundColor,
+    symbols,
+    bgStyles,
+    keyFrames
+}) => {
     const root = document.createElement('div'),
-        {
-            width, height,
-            backgroundColorAlpha, backgroundColor,
-            symbols,
-            bgStyles,
-            keyFrames
-        } = state,
         bgColor = backgroundColorAlpha ? `${backgroundColor}00` : backgroundColor;
     root.setAttribute('style', [
         `width:${width}px`,
@@ -60,12 +61,7 @@ export const cleanCodeFromState = state => {
         var child = document.createElement('div');
         child.innerHTML = sym.char;
         child.setAttribute('style',
-            [
-                // ...((sym.animation && sym.animation in state.keyFrames)
-                //     ? css2string(state.keyFrames[sym.animation].animate).split(';')
-                //     : []
-                // ),
-                
+            [   
                 json2string(mergeAdditionalStyles({
                     additionalStyles: sym.additionalStyles,
                     blur: sym.blur
@@ -92,7 +88,7 @@ export const cleanCodeFromState = state => {
         );
         return child;
     }).forEach(c => root.appendChild(c));
-    // console.log({r:1});
+    
     return root.outerHTML;
 };
 
@@ -100,7 +96,8 @@ export const count = symbols => symbols.reduce(
     (acc, { data }) => acc + data.reduce(
         (acc0, { charSet }) => acc0 + charSet.length
         , 0)
-    , 0);
+    , 0
+);
 
 export const debounce = (func, delay) => {
     var to,
@@ -167,6 +164,7 @@ export const filter = ({ symbols, filter, debug = false }) => {
     }
     return res;
 };
+
 export const uncompressStateForImport = cstate => {
     const {
         bgca: backgroundColorAlpha,
@@ -179,7 +177,6 @@ export const uncompressStateForImport = cstate => {
         bgc: backgroundColor,
         asf: asciiSelectorFilter,
         sf: symbolsFilter,
-        apf: asciiPanelFilterByIconName,
         alapoas: letAsciiPanelOpenAfterSelection,
         suf: superFocus,
         css: canScrollSymbols,
@@ -191,7 +188,6 @@ export const uncompressStateForImport = cstate => {
         sm: swapMode,
         tk: themeKey,
         fc: filteredCount,
-        hid: hoveringId,
         z: zoomLevel = 1,
         sy: symbols, 
         kf: keyFrames
@@ -207,7 +203,6 @@ export const uncompressStateForImport = cstate => {
         backgroundColor,
         asciiSelectorFilter,
         symbolsFilter,
-        asciiPanelFilterByIconName,
         letAsciiPanelOpenAfterSelection,
         superFocus,
         canScrollSymbols,
@@ -219,13 +214,12 @@ export const uncompressStateForImport = cstate => {
         swapMode,
         themeKey,
         filteredCount,
-        hoveringId,
         zoomLevel,
         keyFrames,
         symbols: symbols.map(({
             i, ch, lb, zi, l, t, c, ff, fw, 
             skx, sky, rx, ry, rz, b, o,
-            s, sx, sy, as, tu, f
+            s, sx, sy, as, f
         }) => ({
             id: i.replace(/U_/, 'U_i'),
             char: ch,
@@ -247,7 +241,6 @@ export const uncompressStateForImport = cstate => {
             scaleX: sx, 
             scaleY: sy, 
             additionalStyles: as, 
-            targetUp: tu, 
             faded: f,
         }))
     };
@@ -265,7 +258,6 @@ export const compressStateForExport = state => {
         backgroundColor: bgc,
         asciiSelectorFilter: asf,
         symbolsFilter: sf,
-        asciiPanelFilterByIconName: apf,
         letAsciiPanelOpenAfterSelection: alapoas,
         superFocus: suf,
         canScrollSymbols: css,
@@ -277,7 +269,6 @@ export const compressStateForExport = state => {
         swapMode: sm,
         themeKey: tk,
         filteredCount: fc,
-        hoveringId: hid,
         zoomLevel: z,
         symbols, 
         keyFrames: kf,
@@ -286,9 +277,9 @@ export const compressStateForExport = state => {
         bgca, bgc,
         w, h, mw, mh,
         apv,
-        fsid, asf, sf, apf, alapoas,
+        fsid, asf, sf, alapoas,
         suf, css, sc, bgs, pr, fs,
-        s, sm, tk, fc, hid, 
+        s, sm, tk, fc, 
         z,
         kf,
         sy: symbols.map(({
@@ -312,12 +303,11 @@ export const compressStateForExport = state => {
             scaleX: sx, 
             scaleY: sy, 
             additionalStyles: as, 
-            targetUp: tu, 
             faded: f, 
         }) => ({
             i, ch, lb, zi, l, t, c, ff, fw, 
             skx, sky, rx, ry, rz, b, o,
-            s, sx, sy, as, tu, f
+            s, sx, sy, as, f
         }))
     };
     delete exp.availableSymbols;
@@ -330,8 +320,7 @@ export const compressStateForExport = state => {
  */
 export const saveAsStateFileJSON = state =>
     new Promise(resolve => {
-        // const blob = new Blob([getUnicodeistData(state)]);
-        const blob = new Blob([compressStateForExport(state)]);
+        const blob = new Blob([io.compress(state)]);
         resolve(window.URL.createObjectURL(blob));
     });
 export const saveAsFileJSON = json =>
@@ -382,8 +371,7 @@ const getUnicodeistData = j => JSON.stringify({
         },
         ...(j.bgStyles && {
             bgi: cleanCssString(j.bgStyles)
-        }
-        ),
+        }),
     },
     kfs: Object.keys(j.keyFrames).reduce((acc, k) => {
         const inSymbols = j.symbols.find(({additionalStyles}) => 
@@ -431,7 +419,8 @@ const getUnicodeistData = j => JSON.stringify({
 });
 
 export const getUnicodeistScriptTag = state => {
-    const dataUnicodeist = getUnicodeistData(state);
+    // const dataUnicodeist = getUnicodeistData(state);
+    const dataUnicodeist = io.compress(state);
     return `<script src="${UNICODEIST_SCRIPT_URI}" data-unicodeist='${dataUnicodeist}'></script>`;
 };
 

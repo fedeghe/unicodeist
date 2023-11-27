@@ -14,7 +14,7 @@ import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
 
 import {
-    DEFAULT_BG_STYLES
+    DEFAULTS,
 } from 'src/constants';
 
 const BgStylesEditor = ({ visibility, setVisibility }) => {
@@ -27,9 +27,9 @@ const BgStylesEditor = ({ visibility, setVisibility }) => {
             }
         } = useContext(ctx),
 
-        [value, setValue] = useState(bgStyles || DEFAULT_BG_STYLES),
+        [value, setValue] = useState(bgStyles || DEFAULTS.TPLS.BG_STYLES),
         reset = () => {
-            setValue(DEFAULT_BG_STYLES);
+            setValue(DEFAULTS.TPLS.BG_STYLES);
         },
         onChangeValue = useCallback(val => setValue(val), []),
         onClose = useCallback(

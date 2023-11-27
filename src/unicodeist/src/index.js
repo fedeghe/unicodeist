@@ -1,101 +1,82 @@
 (function () {
-    var script = document.currentScript,
-        // must be in synch with src/constants.js
-        // FONT_FAMILIES_REDUCTION_MAP
-        FFRM = {
-            ar: 'Arial', v: 'Verdana', ta: 'Tahoma', tr: 'Trebuchet MS', tn: 'Times New Roman',
-            ge: 'Georgia', ga: 'Garamond', c: 'Courier New',b: 'Brush Script MT'
+    var cleanKf = function(kf) {
+            return kf
+                .replace(/^\{/, '')
+                .replace(/\}$/, '')
+                .replace(/\/\*[^]*?\*\//g, '')
+                .replace(/\n/g, '');
         },
-        lbs = {
-            r:'rotate', s:'scale', f:'font', c:'color',
-            d:'deg', po:'position', cn:'center', p:'px',
-            t:'transform', fl:'filter', b:'blur', sk:'skew'
+        defs = {
+            w: 500,
+            h: 500,
+            bgc: '#FFFFFF',
+            c: '#000000',
+            ff: 'Verdana',
+            fw: '400',
+            fs : '20px'
         },
-        /**
-         * uncompressing function map 
-         */
-        map = {
-            w: function (v) { return 'width:' + v + lbs.p; },
-            h: function (v) { return 'height:' + v + lbs.p; },
-            bgc: function (v) { return 'background-' + lbs.c + ':' + v.c + (v.a ? '00' : 'ff'); },
-            bgi: function (v) { return v; },
-            zi: function (v) { return 'z-index:' + v; },
-            c: function (v) { return lbs.c + ':' + v; },
-            ff: function (v) { return lbs.f + '-family:' + FFRM[v]; },
-            fw: function (v) { return lbs.f + '-weight:' + v; },
-            o: function (v) { return 'opacity:' + v; },
-            s: function (v) { return v !== 1 ? lbs.s + '(' + v + ')' : false; },
-            sx: function (v) { return v !== 1 ? lbs.s + 'X(' + v + ')' : false; },
-            sy: function (v) { return v !== 1 ? lbs.s + 'Y(' + v + ')' : false; },
-            rx: function (v) { return v ? lbs.r + 'X(' + v + lbs.d + ')' : false; },
-            ry: function (v) { return v ? lbs.r + 'Y(' + v + lbs.d + ')' : false; },
-            rz: function (v) { return v ? lbs.r + 'Z(' + v + lbs.d + ')' : false; },
-            sk: function (x,y) { return (x||y) ? lbs.sk + '(' + x + lbs.d + ',' + y + lbs.d + ')' : false; },
-            bl: function (v) { return v ? lbs.b + '(' + v + lbs.p + ')' : false; },
-            add: function (v) { return v;},
-            it: function (v) { return v ? lbs.f + '-style:italic' : false; },
-        },
+        script = document.currentScript,
+        /* returns root or symbol */
+        createElement = function (d) {
+            var isRoot = 'sym' in d,
+                mergeDasDb = function (ast, bl){
+                    if (ast) {
+                        var _ast = cleanKf(ast);
+                        return bl
+                            ? (_ast.includes('filter:'))
+                                ? _ast.replace('filter:', 'filter: blur(' + bl + 'px)')
+                                : _ast + 'filter:blur(' + bl + 'px)'
+                            : _ast;
+                    }
+                    return bl && 'filter:blur('+bl+'px)';
+                },
+                node = document.createElement('div'),
+                // just to save few bytes I'll not map repeated strings
+                styles = isRoot
+                    ? [
+                        d.bgs && cleanKf(d.bgs),
+                        'width:'+(d.w || defs.w) + 'px',
+                        'height:'+(d.h || defs.h) + 'px',
+                        'background-color:' + (d.bgc || defs.bgc) + (d.bgca ? '00' : ''),
+                        'position:relative;overflow:hidden;pointer-events:none',
+                    ]
+                    : [
+                        'z-index:' + d.zi,
+                        'color:' + (d.c || defs.c),
+                        'font-family:' + (d.ff || defs.ff) ,
+                        'font-weight:' + (d.fw || defs.fw) ,
+                        'font-size:' + defs.fs + ';position:absolute;transform-origin:center center',
+                        (d.o !== 1 && 'opacity:'+d.o),
+                        mergeDasDb(d.as, d.b),
+                        'transform:' + [
+                            'translate('+d.l+'px,'+d.t+'px)',
+                            d.s && d.s!==1 && 'scale(' + d.s +  ')',
+                            d.sx && d.sx!==1 && 'scaleX(' + d.sx +  ')',
+                            d.sy && d.sy!==1 && 'scaleY(' + d.sy +  ')',
+                            d.rx && 'rotateX(' + d.rx +  'deg)',
+                            d.ry && 'rotateY(' + d.ry +  'deg)',
+                            d.rz && 'rotateZ(' + d.rz +  'deg)',
+                            (d.skx || d.sky) && 'skew('+(d.skx||0)+'deg,'+(d.sky||0)+'deg)'
+                        ].filter(Boolean).join(' ')
+                    ];
 
-        /**
-         * returns root or symbol
-         */
-        createElement = function (sty, cnt) {
-            var node = document.createElement('div'),
-                styles = [cnt
-                    ? lbs.f + '-size:20' + lbs.p + ';' + lbs.po + ':absolute;' + lbs.t + '-origin:' + lbs.cn + ' ' + lbs.cn
-                    : lbs.po + ':relative;overflow:hidden;pointer-events:none'
-                ],
-                k;
-
-            for (k in sty) {
-                switch (k) {
-                    case 't':
-                        var trans = [
-                            lbs[k] + ':translate(' + sty[k].trn[0] + lbs.p + ',' + sty[k].trn[1] + lbs.p + ')'
-                        ];
-                        's' in sty[k] && trans.push(map.s(sty[k].s));
-                        'sx' in sty[k] && trans.push(map.sx(sty[k].sx));
-                        'sy' in sty[k] && trans.push(map.sy(sty[k].sy));
-                        'sy' in sty[k] && trans.push(map.rx(sty[k].rx));
-                        'rx' in sty[k] && trans.push(map.rx(sty[k].rx));
-                        'ry' in sty[k] && trans.push(map.ry(sty[k].ry));
-                        'rz' in sty[k] && trans.push(map.rz(sty[k].rz));
-                        'sk' in sty[k] && trans.push(map.sk(sty[k].sk[0],sty[k].sk[1]));
-                        styles.push(
-                            trans.filter(Boolean).join(' ') + ';'
-                        );
-                        break;
-                    case 'f':
-                        var filter = [lbs.fl + ':'];
-                        'bl' in sty[k] && filter.push(map.bl(sty[k].bl));
-                        styles.push(
-                            filter.join(' ') + ';'
-                        );
-                        break;
-                    default:        
-                        k in map && styles.push(
-                            map[k](sty[k])
-                        );
-                        break;
-                }
-            }
-            styles.length && node.setAttribute('style', styles.filter(Boolean).join(';'));
-            cnt && (node.innerHTML = cnt);
+            node.setAttribute('style', styles.filter(Boolean).join(';'));
+            d.ch && (node.innerHTML = d.ch);
             return node;
         },
         rawData = script.dataset.unicodeist,
         data = JSON.parse(rawData),
-        root = createElement(data.sty);
+        root = createElement(data);
 
-    for(var k in data.kfs) {
+    for(var k in data.kf) {
         var s = document.createElement('style');
-        s.innerHTML = data.kfs[k];
+        s.innerHTML = data.kf[k];
         root.appendChild(s);
     }
-    // append children symbols
+    // append children
     data.sym.forEach(function (symbol) {
         root.appendChild(
-            createElement(symbol.sty, symbol.cnt)
+            createElement(symbol)
         );
     });
     script.parentNode.insertBefore(root, script.nextSibling);

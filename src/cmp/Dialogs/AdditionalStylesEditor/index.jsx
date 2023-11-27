@@ -14,7 +14,7 @@ import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
 
 import {
-    DEFAULT_ADDITIONAL_STYLES
+    DEFAULTS,
 } from 'src/constants';
 
 const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
@@ -29,9 +29,9 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
             }
         } = useContext(ctx),
         additionalStyles = symbols.find(sym => sym.id === focusedSymbolId).additionalStyles,
-        [value, setValue] = useState(additionalStyles || DEFAULT_ADDITIONAL_STYLES),
+        [value, setValue] = useState(additionalStyles || DEFAULTS.TPLS.ADDITIONAL_STYLES),
         reset = () => {
-            setValue(DEFAULT_ADDITIONAL_STYLES);
+            setValue(DEFAULTS.TPLS.ADDITIONAL_STYLES);
         },
         onChangeValue = useCallback(val => setValue(val), []),
         onClose = useCallback(

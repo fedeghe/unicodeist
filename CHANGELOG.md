@@ -36,4 +36,7 @@ bulk actions:
 - undo added
 
 0.0.16
-- changed the way the keyframes are supposed to be used
+- changed the way the keyframes are supposed to be used  
+
+0.0.17  
+- export json file size reduced a lot thanks to default values

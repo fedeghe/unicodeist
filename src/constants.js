@@ -1,27 +1,22 @@
 const h = (new Date()).getHours();
 // leave that false, scale does the job
 
+export const getMaxHeight = () => ~~window.innerHeight * 0.9;
+export const getMaxWidth = () => ~~window.innerWidth * 0.9;
 
 export const REPO_URL = 'https://github.com/fedeghe/unicodeist';
-export const WIDTH = 500;
-export const HEIGHT = 500;
 export const MIN_WIDTH = 1;
 export const MIN_HEIGHT = 1;
 export const PANEL_WIDTH = 300;
 export const PANEL_PADDING = 10;
 export const PANEL_FONTSIZE = 14;
-export const SYMBOL_BASE_FONTFAMILY = 'Verdana';
-export const SYMBOL_BASE_FONTWEIGHT = '400';
-export const DEFAULT_BACKGROUND_COLOR = '#FFFFFF';
-export const DEFAULT_SYMBOL_COLOR = '#000000';
+
 export const ITEM_WIDTH = 100;
 export const ITEM_HEIGHT = 140;
 export const ITEM_FOOTER_HEIGHT = 20;
 export const ITEM_FONTSIZE = '2.5em';
 export const THEMES = {'dark' : 'dark', 'light': 'light'};
-export const DEFAULT_THEME = (h > 20 || h < 7) ? THEMES.dark : THEMES.light;
 export const FADED_OPACITY = 0.4;
-export const LET_UNICODE_PANEL_OPEN_AFTER_SELECTION = true;
 export const MIN_SCALE_REV = -150;
 export const MIN_SCALE = 0.01;
 export const MAX_SCALE = 150;
@@ -40,36 +35,82 @@ export const COLLAPSING_SYM_TIME = 0.3;
 export const CLOSE_TOAST_TIMEOUT = 1000;
 export const OFFSET_PERC = 0.3;
 export const HEADER_HEIGHT = 140;
-export const DEFAULT_BACKGROUND_ALPHA = false;
 export const LOCALSTORAGE_KEYFRAMES_KEY = 'keyframes';
 export const UNSELECTED = '__unselected__';
 export const SHOW_UNDO_ICON = true;
 export const UNDO_UNBOUNCING = 1000;
-export const getMaxHeight = () => ~~window.innerHeight * 0.9;
-export const getMaxWidth = () => ~~window.innerWidth * 0.9;
 
-export const getBaseNamedKeyFrame = `@keyframes {
-    from {color: red;}
-    to {color: blue;}
-    /*
-    0% {color: red;}
-    100% {color: blue;}
-    */
-}`;
 
-export const DEFAULT_BG_STYLES = `{
-    // background-image: linear-gradient(180deg, red, yellow);
-    // background-image: linear-gradient(to bottom right, red, yellow);
-    // background-image: linear-gradient(to right, red , yellow);
-}`;
-export const DEFAULT_ADDITIONAL_STYLES = `{
+const TPLS = {
+    ADDITIONAL_STYLES: `{
     // animation-name: example;
     // animation-duration: 5s;
     // animation-timing-function: linear;
     // animation-delay: 2s;
     // animation-iteration-count: infinite;
     // animation-direction: alternate;
-}`;
+}`,
+    BG_STYLES: `{
+    // background-image: linear-gradient(180deg, red, yellow);
+    // background-image: linear-gradient(to bottom right, red, yellow);
+    // background-image: linear-gradient(to right, red , yellow);
+}`,
+    KEYFRAMES: `@keyframes {
+    from {color: red;}
+    to {color: blue;}
+    /*
+    0% {color: red;}
+    100% {color: blue;}
+    */
+}`
+};
+
+
+export const DEFAULTS = {
+    WIDTH: 500,
+    HEIGHT: 500,
+    ADD_PANEL_VISIBILITY: false,
+    ASCII_SELECTOR_FILTER: '',
+    BACKGROUND_ALPHA: false,
+    BACKGROUND_COLOR: '#FFFFFF',
+    BACKGROUND_STYLES: false,
+    CAN_SCROLL_SYMBOLS: true,
+    DOWNLOAD_FORMAT: 'json',
+    FILTERED_COUNT: 0,
+    FOCUSED_SYMBOL_ID: null,
+    FULLSCREEN_MODE: false,
+    KEYFRAMES: {},
+    LET_UNICODE_PANEL_OPEN_AFTER_SELECTION: true,
+    PREVENT_RELOAD: false,
+    SCROLL_TOP: 0,
+    SELECTED: [],
+    SUPERFOCUS: false,
+    SYMBOLS_FILTER: '',
+    SYMBOLS: [],
+    SWAP_MODE: false,
+    THEME_KEY: (h > 20 || h < 7) ? THEMES.dark : THEMES.light,
+    TPLS,
+    ZOOM_LEVEL: 1,
+};
+
+export const SYMBOL_DEFAULTS = {
+    ADDITIONAL_STYLES: '',
+    COLOR: '#000000',
+    FADED: false,
+    FONTFAMILY: 'Verdana',
+    FONTWEIGHT: '400',
+    ITALIC: false,
+    SKEWX: 0,
+    SKEWY: 0,
+    ROTATIONX: 0,
+    ROTATIONY: 0,
+    ROTATIONZ: 0,
+    BLUR: 0,
+    OPACITY: 1,
+    SCALE: 1,
+    SCALEX: 1,
+    SCALEY: 1,
+};
 
 export const FONT_FAMILIES = [
     'Arial', 'Verdana', 'Tahoma',
@@ -98,27 +139,23 @@ export const DOWNLOAD_FORMATS = {
     jpeg: 'jpeg',
     png: 'png'
 };
-export const DEFAULT_DOWNLOAD_FORMAT = 'json';
 export const UNSUPPORTEDFILE_MESSAGE = 'File not supported';
-export const DEFAULT_PREVENT_RELOAD = false;
 
-
-
+export const MEASURE = {
+    getMaxHeight,
+    getMaxWidth,
+};
 const CONSTS = {
     REPO_URL,
-    WIDTH, HEIGHT,
     MIN_WIDTH, MIN_HEIGHT,
     PANEL_WIDTH,
     PANEL_PADDING,
     PANEL_FONTSIZE,
-    SYMBOL_BASE_FONTFAMILY,
     ITEM_WIDTH,
     ITEM_HEIGHT,
     ITEM_FOOTER_HEIGHT,
     ITEM_FONTSIZE,
-    DEFAULT_THEME,
     FADED_OPACITY,
-    LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
     MIN_SCALE,
     MAX_SCALE,
     STEP_SCALE,
@@ -137,22 +174,16 @@ const CONSTS = {
     FONT_FAMILIES,
     UNICODEIST_SCRIPT_URI,
     DOWNLOAD_FORMATS,
-    DEFAULT_DOWNLOAD_FORMAT,
     UNSUPPORTEDFILE_MESSAGE,
     OFFSET_PERC,
     HEADER_HEIGHT,
     THEMES,
-    getMaxHeight,
-    getMaxWidth,
-    DEFAULT_BACKGROUND_ALPHA,
-    DEFAULT_BACKGROUND_COLOR,
-    DEFAULT_SYMBOL_COLOR,
-    DEFAULT_PREVENT_RELOAD,
-    getBaseNamedKeyFrame,
+    
     LOCALSTORAGE_KEYFRAMES_KEY,
     UNSELECTED,
-    DEFAULT_BG_STYLES,
-    DEFAULT_ADDITIONAL_STYLES,
-    SHOW_UNDO_ICON
+    SHOW_UNDO_ICON,
+    DEFAULTS,
+    SYMBOL_DEFAULTS,
+    MEASURE
 };
 export default CONSTS;
