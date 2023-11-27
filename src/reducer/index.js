@@ -1,32 +1,27 @@
+
 import ACTIONS from './actions';
-import { uniqueID, count, filter, uncompressStateForImport, unbounce } from 'src/utils';
-import { getMaxHeight, getMaxWidth } from 'src/constants';
+import { uniqueID, count, filter, unbounce } from 'src/utils';
+import io from 'src/io';
+
 import allSymbols from './../Symbols';
 import { keyFramesManager } from './utils';
 
 import {
-    WIDTH, HEIGHT,
     PANEL_WIDTH,
-    DEFAULT_THEME,
-    SYMBOL_BASE_FONTFAMILY,
-    SYMBOL_BASE_FONTWEIGHT,
-    LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
     MIN_SCALE,
     MAX_SCALE,
     MIN_ZINDEX,
     MAX_ZINDEX,
     UNSUPPORTEDFILE_MESSAGE,
-    DEFAULT_BACKGROUND_ALPHA,
-    DEFAULT_BACKGROUND_COLOR,
-    DEFAULT_SYMBOL_COLOR,
-    DEFAULT_PREVENT_RELOAD,
-    UNDO_UNBOUNCING,
+    UNDO_UNBOUNCING,    
+    DEFAULTS,
+    SYMBOL_DEFAULTS,
+    MEASURE,
 } from 'src/constants';
 
 import undoableActions from './undoables';
 
-let tot = 0,
-    historyCursor = 0;
+let historyCursor = 0;
 
 const history = [],
     createSymbol = ({ char, zIndex, left, top }) => {
@@ -38,57 +33,57 @@ const history = [],
             zIndex,
             left,
             top,
-            color: DEFAULT_SYMBOL_COLOR,
-            fontFamily: SYMBOL_BASE_FONTFAMILY,
-            fontWeight: SYMBOL_BASE_FONTWEIGHT,
-            skewX: 0,
-            skewY: 0,
-            rotationX: 0,
-            rotationY: 0,
-            rotationZ: 0,
-            blur: 0,
-            opacity: 1,
-            scale: 1,
-            scaleX: 1,
-            scaleY: 1,
-            targetUp: false,
-            faded: false,
-            additionalStyles: false,
-            italic: false
+
+            additionalStyles: SYMBOL_DEFAULTS.ADDITIONAL_STYLES,
+            blur: SYMBOL_DEFAULTS.BLUR,
+            color: SYMBOL_DEFAULTS.COLOR,
+            faded: SYMBOL_DEFAULTS.FADED,
+            fontFamily: SYMBOL_DEFAULTS.FONTFAMILY,
+            fontWeight: SYMBOL_DEFAULTS.FONTWEIGHT,
+            italic: SYMBOL_DEFAULTS.ITALIC,
+            opacity: SYMBOL_DEFAULTS.OPACITY,
+            rotationX: SYMBOL_DEFAULTS.ROTATIONX,
+            rotationY: SYMBOL_DEFAULTS.ROTATIONY,
+            rotationZ: SYMBOL_DEFAULTS.ROTATIONZ,
+            scale: SYMBOL_DEFAULTS.SCALE,
+            scaleX: SYMBOL_DEFAULTS.SCALEX,
+            scaleY: SYMBOL_DEFAULTS.SCALEY,
+            skewX: SYMBOL_DEFAULTS.SKEWX,
+            skewY: SYMBOL_DEFAULTS.SKEWY,
         };
     },
 
     base = {
-        backgroundColorAlpha: DEFAULT_BACKGROUND_ALPHA,
-        width: WIDTH,
-        height: HEIGHT,
-        maxWidth: getMaxWidth(),
-        maxHeight: getMaxHeight(),
-        symbols: [],
-        addPanelVisibility: false,
-        focusedSymbolId: null,
-        backgroundColor: DEFAULT_BACKGROUND_COLOR,
-        asciiSelectorFilter: '',
-        symbolsFilter: '',
-        asciiPanelFilterByIconName: '',
-        letAsciiPanelOpenAfterSelection: LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
-        superFocus: false,
-        canScrollSymbols: true,
-        scrollTop: 0,
-        bgStyles: false,
+        backgroundColorAlpha: DEFAULTS.BACKGROUND_ALPHA,
+        width: DEFAULTS.WIDTH,
+        height: DEFAULTS.HEIGHT,
+        maxWidth: MEASURE.getMaxWidth(),
+        maxHeight: MEASURE.getMaxHeight(),
+        symbols: DEFAULTS.SYMBOLS,
+        addPanelVisibility: DEFAULTS.ADD_PANEL_VISIBILITY,
+        focusedSymbolId: DEFAULTS.FOCUSED_SYMBOL_ID,
+        backgroundColor: DEFAULTS.BACKGROUND_COLOR,
+        asciiSelectorFilter: DEFAULTS.ASCII_SELECTOR_FILTER,
+        symbolsFilter: DEFAULTS.SYMBOLS_FILTER,
+        letAsciiPanelOpenAfterSelection: DEFAULTS.LET_UNICODE_PANEL_OPEN_AFTER_SELECTION,
+        superFocus: DEFAULTS.FUPERFOCUS,
+        canScrollSymbols: DEFAULTS.CAN_SCROLL_SYMBOLS,
+        scrollTop: DEFAULTS.SCROLL_TOP,
+        bgStyles: DEFAULTS.BACKGROUND_STYLES,
         keyFrames: keyFramesManager.synch(),
-        preventReload: DEFAULT_PREVENT_RELOAD,
-        fullscreen: false,
+        preventReload: DEFAULTS.PREVENT_RELOAD,
+        fullscreen: DEFAULTS.FULLSCREEN_MODE,
         availableSymbols: [],
-        selected: [],
-        swapMode: false,
-        zoomLevel: 1
+        selected: DEFAULTS.SELECTED,
+        swapMode: DEFAULTS.SWAP_MODE,
+        zoomLevel: DEFAULTS.ZOOM_LEVEL,
+        filteredCount: DEFAULTS.FILTERED_COUNT
     },
 
     actions = {
         [ACTIONS.INIT]: () => ({
             ...base,
-            themeKey: DEFAULT_THEME,
+            themeKey: DEFAULTS.THEME_KEY,
             availableSymbols: allSymbols,
             filteredCount: count(allSymbols),
         }),
@@ -210,7 +205,6 @@ const history = [],
             oldState: { symbols }
         }) => ({
             focusedSymbolId: id,
-            hoveringId: id,
             superFocus: false, //in case there is one
             // and need to reset faded mode fo all symbols
             symbols: symbols.map(sym => ({
@@ -327,8 +321,8 @@ const history = [],
                 symbols
             }
         }) => {
-            const newMaxWidth = parseInt(getMaxWidth(), 10) - PANEL_WIDTH,
-                newMaxHeight = parseInt(getMaxHeight(), 10),
+            const newMaxWidth = parseInt(MEASURE.getMaxWidth(), 10) - PANEL_WIDTH,
+                newMaxHeight = parseInt(MEASURE.getMaxHeight(), 10),
                 newWidth = Math.min(width, newMaxWidth),
                 newHeight = Math.min(height, newMaxHeight),
                 offsetLeft = Math.min(0, newWidth - width) / 2,
@@ -365,7 +359,7 @@ const history = [],
             let newState;
             try {
                 newState = JSON.parse(payload);
-                if (!('sy' in newState)) {
+                if (!('sym' in newState)) {
                     throw UNSUPPORTEDFILE_MESSAGE;
                 }
             } catch (e) {
@@ -373,13 +367,16 @@ const history = [],
                     error: UNSUPPORTEDFILE_MESSAGE
                 };
             }
-            var t = uncompressStateForImport(newState);
+            // var t = uncompressStateForImport(newState);
+            const t = io.uncompress(newState);
             return {
                 ...t,
                 keyFrames: {
                     ...oldState.keyFrames,
                     ...t.keyFrames
-                }
+                },
+                availableSymbols: allSymbols,
+                filteredCount: count(allSymbols)
             };
         },
         [ACTIONS.IMPORT_KEYFRAMES]: ({ payload, oldState }) => {
@@ -713,18 +710,7 @@ const history = [],
         }
     },
 
-    unbounced = unbounce((next, prev, type) => {
-        const newL = JSON.stringify(next).length,
-            oldL = JSON.stringify(prev).length,
-            variance = newL - oldL;
-        tot += newL;
-        false && console.log({
-            type: type.description,
-            oldL,
-            newL,
-            variance,
-            tot: tot / (2 ** 10)
-        });
+    unbounced = unbounce(({prev}) => {
         history[historyCursor++] = prev;
     }, UNDO_UNBOUNCING),
 
@@ -732,7 +718,6 @@ const history = [],
         const { payload = {}, type } = action;
         if (typeof type === 'undefined') throw new Error('Action type not given');
         if (type in actions) {
-
             const changes = actions[type]({ payload, oldState }),
                 newState = {
                     ...oldState,
@@ -740,14 +725,12 @@ const history = [],
                 },
                 changedKeys = Object.keys(changes);
 
-            undoableActions.includes(type) && unbounced(
-                changes,
-                Object.entries(oldState).reduce((acc, [k, v]) => {
+            undoableActions.includes(type) && unbounced({
+                prev: Object.entries(oldState).reduce((acc, [k, v]) => {
                     if (changedKeys.includes(k)) acc[k] = v;
                     return acc;
-                }, {}),
-                type
-            );
+                }, {})
+            });
             return {
                 ...newState,
                 canUndo: historyCursor > 0,
