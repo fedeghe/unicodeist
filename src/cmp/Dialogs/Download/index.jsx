@@ -7,7 +7,7 @@ import {
 import {
     toPng, toJpeg
 } from 'html-to-image';
-import { DEFAULT_DOWNLOAD_FORMAT, DOWNLOAD_FORMATS } from 'src/constants';
+import { DEFAULTS, DOWNLOAD_FORMATS } from 'src/constants';
 import { saveAsStateFileJSON, downloadAs } from 'src/utils';
 import ctx from 'src/Context';
 import useStyles from './styles';
@@ -16,7 +16,7 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
     const classes = useStyles(),
         maybeRetina = devicePixelRatio === 2,
         { state, state: { backgroundColorAlpha } } = useContext(ctx),
-        [format, setFormat] = useState(DEFAULT_DOWNLOAD_FORMAT),
+        [format, setFormat] = useState(DEFAULTS.DOWNLOAD_FORMAT),
         [filename, setFilename] = useState(''),
         [downloadEnabled, setDownloadEnabled] = useState(false),
         [validFilename, setValidFilename] = useState(true),
@@ -26,7 +26,7 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
                 setFilename('');
                 setDownloadEnabled(false);
                 setValidFilename(true);
-                setFormat(DEFAULT_DOWNLOAD_FORMAT);
+                setFormat(DEFAULTS.DOWNLOAD_FORMAT);
             },
             [setVisibility]
         ),

@@ -61,7 +61,7 @@ const Styles = ({ sym }) => {
                 </div>
                 <div>
                     <span className={classes.Label} >Italic:</span>
-                    <input type="checkbox" checked={italic} onChange={onChangeFontItalic}/>
+                    <input type="checkbox" checked={italic} value="1" onChange={onChangeFontItalic}/>
                 </div>
             </Box>
         </div>

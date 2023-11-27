@@ -42,16 +42,19 @@ const Sym = ({ sym }) => {
             sky: skewY,
             blr: blur,
         }),
-        focus = () => !expanded && dispatch({
-            type: ACTIONS.FOCUS_ON_SYMBOL,
-            payload: id
-        }),
+        // with native checkbox ...react wants onChange....but on the upper (expand/collapse)
+        // the onClick matter thus here must check if it does not come from a checkbox
+        focus = e => 
+            !expanded && e.target.type !== 'checkbox' && dispatch({
+                type: ACTIONS.FOCUS_ON_SYMBOL,
+                payload: id
+            }),
         onCheckToggle = e => {
-            e.stopPropagation();
             dispatch({
                 type: ACTIONS.TOGGLE_SYMBOL_SELECTION,
                 payload: id,
             });
+            e.stopPropagation();
         },
         move = (e, direction) => {
             e.stopPropagation();
@@ -75,9 +78,8 @@ const Sym = ({ sym }) => {
                     <Position sym={sym} />
                 </div> : <div className={classes.HoverLight}>
                     {Boolean(symbols.length > 1) &&
-                        <div>
-                            <input type="checkbox" checked={selected.includes(id)} onClick={onCheckToggle} />
-                        </div>}
+                        <input type="checkbox" value="1" checked={selected.includes(id)} onChange={onCheckToggle} />
+                    }
                     <div>
                         <Typography variant="body1">{label}</Typography>
                         <Typography variant="h5">

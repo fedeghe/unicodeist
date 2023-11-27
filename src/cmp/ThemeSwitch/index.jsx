@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Switch, Tooltip } from '@mui/material';
 
-import {DEFAULT_THEME} from 'src/constants';
+import {DEFAULTS} from 'src/constants';
 import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
 import useStyles from './styles';
@@ -19,7 +19,7 @@ const ThemeSwitch = ({onChange = () => {}, tooltip}) => {
         cnt = <Switch
             className={classes.Container}
             onChange={switchTheme}
-            checked={themeKey === DEFAULT_THEME}
+            checked={themeKey === DEFAULTS.THEME_KEY}
         />;
     return tooltip
         ? <Tooltip title={tooltip}>{cnt}</Tooltip>

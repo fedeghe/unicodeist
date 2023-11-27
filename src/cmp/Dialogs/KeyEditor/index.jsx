@@ -25,7 +25,7 @@ import { saveAsFileJSON, importFromFile, downloadAs } from 'src/utils';
 import ACTIONS from 'src/reducer/actions';
 import SnackMessage from 'src/cmp/SnackMessage';
 import {
-    getBaseNamedKeyFrame,
+    DEFAULTS,
     UNSELECTED,
 } from 'src/constants';
 
@@ -49,7 +49,7 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
             ? Object.keys(keyFrames).find(k => focusedSymbol.additionalStyles.includes(` ${k} `))
             : false,
         // and in case preselect it
-        [keyFrame, setKeyFrame] = useState(maybeSymbolUsesKeyframe ? keyFrames[maybeSymbolUsesKeyframe] : getBaseNamedKeyFrame),
+        [keyFrame, setKeyFrame] = useState(maybeSymbolUsesKeyframe ? keyFrames[maybeSymbolUsesKeyframe] : DEFAULTS.TPLS.KEYFRAMES),
         [selected, setSelected] = useState(maybeSymbolUsesKeyframe || UNSELECTED),
         [name, setName] = useState(maybeSymbolUsesKeyframe || ''),
         [confirmationVisibility, setConfirmationVisibility] = useState(false),
@@ -111,7 +111,7 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
             dispatch({ type: ACTIONS.REMOVE_ALL_KEY_FRAMES });
             showConfirmation('all deleted');
             setSelected(UNSELECTED);
-            reset();// setVisibility(false);
+            reset();
         },
         onName = e => {
             const n = e.target.value;
@@ -211,7 +211,6 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                             onChange={onChangeKeyFrame}
                         />
                     </div>
-
                     <div className={classes.Bottom}>
                         <Tooltip title="close editor">
                             <Button onClick={onClose} color="error">Close</Button>
