@@ -22,7 +22,7 @@ One thing to notice here is that most of the times the size comparison is quite 
 
 | example    | .jpeg | .png | .json | embed html | embed script |
 | -------- | ------- | ------- | ------- | ------- | ------- |
-| [<img src="src/img/comparison/fg.png" width="50"/>](image)<br/>500x350  | 160 KB | 44 KB | 540 B  | 1 KB | 627 B |
+| [<img src="src/img/comparison/fg.png" width="50"/>](src/img/comparison/fg.png)<br/>500x350  | 160 KB | 44 KB | 540 B  | 1 KB | 627 B |
 | [<img src="src/img/comparison/unicodeist.png" width="50"/>](image)<br/>500 x 250 | 63 KB | 40 KB | 1.2 KB | 2.5 KB | 1.3KB |
 | [<img src="src/img/comparison/HumanCoded100.png" width="50"/>](image) | 10 KB | 3 KB | 1.5 KB | 3.5KB | 1.6 KB |
 
