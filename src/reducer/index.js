@@ -87,15 +87,9 @@ const history = [],
             availableSymbols: allSymbols,
             filteredCount: count(allSymbols),
         }),
-        [ACTIONS.NEW]: () => ({
-            ...base,
-            availableSymbols: allSymbols,
-        }),
-        [ACTIONS.SWITCH_THEME]: ({
-            oldState: { themeKey }
-        }) => ({
-            themeKey: themeKey === 'light'
-                ? 'dark' : 'light'
+        [ACTIONS.NEW]: () => ({ ...base, availableSymbols: allSymbols,}),
+        [ACTIONS.SWITCH_THEME]: ({ oldState: { themeKey } }) => ({
+            themeKey: themeKey === 'light' ? 'dark' : 'light'
         }),
 
         [ACTIONS.RESIZE]: ({
@@ -153,6 +147,7 @@ const history = [],
                 ]
             };
         },
+
         [ACTIONS.SWAP_SYMBOL]: ({
             payload: { char },
             oldState: { symbols, focusedSymbolId }
@@ -162,7 +157,8 @@ const history = [],
                     ? ({
                         ...symbol,
                         char
-                    }) : symbol
+                    })
+                    : symbol
             )
         }),
 
@@ -213,16 +209,17 @@ const history = [],
             })),
         }),
         [ACTIONS.ZOOM_ZERO]: () => ({ zoomLevel: 1 }),
+
         [ACTIONS.ZOOM_IN]: ({
             oldState: { zoomLevel }
-        }) => ({ zoomLevel: parseFloat((zoomLevel + 0.1).toFixed(1)) }),
+        }) => ({
+            zoomLevel: parseFloat((zoomLevel + 0.1).toFixed(1))
+        }),
+
         [ACTIONS.ZOOM_OUT]: ({
             oldState: { zoomLevel }
         }) => ({
-            zoomLevel: Math.max(
-                parseFloat((zoomLevel - 0.1).toFixed(1)),
-                0.1
-            )
+            zoomLevel: Math.max(parseFloat((zoomLevel - 0.1).toFixed(1)), 0.1)
         }),
 
         [ACTIONS.UPDATE_GLOBAL]: ({
@@ -233,12 +230,13 @@ const history = [],
             payload: { field, value },
             oldState: { symbols, focusedSymbolId }
         }) => ({
-            symbols: symbols.map(sym => sym.id === focusedSymbolId
-                ? {
-                    ...sym,
-                    [field]: value
-                }
-                : sym
+            symbols: symbols.map(
+                sym => sym.id === focusedSymbolId
+                    ? {
+                        ...sym,
+                        [field]: value
+                    }
+                    : sym
             )
         }),
 
@@ -246,13 +244,14 @@ const history = [],
             payload: { left = 0, top = 0 },
             oldState: { symbols, focusedSymbolId, zoomLevel }
         }) => ({
-            symbols: symbols.map(sym => sym.id === focusedSymbolId
-                ? ({
-                    ...sym,
-                    left: parseInt(sym.left, 10) + parseInt(left / zoomLevel, 10),
-                    top: parseInt(sym.top, 10) + parseInt(top / zoomLevel, 10),
-                })
-                : sym
+            symbols: symbols.map(
+                sym => sym.id === focusedSymbolId
+                    ? ({
+                        ...sym,
+                        left: parseInt(sym.left, 10) + parseInt(left / zoomLevel, 10),
+                        top: parseInt(sym.top, 10) + parseInt(top / zoomLevel, 10),
+                    })
+                    : sym
             )
         }),
 
@@ -285,25 +284,22 @@ const history = [],
             );
             if (minZindexSymbol.id === focusedSymbolId) return {};
             return {
-                symbols: symbols.map(sym => sym.id === focusedSymbolId
-                    ? ({
-                        ...sym,
-                        zIndex: Math.max(0, minZindexSymbol.zIndex - 1)
-                    })
-                    : sym
+                symbols: symbols.map(
+                    sym => sym.id === focusedSymbolId
+                        ? ({
+                            ...sym,
+                            zIndex: Math.max(0, minZindexSymbol.zIndex - 1)
+                        })
+                        : sym
                 )
             };
         },
 
-        [ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION]: ({
-            payload
-        }) => ({
+        [ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION]: ({ payload }) => ({
             letAsciiPanelOpenAfterSelection: payload
         }),
 
-        [ACTIONS.SET_ASCIIPANEL_FILTER]: ({
-            payload: asciiSelectorFilter,
-        }) => {
+        [ACTIONS.SET_ASCIIPANEL_FILTER]: ({ payload: asciiSelectorFilter }) => {
             const newAvailableSymbols = filter({
                 symbols: allSymbols,
                 filter: asciiSelectorFilter
@@ -430,16 +426,18 @@ const history = [],
             payload: { leftTune, topTune },
             oldState: { symbols, selected }
         }) => ({
-            symbols: symbols.map(sym => {
-                const tuned = !selected.length || selected.includes(sym.id),
-                    newLeft = parseInt(sym.left + (tuned ? leftTune : 0), 10),
-                    newTop = parseInt(sym.top + (tuned ? topTune : 0), 10);
-                return {
-                    ...sym,
-                    left: newLeft,
-                    top: newTop
-                };
-            })
+            symbols: symbols.map(
+                sym => {
+                    const tuned = !selected.length || selected.includes(sym.id),
+                        newLeft = parseInt(sym.left + (tuned ? leftTune : 0), 10),
+                        newTop = parseInt(sym.top + (tuned ? topTune : 0), 10);
+                    return {
+                        ...sym,
+                        left: newLeft,
+                        top: newTop
+                    };
+                }
+            )
         }),
 
         [ACTIONS.PAN_ALL_SYMBOLS]: ({
@@ -466,18 +464,20 @@ const history = [],
         [ACTIONS.SET_SYMBOLS_FILTER]: ({ payload: symbolsFilter }) => ({ symbolsFilter }),
 
         [ACTIONS.REMOVE_ERROR]: () => ({ error: null }),
+
         [ACTIONS.TOGGLE_ITALIC]: ({
             oldState: {
                 symbols,
                 focusedSymbolId
             }
         }) => ({
-            symbols: symbols.map(symbol => symbol.id === focusedSymbolId
-                ? ({
-                    ...symbol,
-                    italic: !symbol.italic
-                })
-                : symbol
+            symbols: symbols.map(symbol =>
+                symbol.id === focusedSymbolId
+                    ? ({
+                        ...symbol,
+                        italic: !symbol.italic
+                    })
+                    : symbol
             )
         }),
 
@@ -516,13 +516,14 @@ const history = [],
                     : ({ id }) => id === focusedSymbolId;
 
             return {
-                symbols: symbols.map(s => (
-                    mustConsider(s) ?
-                        {
+                symbols: symbols.map(s =>
+                    mustConsider(s)
+                        ? {
                             ...s,
                             [what.field]: s[what.field] + what.diff
-                        } : s
-                ))
+                        }
+                        : s
+                )
             };
         },
 
@@ -539,6 +540,7 @@ const history = [],
                 keyFrames: newKeyFrames
             };
         },
+
         [ACTIONS.REMOVE_KEY_FRAME]: ({
             payload: { name },
             oldState: { keyFrames }
@@ -550,12 +552,14 @@ const history = [],
                 keyFrames: newKeyFrames,
             };
         },
+
         [ACTIONS.REMOVE_ALL_KEY_FRAMES]: () => {
             keyFramesManager.synch({});
             return {
                 keyFrames: {},
             };
         },
+
         [ACTIONS.EXPAND_FAMILY]: ({
             oldState: { availableSymbols },
             payload: label
@@ -568,6 +572,7 @@ const history = [],
                 }))
             };
         },
+
         [ACTIONS.COLLAPSE_FAMILY]: ({
             oldState: { availableSymbols },
             payload: label
@@ -586,6 +591,7 @@ const history = [],
                 ? selected.filter(i => i !== id)
                 : [...selected, id]
         }),
+        
         [ACTIONS.TOGGLE_SYMBOLS_SELECTION]: ({ payload: what, oldState: { selected, symbols } }) => {
             switch (what) {
                 case 'selectAll':
@@ -613,8 +619,8 @@ const history = [],
             );
 
             return {
-                symbols: symbols.map(
-                    sym => selected.includes(sym.id)
+                symbols: symbols.map(sym =>
+                    selected.includes(sym.id)
                         ? { ...sym, top: mean }
                         : sym
                 )
@@ -631,8 +637,8 @@ const history = [],
             );
 
             return {
-                symbols: symbols.map(
-                    sym => selected.includes(sym.id)
+                symbols: symbols.map( sym =>
+                    selected.includes(sym.id)
                         ? { ...sym, left: mean }
                         : sym
                 )
@@ -677,9 +683,10 @@ const history = [],
                 targetLeft = width / 2,
                 diffLeft = targetLeft - meanLeft;
             return {
-                symbols: symbols.map(symbol => selected.includes(symbol.id)
-                    ? { ...symbol, left: symbol.left + diffLeft }
-                    : symbol
+                symbols: symbols.map( symbol =>
+                    selected.includes(symbol.id)
+                        ? { ...symbol, left: symbol.left + diffLeft }
+                        : symbol
                 )
             };
         },
@@ -697,9 +704,10 @@ const history = [],
                 targetTop = height / 2,
                 diffTop = targetTop - meanTop;
             return {
-                symbols: symbols.map(symbol => selected.includes(symbol.id)
-                    ? { ...symbol, top: symbol.top + diffTop }
-                    : symbol
+                symbols: symbols.map(symbol =>
+                    selected.includes(symbol.id)
+                        ? { ...symbol, top: symbol.top + diffTop }
+                        : symbol
                 )
             };
         },
