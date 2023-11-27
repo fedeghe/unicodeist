@@ -450,7 +450,7 @@ const history = [],
                 const tuned = !selected.length || selected.includes(sym.id),
                     minCompliantScale = Math.max(
                         MIN_SCALE,
-                        parseInt(sym.scale, 10) - (tuned ? parseInt(pan, 10) : 0)
+                        parseFloat(sym.scale, 10) - (tuned ? parseInt(pan, 10) : 0)
                     ),
                     compliantScale = Math.min(
                         MAX_SCALE,
