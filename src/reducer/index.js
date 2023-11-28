@@ -1,11 +1,6 @@
 
-import ACTIONS from './actions';
 import { uniqueID, count, filter, unbounce } from 'src/utils';
 import io from 'src/io';
-
-import allSymbols from './../Symbols';
-import { keyFramesManager } from './utils';
-
 import {
     PANEL_WIDTH,
     MIN_SCALE,
@@ -17,8 +12,12 @@ import {
     DEFAULTS,
     SYMBOL_DEFAULTS,
     MEASURE,
+    MOVE_MULTIPLIER
 } from 'src/constants';
 
+import ACTIONS from './actions';
+import allSymbols from './../Symbols';
+import { keyFramesManager } from './utils';
 import undoableActions from './undoables';
 
 let historyCursor = 0;
@@ -33,7 +32,6 @@ const history = [],
             zIndex,
             left,
             top,
-
             additionalStyles: SYMBOL_DEFAULTS.ADDITIONAL_STYLES,
             blur: SYMBOL_DEFAULTS.BLUR,
             color: SYMBOL_DEFAULTS.COLOR,
@@ -73,21 +71,19 @@ const history = [],
         keyFrames: keyFramesManager.synch(),
         preventReload: DEFAULTS.PREVENT_RELOAD,
         fullscreen: DEFAULTS.FULLSCREEN_MODE,
-        availableSymbols: [],
+        // availableSymbols: [],
         selected: DEFAULTS.SELECTED,
         swapMode: DEFAULTS.SWAP_MODE,
         zoomLevel: DEFAULTS.ZOOM_LEVEL,
-        filteredCount: DEFAULTS.FILTERED_COUNT
+        // filteredCount: DEFAULTS.FILTERED_COUNT,
+        themeKey: DEFAULTS.THEME_KEY,
+            availableSymbols: allSymbols,
+            filteredCount: count(allSymbols),
     },
 
     actions = {
-        [ACTIONS.INIT]: () => ({
-            ...base,
-            themeKey: DEFAULTS.THEME_KEY,
-            availableSymbols: allSymbols,
-            filteredCount: count(allSymbols),
-        }),
-        [ACTIONS.NEW]: () => ({ ...base, availableSymbols: allSymbols,}),
+        [ACTIONS.INIT]: () => base, // not undoable
+        [ACTIONS.NEW]: () => base,  // undoable
         [ACTIONS.SWITCH_THEME]: ({ oldState: { themeKey } }) => ({
             themeKey: themeKey === 'light' ? 'dark' : 'light'
         }),
@@ -499,7 +495,7 @@ const history = [],
         },
 
         [ACTIONS.MOVE_TARGET_ONE_PX]: ({
-            payload: key,
+            payload: { key, multiplier },
             oldState: {
                 focusedSymbolId, symbols,
                 selected
@@ -520,7 +516,7 @@ const history = [],
                     mustConsider(s)
                         ? {
                             ...s,
-                            [what.field]: s[what.field] + what.diff
+                            [what.field]: s[what.field] + what.diff*(multiplier ? MOVE_MULTIPLIER : 1)
                         }
                         : s
                 )

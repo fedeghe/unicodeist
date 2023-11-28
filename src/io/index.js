@@ -131,10 +131,8 @@ export const compress = ({
             faded: f, 
         }) => ({
             i, ch, zi, l, t,
-
             // only if differs from id (default label is = the id)
             ...(lb !== i && {lb}),
-
             ...(c !== SYMBOL_DEFAULTS.COLOR && {c}),
             ...(ff !== SYMBOL_DEFAULTS.FONTFAMILY && {ff}),
             ...(fw !== SYMBOL_DEFAULTS.FONTWEIGHT && {fw}),

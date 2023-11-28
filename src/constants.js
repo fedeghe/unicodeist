@@ -39,6 +39,7 @@ export const LOCALSTORAGE_KEYFRAMES_KEY = 'keyframes';
 export const UNSELECTED = '__unselected__';
 export const SHOW_UNDO_ICON = true;
 export const UNDO_UNBOUNCING = 1000;
+export const MOVE_MULTIPLIER = 10;
 
 
 const TPLS = {

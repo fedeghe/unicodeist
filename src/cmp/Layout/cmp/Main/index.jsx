@@ -33,10 +33,13 @@ const Main = () => {
             }),
             [addPanelVisibility, dispatch]
         ),
-        move = useCallback(key =>
+        move = useCallback((key, multiplier) =>
             dispatch({
                 type: ACTIONS.MOVE_TARGET_ONE_PX,
-                payload: key
+                payload: {
+                    key,
+                    multiplier
+                }
             }),
             [addPanelVisibility, dispatch]
         ),
@@ -69,10 +72,10 @@ const Main = () => {
             
             // on shift+arrow move current target symbol
             if (
-                e.shiftKey
+                (e.shiftKey || e.metaKey)
                 && ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)
             ){
-                move(e.key); e.preventDefault();
+                move(e.key, e.metaKey); e.preventDefault();
             }
             // on shift+arrow move current target symbol
             if (

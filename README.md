@@ -111,7 +111,8 @@ When more than one _symbol_ is added, then you will see a checkbox (for both exp
 ### Move | scale all _symbols_  
 To move all _symbols_ together just go to the _unicodeist_ logo in the right upper part and drag within the logo, on mouse release all _symbols_ will move together in that direction for an amout proportional to the movement.  
 If you do the same with the `shift` key down then all _symbols_ will be up or down scaled depending on the movement direction. Notice that the relative position of all the elements will **not** change.  
-When some _symbols_ are selected then only those will be moved or scaled.
+When some _symbols_ are selected then only those will be moved or scaled.  
+In case one needs to move faster instead of using `shift` use the `` and every movement will be _10px_ in the arrowing direction.
 
 ### Zoom
 Sometimes it might be useful to _zoom-in_ or _zoom-out_ the creative, use  
