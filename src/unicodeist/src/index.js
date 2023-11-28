@@ -3,6 +3,7 @@
             return kf
                 .replace(/^\{/, '')
                 .replace(/\}$/, '')
+                .replace(/\/\/.*/g, '')
                 .replace(/\n/g, '');
         },
         defs = {
