@@ -90,59 +90,70 @@ export const compress = ({
     themeKey: tk,
     zoomLevel: z,
     symbols, 
-    keyFrames: kf,
-}) => JSON.stringify({
-    ...(bgca !== DEFAULTS.BACKGROUND_ALPHA && {bgca}),
-    ...(bgc !== DEFAULTS.BACKGROUND_COLOR && {bgc}),
-    ...(w !== DEFAULTS.WIDTH && {w}),
-    ...(h !== DEFAULTS.HEIGHT && {h}),
-    fsid, bgs, s, tk, z, kf,
-    sym: symbols.map(({
-        id: i,
-        char: ch,
-        label: lb, 
-        zIndex: zi, 
-        left: l, 
-        top: t, 
-        color: c, 
-        fontFamily: ff, 
-        fontWeight: fw, 
-        skewX: skx,
-        skewY: sky,
-        rotationX: rx,
-        rotationY: ry,
-        rotationZ: rz, 
-        blur: b,
-        opacity: o,  
-        scale: s, 
-        scaleX: sx, 
-        scaleY: sy, 
-        additionalStyles: ast, 
-        faded: f, 
-    }) => ({
-        i, ch, zi, l, t,
+    keyFrames: kfs,
+}) => {
+    const kf = Object.entries(kfs).reduce((acc, [k, v]) => {
+            if (symbols.some(
+                ({additionalStyles}) => additionalStyles.includes(k)
+            )) acc[k] = v;
+            return acc;
+        }, {}),
+        hasKf = Object.keys(kf).length;
+    return JSON.stringify({
+        ...(bgca !== DEFAULTS.BACKGROUND_ALPHA && {bgca}),
+        ...(bgc !== DEFAULTS.BACKGROUND_COLOR && {bgc}),
+        ...(w !== DEFAULTS.WIDTH && {w}),
+        ...(h !== DEFAULTS.HEIGHT && {h}),
+        fsid, bgs, s, tk, z,
+        // need to include only those actually used
+        ...(hasKf && kf),
+        sym: symbols.map(({
+            id: i,
+            char: ch,
+            label: lb, 
+            zIndex: zi, 
+            left: l, 
+            top: t, 
+            color: c, 
+            fontFamily: ff, 
+            fontWeight: fw, 
+            skewX: skx,
+            skewY: sky,
+            rotationX: rx,
+            rotationY: ry,
+            rotationZ: rz, 
+            blur: b,
+            opacity: o,  
+            scale: s, 
+            scaleX: sx, 
+            scaleY: sy, 
+            additionalStyles: ast, 
+            faded: f, 
+        }) => ({
+            i, ch, zi, l, t,
 
-        // only if differs from id (default label is = the id)
-        ...(lb !== i && {lb}),
+            // only if differs from id (default label is = the id)
+            ...(lb !== i && {lb}),
 
-        ...(c !== SYMBOL_DEFAULTS.COLOR && {c}),
-        ...(ff !== SYMBOL_DEFAULTS.FONTFAMILY && {ff}),
-        ...(fw !== SYMBOL_DEFAULTS.FONTWEIGHT && {fw}),
-        ...(skx !== SYMBOL_DEFAULTS.SKEWX && {skx}),
-        ...(sky !== SYMBOL_DEFAULTS.SKEWY && {sky}),
-        ...(rx !== SYMBOL_DEFAULTS.ROTATIONX && {rx}),
-        ...(ry !== SYMBOL_DEFAULTS.ROTATIONY && {ry}),
-        ...(rz !== SYMBOL_DEFAULTS.ROTATIONZ && {rz}),
-        ...(b !== SYMBOL_DEFAULTS.BLUR && {b}),
-        ...(o !== SYMBOL_DEFAULTS.OPACITY && {o}),
-        ...(s !== SYMBOL_DEFAULTS.SCALE && {s}),
-        ...(sx !== SYMBOL_DEFAULTS.SCALEX && {sx}),
-        ...(sy !== SYMBOL_DEFAULTS.SCALEY && {sy}),
-        ...(sy !== SYMBOL_DEFAULTS.SCALEY && {sy}),
-        ...(ast !== SYMBOL_DEFAULTS.ADDITIONAL_STYLES && {as: ast}),
-        ...(f !== SYMBOL_DEFAULTS.FADED && {f})
-    }))
-});
+            ...(c !== SYMBOL_DEFAULTS.COLOR && {c}),
+            ...(ff !== SYMBOL_DEFAULTS.FONTFAMILY && {ff}),
+            ...(fw !== SYMBOL_DEFAULTS.FONTWEIGHT && {fw}),
+            ...(skx !== SYMBOL_DEFAULTS.SKEWX && {skx}),
+            ...(sky !== SYMBOL_DEFAULTS.SKEWY && {sky}),
+            ...(rx !== SYMBOL_DEFAULTS.ROTATIONX && {rx}),
+            ...(ry !== SYMBOL_DEFAULTS.ROTATIONY && {ry}),
+            ...(rz !== SYMBOL_DEFAULTS.ROTATIONZ && {rz}),
+            ...(b !== SYMBOL_DEFAULTS.BLUR && {b}),
+            ...(o !== SYMBOL_DEFAULTS.OPACITY && {o}),
+            ...(s !== SYMBOL_DEFAULTS.SCALE && {s}),
+            ...(sx !== SYMBOL_DEFAULTS.SCALEX && {sx}),
+            ...(sy !== SYMBOL_DEFAULTS.SCALEY && {sy}),
+            ...(sy !== SYMBOL_DEFAULTS.SCALEY && {sy}),
+            ...(ast !== SYMBOL_DEFAULTS.ADDITIONAL_STYLES && {as: ast}),
+            ...(f !== SYMBOL_DEFAULTS.FADED && {f})
+        }))
+    });
+};
 
 const def = {
     compress,

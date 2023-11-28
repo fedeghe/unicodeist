@@ -111,7 +111,9 @@ const Canvas = () => {
                      */
                     symbols.reduce((acc, {additionalStyles}) => {
                         if (!additionalStyles) return acc;
-                        const foundKf = keyFramesNames.find(kfn => additionalStyles.includes(` ${kfn} `));
+                        const foundKf = keyFramesNames.find(
+                            kfn => additionalStyles.match(new RegExp(`${kfn}[\\s;]{1}`))
+                        );
                         if (foundKf && !acc.includes(foundKf)) acc.push(foundKf);
                         return acc;
                     }, []).map(
