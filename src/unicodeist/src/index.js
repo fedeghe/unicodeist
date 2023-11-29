@@ -3,7 +3,7 @@
             return kf
                 .replace(/^\{/, '')
                 .replace(/\}$/, '')
-                .replace(/\/\/.*/g, '')
+                // .replace(/\/\/.*/g, '')// allow urls
                 .replace(/\n/g, '');
         },
         defs = {
