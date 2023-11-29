@@ -2,7 +2,8 @@ import { createUseStyles } from 'react-jss';
 import {
     EXPANDED_SYM_HEIGHT,
     COLLAPSED_SYM_HEIGHT,
-    COLLAPSING_SYM_TIME
+    COLLAPSING_SYM_TIME,
+    PANEL_WIDTH
 } from 'src/constants';
 
 export default createUseStyles(theme => ({
@@ -56,6 +57,13 @@ export default createUseStyles(theme => ({
 
     FontFamilyAndWeight: {
         width: '80px'
+    },
+    LabelOut: {
+        textOverflow: 'ellipsis',
+        width: `${PANEL_WIDTH*3/5}px`,
+        textAlign:'center',
+        overflow: 'hidden',
+        textWrap: 'nowrap'
     },
 
     HoverLight: {

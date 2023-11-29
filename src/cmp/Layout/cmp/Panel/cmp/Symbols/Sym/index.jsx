@@ -81,7 +81,7 @@ const Sym = ({ sym }) => {
                         <input type="checkbox" value="1" checked={selected.includes(id)} onChange={onCheckToggle} />
                     }
                     <div>
-                        <Typography variant="body1">{label}</Typography>
+                        <Typography className={classes.LabelOut} variant="body1">{label}</Typography>
                         <Typography variant="h5">
                             <div className={classes.RotatedContainer}>
                                 <div className={classes.Rotated}>{char}</div>
