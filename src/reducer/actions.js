@@ -49,7 +49,8 @@ export const ADD_SYMBOL = Symbol('add a symbol'),
     UPDATE_SYMBOL_USLIDER = Symbol('update a symbol with uslider'),
     ZOOM_IN = Symbol('zoom in'),
     ZOOM_OUT = Symbol('zoom out'),
-    ZOOM_ZERO = Symbol('zoom zero');
+    ZOOM_ZERO = Symbol('zoom zero'),
+    SAVE_SCROLL = Symbol('save scroll');
 
 const exp = {
     ADD_SYMBOL,
@@ -103,7 +104,8 @@ const exp = {
     UPDATE_SYMBOL_USLIDER,
     ZOOM_IN,
     ZOOM_OUT,
-    ZOOM_ZERO
+    ZOOM_ZERO,
+    SAVE_SCROLL
 };
 
 export default exp;

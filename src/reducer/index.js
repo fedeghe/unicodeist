@@ -120,7 +120,7 @@ const history = [],
         }),
 
         [ACTIONS.ADD_SYMBOL]: ({
-            payload: { char, scrollTop },
+            payload: { char },
             oldState: { symbols, width, height }
         }) => {
             // get highest zindex
@@ -135,7 +135,6 @@ const history = [],
                     zIndex
                 });
             return {
-                scrollTop,
                 focusedSymbolId: newSymbol.id,
                 symbols: [
                     ...symbols,
@@ -711,7 +710,8 @@ const history = [],
             const previous = history[historyCursor - 1];
             historyCursor--;
             return { ...previous };
-        }
+        },
+        [ACTIONS.SAVE_SCROLL]: ({payload}) => ({scrollTop : payload})
     },
 
     unbounced = unbounce(({prev}) => {

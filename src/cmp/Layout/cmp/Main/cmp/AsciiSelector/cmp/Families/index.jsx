@@ -31,12 +31,16 @@ const Families = () => {
             setOpen(char.length > 0);
         },
         hideConfirmation = () => setOpen(false),
+        
+        onScroll = () => !swapMode && dispatch({
+            type: ACTIONS.SAVE_SCROLL,
+            payload: ref.current.scrollTop
+        }),
         onSelect = (char) => {
             dispatch({
                 type: swapMode ? ACTIONS.SWAP_SYMBOL : ACTIONS.ADD_SYMBOL,
                 payload: {
-                    char,
-                    scrollTop: ref.current.scrollTop //not consumed inswapMode
+                    char
                 }
             });
             letAsciiPanelOpenAfterSelection && !swapMode ? showConfirmation(char) : closePanel();
@@ -46,7 +50,7 @@ const Families = () => {
         ref.current.scrollTop = scrollTop;
     }, []);
     
-    return <div className={classes.Container} ref={ref}>
+    return <div className={classes.Container} ref={ref} onScroll={onScroll}>
         {Boolean(filteredCount) && 
             availableSymbols.map(({label, data, expanded}) => <Family key={label} data={data} label={label} onSelect={onSelect} expanded={expanded} />)
         }
