@@ -5,13 +5,15 @@ import {
     MIN_BLUR, MAX_BLUR, STEP_BLUR,
 } from 'src/constants';
 
+const pf = v => parseFloat(v.toFixed(2), 10);
+
 export const config = [{
     label: 'Scale',
     field: 'scale',
     min: MIN_SCALE,
     max: MAX_SCALE,
     step: STEP_SCALE,
-    rounder: parseFloat,
+    rounder: pf,
     quickTune: true,
 },{
     label: 'Scale x',
@@ -19,7 +21,7 @@ export const config = [{
     min: MIN_SCALE_REV,
     max: MAX_SCALE,
     step: STEP_SCALE,
-    rounder: parseFloat,
+    rounder: pf,
     quickTune: true,
 },{
     label: 'Scale y',
@@ -27,7 +29,7 @@ export const config = [{
     min: MIN_SCALE_REV,
     max: MAX_SCALE,
     step: STEP_SCALE,
-    rounder: parseFloat,
+    rounder: pf,
     quickTune: true,
 },{
     label: 'Rot. x',
@@ -35,7 +37,7 @@ export const config = [{
     min: MIN_ROT,
     max: MAX_ROT,
     step: STEP_ROT,
-    rounder: parseFloat,
+    rounder: pf,
     unit: '°',
     quickTune: true,
 },{
@@ -44,7 +46,7 @@ export const config = [{
     min: MIN_ROT,
     max: MAX_ROT,
     step: STEP_ROT,
-    rounder: parseFloat,
+    rounder: pf,
     unit: '°',
     quickTune: true,
 },{
@@ -53,7 +55,7 @@ export const config = [{
     min: MIN_ROT,
     max: MAX_ROT,
     step: STEP_ROT,
-    rounder: parseFloat,
+    rounder: pf,
     unit: '°',
     quickTune: true,
 },{
@@ -62,7 +64,7 @@ export const config = [{
     min: MIN_ROT/2,
     max: MAX_ROT/2,
     step: STEP_ROT,
-    rounder: parseFloat,
+    rounder: pf,
     unit: '°',
     quickTune: true,
 },{
@@ -71,7 +73,7 @@ export const config = [{
     min: MIN_ROT/2,
     max: MAX_ROT/2,
     step: STEP_ROT,
-    rounder: parseFloat,
+    rounder: pf,
     unit: '°',
     quickTune: true,
 },{
@@ -80,7 +82,7 @@ export const config = [{
     min: MIN_BLUR,
     max: MAX_BLUR,
     step: STEP_BLUR,
-    rounder: parseFloat,
+    rounder: pf,
     unit: '',
     quickTune: true,
 }];

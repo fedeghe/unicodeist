@@ -31,7 +31,7 @@ const Uslider = ({
         onTune = () => setTuning(quickTune),
         validator = val => val >= min && val<= max,
         change = e => {
-            const v = rounder(e.target.value, 10);
+            const v = rounder(e.target.value);
             validator(v) && onChange(v);
         };
 
