@@ -5,7 +5,7 @@ import {
     MIN_BLUR, MAX_BLUR, STEP_BLUR,
 } from 'src/constants';
 
-const pf = v => parseFloat(v.toFixed(2), 10);
+const pf = v => parseFloat(parseFloat(v, 10).toFixed(2), 10);
 
 export const config = [{
     label: 'Scale',
