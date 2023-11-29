@@ -32,7 +32,7 @@ const Families = () => {
         },
         hideConfirmation = () => setOpen(false),
         
-        onScroll = () => !swapMode && dispatch({
+        onScroll = () => dispatch({
             type: ACTIONS.SAVE_SCROLL,
             payload: ref.current.scrollTop
         }),
