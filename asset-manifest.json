@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/unicodeist/static/css/main.586e0fb4.css",
-    "main.js": "/unicodeist/static/js/main.64b2252f.js",
+    "main.js": "/unicodeist/static/js/main.a7904b4d.js",
     "static/media/unicodeist.png": "/unicodeist/static/media/unicodeist.098ecfa5cd78b6d27c6b.png",
     "static/media/roboto-latin-500-normal.woff2": "/unicodeist/static/media/roboto-latin-500-normal.f25d774ecfe0996f8eb5.woff2",
     "static/media/roboto-latin-700-normal.woff2": "/unicodeist/static/media/roboto-latin-700-normal.227c93190fe7f82de3f8.woff2",
@@ -61,10 +61,10 @@
     "static/media/roboto-greek-ext-700-normal.woff": "/unicodeist/static/media/roboto-greek-ext-700-normal.249853776d22a271b2b5.woff",
     "index.html": "/unicodeist/index.html",
     "main.586e0fb4.css.map": "/unicodeist/static/css/main.586e0fb4.css.map",
-    "main.64b2252f.js.map": "/unicodeist/static/js/main.64b2252f.js.map"
+    "main.a7904b4d.js.map": "/unicodeist/static/js/main.a7904b4d.js.map"
   },
   "entrypoints": [
     "static/css/main.586e0fb4.css",
-    "static/js/main.64b2252f.js"
+    "static/js/main.a7904b4d.js"
   ]
 }
