@@ -97,6 +97,7 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
                     </Alert>}
                     <br />
                     <Alert severity="warning" style={{ width: '90%' }}>
+                        Some css rule may not work, for example using background encoded images.<br/>
                         All the css rules inplied by the usage of the setters in the symbol panel will <strong>not</strong> be overriden by any rule specified here, if for example hereby one attempts to set the `transform: scale(23)` this will have no effect.
                     </Alert>
                     <div className={classes.Bottom}>

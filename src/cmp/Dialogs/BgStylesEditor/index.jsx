@@ -1,7 +1,7 @@
 import { useCallback, useState, useContext } from 'react';
 import {
     Dialog, DialogTitle, DialogContent,
-    Button, Tooltip,
+    Button, Tooltip, Alert
 } from '@mui/material';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -88,6 +88,9 @@ const BgStylesEditor = ({ visibility, setVisibility }) => {
                             onChange={onChangeValue}
                         />
                     </div>
+                    <Alert severity="warning" style={{ width: '90%' }}>
+                        Some css rule may not work, for example using background encoded images
+                    </Alert>
                     <div className={classes.Bottom}>
                         <Tooltip title="close editor">
                             <Button onClick={onClose} color="error">Close</Button>
