@@ -52,17 +52,18 @@ const TPLS = {
     // animation-direction: alternate;
 }`,
     BG_STYLES: `{
+    // clip-path: circle(50%);
     // background-image: linear-gradient(180deg, red, yellow);
     // background-image: linear-gradient(to bottom right, red, yellow);
     // background-image: linear-gradient(to right, red , yellow);
+    // background-image: url(https://www.dolomiten-suedtirol.com/img-2/content/cortina/2.jpg);
+    // background-size: 100% 100%;
 }`,
     KEYFRAMES: `@keyframes {
     from {color: red;}
     to {color: blue;}
-    /*
-    0% {color: red;}
-    100% {color: blue;}
-    */
+    // 0% {color: red;}
+    // 100% {color: blue;}
 }`
 };
 
