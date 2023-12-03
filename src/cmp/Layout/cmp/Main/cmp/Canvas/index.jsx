@@ -1,19 +1,14 @@
-/* eslint-disable no-unused-vars */
 import {
     useRef, useContext, useMemo,
     useEffect, useState
 } from 'react';
-
 import Channeljs from '@fedeghe/channeljs';
-
 import CanvasSymbol from './CanvasSymbol';
 import ctx from 'src/Context';
 import {
-    cleanCodeFromState,
-    getUnicodeistScriptTag,
-    css2string, css2json2
+    cleanCodeFromState, getUnicodeistScriptTag, css2json2
 } from 'src/utils';
-// import { UNSELECTED } from 'src/constants';
+
 import {
     CopyDialog,
     DownloadDialog,

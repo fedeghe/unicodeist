@@ -23,7 +23,6 @@ export const uncompress = ({
     backgroundColorAlpha,
     backgroundColor,
     bgStyles,
-    
     keyFrames,
     focusedSymbolId: focusedSymbolId?.replace(/U_/, 'U_i'),
     zoomLevel,
@@ -77,7 +76,6 @@ export const uncompress = ({
         };
     })
 });
-
 
 export const compress = ({
     backgroundColorAlpha: bgca,
