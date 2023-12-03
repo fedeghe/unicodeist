@@ -358,7 +358,6 @@ const history = [],
                     error: UNSUPPORTEDFILE_MESSAGE
                 };
             }
-            // var t = uncompressStateForImport(newState);
             const t = io.uncompress(newState);
             return {
                 ...t,

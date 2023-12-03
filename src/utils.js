@@ -1,6 +1,5 @@
 import {
     UNICODEIST_SCRIPT_URI,
-    FONT_FAMILIES_REDUCTION_MAP,
 } from './constants';
 
 import io from 'src/io';
@@ -46,8 +45,8 @@ export const cleanCodeFromState = ({
     ].join(';'));
 
     Object.keys(keyFrames).reduce((acc, k) => {
-        const inSymbols = symbols.find(({additionalStyles}) => 
-            additionalStyles.includes(` ${k} `)
+        const inSymbols = symbols.find(({ additionalStyles }) =>
+            additionalStyles.includes(`${k}`)
         );
         if (inSymbols && !acc.includes(k)) acc.push(k);
         return acc;
@@ -61,7 +60,7 @@ export const cleanCodeFromState = ({
         var child = document.createElement('div');
         child.innerHTML = sym.char;
         child.setAttribute('style',
-            [   
+            [
                 json2string(mergeAdditionalStyles({
                     additionalStyles: sym.additionalStyles,
                     blur: sym.blur
@@ -88,7 +87,7 @@ export const cleanCodeFromState = ({
         );
         return child;
     }).forEach(c => root.appendChild(c));
-    
+
     return root.outerHTML;
 };
 
@@ -115,7 +114,7 @@ export const unbounce = (func, delay) => {
         to,
         ret = (...args) => {
             clearTimeout(to);
-            to = setTimeout(() => {calls = true;}, delay);
+            to = setTimeout(() => { calls = true; }, delay);
             if (calls) func(...args);
             calls = false;
         };
@@ -165,167 +164,14 @@ export const filter = ({ symbols, filter, debug = false }) => {
     return res;
 };
 
-export const uncompressStateForImport = cstate => {
-    const {
-        bgca: backgroundColorAlpha,
-        w: width,
-        h: height,
-        mw: maxWidth,
-        mh: maxHeight,
-        apv: addPanelVisibility,
-        fsid: focusedSymbolId,
-        bgc: backgroundColor,
-        asf: asciiSelectorFilter,
-        sf: symbolsFilter,
-        alapoas: letAsciiPanelOpenAfterSelection,
-        suf: superFocus,
-        css: canScrollSymbols,
-        sc: scrollTop,
-        bgs: bgStyles,
-        pr: preventReload,
-        fs: fullscreen,
-        s: selected,
-        sm: swapMode,
-        tk: themeKey,
-        fc: filteredCount,
-        z: zoomLevel = 1,
-        sy: symbols, 
-        kf: keyFrames
-    } = cstate;
-    return {
-        backgroundColorAlpha,
-        width,
-        height,
-        maxWidth,
-        maxHeight,
-        addPanelVisibility,
-        focusedSymbolId: focusedSymbolId?.replace(/U_/, 'U_i'),
-        backgroundColor,
-        asciiSelectorFilter,
-        symbolsFilter,
-        letAsciiPanelOpenAfterSelection,
-        superFocus,
-        canScrollSymbols,
-        scrollTop,
-        bgStyles,
-        preventReload,
-        fullscreen,
-        selected,
-        swapMode,
-        themeKey,
-        filteredCount,
-        zoomLevel,
-        keyFrames,
-        symbols: symbols.map(({
-            i, ch, lb, zi, l, t, c, ff, fw, 
-            skx, sky, rx, ry, rz, b, o,
-            s, sx, sy, as, f
-        }) => ({
-            id: i.replace(/U_/, 'U_i'),
-            char: ch,
-            label: lb, 
-            zIndex: zi, 
-            left: l, 
-            top: t, 
-            color: c, 
-            fontFamily: ff, 
-            fontWeight: fw, 
-            skewX: skx,
-            skewY: sky,
-            rotationX: rx,
-            rotationY: ry,
-            rotationZ: rz, 
-            blur: b,
-            opacity: o,  
-            scale: s, 
-            scaleX: sx, 
-            scaleY: sy, 
-            additionalStyles: as, 
-            faded: f,
-        }))
-    };
-};
-
-export const compressStateForExport = state => {
-    const {
-        backgroundColorAlpha: bgca,
-        width: w,
-        height: h,
-        maxWidth: mw,
-        maxHeight: mh,
-        addPanelVisibility: apv,
-        focusedSymbolId: fsid,
-        backgroundColor: bgc,
-        asciiSelectorFilter: asf,
-        symbolsFilter: sf,
-        letAsciiPanelOpenAfterSelection: alapoas,
-        superFocus: suf,
-        canScrollSymbols: css,
-        scrollTop: sc,
-        bgStyles: bgs,
-        preventReload: pr,
-        fullscreen: fs,
-        selected: s,
-        swapMode: sm,
-        themeKey: tk,
-        filteredCount: fc,
-        zoomLevel: z,
-        symbols, 
-        keyFrames: kf,
-    } = state;
-    const exp = {
-        bgca, bgc,
-        w, h, mw, mh,
-        apv,
-        fsid, asf, sf, alapoas,
-        suf, css, sc, bgs, pr, fs,
-        s, sm, tk, fc, 
-        z,
-        kf,
-        sy: symbols.map(({
-            id: i,
-            char: ch,
-            label: lb, 
-            zIndex: zi, 
-            left: l, 
-            top: t, 
-            color: c, 
-            fontFamily: ff, 
-            fontWeight: fw, 
-            skewX: skx,
-            skewY: sky,
-            rotationX: rx,
-            rotationY: ry,
-            rotationZ: rz, 
-            blur: b,
-            opacity: o,  
-            scale: s, 
-            scaleX: sx, 
-            scaleY: sy, 
-            additionalStyles: as, 
-            faded: f, 
-        }) => ({
-            i, ch, lb, zi, l, t, c, ff, fw, 
-            skx, sky, rx, ry, rz, b, o,
-            s, sx, sy, as, f
-        }))
-    };
-    delete exp.availableSymbols;
-    return JSON.stringify(exp);
-};
 
 /**
  * TODO: here I should allow the use to see the location & name dialog
  * but still do not know how
  */
-export const saveAsStateFileJSON = state =>
+export const saveAsFileJSON = ({state, compress = false}) =>
     new Promise(resolve => {
-        const blob = new Blob([io.compress(state)]);
-        resolve(window.URL.createObjectURL(blob));
-    });
-export const saveAsFileJSON = json =>
-    new Promise(resolve => {
-        const blob = new Blob([JSON.stringify(json)]);
+        const blob = new Blob([compress ? io.compress(state) : JSON.stringify(state)]);
         resolve(window.URL.createObjectURL(blob));
     });
 export const importFromFile = ({ onContentReady }) => {
@@ -356,70 +202,7 @@ export const mergeAdditionalStyles = ({ additionalStyles, blur }) => {
     return ast;
 };
 
-
-const cleanCssString = v => v
-    .replace(/^\{/, '')
-    .replace(/\}$/, '')
-    .replace(/\n/g, '');
-const getUnicodeistData = j => JSON.stringify({
-    sty: {
-        w: j.width,
-        h: j.height,
-        bgc: {
-            c: j.backgroundColor,
-            a: j.backgroundColorAlpha
-        },
-        ...(j.bgStyles && {
-            bgi: cleanCssString(j.bgStyles)
-        }),
-    },
-    kfs: Object.keys(j.keyFrames).reduce((acc, k) => {
-        const inSymbols = j.symbols.find(({additionalStyles}) => 
-            additionalStyles.includes(` ${k} `)
-        );
-        if (inSymbols) acc[k] = cleanKf(j.keyFrames[k]);
-        return acc;
-    }, {}),
-    sym: j.symbols.map(s => ({
-        id: s.id.replace(/U_/, 'U_i'),
-        l: s.label,
-        cnt: s.char,
-        sty: {
-            ...(s.additionalStyles ? {
-                add: `${json2string(mergeAdditionalStyles({
-                    additionalStyles: s.additionalStyles,
-                    blur: s.blur || 0
-                }))}`
-            } : (s.blur && {
-                f: {
-                    bl: s.blur
-                }
-            })),
-            zi: s.zIndex,
-            c: s.color,
-            ff: Object.keys(FONT_FAMILIES_REDUCTION_MAP).find(
-                k => FONT_FAMILIES_REDUCTION_MAP[k] === s.fontFamily
-            ),
-            fw: s.fontWeight,
-            o: s.opacity,
-            it: s.italic,
-            t: {
-                trn: [s.left, s.top],
-                ...(s.scale !== 1 && { s: s.scale }),
-                ...(s.scaleX !== 1 && { sx: s.scaleX }),
-                ...(s.scaleY !== 1 && { sy: s.scaleY }),
-                ...(s.rotationX && { rx: s.rotationX }), // deg
-                ...(s.rotationY && { ry: s.rotationY }), // deg
-                ...(s.rotationZ && { rz: s.rotationZ }),  // deg
-                ...((s.skewX || s.skewY) && { sk: [s.skewX, s.skewY] })  // deg
-            },
-
-        }
-    }))
-});
-
 export const getUnicodeistScriptTag = state => {
-    // const dataUnicodeist = getUnicodeistData(state);
     const dataUnicodeist = io.compress(state);
     return `<script src="${UNICODEIST_SCRIPT_URI}" data-unicodeist='${dataUnicodeist}'></script>`;
 };
@@ -442,29 +225,36 @@ function seekAllCssRules(css) {
     return [...ks];
 }
 
-export function css2json(v, jssify = true) {
+export const css2json = (v, jssify = true) => {
     const vals = seekAllCssRules(v),
         // eslint-disable-next-line no-unused-vars
         ret = vals.reduce((acc, [_, k, v]) => {
             const nk = jssify ? k.replace(/(\w)-(\w)/g, (_, a, b) => `${a}${b.toUpperCase()}`) : k;
             acc[nk.toString()] = v.toString();
             return acc;
-        }, {}),
-        sret = JSON.stringify(ret),
-        jret = JSON.parse(sret);
-    return jret;
-}
-export function json2string(o) {
-    return Object.entries(o).reduce((acc, [k, e]) => {
-        return `${acc}${k}:${e};`;
-    }, '');
-}
-export function css2string(v) {
+        }, {});
+    return JSON.parse(JSON.stringify(ret));
+};
+
+export const css2json2 = (c, jssify = true) =>
+    [...c.matchAll(/\s*([^:\s]*)\s?:\s?(.*)?;/g)]
+        // eslint-disable-next-line no-unused-vars
+        .reduce((acc, [_, k, v]) => {
+            const nk = jssify ? k.replace(/(\w)-(\w)/g, (_, a, b) => `${a}${b.toUpperCase()}`) : k;
+            acc[nk.toString()] = v.toString();
+            return acc;
+        }, {});
+
+export const json2string = o => Object.entries(o).reduce(
+    (acc, [k, e]) => `${acc}${k}:${e};`,
+    ''
+);
+export const css2string = v => {
     const vals = seekAllCssRules(v),
         // eslint-disable-next-line no-unused-vars
         ret = vals.reduce((acc, [_, k, v]) => `${acc}${k}:${v};`, '');
     return ret;
-}
+};
 
 
 /* View in fullscreen */
@@ -507,9 +297,7 @@ const def = {
     debounce,
     unbounce,
     importFromFile,
-    getUnicodeistData,
     getUnicodeistScriptTag,
-    saveAsStateFileJSON,
     saveAsFileJSON,
     getCodes,
     count,
@@ -520,7 +308,6 @@ const def = {
     downloadAs,
     css2json,
     mergeAdditionalStyles,
-    compressStateForExport,
-    uncompressStateForImport,
+    css2json2
 };
 export default def;

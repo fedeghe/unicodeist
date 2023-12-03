@@ -122,18 +122,7 @@ export const FONT_FAMILIES = [
     'Courier New',
     'Brush Script MT'
 ];
-// must be in synch with src/unicodeist/src/index.js
-export const FONT_FAMILIES_REDUCTION_MAP = {
-    ar: 'Arial',
-    v: 'Verdana',
-    ta: 'Tahoma',
-    tr: 'Trebuchet MS',
-    tn: 'Times New Roman',
-    ge: 'Georgia',
-    ga: 'Garamond',
-    c: 'Courier New',
-    b: 'Brush Script MT'
-};
+
 export const UNICODEIST_SCRIPT_URI = 'https://www.jmvc.org/unicodeist/index.js';
 export const DOWNLOAD_FORMATS = {
     json: 'json',

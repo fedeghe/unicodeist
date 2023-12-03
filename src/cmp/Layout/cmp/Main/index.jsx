@@ -11,7 +11,7 @@ import Zoom from './cmp/Zoom';
 import Undo from './cmp/Undo';
 import ACTIONS from 'src/reducer/actions';
 
-import Channel from '@fedeghe/channeljs';
+import Channeljs from '@fedeghe/channeljs';
 
 const Main = () => {
     const classes = useStyles(),
@@ -95,11 +95,11 @@ const Main = () => {
 
     // allow open panel in swap mode
     useEffect(() => {
-        Channel.get('event').sub(
+        Channeljs.get('event').sub(
             'swap',
             () => togglePanel({ swapMode: true })
         );
-        return () => Channel('event').unsub('swap');
+        return () => Channeljs('event').unsub('swap');
     }, []);
     useEffect(() => {
         document.addEventListener("keydown", onKeyDown);

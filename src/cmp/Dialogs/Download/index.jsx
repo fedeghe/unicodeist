@@ -8,7 +8,7 @@ import {
     toPng, toJpeg
 } from 'html-to-image';
 import { DEFAULTS, DOWNLOAD_FORMATS } from 'src/constants';
-import { saveAsStateFileJSON, downloadAs } from 'src/utils';
+import { saveAsFileJSON, downloadAs } from 'src/utils';
 import ctx from 'src/Context';
 import useStyles from './styles';
 
@@ -31,7 +31,7 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
             [setVisibility]
         ),
         toJson = useCallback(
-            () => saveAsStateFileJSON(state),
+            () => saveAsFileJSON({state, compress: true}),
             [state]
         ),
         alphaFlagLabel = backgroundColorAlpha ? '' : ' (turned OFF)',

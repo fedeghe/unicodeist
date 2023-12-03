@@ -4,14 +4,14 @@ import {
     useEffect, useState
 } from 'react';
 
-import Channel from '@fedeghe/channeljs';
+import Channeljs from '@fedeghe/channeljs';
 
 import CanvasSymbol from './CanvasSymbol';
 import ctx from 'src/Context';
 import {
     cleanCodeFromState,
     getUnicodeistScriptTag,
-    css2string, css2json
+    css2string, css2json2
 } from 'src/utils';
 // import { UNSELECTED } from 'src/constants';
 import {
@@ -47,7 +47,7 @@ const Canvas = () => {
         [embedCode, setEmbedCode] = useState(''),
         [scriptCode, setScriptCode] = useState(''),
         refStyles = useMemo(() => ({
-            ...(bgStyles ? css2json(bgStyles) : {}),
+            ...(bgStyles ? css2json2(bgStyles) : {}),
             width: `${width}px`,
             height: `${height}px`,
             backgroundColor: backgroundColorAlpha ? `${backgroundColor}00` : backgroundColor,
@@ -74,20 +74,20 @@ const Canvas = () => {
             };
 
         if (ref.current) {
-            Channel.get('event').sub('embed', embed);
-            Channel.get('event').sub('exportImage', exportImage);
-            Channel.get('event').sub('backgrounStyles', backgrounStyles);
-            Channel.get('event').sub('contribute', contribute);
-            Channel.get('event').sub('keyEditor', keyEditor);
-            Channel.get('event').sub('shadowEditor', shadowEditor);
+            Channeljs.get('event').sub('embed', embed);
+            Channeljs.get('event').sub('exportImage', exportImage);
+            Channeljs.get('event').sub('backgrounStyles', backgrounStyles);
+            Channeljs.get('event').sub('contribute', contribute);
+            Channeljs.get('event').sub('keyEditor', keyEditor);
+            Channeljs.get('event').sub('shadowEditor', shadowEditor);
         }
         return () => {
-            Channel.get('event').unsub('embed', embed);
-            Channel.get('event').unsub('exportImage', exportImage);
-            Channel.get('event').unsub('contribute', contribute);
-            Channel.get('event').unsub('backgrounStyles', backgrounStyles);
-            Channel.get('event').unsub('keyEditor', keyEditor);
-            Channel.get('event').unsub('shadowEditor', shadowEditor);
+            Channeljs.get('event').unsub('embed', embed);
+            Channeljs.get('event').unsub('exportImage', exportImage);
+            Channeljs.get('event').unsub('contribute', contribute);
+            Channeljs.get('event').unsub('backgrounStyles', backgrounStyles);
+            Channeljs.get('event').unsub('keyEditor', keyEditor);
+            Channeljs.get('event').unsub('shadowEditor', shadowEditor);
         };
     }, [ref, state]);
     return (
