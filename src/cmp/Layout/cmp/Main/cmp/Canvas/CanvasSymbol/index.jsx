@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import useStyles from './styles';
 
 import ctx from 'src/Context';
-import {css2json2} from 'src/utils';
+import {css2json} from 'src/utils';
 import ACTIONS from 'src/reducer/actions';
 
 const CanvasSymbol = ({symbol}) => {
@@ -53,7 +53,7 @@ const CanvasSymbol = ({symbol}) => {
             });
         },
         mergeAdditionalStyles = () => {
-            const ast = additionalStyles ? css2json2(additionalStyles) : {},
+            const ast = additionalStyles ? css2json(additionalStyles) : {},
                 filter = [`blur(${blur}px)`];
             if ('filter' in ast) {
                 filter.push(ast.filter);

@@ -217,31 +217,20 @@ export const getCodes = char => {
     };
 };
 
-function seekAllCssRules(css) {
-    const first = css.replace(/\n/g, ''),
-        ks = first.matchAll(/([A-Za-z0-9-_]*):(['"A-Za-z0-9-_.,:/()%#\s]*);?/g);
-    return [...ks];
-}
+export const seekAllCssRules = css => {
+    const first = css.replace(/^\s*\/\/[^\n]*/g, ''),
 
-export const css2json = (v, jssify = true) => {
-    const vals = seekAllCssRules(v),
-        // eslint-disable-next-line no-unused-vars
-        ret = vals.reduce((acc, [_, k, v]) => {
-            const nk = jssify ? k.replace(/(\w)-(\w)/g, (_, a, b) => `${a}${b.toUpperCase()}`) : k;
-            acc[nk.toString()] = v.toString();
-            return acc;
-        }, {});
-    return JSON.parse(JSON.stringify(ret));
+        ks = first.matchAll(/\s*([^:\s]*)\s?:\s?(.*)?;/g),
+        res = [...ks];
+    return res.map(r => [r[1], r[2]]);
 };
 
-export const css2json2 = (c, jssify = true) =>
-    [...c.matchAll(/\s*([^:\s]*)\s?:\s?(.*)?;/g)]
-        // eslint-disable-next-line no-unused-vars
-        .reduce((acc, [_, k, v]) => {
-            const nk = jssify ? k.replace(/(\w)-(\w)/g, (_, a, b) => `${a}${b.toUpperCase()}`) : k;
-            acc[nk.toString()] = v.toString();
-            return acc;
-        }, {});
+export const css2json = (c, jssify = true) => seekAllCssRules(c)
+    .reduce((acc, [k, v]) => {
+        const nk = jssify ? k.replace(/(\w)-(\w)/g, (_, a, b) => `${a}${b.toUpperCase()}`) : k;
+        acc[nk.toString().trim()] = v.toString().trim();
+        return acc;
+    }, {});
 
 export const json2string = o => Object.entries(o).reduce(
     (acc, [k, e]) => `${acc}${k}:${e};`,
@@ -249,8 +238,7 @@ export const json2string = o => Object.entries(o).reduce(
 );
 export const css2string = v => {
     const vals = seekAllCssRules(v),
-        // eslint-disable-next-line no-unused-vars
-        ret = vals.reduce((acc, [_, k, v]) => `${acc}${k}:${v};`, '');
+        ret = vals.reduce((acc, [k, v]) => `${acc}${k}:${v};`, '');
     return ret;
 };
 
@@ -306,6 +294,6 @@ const def = {
     downloadAs,
     css2json,
     mergeAdditionalStyles,
-    css2json2
+    seekAllCssRules
 };
 export default def;

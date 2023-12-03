@@ -6,7 +6,7 @@ import Channeljs from '@fedeghe/channeljs';
 import CanvasSymbol from './CanvasSymbol';
 import ctx from 'src/Context';
 import {
-    cleanCodeFromState, getUnicodeistScriptTag, css2json2
+    cleanCodeFromState, getUnicodeistScriptTag, css2json
 } from 'src/utils';
 
 import {
@@ -42,7 +42,7 @@ const Canvas = () => {
         [embedCode, setEmbedCode] = useState(''),
         [scriptCode, setScriptCode] = useState(''),
         refStyles = useMemo(() => ({
-            ...(bgStyles ? css2json2(bgStyles) : {}),
+            ...(bgStyles ? css2json(bgStyles) : {}),
             width: `${width}px`,
             height: `${height}px`,
             backgroundColor: backgroundColorAlpha ? `${backgroundColor}00` : backgroundColor,
