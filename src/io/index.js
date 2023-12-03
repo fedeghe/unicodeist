@@ -106,7 +106,7 @@ export const compress = ({
         ...(h !== DEFAULTS.HEIGHT && {h}),
         fsid, bgs, s, tk, z,
         // need to include only those actually used
-        ...(hasKf && kf),
+        ...(hasKf && {kf}),
         sym: symbols.map(({
             id: i,
             char: ch,
