@@ -17,6 +17,7 @@ import {
     BgStylesEditorDialog,
     AdditionalStylesEditorDialog
  } from 'src/cmp/Dialogs';
+ import ACTIONS from 'src/reducer/actions';
 
 const Canvas = () => {
     const {
@@ -30,6 +31,7 @@ const Canvas = () => {
             zoomLevel
         },
         state,
+        dispatch
     } = useContext(ctx),
         keyFramesNames = Object.keys(keyFrames),
         ref = useRef(),
@@ -85,6 +87,15 @@ const Canvas = () => {
             Channeljs.get('event').unsub('shadowEditor', shadowEditor);
         };
     }, [ref, state]);
+    useEffect(() => {
+        const disableArrows = copyDialogVisibility
+            || downloadDialogVisibility
+            || contributeDialogVisibility
+            || backgrounStylesDialogVisibility
+            || additionalStylesEditorDialogVisibility
+            || keyEditorDialogVisibility;
+        dispatch({type: ACTIONS.TOGGLE_ARROW_EVENTS, payload: !disableArrows});
+    }, [copyDialogVisibility, downloadDialogVisibility, contributeDialogVisibility, backgrounStylesDialogVisibility, additionalStylesEditorDialogVisibility, keyEditorDialogVisibility]);
     return (
         <div>
             <CopyDialog visibility={copyDialogVisibility} setVisibility={setCopyDialogVisibility} embedCode={embedCode} scriptCode={scriptCode} />

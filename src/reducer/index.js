@@ -71,11 +71,10 @@ const history = [],
         keyFrames: keyFramesManager.synch(),
         preventReload: DEFAULTS.PREVENT_RELOAD,
         fullscreen: DEFAULTS.FULLSCREEN_MODE,
-        // availableSymbols: [],
         selected: DEFAULTS.SELECTED,
         swapMode: DEFAULTS.SWAP_MODE,
         zoomLevel: DEFAULTS.ZOOM_LEVEL,
-        // filteredCount: DEFAULTS.FILTERED_COUNT,
+        arrowEventsActive: true,
         themeKey: DEFAULTS.THEME_KEY,
             availableSymbols: allSymbols,
             filteredCount: count(allSymbols),
@@ -117,6 +116,9 @@ const history = [],
         }),
         [ACTIONS.CAN_SCROLL_SYMBOLS]: ({ payload }) => ({
             canScrollSymbols: payload
+        }),
+        [ACTIONS.TOGGLE_ARROW_EVENTS]: ({ payload }) => ({
+            arrowEventsActive: payload
         }),
 
         [ACTIONS.ADD_SYMBOL]: ({

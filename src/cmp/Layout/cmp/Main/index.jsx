@@ -19,7 +19,8 @@ const Main = () => {
             state: {
                 addPanelVisibility, fullscreen,
                 selected, zoomLevel,
-                canUndo, undos
+                canUndo, undos,
+                arrowEventsActive
             },
             dispatch
         } = useContext(ctx),
@@ -72,7 +73,8 @@ const Main = () => {
             
             // on shift+arrow move current target symbol
             if (
-                (e.shiftKey || e.metaKey)
+                arrowEventsActive
+                && (e.shiftKey || e.metaKey)
                 && ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)
             ){
                 move(e.key, e.metaKey); e.preventDefault();
@@ -91,7 +93,7 @@ const Main = () => {
             ){
                 undo(); e.preventDefault();
             }
-        }, [togglePanel, fullscreen]);
+        }, [togglePanel, fullscreen, arrowEventsActive]);
 
     // allow open panel in swap mode
     useEffect(() => {

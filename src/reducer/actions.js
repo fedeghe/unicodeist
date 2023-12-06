@@ -50,6 +50,7 @@ export const ADD_SYMBOL = Symbol('add a symbol'),
     ZOOM_IN = Symbol('zoom in'),
     ZOOM_OUT = Symbol('zoom out'),
     ZOOM_ZERO = Symbol('zoom zero'),
+    TOGGLE_ARROW_EVENTS = Symbol('enable disable arrow move events'),
     SAVE_SCROLL = Symbol('save scroll');
 
 const exp = {
@@ -105,7 +106,8 @@ const exp = {
     ZOOM_IN,
     ZOOM_OUT,
     ZOOM_ZERO,
-    SAVE_SCROLL
+    SAVE_SCROLL,
+    TOGGLE_ARROW_EVENTS,
 };
 
 export default exp;
