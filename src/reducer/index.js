@@ -127,9 +127,9 @@ const history = [],
         }) => {
             // get highest zindex
             const zIndex = Object.values(symbols).reduce(
-                (acc, { zIndex }) => acc > zIndex ? acc : zIndex,
-                0
-            ) + 1,
+                    (acc, { zIndex }) => acc > zIndex ? acc : zIndex,
+                    0
+                ) + 1,
                 newSymbol = createSymbol({
                     char,
                     left: width / 2,
@@ -255,17 +255,16 @@ const history = [],
         [ACTIONS.MAX_ZI]: ({
             oldState: { symbols, focusedSymbolId }
         }) => {
-            const maxZindexSymbol = symbols.reduce(
-                (a, n) => n.zIndex > a.zIndex ? n : a,
-                { zIndex: MIN_ZINDEX }
+            const maxZindex = symbols.reduce(
+                (max, s) => s.zIndex > max ? s.zIndex : max,
+                MIN_ZINDEX
             );
-            if (maxZindexSymbol.id === focusedSymbolId) return {};
-            return {
+            return  {
                 symbols: symbols.map(
                     sym => sym.id === focusedSymbolId
                         ? ({
                             ...sym,
-                            zIndex: maxZindexSymbol.zIndex + 1
+                            zIndex: maxZindex === sym.zIndex ? maxZindex : Math.min(maxZindex + 1, MAX_ZINDEX)
                         })
                         : sym
                 )
@@ -275,17 +274,16 @@ const history = [],
         [ACTIONS.MIN_ZI]: ({
             oldState: { symbols, focusedSymbolId }
         }) => {
-            const minZindexSymbol = symbols.reduce(
-                (a, n) => n.zIndex < a.zIndex ? n : a,
-                { zIndex: MAX_ZINDEX }
+            const minZindex = symbols.reduce(
+                (min, s) => s.zIndex < min ? s.zIndex : min,
+                MAX_ZINDEX
             );
-            if (minZindexSymbol.id === focusedSymbolId) return {};
-            return {
+            return  {
                 symbols: symbols.map(
                     sym => sym.id === focusedSymbolId
                         ? ({
                             ...sym,
-                            zIndex: Math.max(0, minZindexSymbol.zIndex - 1)
+                            zIndex: minZindex === sym.zIndex ? minZindex : Math.max(minZindex - 1, MIN_ZINDEX)
                         })
                         : sym
                 )

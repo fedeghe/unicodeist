@@ -44,16 +44,16 @@ const Main = () => {
             }),
             [addPanelVisibility, dispatch]
         ),
-        zoom = useCallback(key => {
-                const type = {
+        zoom = useCallback(key =>
+            dispatch({
+                type: {
                     '=': ACTIONS.ZOOM_IN,
                     '+': ACTIONS.ZOOM_IN,
                     '-': ACTIONS.ZOOM_OUT,
                     '_': ACTIONS.ZOOM_OUT,
                     '0': ACTIONS.ZOOM_ZERO,
-                }[key];
-                dispatch({ type });
-            },
+                }[key]
+            }),
             [addPanelVisibility, dispatch]
         ),
         resetZoom = () => dispatch({ type: ACTIONS.ZOOM_ZERO }),
