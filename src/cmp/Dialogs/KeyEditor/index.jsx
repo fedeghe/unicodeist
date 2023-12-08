@@ -133,7 +133,7 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
         keyFramesKeys = Object.keys(keyFrames),
         updating = keyFramesKeys.includes(name),
         hasKeyFrames = keyFramesKeys.length;
-
+    console.log({keyFrames});
     return (
         <Dialog
             open={visibility}
@@ -170,7 +170,7 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                             hasKeyFrames && {
                                 title: "export",
                                 icon: <FileUploadIcon />,
-                                onClick: () => saveAsFileJSON(keyFrames)
+                                onClick: () => saveAsFileJSON({what: keyFrames})
                                     .then(downloadAs('keyframes.json'))
                             }
                         ].filter(Boolean)

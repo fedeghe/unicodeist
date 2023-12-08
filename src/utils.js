@@ -167,9 +167,9 @@ export const filter = ({ symbols, filter, debug = false }) => {
  * TODO: here I should allow the use to see the location & name dialog
  * but still do not know how
  */
-export const saveAsFileJSON = ({state, compress = false}) =>
+export const saveAsFileJSON = ({what, compress = false}) =>
     new Promise(resolve => {
-        const blob = new Blob([compress ? io.compress(state) : JSON.stringify(state)]);
+        const blob = new Blob([compress ? io.compress(what) : JSON.stringify(what)]);
         resolve(window.URL.createObjectURL(blob));
     });
 export const importFromFile = ({ onContentReady }) => {

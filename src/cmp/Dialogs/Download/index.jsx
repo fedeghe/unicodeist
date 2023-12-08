@@ -31,7 +31,7 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
             [setVisibility]
         ),
         toJson = useCallback(
-            () => saveAsFileJSON({state, compress: true}),
+            () => saveAsFileJSON({what: state, compress: true}),
             [state]
         ),
         alphaFlagLabel = backgroundColorAlpha ? '' : ' (turned OFF)',
