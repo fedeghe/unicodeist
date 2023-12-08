@@ -25,6 +25,7 @@ const App = () => {
             e.preventDefault();
             e.returnValue = '';
         }, []),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         storeViewPortData = useCallback(debounced, []),
         prevent = useCallback(e => e.preventDefault(), []),
         mtheme = createTheme({
@@ -53,7 +54,7 @@ const App = () => {
                 window.removeEventListener("popstate", catchReload);
             }
         };
-    }, [storeViewPortData, preventReload]);
+    }, [storeViewPortData, preventReload, prevent, catchReload]);
 
     return (
         <MThemeProvider theme={mtheme}>

@@ -52,11 +52,11 @@ const DownloadDialog = ({ visibility, setVisibility, domRef }) => {
                 outerHint: [`This format supports background alpha transparency${alphaFlagLabel}.`, maybeRetina ? retinaHint : false]
             },
         },
-        changeFormat = e => setFormat(e.target.value),
-        changeName = e => {
+        changeFormat = useCallback(e => setFormat(e.target.value)),
+        changeName = useCallback(e => {
             setValidFilename(e.target.value.match(/^[0-9a-zA-Z ... ]+$/));
             setFilename(e.target.value);
-        },
+        }, []),
         doDownload = useCallback(() => {
             const dom = domRef.current;
             format in formatToReader && formatToReader[format].executor(dom).then(

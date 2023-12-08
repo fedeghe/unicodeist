@@ -1,7 +1,8 @@
 {
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended"
       ],
     "rules": {
         "semi": [2, "always"],
@@ -25,5 +26,6 @@
     "globals": {
         "window" :true,
         "console" :true
-    }
+    },
+    "ignorePatterns": [ "**/unicodeist/*.js"]
 }

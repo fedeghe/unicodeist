@@ -36,7 +36,7 @@ const Families = () => {
             type: ACTIONS.SAVE_SCROLL,
             payload: ref.current.scrollTop
         }),
-        onSelect = (char) => {
+        onSelect = char =>  {
             dispatch({
                 type: swapMode ? ACTIONS.SWAP_SYMBOL : ACTIONS.ADD_SYMBOL,
                 payload: {
@@ -48,7 +48,7 @@ const Families = () => {
 
     useEffect(() => {
         ref.current.scrollTop = scrollTop;
-    }, []);
+    }, [scrollTop]);
     
     return <div className={classes.Container} ref={ref} onScroll={onScroll}>
         {Boolean(filteredCount) && 

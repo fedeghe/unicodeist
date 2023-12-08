@@ -125,11 +125,11 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                 e.preventDefault();
                 return false;
             }
-        }, [fullscreen]),
-        showConfirmation = msg => {
+        }, [fullscreen, onClose]),
+        showConfirmation = useCallback(msg => {
             setConfirmationMessage(msg);
             setConfirmationVisibility(true);
-        },
+        }, []),
         keyFramesKeys = Object.keys(keyFrames),
         updating = keyFramesKeys.includes(name),
         hasKeyFrames = keyFramesKeys.length;
