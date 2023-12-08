@@ -133,7 +133,6 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
         keyFramesKeys = Object.keys(keyFrames),
         updating = keyFramesKeys.includes(name),
         hasKeyFrames = keyFramesKeys.length;
-    console.log({keyFrames});
     return (
         <Dialog
             open={visibility}
