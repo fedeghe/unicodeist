@@ -162,11 +162,6 @@ export const filter = ({ symbols, filter, debug = false }) => {
     return res;
 };
 
-
-/**
- * TODO: here I should allow the use to see the location & name dialog
- * but still do not know how
- */
 export const saveAsFileJSON = ({what, compress = false}) =>
     new Promise(resolve => {
         const blob = new Blob([compress ? io.compress(what) : JSON.stringify(what)]);
