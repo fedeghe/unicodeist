@@ -640,8 +640,8 @@ const history = [],
         },
         [ACTIONS.BULK_SPACE]: ({ oldState: { symbols, selected }, payload: what }) => {
             const sortedSymbols = symbols
-                .filter(({ id }) => selected.includes(id))
-                .sort((a, b) => a[what] - b[what]),
+                .filter(({ id }) => selected.includes(id)),
+                // .sort((a, b) => a[what] - b[what]),
                 lastIndex = sortedSymbols.length - 1,
                 min = sortedSymbols[0][what],
                 max = sortedSymbols[lastIndex][what],
