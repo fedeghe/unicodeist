@@ -22,9 +22,7 @@ const Families = () => {
         } = useContext(ctx),
         closePanel = () => dispatch({
             type: ACTIONS.TOGGLE_ADD_PANEL,
-            payload: {
-                visibility: false
-            }
+            payload: { visibility: false }
         }),
         showConfirmation = char => {
             setMessageChar(char);
@@ -39,9 +37,7 @@ const Families = () => {
         onSelect = char =>  {
             dispatch({
                 type: swapMode ? ACTIONS.SWAP_SYMBOL : ACTIONS.ADD_SYMBOL,
-                payload: {
-                    char
-                }
+                payload: { char }
             });
             letAsciiPanelOpenAfterSelection && !swapMode ? showConfirmation(char) : closePanel();
         };

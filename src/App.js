@@ -1,9 +1,9 @@
 import { useReducer, useEffect, useCallback } from 'react';
 import { ThemeProvider } from 'react-jss';
 import { ThemeProvider as MThemeProvider, createTheme } from '@mui/material/styles';
+import Context from './Context';
 
 import Layout from './cmp/Layout';
-import Context from './Context';
 import reducerFactory from './reducer';
 import ACTIONS from './reducer/actions';
 import getTheme from './themes';
@@ -28,11 +28,8 @@ const App = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         storeViewPortData = useCallback(debounced, []),
         prevent = useCallback(e => e.preventDefault(), []),
-        mtheme = createTheme({
-            palette: {
-                mode: themeKey,
-            },
-        });
+        mtheme = createTheme({ palette: { mode: themeKey } });
+
     useEffect(storeViewPortData, [storeViewPortData]);
     useEffect(() => {
         window.addEventListener("resize", storeViewPortData);
