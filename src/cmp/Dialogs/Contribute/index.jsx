@@ -20,10 +20,10 @@ const CopyDialog = ({visibility, setVisibility}) => {
             <div className={classes.Dialog}>
                 <h3>Hi</h3>
                 <p>We are thrilled to invite you to contribute to this project.</p>
-                <p>Your valuable contributions can help me to enhance the project and make it better.</p>
-                <p>Whether you have ideas, suggestions, or expertise in coding, I welcome you to contribute by filing issues or opening pull requests.</p>                    
+                <p>Your valuable contributions can help us to enhance the project and make it better.</p>
+                <p>Whether you have ideas, suggestions, or expertise in coding, We welcome you to contribute by filing issues or opening pull requests.</p>                    
                 <p>To get started, please visit the <Link onClick={onContribute} href="javascript:;">project repository on GitHub</Link> and explore the existing issues or codebase.</p>
-                <p>If you come across any issues or have ideas for improvements, feel free to file an issue or open a pull request. I`ll do my best to review and provide feedback promptly.</p>
+                <p>If you come across any issues or have ideas for improvements, feel free to file an issue or open a pull request. We`ll do our best to review and provide feedback promptly.</p>
                 <p>Thank you for considering contributing to this project.</p>
                 <p>Best regards,</p>
                 <p>Federico & Gabriele</p>
