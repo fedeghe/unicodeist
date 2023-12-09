@@ -19,7 +19,7 @@ const CopyDialog = ({visibility, setVisibility}) => {
         <Dialog open={visibility} onClose={onClose} disableRestoreFocus>
             <div className={classes.Dialog}>
                 <h3>Hi</h3>
-                <p>I are thrilled to invite you to contribute to this project.</p>
+                <p>We are thrilled to invite you to contribute to this project.</p>
                 <p>Your valuable contributions can help me to enhance the project and make it better.</p>
                 <p>Whether you have ideas, suggestions, or expertise in coding, I welcome you to contribute by filing issues or opening pull requests.</p>                    
                 <p>To get started, please visit the <Link onClick={onContribute} href="javascript:;">project repository on GitHub</Link> and explore the existing issues or codebase.</p>
