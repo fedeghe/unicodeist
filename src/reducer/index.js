@@ -10,46 +10,18 @@ import {
     UNSUPPORTEDFILE_MESSAGE,
     UNDO_UNBOUNCING,    
     DEFAULTS,
-    SYMBOL_DEFAULTS,
     MEASURE,
     MOVE_MULTIPLIER
 } from 'src/constants';
 
 import ACTIONS from './actions';
 import allSymbols from './../Symbols';
-import { keyFramesManager } from './utils';
+import { keyFramesManager, createSymbol } from './utils';
 import undoableActions from './undoables';
 
 let historyCursor = 0;
 
 const history = [],
-    createSymbol = ({ char, zIndex, left, top }) => {
-        const u = `${uniqueID}`;
-        return {
-            id: u,
-            char,
-            label: `${u}`,
-            zIndex,
-            left,
-            top,
-            additionalStyles: SYMBOL_DEFAULTS.ADDITIONAL_STYLES,
-            blur: SYMBOL_DEFAULTS.BLUR,
-            color: SYMBOL_DEFAULTS.COLOR,
-            faded: SYMBOL_DEFAULTS.FADED,
-            fontFamily: SYMBOL_DEFAULTS.FONTFAMILY,
-            fontWeight: SYMBOL_DEFAULTS.FONTWEIGHT,
-            italic: SYMBOL_DEFAULTS.ITALIC,
-            opacity: SYMBOL_DEFAULTS.OPACITY,
-            rotationX: SYMBOL_DEFAULTS.ROTATIONX,
-            rotationY: SYMBOL_DEFAULTS.ROTATIONY,
-            rotationZ: SYMBOL_DEFAULTS.ROTATIONZ,
-            scale: SYMBOL_DEFAULTS.SCALE,
-            scaleX: SYMBOL_DEFAULTS.SCALEX,
-            scaleY: SYMBOL_DEFAULTS.SCALEY,
-            skewX: SYMBOL_DEFAULTS.SKEWX,
-            skewY: SYMBOL_DEFAULTS.SKEWY,
-        };
-    },
 
     base = {
         backgroundColorAlpha: DEFAULTS.BACKGROUND_ALPHA,
@@ -76,13 +48,15 @@ const history = [],
         zoomLevel: DEFAULTS.ZOOM_LEVEL,
         arrowEventsActive: true,
         themeKey: DEFAULTS.THEME_KEY,
-            availableSymbols: allSymbols,
-            filteredCount: count(allSymbols),
+        availableSymbols: allSymbols,
+        filteredCount: count(allSymbols),
     },
 
     actions = {
         [ACTIONS.INIT]: () => base, // not undoable
+        
         [ACTIONS.NEW]: () => base,  // undoable
+
         [ACTIONS.SWITCH_THEME]: ({ oldState: { themeKey } }) => ({
             themeKey: themeKey === 'light' ? 'dark' : 'light'
         }),
@@ -96,6 +70,7 @@ const history = [],
                 offset = v - oldState[what],
                 halfHoffset = offset / 2,
                 posDimension = what === 'height' ? 'top' : 'left';
+
             return {
                 [what]: v,
                 symbols: symbols.map(s => ({
@@ -114,11 +89,13 @@ const history = [],
             addPanelVisibility: visibility,
             swapMode
         }),
+
         [ACTIONS.CAN_SCROLL_SYMBOLS]: ({ payload }) => ({
-            canScrollSymbols: payload
+            canScrollSymbols: !!payload
         }),
+
         [ACTIONS.TOGGLE_ARROW_EVENTS]: ({ payload }) => ({
-            arrowEventsActive: payload
+            arrowEventsActive: !!payload
         }),
 
         [ACTIONS.ADD_SYMBOL]: ({
@@ -205,6 +182,7 @@ const history = [],
                 faded: false
             })),
         }),
+
         [ACTIONS.ZOOM_ZERO]: () => ({ zoomLevel: 1 }),
 
         [ACTIONS.ZOOM_IN]: ({
@@ -291,7 +269,7 @@ const history = [],
         },
 
         [ACTIONS.LET_ASCIIPANEL_OPEN_AFTER_SELECTION]: ({ payload }) => ({
-            letAsciiPanelOpenAfterSelection: payload
+            letAsciiPanelOpenAfterSelection: !!payload
         }),
 
         [ACTIONS.SET_ASCIIPANEL_FILTER]: ({ payload: asciiSelectorFilter }) => {
@@ -312,6 +290,7 @@ const history = [],
                 symbols
             }
         }) => {
+
             const newMaxWidth = parseInt(MEASURE.getMaxWidth(), 10) - PANEL_WIDTH,
                 newMaxHeight = parseInt(MEASURE.getMaxHeight(), 10),
                 newWidth = Math.min(width, newMaxWidth),
@@ -369,6 +348,7 @@ const history = [],
                 filteredCount: count(allSymbols)
             };
         },
+
         [ACTIONS.IMPORT_KEYFRAMES]: ({ payload, oldState }) => {
             let keyFrames;
             try {
@@ -458,22 +438,6 @@ const history = [],
         [ACTIONS.SET_SYMBOLS_FILTER]: ({ payload: symbolsFilter }) => ({ symbolsFilter }),
 
         [ACTIONS.REMOVE_ERROR]: () => ({ error: null }),
-
-        [ACTIONS.TOGGLE_ITALIC]: ({
-            oldState: {
-                symbols,
-                focusedSymbolId
-            }
-        }) => ({
-            symbols: symbols.map(symbol =>
-                symbol.id === focusedSymbolId
-                    ? ({
-                        ...symbol,
-                        italic: !symbol.italic
-                    })
-                    : symbol
-            )
-        }),
 
         // not on focusedSymbolId
         [ACTIONS.MOVE_SYMBOL]: ({
@@ -620,6 +584,7 @@ const history = [],
                 )
             };
         },
+
         [ACTIONS.BULK_ALIGNH]: ({
             oldState: { symbols, selected }
         }) => {
@@ -638,6 +603,7 @@ const history = [],
                 )
             };
         },
+
         [ACTIONS.BULK_SPACE]: ({ oldState: { symbols, selected }, payload: what }) => {
             const sortedSymbols = symbols
                 .filter(({ id }) => selected.includes(id)),
@@ -684,6 +650,7 @@ const history = [],
                 )
             };
         },
+
         [ACTIONS.BULK_CENTER_VERTICALLY]: ({ oldState: { symbols, height, selected } }) => {
             const { min, max } = symbols
                 .filter(({ id }) => selected.includes(id))
@@ -705,11 +672,13 @@ const history = [],
                 )
             };
         },
+
         [ACTIONS.UNDO]: () => {
             const previous = history[historyCursor - 1];
             historyCursor--;
             return { ...previous };
         },
+
         [ACTIONS.SAVE_SCROLL]: ({payload}) => ({scrollTop : payload})
     },
 
@@ -747,7 +716,8 @@ const history = [],
 
 const exp = () => ({
     reducer,
-    init: (cnf = {}) => reducer({}, { type: ACTIONS.INIT, payload: cnf })
+    init: (cnf = {}) => reducer({}, { type: ACTIONS.INIT, payload: cnf }),
+    base
 });
 
 export default exp;
