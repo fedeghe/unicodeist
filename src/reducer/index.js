@@ -24,6 +24,7 @@ let historyCursor = 0;
 const history = [],
 
     base = {
+        
         backgroundColorAlpha: DEFAULTS.BACKGROUND_ALPHA,
         width: DEFAULTS.WIDTH,
         height: DEFAULTS.HEIGHT,
@@ -613,7 +614,7 @@ const history = [],
                 max = sortedSymbols[lastIndex][what],
                 span = max - min,
                 step = span / lastIndex;
-
+            
             return {
                 symbols: symbols.map(sym => {
                     const index = sortedSymbols.findIndex(({ id }) => id === sym.id);

@@ -323,5 +323,54 @@ describe('reducer should work as expected', () => {
             checker(expect, res);
         }
     );
+    it.each(testActions.TOGGLE_SYMBOL_SELECTION)(
+        'should work - %s',
+        (_, oldstate, action, checker) => {
+            const res = reducer(oldstate, action);
+            checker(expect, res);
+        }
+    );
+    it.each(testActions.TOGGLE_SYMBOLS_SELECTION)(
+        'should work - %s',
+        (_, oldstate, action, checker) => {
+            const res = reducer(oldstate, action);
+            checker(expect, res);
+        }
+    );
+    it.each(testActions.BULK_ALIGNV)(
+        'should work - %s',
+        (_, oldstate, action, checker) => {
+            const res = reducer(oldstate, action);
+            checker(expect, res);
+        }
+    );
+    it.each(testActions.BULK_ALIGNH)(
+        'should work - %s',
+        (_, oldstate, action, checker) => {
+            const res = reducer(oldstate, action);
+            checker(expect, res);
+        }
+    );
+    it.each(testActions.BULK_SPACE)(
+        'should work - %s',
+        (_, oldstate, action, checker) => {
+            const res = reducer(oldstate, action);
+            checker(expect, res);
+        }
+    );
+    it.each(testActions.BULK_CENTER_HORIZONTALLY)(
+        'should work - %s',
+        (_, oldstate, action, checker) => {
+            const res = reducer(oldstate, action);
+            checker(expect, res);
+        }
+    );
+    it.each(testActions.BULK_CENTER_VERTICALLY)(
+        'should work - %s',
+        (_, oldstate, action, checker) => {
+            const res = reducer(oldstate, action);
+            checker(expect, res);
+        }
+    );
 
 });
