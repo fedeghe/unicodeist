@@ -3,14 +3,17 @@ import exp from './index';
 import testActions from './testData/actions';
 import ACTIONS from './actions';
 const {
-    reducer,
-    base
-} = exp();
+        reducer,
+        init,
+        base
+    } = exp(),
+    pause = ms => new Promise(res => setTimeout(res, ms));
+
 
 describe('reducer should work as expected', () => {
 
     it('init&new work as expected', () => {
-        expect(reducer({}, {type: ACTIONS.INIT})).toMatchObject(base);
+        expect(init()).toMatchObject(base);
         expect(reducer({}, {type: ACTIONS.NEW})).toMatchObject(base);
         expect(reducer({}, {type: ACTIONS.CAN_SCROLL_SYMBOLS, payload: true})).toMatchObject({
             canScrollSymbols: true
@@ -372,5 +375,61 @@ describe('reducer should work as expected', () => {
             checker(expect, res);
         }
     );
+    it.each(testActions.SAVE_SCROLL)(
+        'should work - %s',
+        (_, oldstate, action, checker) => {
+            const res = reducer(oldstate, action);
+            checker(expect, res);
+        }
+    );
+    
+    
+    it('UNDO works as expected ', async () => {
+        const s1 = reducer({}, {type:ACTIONS.INIT});
+        await pause(1000);
+        const s2 = reducer(
+            s1,
+            {
+                type: ACTIONS.RESIZE,
+                payload: {
+                    what: 'height',
+                    value:200
+                }
+            }
+        );
+        await pause(1000);
+        const s3 = reducer(
+            s2,
+            {
+                type: ACTIONS.RESIZE,
+                payload: {
+                    what: 'width',
+                    value:300
+                }
+            }
+        );
+        await pause(1000);
+        expect(s1.height).toBe(500);
+        expect(s3.height).toBe(200);
+        expect(s3.width).toBe(300);
+        
+        const s4 = reducer(s3, {type: ACTIONS.UNDO });
+        expect(s4.width).toBe(500);
+    });
+
+    it('throws if action not expected', () => {
+        try {
+            reducer({},{type: 'xxx'});
+        } catch(e)  {
+            expect(e.message).toBe('Action type not given');
+        }
+    });
+    it('throws if action.type not expected', () => {
+        try {
+            reducer({},{typesss: 'xxx'});
+        } catch(e)  {
+            expect(e.message).toBe('Action type not given');
+        }
+    });
 
 });
