@@ -40,3 +40,6 @@ bulk actions:
 
 0.0.17  
 - export json file size reduced a lot thanks to default values
+
+0.0.18  
+- test more
