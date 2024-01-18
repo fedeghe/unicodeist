@@ -21,18 +21,19 @@ const Styles = ({ sym }) => {
         onChangeFontFamily = useCallback(e => dispatch({
             type: ACTIONS.UPDATE_SYMBOL,
             payload: { field: 'fontFamily', value: e.target.value }
-        }), []),
+        }), [dispatch]),
         onChangeColor = useCallback(e => dispatch({
             type: ACTIONS.UPDATE_SYMBOL,
             payload: {field: 'color', value: e.target.value }
-        }), []),
+        }), [dispatch]),
         onChangeFontWeight = useCallback(e => dispatch({
             type: ACTIONS.UPDATE_SYMBOL,
             payload: { field: 'fontWeight', value: e.target.value }
-        }), []),
+        }), [dispatch]),
         onChangeFontItalic = useCallback(() => dispatch({
-            type: ACTIONS.TOGGLE_ITALIC
-        }), []);
+            type: ACTIONS.UPDATE_SYMBOL,
+            payload: { field: 'italic', value: !italic }
+        }), [dispatch, italic]);
 
     return <div className={localClasses.SectionStyles}>
         <div className={localClasses.SectionStylesContainer}>

@@ -37,7 +37,7 @@ export const ADD_SYMBOL = Symbol('add a symbol'),
     SYMBOL_FOCUS = Symbol('focus symbol toggle'),
     SWAP_SYMBOL = Symbol('swap a symbol'),
     TOGGLE_ADD_PANEL = Symbol('toggle add panel'),
-    TOGGLE_ITALIC = Symbol('toggle italic'),
+    
     TOGGLE_PANEL = Symbol('toggle panel'),
     TOGGLE_SYMBOL_SELECTION = Symbol('select toggle symbol for bulk action'),
     TOGGLE_SYMBOLS_SELECTION = Symbol('select toggle symbols'),
@@ -93,7 +93,7 @@ const exp = {
     SYMBOL_FOCUS,
     SWAP_SYMBOL,
     TOGGLE_ADD_PANEL,
-    TOGGLE_ITALIC,
+    
     TOGGLE_PANEL,
     TOGGLE_SYMBOL_SELECTION,
     TOGGLE_SYMBOLS_SELECTION,
