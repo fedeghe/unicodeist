@@ -688,12 +688,15 @@ const history = [],
             const { min, max } = symbols
                 .filter(({ id }) => selected.includes(id))
                 .reduce(
-                    (acc, symbol) => {
-                        symbol.top < acc.min && (acc.min = symbol.top);
-                        symbol.top > acc.max && (acc.max = symbol.top);
-                        return acc;
+                    (acc, symbol) => ({
+                        min: symbol.top < acc.min ? symbol.top :acc.min,
+                        max: symbol.top > acc.max ? symbol.top :acc.max,
+                    }),
+                    {
+                        min: Number.POSITIVE_INFINITY,
+                        max: Number.NEGATIVE_INFINITY
                     }
-                    , { min: Number.POSITIVE_INFINITY, max: Number.NEGATIVE_INFINITY }),
+                ),
                 meanTop = (min + max) / 2,
                 targetTop = height / 2,
                 diffTop = targetTop - meanTop;
