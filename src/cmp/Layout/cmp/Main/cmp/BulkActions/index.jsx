@@ -14,8 +14,11 @@ import {
     BorderVertical as BorderVerticalIcon,
     BorderHorizontal as BorderHorizontalIcon,
     DensityMedium as DensityMediumIcon,
-    Delete as DeleteIcon
+    Delete as DeleteIcon,
+    Handyman as HandyManIcon,
+    Close as CloseIcon
 } from '@mui/icons-material';
+
 
 import useStyles from './styles';
 
@@ -84,7 +87,7 @@ const BulkActions = () => {
         direction="left"
         ariaLabel="SpeedDial basic example"
         sx={{ position: 'absolute', top: 30, right: 16 }}
-        icon={<SpeedDialIcon />}
+        icon={<SpeedDialIcon icon={<HandyManIcon/>} openIcon={<CloseIcon/>} />}
     >
         {actions.map((action) => (
             <SpeedDialAction
