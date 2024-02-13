@@ -43,3 +43,6 @@ bulk actions:
 
 0.0.18  
 - test more
+
+0.0.19  
+- just icon changed
