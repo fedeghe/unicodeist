@@ -34,6 +34,12 @@ const App = () => {
     useEffect(() => {
         window.addEventListener("resize", storeViewPortData);
         window.addEventListener("scroll", prevent);
+        window.addEventListener("keydown", e => {
+            if(e.key === 's' && e.metaKey){
+                e.preventDefault();
+                return false;
+            }
+        });
         if (preventReload) {
             window.addEventListener("beforeunload", catchReload);
             window.addEventListener("popstate", catchReload);
