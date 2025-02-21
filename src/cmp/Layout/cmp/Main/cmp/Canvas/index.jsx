@@ -61,7 +61,7 @@ const Canvas = () => {
         keyEditor = () => setKeyEditorDialogVisibility(true),
         backgrounStyles = () => setBackgrounStylesDialogVisibility(true),
         shadowEditor = () => setAdditionalStylesEditorDialogVisibility(true);
-
+    
     useEffect(() => {
         const embed = () => {
                 const code = cleanCodeFromState(state);
@@ -95,7 +95,7 @@ const Canvas = () => {
             || additionalStylesEditorDialogVisibility
             || keyEditorDialogVisibility;
         dispatch({type: ACTIONS.TOGGLE_ARROW_EVENTS, payload: !disableArrows});
-    }, [copyDialogVisibility, downloadDialogVisibility, contributeDialogVisibility, backgrounStylesDialogVisibility, additionalStylesEditorDialogVisibility, keyEditorDialogVisibility]);
+    }, [copyDialogVisibility, downloadDialogVisibility, contributeDialogVisibility, backgrounStylesDialogVisibility, additionalStylesEditorDialogVisibility, keyEditorDialogVisibility, dispatch]);
     return (
         <div>
             <CopyDialog visibility={copyDialogVisibility} setVisibility={setCopyDialogVisibility} embedCode={embedCode} scriptCode={scriptCode} />
