@@ -64,9 +64,10 @@ const Canvas = () => {
     
     useEffect(() => {
         const embed = () => {
-                const code = cleanCodeFromState(state);
+                const code = cleanCodeFromState(state),
+                    codeScript = getUnicodeistScriptTag(state);
                 setEmbedCode(code);
-                setScriptCode(getUnicodeistScriptTag(state));
+                setScriptCode(codeScript);
                 if (ref?.current) setCopyDialogVisibility(true);
             };
 

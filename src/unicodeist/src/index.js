@@ -46,7 +46,7 @@
                         'font-family:' + (d.ff || defs.ff) ,
                         'font-weight:' + (d.fw || defs.fw) ,
                         'font-size:' + defs.fs + ';position:absolute;transform-origin:center center',
-                        (d.o !== 1 && 'opacity:'+d.o),
+                        (typeof d.o !== 'undefined' && d.o !== 1 && 'opacity:'+d.o),
                         mergeDasDb(d.as, d.b),
                         'transform:' + [
                             'translate('+d.l+'px,'+d.t+'px)',
@@ -61,6 +61,8 @@
                     ];
 
             node.setAttribute('style', styles.filter(Boolean).join(';'));
+            
+            if('lb' in d)node.dataset.id = d.lb;
             d.ch && (node.innerHTML = d.ch);
             return node;
         },

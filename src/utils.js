@@ -83,6 +83,9 @@ export const cleanCodeFromState = ({
                 'font-size:20px'
             ].filter(Boolean).join(';')
         );
+        if('label' in sym) {
+            child.dataset.id = sym.label;
+        }
         return child;
     }).forEach(c => root.appendChild(c));
 
