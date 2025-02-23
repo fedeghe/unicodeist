@@ -7,7 +7,10 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 
 import CodeMirror from '@uiw/react-codemirror';
+import { color } from '@uiw/codemirror-extensions-color';
 import { css } from '@codemirror/lang-css';
+import {githubLight} from '@uiw/codemirror-theme-github';
+import {darcula} from '@uiw/codemirror-theme-darcula';
 import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
 
@@ -23,9 +26,14 @@ const BgStylesEditor = ({ visibility, setVisibility }) => {
             dispatch,
             state: {
                 bgStyles,
-                fullscreen
+                fullscreen,
+                themeKey
             }
         } = useContext(ctx),
+        themes = {
+            light : githubLight,
+            dark: darcula
+        },
 
         [value, setValue] = useState(bgStyles || DEFAULTS.TPLS.BG_STYLES),
         reset = () => {
@@ -58,7 +66,7 @@ const BgStylesEditor = ({ visibility, setVisibility }) => {
                 e.preventDefault();
                 return false;
             }
-        }, [fullscreen]);
+        }, [fullscreen, onClose]);
 
     return (
         <Dialog
@@ -80,11 +88,11 @@ const BgStylesEditor = ({ visibility, setVisibility }) => {
                 <div className={classes.Container}>
                     <div className={classes.Editor1}>
                         <CodeMirror
-                            extensions={[css()]}
+                            extensions={[color, css()]}
                             value={value}
                             height="200px"
                             width="500px"
-                            theme="dark"
+                            theme={themes[themeKey]}
                             onChange={onChangeValue}
                         />
                     </div>

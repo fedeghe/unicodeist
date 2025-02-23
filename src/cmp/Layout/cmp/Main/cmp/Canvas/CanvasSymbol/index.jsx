@@ -75,6 +75,7 @@ const CanvasSymbol = ({symbol}) => {
         >
         <div
             className={classes.CanvasSymbol}
+            data-uc={symbol.label}
             style={{
                 ...mergeAdditionalStyles({additionalStyles, blur}),
                 position:'absolute',
