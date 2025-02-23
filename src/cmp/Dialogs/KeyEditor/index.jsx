@@ -15,7 +15,10 @@ import {
 } from '@mui/icons-material';
 
 import CodeMirror from '@uiw/react-codemirror';
+import { color } from '@uiw/codemirror-extensions-color';
 import { css } from '@codemirror/lang-css';
+import { githubLight } from '@uiw/codemirror-theme-github';
+import { darcula } from '@uiw/codemirror-theme-darcula';
 import ctx from 'src/Context';
 
 
@@ -37,9 +40,14 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                 keyFrames,
                 focusedSymbolId,
                 symbols,
-                fullscreen
+                fullscreen,
+                themeKey
             }
         } = useContext(ctx),
+        themes = {
+            light : githubLight,
+            dark: darcula
+        },
         // list all used keyframes
         usedKeyFrames = Object.keys(keyFrames).filter(k => symbols.some(s => s.additionalStyles.includes(` ${k} `))),
         
@@ -202,11 +210,11 @@ const KeyEditorDialog = ({ visibility, setVisibility }) => {
                     <TextField required label="Name it" variant="standard" value={name} onInput={onName} />
                     <div className={classes.Editor1}>
                         <CodeMirror
-                            extensions={[css()]}
+                            extensions={[color, css()]}
                             value={keyFrame}
-                            height="200px"
-                            width="500px"
-                            theme="dark"
+                            height="50vh"
+                            width="50vw"
+                            theme={themes[themeKey]}
                             onChange={onChangeKeyFrame}
                         />
                     </div>

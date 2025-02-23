@@ -9,8 +9,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import CodeMirror from '@uiw/react-codemirror';
 import { color } from '@uiw/codemirror-extensions-color';
 import { css } from '@codemirror/lang-css';
-import {githubLight} from '@uiw/codemirror-theme-github';
-import {darcula} from '@uiw/codemirror-theme-darcula';
+import { githubLight } from '@uiw/codemirror-theme-github';
+import { darcula } from '@uiw/codemirror-theme-darcula';
 import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
 
@@ -90,8 +90,8 @@ const BgStylesEditor = ({ visibility, setVisibility }) => {
                         <CodeMirror
                             extensions={[color, css()]}
                             value={value}
-                            height="200px"
-                            width="500px"
+                            height="50vh"
+                            width="50vw"
                             theme={themes[themeKey]}
                             onChange={onChangeValue}
                         />

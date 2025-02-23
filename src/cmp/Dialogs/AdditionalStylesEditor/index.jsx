@@ -7,7 +7,10 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 
 import CodeMirror from '@uiw/react-codemirror';
+import { color } from '@uiw/codemirror-extensions-color';
 import { css } from '@codemirror/lang-css';
+import { githubLight } from '@uiw/codemirror-theme-github';
+import { darcula } from '@uiw/codemirror-theme-darcula';
 import ctx from 'src/Context';
 import ACTIONS from 'src/reducer/actions';
 
@@ -25,9 +28,14 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
                 symbols,
                 focusedSymbolId,
                 fullscreen,
-                keyFrames
+                keyFrames,
+                themeKey
             }
         } = useContext(ctx),
+        themes = {
+            light : githubLight,
+            dark: darcula
+        },
         additionalStyles = symbols.find(sym => sym.id === focusedSymbolId).additionalStyles,
         [value, setValue] = useState(additionalStyles || DEFAULTS.TPLS.ADDITIONAL_STYLES),
         reset = () => {
@@ -60,7 +68,7 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
                 e.preventDefault();
                 return false;
             }
-        }, [fullscreen]),
+        }, [fullscreen, onClose]),
         keyFrameNames = Object.keys(keyFrames),
         keyFramesNum = keyFrameNames.length;
     
@@ -84,11 +92,11 @@ const AdditionalStylesEditor = ({ visibility, setVisibility }) => {
                 <div className={classes.Container}>
                     <div className={classes.Editor1}>
                         <CodeMirror
-                            extensions={[css()]}
+                            extensions={[color, css()]}
                             value={value}
-                            height="200px"
-                            width="500px"
-                            theme="dark"
+                            height="50vh"
+                            width="50vw"
+                            theme={themes[themeKey]}
                             onChange={onChangeValue}
                         />
                     </div>
