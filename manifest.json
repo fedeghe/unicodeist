@@ -1,7 +1,7 @@
 {
   "short_name": "unicodeist",
   "name": "unicodeist",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "a visual unicode characters editor",
   "author": "fedeghe@gmail.com",
   "icons": [
