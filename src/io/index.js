@@ -104,7 +104,7 @@ export const compress = ({
         // need to include only those actually used
         ...(hasKf && {kf}),
         sym: symbols.map(({
-            
+            id: i,
             char: ch,
             label: lb, 
             zIndex: zi, 
@@ -126,7 +126,7 @@ export const compress = ({
             additionalStyles: ast, 
             faded: f, 
         }) => ({
-            ch, zi, l, t, lb,
+            ch, zi, l, t, lb, i,
             ...(c !== SYMBOL_DEFAULTS.COLOR && {c}),
             ...(ff !== SYMBOL_DEFAULTS.FONTFAMILY && {ff}),
             ...(fw !== SYMBOL_DEFAULTS.FONTWEIGHT && {fw}),
