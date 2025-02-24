@@ -7,6 +7,11 @@
     "name": "Federico Ghedina",
     "email": "federico.ghedina@gmail.com"
   },
+  "keywords": [
+    "unicode editor",
+    "unicode characters editor",
+    "unicode characters based editor"
+  ],
   "dependencies": {
     "@codemirror/lang-css": "^6.2.1",
     "@codemirror/lang-javascript": "^6.2.3",
