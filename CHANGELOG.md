@@ -46,3 +46,6 @@ bulk actions:
 
 0.0.19  
 - just icon changed
+
+0.0.22  
+- automatically add data-id attrs to the symbols making it easier afterwar dot add a script
