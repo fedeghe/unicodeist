@@ -48,13 +48,9 @@ export const uncompress = ({
         skx, sky, rx, ry, rz, b, o,
         s, sx, sy, as : asl, f
     }) => {
-        const id = i.replace(/U_/, 'U_i');
-        return {
-            id,
+        const ret = {
             char: ch,
-            // if the label is not there then means that on export 
-            // was skipped since equal to id
-            label: lb || id, 
+            label: lb || i || 'unknown', 
             zIndex: zi, 
             left: l, 
             top: t, 
@@ -74,6 +70,8 @@ export const uncompress = ({
             additionalStyles: asl || SYMBOL_DEFAULTS.ADDITIONAL_STYLES, 
             faded: f || SYMBOL_DEFAULTS.FADED,
         };
+        if(typeof i !== 'undefined') ret.id = i.replace(/U_/, 'U_i');
+        return ret;
     })
 });
 
